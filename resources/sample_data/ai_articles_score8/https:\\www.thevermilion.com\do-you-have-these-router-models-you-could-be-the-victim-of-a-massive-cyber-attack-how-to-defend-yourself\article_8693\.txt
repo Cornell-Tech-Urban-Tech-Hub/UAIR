@@ -1,0 +1,26 @@
+Do you have these router models? You could be the victim of a massive cyber attack: how to defend yourself
+
+
+
+
+
+
+ 
+ A massive one cyber attack still ongoing, the peak of which was recorded between the months of October and November, is claiming numerous victims all over the world: the experts of Fortinet, an …
+Written by: Jack Williams
+But which specimens ended up in the sights of the authors of the cyber attack? According to what was reported by the US company that detected the “cyber incursions”, these would be the D-Link DIR-645, DIR-806, GO-RT-AC750 and DIR-845L routers: despite the fact that these are obsolete models, they continue to be still used both by individual users and by small and large companies.
+ EVOLUTION ADV 
+cases is to replace the access keys and install the latest firmware: if this is not possible because support from the manufacturer has stopped, the advice is to change the router.
+		
+Jack Williams
+Jack Williams established himself as the editor-in-chief of The Vermilion with rigorous journalistic traits and an incessant quest for truth. His career began as an investigative reporter, where he quickly gained a reputation for his in-depth research and insightful articles.
+
+Williams takes his role at The Vermilion very seriously. Since he became editor-in-chief, he has set an editorial line based on impartiality, factual accuracy, and context relevance; this has established The Vermilion as a reference for political, economic, and global news.
+
+Under his leadership, the media continues its mission of reporting news with accuracy and equanimity, giving a voice to those who are often overlooked by large-scale media. Jack dedicates himself to fulfilling this mandate with passion, rigour, and unwavering determination.
+Previous
+Next
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses a massive ongoing cyber attack that targets specific router models, including the D-Link DIR-645, DIR-806, GO-RT-AC750, and DIR-845L. The attack is ongoing, and experts advise users to replace their access keys and install the latest firmware or change their router if support has stopped. This indicates a significant role of computing and cybersecurity in the article, with a focus on technical aspects and implications for users."}]

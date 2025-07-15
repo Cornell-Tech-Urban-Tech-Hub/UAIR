@@ -1,0 +1,9 @@
+United Airlines to offer Starlink Wi-Fi in U.S. flights
+   NEW YORK, Jan. 6 (Xinhua) -- United Airlines Holdings Inc. expects to begin using SpaceX's Starlink for inflight Wi-Fi in the spring, an earlier-than-expected rollout for the first major U.S. carrier to use Elon Musk's satellite business.
+   But only members of the carrier's loyalty program will get the service free, said the company in a statement on Sunday. "This marks a departure from the airline's original plans to offer it to all passengers for free, a move likely designed to draw in new MileagePlus participants," reported Bloomberg News about the development.
+   The service will first be available on an Embraer SA E175, with the entire two-class regional jet fleet equipped with Starlink by the end of this year, said the airline.
+   The first mainline jet will be outfitted before the end of 2025, it said. The new timeline compares with earlier projections for testing to start early this year with the first passenger flight later in the year.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about United Airlines' decision to use SpaceX's Starlink for inflight Wi-Fi, indicating a significant role for computing technology. However, the focus is shared with non-technological aspects, such as the airline's loyalty program and business strategy."}]

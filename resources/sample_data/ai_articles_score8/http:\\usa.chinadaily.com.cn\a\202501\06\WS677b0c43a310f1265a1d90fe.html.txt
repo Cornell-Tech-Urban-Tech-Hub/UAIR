@@ -1,0 +1,30 @@
+China's chip exports soar despite curbs
+The imposition of multiple sanctions by the US has not been able to halt the rapid growth of China's chip industry, which is continuously expanding its production and technological capabilities, experts said.
+China's integrated circuit exports touched 1.03 trillion yuan ($141 billion) in the first 11 months of 2024, a year-on-year increase of 20.3 percent, according to data released recently by the General Administration of Customs.
+Integrated circuit design, which is at the forefront of the chip industry, directly impacts a chip's functionality, performance and cost, according to industry experts.
+IC exports stood at just 559 billion yuan in 2018 when the US initiated its tech war against China.
+The surge in exports comes as Joe Biden's administration on Dec 23 launched a trade probe into China's legacy chips, which could lead to higher tariffs or import bans.
+China has voiced strong opposition to Washington's move.
+Last month, the Bureau of Industry and Security of the US Department of Commerce announced tighter restrictions on semiconductor manufacturing equipment and memory chips meant for China, adding 140 Chinese semiconductor-related companies to its Entity List.
+"Amid the US' continued escalation of export controls on chips and related technologies, China's integrated circuit exports have continued to grow, indicating that US sanctions have not hindered the development and expansion of China's chip industry," said Xiang Ligang, director-general of the Information Consumption Alliance, a telecom industry association.
+"US sanctions over the past several years have allowed China to map out its chip industry chain. While Chinese companies still lag behind some of the world's most advanced levels of manufacturing, design, packaging, and testing, they have made notable progress in each of these areas," he told China Daily.
+Experts attribute much of this strong growth to robust policy support and clear government guidance, which have fortified the industry's development foundation.
+China in May launched the third phase of the National Integrated Circuit Industry Investment Fund, also known as the "Big Fund", with a registered capital of 344 billion yuan. The fund's earlier phases were established in 2014 and 2019, with 138.7 billion yuan and 204.2 billion yuan, respectively.
+In 2020, the State Council released policies to support the high-quality development of integrated circuit and software industries.
+A chip industrial professional surnamed Zhu said China's localization rate of chip packaging is indeed showing an increasing trend and the yield rate of domestic chips is also gradually improving.
+"Generally speaking, mature process technologies can meet the needs of most application scenarios. Cost savings and stability are the main considerations," Zhu said.
+Mature processes, which use node sizes larger than 28nm, are more suitable for industries like automotive and manufacturing, while advanced processes excel in performance but are more expensive and used in limited areas.
+Good progress
+"China has made good progress in mature process chip production, with a higher self-sufficiency rate. However, challenges remain in advanced nodes manufacturing, which is under heavy US restrictions," Liu Liang, a researcher at the Institute of Applied Economics of the Shanghai Academy of Social Sciences, told China Daily.
+"The export controls have strongly motivated Chinese firms to pursue innovation independently," he said.
+One notable example is Huawei's announcement in November that its Mate 70 series features 100 percent domestically produced chips.
+"The US curbs will only backfire on itself and its allies, making it a lose-lose measure," Xiang said.
+A report titled "Geopolitical Risk and Decoupling: Evidence from US Export Controls" by the Federal Reserve Bank of New York, revised in November, stated: "Our estimates suggest that export controls cost the average affected US supplier $857 million in lost market capitalization, with total losses for all affected suppliers totaling $130 billion."
+"Global supply chain disruptions, intensified international competition, and faster tech iterations pose new challenges, which have shaped the resilience and vitality of China's domestic chip industry," Liu said.
+"The rapid development of new technologies like 5G, AI, and internet of things has created vast opportunities and market potential for the chip industry," he said.
+shaoxinying@chinadaily.com.cn
+ 
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about China's chip industry, its growth, and its resilience despite US sanctions. The topic of computing and chip technology is central to the discussion, with experts citing the importance of integrated circuit design, manufacturing, and packaging. The article also mentions the impact of US export controls on the chip industry, with some experts arguing that these controls will ultimately backfire on the US. While the article does not delve deeply into technical aspects of chip manufacturing, it provides a good overview of the industry's current state and its prospects for the future."}]

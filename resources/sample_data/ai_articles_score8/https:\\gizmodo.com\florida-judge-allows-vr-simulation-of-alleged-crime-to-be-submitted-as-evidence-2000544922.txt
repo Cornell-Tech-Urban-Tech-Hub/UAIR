@@ -1,0 +1,49 @@
+
+        Florida Judge Allows VR Simulation of Alleged Crime to Be Submitted as Evidence
+    
+A judge in Florida has allowed a virtual reality simulation to be submitted as evidence during a case over aggravated assault in 2023, according to a local TV news station in Ft. Lauderdale. And it might be the first time the defense in any criminal court hearing in the country has been permitted to introduce VR into evidence.
+Miguel Albisu owns a wedding venue in Florida and was charged with aggravated assault with a deadly weapon after allegedly waving a gun at guests during an altercation. Albisu’s wife and son were allegedly attacked at the venue, with his wife sustaining an injury to her wrist, and Albisu was called to the scene.
+The question is whether Albisu’s decision to threaten those at the venue with a gun was a valid form of self-defense under Florida’s Stand-Your-Ground laws.
+The defense attorney in the case, Ken Padowitz, commissioned an artist to concoct a simulation of the incident for the Oculus Quest 2 and Broward County Judge Andrew Siegel will allow it to be introduced at trial. The idea is to give everyone in the courtroom the defendant’s perspective.
+This isn’t the first time an animated simulation has been introduced at trial, just the apparent first using virtual reality. Padowitz takes credit for being the first to see animation upheld as evidence in a criminal case back when he was a prosecutor in 1992.
+The admittance of the VR simulation was allowed during a pre-trial hearing before a judge who will determine if the case is dismissed or goes to a jury trial. If it does go to trial, court proceedings are expected to resume in February.
+
+          Get the best tech, science, and culture news in your inbox daily.
+        
+
+          News from the future, delivered to your present.
+        
+
+      Please select your desired newsletters and submit your email to upgrade your inbox.
+    
+
+          The threatened sea mammals dealt with a recent cold snap in a frankly relatable way.
+        
+
+          The aptly named MouseGoggles allow lab mice to more realistically experience virtual reality.
+        
+
+          Starting January 1, Floridians can no longer legally come to Pornhub.
+        
+
+          PlayStation’s PSVR2 controllers working on Vision Pro could finally bring gaming to Apple’s ‘spatial computer.’
+        
+
+          The Meta Quest 3S has some of the best features of the Meta Quest 3, for $200 less. You’ll just need to accept the limited memory and lenses.
+        
+
+          The campaign pushes users to IWillVote.com to make sure they're registered.
+        
+Best of CES 2025 Awards ➜
+Mode
+
+                Follow us
+              
+Mode
+
+                Follow us
+              
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing, specifically virtual reality (VR), as it discusses the use of a VR simulation as evidence in a court case. The VR simulation was created for the Oculus Quest 2, and the article mentions the defendant's defense attorney, Ken Padowitz, taking credit for being the first to see animation upheld as evidence in a criminal case back in 1992. The article provides some depth in discussing the use of VR in the courtroom and its potential impact, but also touches on other themes such as the case's details and the defendant's perspective. Overall, computing is a dominant topic in the article, with a detailed discussion of technical developments and implications."}, {"uses": ["Virtual reality (VR) simulation", "Oculus Quest 2"]}]

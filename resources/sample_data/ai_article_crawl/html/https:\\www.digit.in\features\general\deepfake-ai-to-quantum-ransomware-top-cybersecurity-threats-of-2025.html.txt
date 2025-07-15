@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head><meta charset="UTF-8" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>(()=>{class RocketLazyLoadScripts{constructor(){this.v="1.2.6",this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this.t.bind(this),this.touchStartHandler=this.i.bind(this),this.touchMoveHandler=this.o.bind(this),this.touchEndHandler=this.h.bind(this),this.clickHandler=this.u.bind(this),this.interceptedClicks=[],this.interceptedClickListeners=[],this.l(this),window.addEventListener("pageshow",(t=>{this.persisted=t.persisted,this.everythingLoaded&&this.m()})),this.CSPIssue=sessionStorage.getItem("rocketCSPIssue"),document.addEventListener("securitypolicyviolation",(t=>{this.CSPIssue||"script-src-elem"!==t.violatedDirective||"data"!==t.blockedURI||(this.CSPIssue=!0,sessionStorage.setItem("rocketCSPIssue",!0))})),document.addEventListener("DOMContentLoaded",(()=>{this.k()})),this.delayedScripts={normal:[],async:[],defer:[]},this.trash=[],this.allJQueries=[]}p(t){document.hidden?t.t():(this.triggerEvents.forEach((e=>window.addEventListener(e,t.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",t.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",t.touchStartHandler),document.addEventListener("visibilitychange",t.userEventHandler))}_(){this.triggerEvents.forEach((t=>window.removeEventListener(t,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}i(t){"HTML"!==t.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),t.target.addEventListener("click",this.clickHandler),this.L(t.target,!0),this.S(t.target,"onclick","rocket-onclick"),this.C())}o(t){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),t.target.removeEventListener("click",this.clickHandler),this.L(t.target,!1),this.S(t.target,"rocket-onclick","onclick"),this.M()}h(){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}u(t){t.target.removeEventListener("click",this.clickHandler),this.L(t.target,!1),this.S(t.target,"rocket-onclick","onclick"),this.interceptedClicks.push(t),t.preventDefault(),t.stopPropagation(),t.stopImmediatePropagation(),this.M()}O(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((t=>{t.target.dispatchEvent(new MouseEvent("click",{view:t.view,bubbles:!0,cancelable:!0}))}))}l(t){EventTarget.prototype.addEventListenerWPRocketBase=EventTarget.prototype.addEventListener,EventTarget.prototype.addEventListener=function(e,i,o){"click"!==e||t.windowLoaded||i===t.clickHandler||t.interceptedClickListeners.push({target:this,func:i,options:o}),(this||window).addEventListenerWPRocketBase(e,i,o)}}L(t,e){this.interceptedClickListeners.forEach((i=>{i.target===t&&(e?t.removeEventListener("click",i.func,i.options):t.addEventListener("click",i.func,i.options))})),t.parentNode!==document.documentElement&&this.L(t.parentNode,e)}D(){return new Promise((t=>{this.P?this.M=t:t()}))}C(){this.P=!0}M(){this.P=!1}S(t,e,i){t.hasAttribute&&t.hasAttribute(e)&&(event.target.setAttribute(i,event.target.getAttribute(e)),event.target.removeAttribute(e))}t(){this._(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this.R.bind(this)):this.R()}k(){let t=[];document.querySelectorAll("script[type=rocketlazyloadscript][data-rocket-src]").forEach((e=>{let i=e.getAttribute("data-rocket-src");if(i&&!i.startsWith("data:")){0===i.indexOf("//")&&(i=location.protocol+i);try{const o=new URL(i).origin;o!==location.origin&&t.push({src:o,crossOrigin:e.crossOrigin||"module"===e.getAttribute("data-rocket-type")})}catch(t){}}})),t=[...new Map(t.map((t=>[JSON.stringify(t),t]))).values()],this.T(t,"preconnect")}async R(){this.lastBreath=Date.now(),this.j(this),this.F(this),this.I(),this.W(),this.q(),await this.A(this.delayedScripts.normal),await this.A(this.delayedScripts.defer),await this.A(this.delayedScripts.async);try{await this.U(),await this.H(this),await this.J()}catch(t){console.error(t)}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this.everythingLoaded=!0,this.D().then((()=>{this.O()})),this.N()}W(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{t.hasAttribute("data-rocket-src")?t.hasAttribute("async")&&!1!==t.async?this.delayedScripts.async.push(t):t.hasAttribute("defer")&&!1!==t.defer||"module"===t.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(t):this.delayedScripts.normal.push(t):this.delayedScripts.normal.push(t)}))}async B(t){if(await this.G(),!0!==t.noModule||!("noModule"in HTMLScriptElement.prototype))return new Promise((e=>{let i;function o(){(i||t).setAttribute("data-rocket-status","executed"),e()}try{if(navigator.userAgent.indexOf("Firefox/")>0||""===navigator.vendor||this.CSPIssue)i=document.createElement("script"),[...t.attributes].forEach((t=>{let e=t.nodeName;"type"!==e&&("data-rocket-type"===e&&(e="type"),"data-rocket-src"===e&&(e="src"),i.setAttribute(e,t.nodeValue))})),t.text&&(i.text=t.text),i.hasAttribute("src")?(i.addEventListener("load",o),i.addEventListener("error",(function(){i.setAttribute("data-rocket-status","failed-network"),e()})),setTimeout((()=>{i.isConnected||e()}),1)):(i.text=t.text,o()),t.parentNode.replaceChild(i,t);else{const i=t.getAttribute("data-rocket-type"),s=t.getAttribute("data-rocket-src");i?(t.type=i,t.removeAttribute("data-rocket-type")):t.removeAttribute("type"),t.addEventListener("load",o),t.addEventListener("error",(i=>{this.CSPIssue&&i.target.src.startsWith("data:")?(console.log("WPRocket: data-uri blocked by CSP -> fallback"),t.removeAttribute("src"),this.B(t).then(e)):(t.setAttribute("data-rocket-status","failed-network"),e())})),s?(t.removeAttribute("data-rocket-src"),t.src=s):t.src="data:text/javascript;base64,"+window.btoa(unescape(encodeURIComponent(t.text)))}}catch(i){t.setAttribute("data-rocket-status","failed-transform"),e()}}));t.setAttribute("data-rocket-status","skipped")}async A(t){const e=t.shift();return e&&e.isConnected?(await this.B(e),this.A(t)):Promise.resolve()}q(){this.T([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}T(t,e){var i=document.createDocumentFragment();t.forEach((t=>{const o=t.getAttribute&&t.getAttribute("data-rocket-src")||t.src;if(o&&!o.startsWith("data:")){const s=document.createElement("link");s.href=o,s.rel=e,"preconnect"!==e&&(s.as="script"),t.getAttribute&&"module"===t.getAttribute("data-rocket-type")&&(s.crossOrigin=!0),t.crossOrigin&&(s.crossOrigin=t.crossOrigin),t.integrity&&(s.integrity=t.integrity),i.appendChild(s),this.trash.push(s)}})),document.head.appendChild(i)}j(t){let e={};function i(i,o){return e[o].eventsToRewrite.indexOf(i)>=0&&!t.everythingLoaded?"rocket-"+i:i}function o(t,o){!function(t){e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=i(arguments[0],t),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=i(arguments[0],t),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(o)}function s(e,i){let o=e[i];e[i]=null,Object.defineProperty(e,i,{get:()=>o||function(){},set(s){t.everythingLoaded?o=s:e["rocket"+i]=o=s}})}o(document,"DOMContentLoaded"),o(window,"DOMContentLoaded"),o(window,"load"),o(window,"pageshow"),o(document,"readystatechange"),s(document,"onreadystatechange"),s(window,"onload"),s(window,"onpageshow");try{Object.defineProperty(document,"readyState",{get:()=>t.rocketReadyState,set(e){t.rocketReadyState=e},configurable:!0}),document.readyState="loading"}catch(t){console.log("WPRocket DJE readyState conflict, bypassing")}}F(t){let e;function i(e){return t.everythingLoaded?e:e.split(" ").map((t=>"load"===t||0===t.indexOf("load.")?"rocket-jquery-load":t)).join(" ")}function o(o){function s(t){const e=o.fn[t];o.fn[t]=o.fn.init.prototype[t]=function(){return this[0]===window&&("string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=i(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{const e=arguments[0][t];delete arguments[0][t],arguments[0][i(t)]=e}))),e.apply(this,arguments),this}}o&&o.fn&&!t.allJQueries.includes(o)&&(o.fn.ready=o.fn.init.prototype.ready=function(e){return t.domReadyFired?e.bind(document)(o):document.addEventListener("rocket-DOMContentLoaded",(()=>e.bind(document)(o))),o([])},s("on"),s("one"),t.allJQueries.push(o)),e=o}o(window.jQuery),Object.defineProperty(window,"jQuery",{get:()=>e,set(t){o(t)}})}async H(t){const e=document.querySelector("script[data-webpack]");e&&(await async function(){return new Promise((t=>{e.addEventListener("load",t),e.addEventListener("error",t)}))}(),await t.K(),await t.H(t))}async U(){this.domReadyFired=!0;try{document.readyState="interactive"}catch(t){}await this.G(),document.dispatchEvent(new Event("rocket-readystatechange")),await this.G(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.G(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this.G(),window.dispatchEvent(new Event("rocket-DOMContentLoaded"))}async J(){try{document.readyState="complete"}catch(t){}await this.G(),document.dispatchEvent(new Event("rocket-readystatechange")),await this.G(),document.rocketonreadystatechange&&document.rocketonreadystatechange(),await this.G(),window.dispatchEvent(new Event("rocket-load")),await this.G(),window.rocketonload&&window.rocketonload(),await this.G(),this.allJQueries.forEach((t=>t(window).trigger("rocket-jquery-load"))),await this.G();const t=new Event("rocket-pageshow");t.persisted=this.persisted,window.dispatchEvent(t),await this.G(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted}),this.windowLoaded=!0}m(){document.onreadystatechange&&document.onreadystatechange(),window.onload&&window.onload(),window.onpageshow&&window.onpageshow({persisted:this.persisted})}I(){const t=new Map;document.write=document.writeln=function(e){const i=document.currentScript;i||console.error("WPRocket unable to document.write this: "+e);const o=document.createRange(),s=i.parentElement;let n=t.get(i);void 0===n&&(n=i.nextSibling,t.set(i,n));const c=document.createDocumentFragment();o.setStart(c,0),c.appendChild(o.createContextualFragment(e)),s.insertBefore(c,n)}}async G(){Date.now()-this.lastBreath>45&&(await this.K(),this.lastBreath=Date.now())}async K(){return document.hidden?new Promise((t=>setTimeout(t))):new Promise((t=>requestAnimationFrame(t)))}N(){this.trash.forEach((t=>t.remove()))}static run(){const t=new RocketLazyLoadScripts;t.p(t)}}RocketLazyLoadScripts.run()})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- feeds & pingback -->
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="https://www.digit.in/xmlrpc.php" />
+
+
+<link rel="preload" as="image" href="https://static.digit.in/cybersecurity-trends-2025.png" imagesrcset="https://static.digit.in/cybersecurity-trends-2025.png?tr=w-200 500w, https://static.digit.in/cybersecurity-trends-2025.png" imagesizes="(max-width: 480px) 100vw, (max-width: 769px) 50vw">
+
+
+
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://static.digit.in" crossorigin>
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" crossorigin>
+<link rel="dns-prefetch" href="https://tpc.googlesyndication.com" crossorigin>
+<link rel="dns-prefetch" href="https://sb.scorecardresearch.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.googletagservices.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.ampproject.org" crossorigin>
+<link rel="dns-prefetch" href="https://ad.doubleclick.net" crossorigin>
+
+<title>Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025</title>
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+		<!-- All in One SEO Pro 4.5.0 - aioseo.com -->
+		<meta name="description" content="As we enter New Year 2025, one can’t help but feel some trepidation, thanks largely to an ever-shifting cybersecurity landscape poised for unprecedented challenges. The rapid evolution of technologies such AI and smart IoT has not only driven innovation but also expanded the attack vectors for cybercriminals. From AI-enhanced ransomware to the looming threats posed" />
+		<meta name="robots" content="max-image-preview:large" />
+		<meta name="keywords" content="ai feature,cybersecurity,deepfake,quantum computing,ransomware" />
+		<link rel="canonical" href="https://www.digit.in/features/general/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" />
+		<meta name="generator" content="All in One SEO Pro (AIOSEO) 4.5.0" />
+		<meta property="og:locale" content="en" />
+		<meta property="og:site_name" content="Digit " />
+		<meta property="og:type" content="article" />
+		<meta property="og:title" content="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" />
+		<meta property="og:description" content="As we enter New Year 2025, one can’t help but feel some trepidation, thanks largely to an ever-shifting cybersecurity landscape poised for unprecedented challenges. The rapid evolution of technologies such AI and smart IoT has not only driven innovation but also expanded the attack vectors for cybercriminals. From AI-enhanced ransomware to the looming threats posed" />
+		<meta property="og:url" content="https://www.digit.in/features/general/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" />
+		<meta property="og:image" content="https://static.digit.in/cybersecurity-trends-2025.png" />
+		<meta property="og:image:secure_url" content="https://static.digit.in/cybersecurity-trends-2025.png" />
+		<meta property="og:image:width" content="1280" />
+		<meta property="og:image:height" content="720" />
+		<meta property="article:published_time" content="2025-01-02T17:08:00+05:30" />
+		<meta property="article:modified_time" content="2025-01-02T17:08:00+05:30" />
+		<meta property="article:publisher" content="https://www.facebook.com/thinkdigit" />
+		<meta property="article:author" content="http://facebook.com/jayesh.shinde" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@digitindia" />
+		<meta name="twitter:title" content="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" />
+		<meta name="twitter:description" content="As we enter New Year 2025, one can’t help but feel some trepidation, thanks largely to an ever-shifting cybersecurity landscape poised for unprecedented challenges. The rapid evolution of technologies such AI and smart IoT has not only driven innovation but also expanded the attack vectors for cybercriminals. From AI-enhanced ransomware to the looming threats posed" />
+		<meta name="twitter:creator" content="@jshinde" />
+		<meta name="twitter:image" content="https://static.digit.in/cybersecurity-trends-2025.png" />
+		<meta name="twitter:label1" content="Written by" />
+		<meta name="twitter:data1" content="Jayesh Shinde" />
+		<meta name="twitter:label2" content="Est. reading time" />
+		<meta name="twitter:data2" content="7 minutes" />
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/www.digit.in\/#listItem","position":1,"name":"Home","item":"https:\/\/www.digit.in\/","nextItem":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#listItem"},{"@type":"ListItem","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#listItem","position":2,"name":"Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025","previousItem":"https:\/\/www.digit.in\/#listItem"}]},{"@type":"NewsArticle","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#newsarticle","name":"Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025","headline":"Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025","author":{"@id":"https:\/\/www.digit.in\/author\/jayesh-shinde\/#author"},"publisher":{"@id":"https:\/\/www.digit.in\/#organization"},"image":{"@type":"ImageObject","url":"https:\/\/static.digit.in\/cybersecurity-trends-2025.png","width":1280,"height":720,"caption":"cybersecurity-trends-2025"},"datePublished":"2025-01-02T17:08:00+05:30","dateModified":"2025-01-02T17:08:00+05:30","mainEntityOfPage":{"@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#webpage"},"isPartOf":{"@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#webpage"},"articleSection":"General, AI feature, Cybersecurity, deepfake, Quantum Computing, ransomware, Feature Story, en","dateline":"Published on January 2, 2025."},{"@type":"NewsMediaOrganization","@id":"https:\/\/www.digit.in\/#organization","name":"Digit","url":"https:\/\/www.digit.in\/","logo":{"@type":"ImageObject","url":"https:\/\/static.digit.in\/digit_logo-2.png","width":"128","height":"54"},"sameAs":["https:\/\/www.youtube.com\/user\/digit","https:\/\/www.facebook.com\/thinkdigit","https:\/\/twitter.com\/digitindia","https:\/\/www.instagram.com\/digit.in\/"],"ethicsPolicy":"https:\/\/www.digit.in\/about-us\/#privacypolicy"},{"@type":"NewsMediaOrganization","name":"Digit","url":"https:\/\/www.digit.in\/","logo":{"@type":"ImageObject","url":"https:\/\/static.digit.in\/digit_logo-2.png","width":"128","height":"54"},"image":"https:\/\/static.digit.in\/digit_logo-2.png","sameAs":["https:\/\/www.youtube.com\/user\/digit","https:\/\/www.facebook.com\/thinkdigit","https:\/\/twitter.com\/digitindia","https:\/\/www.instagram.com\/digit.in\/"],"contactPoint":{"@type":"ContactPoint","telephone":"+911204010999","contactType":"Customer Support"},"address":{"@type":"PostalAddress","streetAddress":"Plot No-FC 6, Second Floor, Film City, Noida Sector 16A,","addressLocality":"Noida","addressRegion":"India","postalCode":"201301"}},{"@type":"Person","@id":"https:\/\/www.digit.in\/author\/jayesh-shinde\/#author","url":"https:\/\/www.digit.in\/author\/jayesh-shinde\/","name":"Jayesh Shinde","image":{"@type":"ImageObject","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#authorImage","url":"https:\/\/secure.gravatar.com\/avatar\/577eb0cd124d70b1a65d5fc7001e4c31?s=96&d=mm&r=g","width":96,"height":96,"caption":"Jayesh Shinde"},"sameAs":["http:\/\/facebook.com\/jayesh.shinde","https:\/\/twitter.com\/jshinde"]},{"@type":"WebPage","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#webpage","url":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html","name":"Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025","description":"As we enter New Year 2025, one can\u2019t help but feel some trepidation, thanks largely to an ever-shifting cybersecurity landscape poised for unprecedented challenges. The rapid evolution of technologies such AI and smart IoT has not only driven innovation but also expanded the attack vectors for cybercriminals. From AI-enhanced ransomware to the looming threats posed","inLanguage":"en","isPartOf":{"@id":"https:\/\/www.digit.in\/#website"},"breadcrumb":{"@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#breadcrumblist"},"author":{"@id":"https:\/\/www.digit.in\/author\/jayesh-shinde\/#author"},"creator":{"@id":"https:\/\/www.digit.in\/author\/jayesh-shinde\/#author"},"image":{"@type":"ImageObject","url":"https:\/\/static.digit.in\/cybersecurity-trends-2025.png","@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html\/#mainImage","width":1280,"height":720,"caption":"cybersecurity-trends-2025"},"primaryImageOfPage":{"@id":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html#mainImage"},"datePublished":"2025-01-02T17:08:00+05:30","dateModified":"2025-01-02T17:08:00+05:30"},{"@type":"WebSite","@id":"https:\/\/www.digit.in\/#website","url":"https:\/\/www.digit.in\/","name":"Digit","description":"Digit represents the largest community of technology consumers (buyers and users) in India","inLanguage":"en","publisher":{"@id":"https:\/\/www.digit.in\/#organization","name":"Digit"}}]}
+		</script>
+		<!-- All in One SEO Pro -->
+
+<link rel="amphtml" href="https://www.digit.in/features/general/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html/amp/" /><meta name="generator" content="AMP for WP 1.1.1"/><link rel='dns-prefetch' href='//www.digit.in' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//static.digit.in' />
+<link rel='dns-prefetch' href='//googleads.g.doubleclick.net' />
+<link rel='dns-prefetch' href='//tpc.googlesyndication.com' />
+<link rel='dns-prefetch' href='//www.googletagservices.com' />
+<link rel='dns-prefetch' href='//ad.doubleclick.net' />
+
+<!-- Begin comScore Tag -->
+<script id="digit_comscore">
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "26200502" , options: { enableFirstPartyCookie: "true" } });
+(function() {
+var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+s.src = "https://sb.scorecardresearch.com/cs/26200502/beacon.js";
+el.parentNode.insertBefore(s, el);
+})();
+</script>
+<noscript id="digit_comscore_2">
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;c2=26200502&amp;cv=3.9.1&amp;cj=1">
+</noscript>
+<!-- End comScore Tag -->
+
+<!-- Google tag (gtag.js) -->
+<script id="digit_ga4" async src=https://www.googletagmanager.com/gtag/js?id=G-HS10CDTKX3></script>
+<script id="digit_ga4_2"> 
+        var ga4_sections = {"page_template" : "article","article_type" : "Feature Story","section" : "General","site_languages" : "English","published_date" : "02-01-2025 17:08:00 pm","keywords" : "AI feature,Cybersecurity,deepfake,Quantum Computing,ransomware","authors" : "jayesh.shinde"};
+        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-HS10CDTKX3',
+              {...ga4_sections}); 
+</script>
+
+<script type='text/javascript' class="exclude_rocket">
+ (function() {
+ var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
+ _sf_async_config.uid = 10538;
+ _sf_async_config.domain = 'digit.in';
+ _sf_async_config.flickerControl = false;
+ _sf_async_config.useCanonical = true;
+ _sf_async_config.useCanonicalDomain = true;
+ _sf_async_config.sections = 'page_template|article,article_type|Feature Story,section|General,site_languages|English,published_date|02-01-2025 17:08:00 pm,keywords|AI feature,Cybersecurity,deepfake,Quantum Computing,ransomware';
+ _sf_async_config.authors = 'jayesh.shinde@9dot9.in';
+ function loadChartbeat() {
+ var e = document.createElement('script');
+ var n = document.getElementsByTagName('script')[0];
+ e.type = 'text/javascript';
+ e.async = true;
+ e.src = '//static.chartbeat.com/js/chartbeat.js';
+ n.parentNode.insertBefore(e, n);
+ }
+ loadChartbeat();
+ })();
+</script>
+<script class="exclude_rocket" async src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+    
+<meta property="fb:app_id" content="243909795959629">
+<meta property="fb:pages" content="110963532384">
+<meta name="twitter:url" content="https://www.digit.in/features/general/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html">
+<meta name="news_keywords" content="AI feature,Cybersecurity,deepfake,Quantum Computing,ransomware"><link rel="alternate" type="application/rss+xml" title="Digit.in &raquo; Stories Feed" href="https://www.digit.in/web-stories/feed/"><!-- digit.in is managing ads with Advanced Ads 1.56.0 --><!--noptimize--><script id="wordp-ready">
+			window.advanced_ads_ready=function(e,a){a=a||"complete";var d=function(e){return"interactive"===a?"loading"!==e:"complete"===e};d(document.readyState)?e():document.addEventListener("readystatechange",(function(a){d(a.target.readyState)&&e()}),{once:"interactive"===a})},window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[];		</script>
+		<!--/noptimize--><style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--main: var(--rehub-main-color);--wp--preset--color--secondary: var(--rehub-sec-color);--wp--preset--color--buttonmain: var(--rehub-main-btn-bg);--wp--preset--color--cyan-grey: #abb8c3;--wp--preset--color--orange-light: #fcb900;--wp--preset--color--red: #cf2e2e;--wp--preset--color--red-bright: #f04057;--wp--preset--color--vivid-green: #00d084;--wp--preset--color--orange: #ff6900;--wp--preset--color--blue: #0693e3;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-family--system-font: Roboto,"Helvetica Neue",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,sans-serif;--wp--preset--font-family--rh-nav-font: var(--rehub-nav-font,Roboto,"Helvetica Neue",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,sans-serif);--wp--preset--font-family--rh-head-font: var(--rehub-head-font,Roboto,"Helvetica Neue",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,sans-serif);--wp--preset--font-family--rh-btn-font: var(--rehub-btn-font,Roboto,"Helvetica Neue",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,sans-serif);--wp--preset--font-family--rh-body-font: var(--rehub-body-font,Roboto,"Helvetica Neue",-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Oxygen-Sans,sans-serif);--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:root { --wp--style--global--content-size: 760px;--wp--style--global--wide-size: 900px; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){color: var(--rehub-link-color, violet);text-decoration: none;}h1{font-size: 29px;line-height: 34px;margin-top: 10px;margin-bottom: 31px;}h2{font-size: 25px;line-height: 31px;margin-top: 10px;margin-bottom: 31px;}h3{font-size: 20px;line-height: 28px;margin-top: 10px;margin-bottom: 25px;}h4{font-size: 18px;line-height: 24px;margin-top: 10px;margin-bottom: 18px;}h5{font-size: 16px;line-height: 20px;margin-top: 10px;margin-bottom: 15px;}h6{font-size: 14px;line-height: 20px;margin-top: 0px;margin-bottom: 10px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-main-color{color: var(--wp--preset--color--main) !important;}.has-secondary-color{color: var(--wp--preset--color--secondary) !important;}.has-buttonmain-color{color: var(--wp--preset--color--buttonmain) !important;}.has-cyan-grey-color{color: var(--wp--preset--color--cyan-grey) !important;}.has-orange-light-color{color: var(--wp--preset--color--orange-light) !important;}.has-red-color{color: var(--wp--preset--color--red) !important;}.has-red-bright-color{color: var(--wp--preset--color--red-bright) !important;}.has-vivid-green-color{color: var(--wp--preset--color--vivid-green) !important;}.has-orange-color{color: var(--wp--preset--color--orange) !important;}.has-blue-color{color: var(--wp--preset--color--blue) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-main-background-color{background-color: var(--wp--preset--color--main) !important;}.has-secondary-background-color{background-color: var(--wp--preset--color--secondary) !important;}.has-buttonmain-background-color{background-color: var(--wp--preset--color--buttonmain) !important;}.has-cyan-grey-background-color{background-color: var(--wp--preset--color--cyan-grey) !important;}.has-orange-light-background-color{background-color: var(--wp--preset--color--orange-light) !important;}.has-red-background-color{background-color: var(--wp--preset--color--red) !important;}.has-red-bright-background-color{background-color: var(--wp--preset--color--red-bright) !important;}.has-vivid-green-background-color{background-color: var(--wp--preset--color--vivid-green) !important;}.has-orange-background-color{background-color: var(--wp--preset--color--orange) !important;}.has-blue-background-color{background-color: var(--wp--preset--color--blue) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-main-border-color{border-color: var(--wp--preset--color--main) !important;}.has-secondary-border-color{border-color: var(--wp--preset--color--secondary) !important;}.has-buttonmain-border-color{border-color: var(--wp--preset--color--buttonmain) !important;}.has-cyan-grey-border-color{border-color: var(--wp--preset--color--cyan-grey) !important;}.has-orange-light-border-color{border-color: var(--wp--preset--color--orange-light) !important;}.has-red-border-color{border-color: var(--wp--preset--color--red) !important;}.has-red-bright-border-color{border-color: var(--wp--preset--color--red-bright) !important;}.has-vivid-green-border-color{border-color: var(--wp--preset--color--vivid-green) !important;}.has-orange-border-color{border-color: var(--wp--preset--color--orange) !important;}.has-blue-border-color{border-color: var(--wp--preset--color--blue) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}.has-system-font-font-family{font-family: var(--wp--preset--font-family--system-font) !important;}.has-rh-nav-font-font-family{font-family: var(--wp--preset--font-family--rh-nav-font) !important;}.has-rh-head-font-font-family{font-family: var(--wp--preset--font-family--rh-head-font) !important;}.has-rh-btn-font-font-family{font-family: var(--wp--preset--font-family--rh-btn-font) !important;}.has-rh-body-font-font-family{font-family: var(--wp--preset--font-family--rh-body-font) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+:root :where(.wp-block-post-title){margin-top: 4px;margin-right: 0;margin-bottom: 15px;margin-left: 0;}
+:root :where(.wp-block-image){margin-top: 0px;margin-bottom: 31px;}
+:root :where(.wp-block-media-text){margin-top: 0px;margin-bottom: 31px;}
+:root :where(.wp-block-post-content){font-size: 16px;line-height: 28px;}
+:root :where(p){font-size: 16px;line-height: 28px;}
+</style>
+<style id='woocommerce-inline-inline-css' type='text/css'>
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link data-minify="1" rel='stylesheet' id='parent-style-css' href='https://www.digit.in/wp-content/cache/background-css/www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/style.css?ver=1736246226&wpr_t=1736453440' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='digit-common-css-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-blankchild/digitTheme/css/digit_common.css?ver=1736246226' type='text/css' media='all' />
+<link rel='stylesheet' id='rhstyle-css' href='https://www.digit.in/wp-content/themes/rehub-blankchild/style.css?ver=18.9.9.2' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='rehubicons-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/iconstyle.css?ver=1736246227' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='rhajaxsearch-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/css/ajaxsearch.css?ver=1736246227' type='text/css' media='all' />
+<style id='rocket-lazyload-inline-css' type='text/css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:var(--wpr-bg-99402602-e8b2-4a76-a95d-560411960a16) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}.wp-embed-responsive .wp-has-aspect-ratio .rll-youtube-player{position:absolute;padding-bottom:0;width:100%;height:100%;top:0;bottom:0;left:0;right:0}
+</style>
+<script type="text/javascript" src="https://www.digit.in/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://www.digit.in/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="advanced-ads-advanced-js-js-extra">
+/* <![CDATA[ */
+var advads_options = {"blog_id":"1","privacy":{"consent-method":"","custom-cookie-name":"","custom-cookie-value":"","enabled":false,"state":"not_needed"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/advanced-ads/public/assets/js/advanced.min.js?ver=1.56.0" id="advanced-ads-advanced-js-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="advanced_ads_pro/visitor_conditions-js-extra">
+/* <![CDATA[ */
+var advanced_ads_pro_visitor_conditions = {"referrer_cookie_name":"advanced_ads_pro_visitor_referrer","referrer_exdays":"365","page_impr_cookie_name":"advanced_ads_page_impressions","page_impr_exdays":"3650"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/advanced-ads-pro/modules/advanced-visitor-conditions/inc/conditions.min.js?ver=2.28.0" id="advanced_ads_pro/visitor_conditions-js" data-rocket-defer defer></script>
+<link rel="https://api.w.org/" href="https://www.digit.in/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.digit.in/wp-json/wp/v2/posts/692818" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.digit.in/xmlrpc.php?rsd" />
+
+<link rel='shortlink' href='https://www.digit.in/?p=692818' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.digit.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.digit.in/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html&#038;format=xml" />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+		var advadsCfpQueue = [];
+		var advadsCfpAd = function( adID ){
+			if ( 'undefined' == typeof advadsProCfp ) { advadsCfpQueue.push( adID ) } else { advadsProCfp.addElement( adID ) }
+		};
+		</script>
+		<link rel="alternate" type="application/rss+xml" href="https://www.digit.in/client-feed/features/all/50" /><script type="text/javascript" id="adcat">
+  digitPriceRange = '';
+  digitSectionAlias = 'Feature Story';
+  digitCatAlias = 'General';
+  digitLangAlias = 'en';
+  digitBrandAlias = ' ';
+  digitPagetypeAlias = '';
+</script>
+ <link rel="preload" href="https://www.digit.in/wp-content/themes/rehub-theme/fonts/rhicons.woff2?3oibrk" as="font" type="font/woff2" crossorigin="crossorigin"><style type="text/css"> .dl-menuwrapper li a,nav.top_menu > ul > li > a,#re_menu_near_logo li,#re_menu_near_logo li{font-family:"Barlow",trebuchet ms !important;font-weight:normal;font-style:normal;}:root{--rehub-nav-font:Barlow;}.rehub_feat_block div.offer_title,.rh_wrapper_video_playlist .rh_video_title_and_time .rh_video_title,.main_slider .flex-overlay h2,.related_articles ul li > a,h1,h2,h3,h4,h5,h6,.widget .title,.title h1,.title h5,.related_articles .related_title,#comments .title_comments,.commentlist .comment-author .fn,.commentlist .comment-author .fn a,.rate_bar_wrap .review-top .review-text span.review-header,.wpsm-numbox.wpsm-style6 span.num,.wpsm-numbox.wpsm-style5 span.num,.rehub-main-font,.logo .textlogo,.wp-block-quote.is-style-large,.comment-respond h3,.related_articles .related_title,.re_title_inmodal{font-family:"Barlow",trebuchet ms;font-style:normal;}.main_slider .flex-overlay h2,h1,h2,h3,h4,h5,h6,.title h1,.title h5,.comment-respond h3{font-weight:600;}:root{--rehub-head-font:Barlow;}.priced_block .btn_offer_block,.rh-deal-compact-btn,.wpsm-button.rehub_main_btn,.woocommerce div.product p.price,.btn_more,input[type="submit"],input[type="button"],input[type="reset"],.vc_btn3,.re-compare-destin.wpsm-button,.rehub-btn-font,.vc_general.vc_btn3,.woocommerce a.woo_loop_btn,.woocommerce input.button.alt,.woocommerce a.add_to_cart_button,.woocommerce .single_add_to_cart_button,.woocommerce div.product form.cart .button,.woocommerce .checkout-button.button,#buddypress button.submit,.wcv-grid a.button,input.gmw-submit,#ws-plugin--s2member-profile-submit,#rtmedia_create_new_album,input[type="submit"].dokan-btn-theme,a.dokan-btn-theme:not(.dashicons),.dokan-btn-theme:not(.dashicons),.woocommerce .single_add_to_cart_button,.woocommerce .woo-button-area .masked_coupon,.woocommerce .summary .price,.wvm_plan,.wp-block-button .wp-block-button__link,.widget_merchant_list .buttons_col a{font-family:"Barlow",trebuchet ms;font-style:normal;font-weight:normal;}:root{--rehub-btn-font:Barlow;}.sidebar,.rehub-body-font,body{font-family:"Barlow",arial !important;font-weight:normal;font-style:normal;}:root{--rehub-body-font:Barlow;}.responsive_nav_wrap{background:none repeat scroll 0 0 #000000!important;box-shadow:none;}.main-nav{border-bottom:none;border-top:none;}.dl-menuwrapper .dl-menu{margin:0 !important}.left-sidebar-archive .main-side{float:right;}.left-sidebar-archive .sidebar{float:left} .widget .title:after{border-bottom:2px solid #211d1a;}.rehub-main-color-border,nav.top_menu > ul > li.vertical-menu.border-main-color .sub-menu,.rh-main-bg-hover:hover,.wp-block-quote,ul.def_btn_link_tabs li.active a,.wp-block-pullquote{border-color:#211d1a;}.wpsm_promobox.rehub_promobox{border-left-color:#211d1a!important;}.color_link{color:#211d1a !important;}.featured_slider:hover .score,.top_chart_controls .controls:hover,article.post .wpsm_toplist_heading:before{border-color:#211d1a;}.btn_more:hover,.tw-pagination .current{border:1px solid #211d1a;color:#fff}.rehub_woo_review .rehub_woo_tabs_menu li.current{border-top:3px solid #211d1a;}.gallery-pics .gp-overlay{box-shadow:0 0 0 4px #211d1a inset;}.post .rehub_woo_tabs_menu li.current,.woocommerce div.product .woocommerce-tabs ul.tabs li.active{border-top:2px solid #211d1a;}.rething_item a.cat{border-bottom-color:#211d1a}nav.top_menu ul li ul.sub-menu{border-bottom:2px solid #211d1a;}.widget.deal_daywoo,.elementor-widget-wpsm_woofeatured .deal_daywoo{border:3px solid #211d1a;padding:20px;background:#fff;}.deal_daywoo .wpsm-bar-bar{background-color:#211d1a !important} #buddypress div.item-list-tabs ul li.selected a span,#buddypress div.item-list-tabs ul li.current a span,#buddypress div.item-list-tabs ul li a span,.user-profile-div .user-menu-tab > li.active > a,.user-profile-div .user-menu-tab > li.active > a:focus,.user-profile-div .user-menu-tab > li.active > a:hover,.news_in_thumb:hover a.rh-label-string,.news_out_thumb:hover a.rh-label-string,.col-feat-grid:hover a.rh-label-string,.carousel-style-deal .re_carousel .controls,.re_carousel .controls:hover,.openedprevnext .postNavigation .postnavprev,.postNavigation .postnavprev:hover,.top_chart_pagination a.selected,.flex-control-paging li a.flex-active,.flex-control-paging li a:hover,.btn_more:hover,body .tabs-menu li:hover,body .tabs-menu li.current,.featured_slider:hover .score,#bbp_user_edit_submit,.bbp-topic-pagination a,.bbp-topic-pagination a,.custom-checkbox label.checked:after,.slider_post .caption,ul.postpagination li.active a,ul.postpagination li:hover a,ul.postpagination li a:focus,.top_theme h5 strong,.re_carousel .text:after,#topcontrol:hover,.main_slider .flex-overlay:hover a.read-more,.rehub_chimp #mc_embed_signup input#mc-embedded-subscribe,#rank_1.rank_count,#toplistmenu > ul li:before,.rehub_chimp:before,.wpsm-members > strong:first-child,.r_catbox_btn,.wpcf7 .wpcf7-submit,.wpsm_pretty_hover li:hover,.wpsm_pretty_hover li.current,.rehub-main-color-bg,.togglegreedybtn:after,.rh-bg-hover-color:hover a.rh-label-string,.rh-main-bg-hover:hover,.rh_wrapper_video_playlist .rh_video_currently_playing,.rh_wrapper_video_playlist .rh_video_currently_playing.rh_click_video:hover,.rtmedia-list-item .rtmedia-album-media-count,.tw-pagination .current,.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.active,.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li:hover,.dokan-dashboard .dokan-dash-sidebar ul.dokan-dashboard-menu li.dokan-common-links a:hover,#ywqa-submit-question,.woocommerce .widget_price_filter .ui-slider .ui-slider-range,.rh-hov-bor-line > a:after,nav.top_menu > ul:not(.off-canvas) > li > a:after,.rh-border-line:after,.wpsm-table.wpsm-table-main-color table tr th,.rh-hov-bg-main-slide:before,.rh-hov-bg-main-slidecol .col_item:before,.mvx-tablink.active::before{background:#211d1a;}@media (max-width:767px){.postNavigation .postnavprev{background:#211d1a;}}.rh-main-bg-hover:hover,.rh-main-bg-hover:hover .whitehovered,.user-profile-div .user-menu-tab > li.active > a{color:#fff !important} a,.carousel-style-deal .deal-item .priced_block .price_count ins,nav.top_menu ul li.menu-item-has-children ul li.menu-item-has-children > a:before,.top_chart_controls .controls:hover,.flexslider .fa-pulse,.footer-bottom .widget .f_menu li a:hover,.comment_form h3 a,.bbp-body li.bbp-forum-info > a:hover,.bbp-body li.bbp-topic-title > a:hover,#subscription-toggle a:before,#favorite-toggle a:before,.aff_offer_links .aff_name a,.rh-deal-price,.commentlist .comment-content small a,.related_articles .title_cat_related a,article em.emph,.campare_table table.one td strong.red,.sidebar .tabs-item .detail p a,.footer-bottom .widget .title span,footer p a,.welcome-frase strong,article.post .wpsm_toplist_heading:before,.post a.color_link,.categoriesbox:hover h3 a:after,.bbp-body li.bbp-forum-info > a,.bbp-body li.bbp-topic-title > a,.widget .title i,.woocommerce-MyAccount-navigation ul li.is-active a,.category-vendormenu li.current a,.deal_daywoo .title,.rehub-main-color,.wpsm_pretty_colored ul li.current a,.wpsm_pretty_colored ul li.current,.rh-heading-hover-color:hover h2 a,.rh-heading-hover-color:hover h3 a,.rh-heading-hover-color:hover h4 a,.rh-heading-hover-color:hover h5 a,.rh-heading-hover-color:hover h3,.rh-heading-hover-color:hover h2,.rh-heading-hover-color:hover h4,.rh-heading-hover-color:hover h5,.rh-heading-hover-color:hover .rh-heading-hover-item a,.rh-heading-icon:before,.widget_layered_nav ul li.chosen a:before,.wp-block-quote.is-style-large p,ul.page-numbers li span.current,ul.page-numbers li a:hover,ul.page-numbers li.active a,.page-link > span:not(.page-link-title),blockquote:not(.wp-block-quote) p,span.re_filtersort_btn:hover,span.active.re_filtersort_btn,.deal_daywoo .price,div.sortingloading:after{color:#211d1a;} .page-link > span:not(.page-link-title),.widget.widget_affegg_widget .title,.widget.top_offers .title,.widget.cegg_widget_products .title,header .header_first_style .search form.search-form [type="submit"],header .header_eight_style .search form.search-form [type="submit"],.filter_home_pick span.active,.filter_home_pick span:hover,.filter_product_pick span.active,.filter_product_pick span:hover,.rh_tab_links a.active,.rh_tab_links a:hover,.wcv-navigation ul.menu li.active,.wcv-navigation ul.menu li:hover a,form.search-form [type="submit"],.rehub-sec-color-bg,input#ywqa-submit-question,input#ywqa-send-answer,.woocommerce button.button.alt,.tabsajax span.active.re_filtersort_btn,.wpsm-table.wpsm-table-sec-color table tr th,.rh-slider-arrow,.rh-hov-bg-sec-slide:before,.rh-hov-bg-sec-slidecol .col_item:before{background:#000000 !important;color:#fff !important;outline:0}.widget.widget_affegg_widget .title:after,.widget.top_offers .title:after,.widget.cegg_widget_products .title:after{border-top-color:#000000 !important;}.page-link > span:not(.page-link-title){border:1px solid #000000;}.page-link > span:not(.page-link-title),.header_first_style .search form.search-form [type="submit"] i{color:#fff !important;}.rh_tab_links a.active,.rh_tab_links a:hover,.rehub-sec-color-border,nav.top_menu > ul > li.vertical-menu.border-sec-color > .sub-menu,body .rh-slider-thumbs-item--active{border-color:#000000}.rh_wrapper_video_playlist .rh_video_currently_playing,.rh_wrapper_video_playlist .rh_video_currently_playing.rh_click_video:hover{background-color:#000000;box-shadow:1200px 0 0 #000000 inset;}.rehub-sec-color{color:#000000} .price_count,.rehub_offer_coupon,#buddypress .dir-search input[type=text],.gmw-form-wrapper input[type=text],.gmw-form-wrapper select,.rh_post_layout_big_offer .priced_block .btn_offer_block,#buddypress a.button,.btn_more,#main_header .wpsm-button,#rh-header-cover-image .wpsm-button,#wcvendor_image_bg .wpsm-button,.rate-bar-bar,.rate-bar,.rehub-main-smooth,.re_filter_instore span.re_filtersort_btn:hover,.re_filter_instore span.active.re_filtersort_btn,.head_search .search-form,.head_search form.search-form input[type="text"],form.search-form input[type="text"]{border-radius:100px}.news .priced_block .price_count,.blog_string .priced_block .price_count,.main_slider .price_count{margin-right:5px}.right_aff .priced_block .btn_offer_block,.right_aff .priced_block .price_count{border-radius:0 !important}form.search-form.product-search-form input[type="text"]{border-radius:100px 0 0 100px;}form.search-form [type="submit"]{border-radius:0 100px 100px 0;}.rtl form.search-form.product-search-form input[type="text"]{border-radius:0 100px 100px 0;}.rtl form.search-form [type="submit"]{border-radius:100px 0 0 100px;}.woocommerce .products.grid_woo .product,.rh_offer_list .offer_thumb .deal_img_wrap,.rehub_chimp #mc_embed_signup input.email,#mc_embed_signup input#mc-embedded-subscribe,.grid_onsale,.def_btn,input[type="submit"],input[type="button"],input[type="reset"],.wpsm-button,#buddypress div.item-list-tabs ul li a,#buddypress .standard-form input[type=text],#buddypress .standard-form textarea,.blacklabelprice{border-radius:5px}.news-community,.review-top .overall-score,.rate_bar_wrap,.rh_offer_list,.woo-tax-logo,#buddypress form#whats-new-form,#buddypress div#invite-list,#buddypress #send-reply div.message-box,.rehub-sec-smooth,#wcfm-main-contentainer #wcfm-content,.wcfm_welcomebox_header{border-radius:8px}.review-top .overall-score span.overall-text{border-radius:0 0 8px 8px}.coupon_btn:before{display:none;}#rhSplashSearch form.search-form input[type="text"],#rhSplashSearch form.search-form [type="submit"]{border-radius:0 !important} .woocommerce .woo-button-area .masked_coupon,.woocommerce a.woo_loop_btn,.woocommerce .button.checkout,.woocommerce input.button.alt,.woocommerce a.add_to_cart_button:not(.flat-woo-btn),.woocommerce-page a.add_to_cart_button:not(.flat-woo-btn),.woocommerce .single_add_to_cart_button,.woocommerce div.product form.cart .button,.woocommerce .checkout-button.button,.priced_block .btn_offer_block,.priced_block .button,.rh-deal-compact-btn,input.mdf_button,#buddypress input[type="submit"],#buddypress input[type="button"],#buddypress input[type="reset"],#buddypress button.submit,.wpsm-button.rehub_main_btn,.wcv-grid a.button,input.gmw-submit,#ws-plugin--s2member-profile-submit,#rtmedia_create_new_album,input[type="submit"].dokan-btn-theme,a.dokan-btn-theme,.dokan-btn-theme,#wcfm_membership_container a.wcfm_submit_button,.woocommerce button.button,.rehub-main-btn-bg,.woocommerce #payment #place_order,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link{background:none #c80701 !important;color:#ffffff !important;fill:#ffffff !important;border:none !important;text-decoration:none !important;outline:0;box-shadow:-1px 6px 19px rgba(200,7,1,0.25) !important;border-radius:100px !important;}.rehub-main-btn-bg > a{color:#ffffff !important;}.woocommerce a.woo_loop_btn:hover,.woocommerce .button.checkout:hover,.woocommerce input.button.alt:hover,.woocommerce a.add_to_cart_button:not(.flat-woo-btn):hover,.woocommerce-page a.add_to_cart_button:not(.flat-woo-btn):hover,.woocommerce a.single_add_to_cart_button:hover,.woocommerce-page a.single_add_to_cart_button:hover,.woocommerce div.product form.cart .button:hover,.woocommerce-page div.product form.cart .button:hover,.woocommerce .checkout-button.button:hover,.priced_block .btn_offer_block:hover,.wpsm-button.rehub_main_btn:hover,#buddypress input[type="submit"]:hover,#buddypress input[type="button"]:hover,#buddypress input[type="reset"]:hover,#buddypress button.submit:hover,.small_post .btn:hover,.ap-pro-form-field-wrapper input[type="submit"]:hover,.wcv-grid a.button:hover,#ws-plugin--s2member-profile-submit:hover,.rething_button .btn_more:hover,#wcfm_membership_container a.wcfm_submit_button:hover,.woocommerce #payment #place_order:hover,.woocommerce button.button:hover,.rehub-main-btn-bg:hover,.rehub-main-btn-bg:hover > a,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link:hover{background:none #c80701 !important;color:#ffffff !important;border-color:transparent;box-shadow:-1px 6px 13px rgba(200,7,1,0.35) !important;}.rehub_offer_coupon:hover{border:1px dashed #c80701;}.rehub_offer_coupon:hover i.far,.rehub_offer_coupon:hover i.fal,.rehub_offer_coupon:hover i.fas{color:#c80701}.re_thing_btn .rehub_offer_coupon.not_masked_coupon:hover{color:#c80701 !important}.woocommerce a.woo_loop_btn:active,.woocommerce .button.checkout:active,.woocommerce .button.alt:active,.woocommerce a.add_to_cart_button:not(.flat-woo-btn):active,.woocommerce-page a.add_to_cart_button:not(.flat-woo-btn):active,.woocommerce a.single_add_to_cart_button:active,.woocommerce-page a.single_add_to_cart_button:active,.woocommerce div.product form.cart .button:active,.woocommerce-page div.product form.cart .button:active,.woocommerce .checkout-button.button:active,.wpsm-button.rehub_main_btn:active,#buddypress input[type="submit"]:active,#buddypress input[type="button"]:active,#buddypress input[type="reset"]:active,#buddypress button.submit:active,.ap-pro-form-field-wrapper input[type="submit"]:active,.wcv-grid a.button:active,#ws-plugin--s2member-profile-submit:active,.woocommerce #payment #place_order:active,input[type="submit"].dokan-btn-theme:active,a.dokan-btn-theme:active,.dokan-btn-theme:active,.woocommerce button.button:active,.rehub-main-btn-bg:active,.wc-block-grid__product-add-to-cart.wp-block-button .wp-block-button__link:active{background:none #c80701 !important;box-shadow:0 1px 0 #999 !important;top:2px;color:#ffffff !important;}.rehub_btn_color,.rehub_chimp_flat #mc_embed_signup input#mc-embedded-subscribe{background-color:#c80701;border:1px solid #c80701;color:#ffffff;text-shadow:none}.rehub_btn_color:hover{color:#ffffff;background-color:#c80701;border:1px solid #c80701;}.rething_button .btn_more{border:1px solid #c80701;color:#c80701;}.rething_button .priced_block.block_btnblock .price_count{color:#c80701;font-weight:normal;}.widget_merchant_list .buttons_col{background-color:#c80701 !important;}.widget_merchant_list .buttons_col a{color:#ffffff !important;}.rehub-svg-btn-fill svg{fill:#c80701;}.rehub-svg-btn-stroke svg{stroke:#c80701;}@media (max-width:767px){#float-panel-woo-area{border-top:1px solid #c80701}}:root{--rehub-main-color:#211d1a;--rehub-sec-color:#000000;--rehub-main-btn-bg:#c80701;--rehub-link-color:#211d1a;}</style><style>.cegg-image-container img, .egg-container .img-responsive{max-height:350px !important}
+.egg-container .row{margin-bottom:0px !important}
+
+
+/*CWV-280624*/
+.footer_details_cont{padding-top: 25px;}
+.footer_details_cont .left_side{width: 100%;}
+.footer_details_cont .left_side img{margin-right: 15px;}
+.footer_details_cont .left_side p{width: calc(100% - 95px);}
+.list-social{margin-top: 20px;}
+.cwv_list_social a{vertical-align: middle;}
+.footer_border_added{margin-bottom: 15px; border-bottom: 1px solid #4e5056; padding-bottom: 25px; }
+.footer_title_head{font-size: 20px; display: inline-block; padding-right: 10px;}
+.cwv_footer_nav .footer_title_head{width:100%; margin-bottom:15px;}
+.cwv_footer_nav a{color: #aaa; font-weight: 400; text-transform: capitalize; font-size: 14px;}
+.cwv_footer_nav a span{border: solid #8b8b8b; border-width: 0 1px 1px 0; display: inline-block; padding: 3px; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); vertical-align: middle; margin-right: 5px; margin-top: -1px;}
+</style>	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<link rel="icon" href="https://static.digit.in/favicon-1-96x96.png" sizes="32x32" />
+<link rel="icon" href="https://static.digit.in/favicon-1-300x300.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://static.digit.in/favicon-1-300x300.png" />
+<meta name="msapplication-TileImage" content="https://static.digit.in/favicon-1-300x300.png" />
+		<style type="text/css" id="wp-custom-css">
+			.woocommerce .products .product figure img{width:100%}
+.custom_hotdeal{width:100%;float:left}
+#gspb_col-id-gsbp-af783d62-a0ab{width: 100%;background: #eee;overflow: hidden;}
+.footer_tag {width: 100%;float: left;padding-top: 15px;font-size: .85rem; color: #ccc;border-bottom: 1px solid #505050;padding-bottom: 5px;}
+.footer_tag a{color: #ccc;font-size: .85rem;margin: 0 .25rem;}
+.footer_tag a:hover{color: #fff;}
+.copyright {display: inline-block; font-size: 13px;width: 100%; background: #2c2d32; color: #ffff; line-height: 22px; font-weight: 400; padding: 14px 0 0}
+.footer-nav {width: 100%; float: left; margin: 13px 0 20px; }
+.footer-nav ul {width: 100%; margin: 0; padding: 0; list-style: none; }
+.footer-nav ul li {width: auto; margin: 0 20px 5px 0; padding: 0; float: left; }
+.footer-nav ul li span {color: #959595; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 16px;float: left; padding: 4px 0;  }
+.footer-nav ul li a {color: #959595; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 16px;float: left; padding: 4px 0; }
+.copey-text {float: left;width: 100%;text-align: center;font-size: 12px;font-weight: normal;color: #fff;margin: 5px 0 0 0;background: #000;padding:5px 0}
+.social-footer{float:right;}
+.list-social {display: inline-block; margin-top:15px; }
+.list-inline>li {display: inline-block; padding:0 5px; }
+.footer_details_cont {display: flex;justify-content: space-between;padding-bottom: 1rem;width: 100%;flex-wrap: wrap;}
+.footer_details_cont .left_side {width: 55%;display: flex;align-items: start;}
+.footer_details_cont .rgt_side {width: 40%;display: flex;align-items: start;flex-wrap: wrap;}
+.footer_details_cont .left_side img {max-width: 100%;margin-right: 1.2rem;width: 74px;}
+.footer_details_cont .left_side p {font-size: 0.9rem;line-height: 1.5rem;color: #a5a4a4;margin:0;width: 85%;}
+.footer_details_cont .rgt_side img {max-width: 100%;}
+.footer_details_cont .rgt_side p {font-size: 0.9rem;line-height: 1.5rem;color: #a5a4a4;width: 80%;padding-left: .5rem;margin:0}
+.copyright_cont {letter-spacing: 0.03rem;color: #FFFFFF;text-align: center;padding: 1rem 0;font-size: 0.87rem;line-height: 1.2rem;}
+.footer_details_cont .rgt_side img.ninetynine_logo{width: 56px;}
+.list-social{width: 100%;}
+.list-inline>li {display: inline-block;padding: 0 5px;}
+.single .tags p a{font-size: 14px;}
+.post ul:not([class]) li {margin-left: 20px;}
+.post ul, .post ol{font-size: 16px;line-height: 24px;color: #606060;}
+.post ul a, .post ol a{text-decoration: underline;}
+#rehub_sticky_on_scroll-1{z-index:1}
+.breadcrumb {line-height: 19px!important}
+header .logo-section{align-items: start!important; height:70px;}
+ .header_wrap{height: 140px;}
+#desktop_ads{display:block!important;}
+#mobile_ads{display:none!important;}
+.post-readopt .title_single_area h1 {text-transform: none;}
+.login-btn-cell,.rh_login_icon_n_btn.mobileinmenu {display: none;}
+.digitlang_menu,.rh_login_icon_n_btn.mobileinmenu.digitlang_menu {display: block;}
+.egg-container .status-outofstock {color: #696969!important}
+.egg-container .text-muted {color: #696969!important}
+.egg-container .status-instock {color: #378100!important}
+article p a, .post p a{color: #bc3216!important;}
+.author_detail_box {background-color: #f5f5f5!important}
+.social_icon.small_i a {width: 48px;height: 48px;display: inline-flex;align-items: center;justify-content: center;font-size: 24px;}
+ @media only screen and (max-width: 767px) and (min-width: 0px){
+.footer-nav ul li a {font-size: 15px;}
+.footer_details_cont .left_side, .footer_details_cont .rgt_side {width: 100%;    margin-bottom: 1rem;}
+.footer_details_cont .rgt_side .ninetynine_logo {margin-right: 1.8rem;}
+.footer_details_cont .rgt_side p{width: 75%;}
+.footer_details_cont{padding-bottom: 0;}
+#desktop_ads{display:none!important;}
+#mobile_ads{display:block!important;}
+.header_wrap{height: auto;}
+#comments .post-comments .comment-respond{padding: 20px!important;}
+}
+
+
+.topten_block .item-small-news-details .post-meta{display:none;}
+
+article iframe.entered , .post iframe.entered {
+    width: 100%; 
+    height:360px; 
+    margin: 10px 0px;
+}
+
+@media only screen and (max-width: 767px) {
+    article iframe.entered , .post iframe.entered {
+        height:210px; 
+    }
+}
+
+iframe#defaultembedvideo{
+    width: 100%; 
+    height:360px; 
+    margin: 10px 0px;
+}
+
+@media only screen and (max-width: 767px) {
+    iframe#defaultembedvideo{
+        height:210px; 
+    }
+}
+
+
+/*CWV-240124*/
+#mobile-menu-icons{min-height: 55px; position: relative; padding-right:61px;}
+.dl-menuwrapper button{height: 55px;}
+.author_detail_box div h3{font-size: 18px; line-height: 24px; margin: 0 0 8px 0;}
+@media only screen and (max-width: 767px){
+#main_header #dl-menu .rh-header-icon {
+margin: 13.5px 9px!important;
+position: absolute;
+right:7px;
+}
+#dl-menu a.logo_image_mobile img{    height: 36px;}
+.post p a {font-weight:600;}
+article p a{font-weight:600;}
+}
+
+.color_sidebar h4{font-size: 15px; margin-bottom: 7px!important;}
+.color_sidebar h4 a{font-size: 15px; color: #333;}
+.post p a, article p a{color: #a90702 !important;}
+.highlights_cont_cwv {margin-bottom: 10px;}
+.highlights_cont_cwv h2 {color: #000; padding-left: 1rem; line-height: 1.5rem; font-size: 1.15rem; margin:0 0 1rem 0; font-weight: 500; display: inline-block; border-left: 3px solid #ed0600; vertical-align: middle;}
+.cwv_footer_tag a{margin: 0px; padding: 0 0.5rem; border-right: 2px solid #bbbcc5; line-height: normal;}
+.cwv_footer_tag a.cwv_footer_menu_first{padding-left:0.25rem;}
+.cwv_footer_tag a.cwv_footer_menu_last{padding-right:0px; border-right: none;}
+.cwv_footer_nav a{color: #959595; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 16px; float: left; padding: 4px 0px; margin: 0px 20px 5px 0px;}
+.cwv_list_social a{display: inline-block; padding: 0 5px;}
+@media only screen and (max-width: 1024px){
+.wordp-sticky{min-height: 56px;}
+.dl-menuwrapper button svg line{animation: none;}
+}
+@media only screen and (max-width: 767px){
+blockquote.twitter-tweet, blockquote.twitter-tweet p{font-weight: 600;}
+.widget .autocontents li{margin: 0px 0px 0px 12px !important; display: flex; justify-content: center;}
+.widget .autocontents li a{display: inline-block; padding: 0px 2px 12px 2px;}
+.post-inner-wrapper p a{color: #a90702!important; font-weight: 600;}
+.review-small-square{font-size: 22px;}
+.review-small-square .font70{font-size: 90%;}
+.cwv_footer_nav a {font-size: 15px;}
+.footer_details_cont .rgt_side .ninetynine_logo{margin-right: 1.5rem;}
+.add_box_top{min-height: 100px;}
+}
+.highlights_cont_cwv h2{width: 100%;}
+.logo-section nav.top_menu ul li:nth-child(6) a{background: #08ddeb;
+    box-sizing: border-box;
+    min-width: 80px;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 13px 6px 13px;
+    margin-top: 4px;}
+nav.top_menu ul li:nth-child(6) a:after{content: none;}
+
+#slide-menu-mobile ul li:nth-child(7) a{background: #08ddeb;
+    box-sizing: border-box;
+    min-width: 80px;
+    text-align: center;
+    font-weight: bold;
+    padding: 5px 13px 6px 13px;
+    margin-top: 4px;}
+
+.post-inner .numbering{background: #ed1d24; padding: 5px 10px; top: 32px; border-radius: 10px 0px 0px 0px; font-size: 18px !important; line-height: normal;}
+.Top10-Seller{width: 100%; float: left; margin: 8px 0 32px;}
+.Top10-Seller table{width: 100%; border-collapse: collapse;}
+.Top10-Seller table tr:nth-child(odd){background: #ddd;}
+.Top10-Seller table tr th{background: #999; color: #fff; padding: 10px 10px; font-weight: 400; font-size: 14px; text-align: left; line-height: normal; vertical-align: middle; border: 1px solid rgb(255 255 255 / 22%);}
+.Top10-Seller table tr td{padding: 10px; text-align: left; font-size: 12px; font-weight: 400; line-height: 20px;  vertical-align: middle;}
+.Top10-Seller table tr td:first-child{width:50%;}
+.Top10-Seller table tr td a {text-decoration:underline; color:#999999}
+.lowest_price { width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; background: #fff; } .lowest_price a { width: 100%; display: flex; align-items: center; justify-content: space-between; color: #000; } .show-desktop { display: block; } .show-mobile { display: none; } .lowest_price p { font-size: 1.15rem; font-weight: 600; } .button_buy { color: #fff; background-color: #d52521; border-color: #d52521; border-radius: 3px; padding: 8px 18px; font-size: 15px; margin: -1px 0 0 0; outline: none; border: none; font-weight: 600; float: right; text-transform: uppercase; cursor: pointer; font-family: ‘Barlow’, sans-serif; } .lowest_price p{margin: 0;} .top_list_new{width: 100%;}
+.top_list_new li{padding-left: 10px; position: relative; font-size: 12px; display: inline; padding-right: 10px;}
+.top_list_new li:before{font-size: 16px; content: '\203A'; font-weight: 600; position: absolute; left:0} .tag_top10_nw { background: #FEC929; border-radius: 0.2rem; font-size: .75rem; line-height: 1rem; color: #000; padding: 0.5rem .7rem; margin: .2rem 1rem 0 0; font-weight: 500; text-transform: uppercase; } @media only screen and (max-width: 767px) and (min-width: 0px) { .show-desktop { display: none; } .show-mobile { display: block; } .lowest_price p { font-size: 1rem; } .lowest_price .button_buy { padding: 8px 10px; font-size: 13px; } }
+
+.rh_gr_img figure, .rh_gr_img_first figure {
+    width: 230px ;}
+
+.rh_gr_img figure img, .rh_gr_img_first figure img {
+      max-height: 230px;
+}
+.product_main_box{display: flex; flex-wrap: wrap; padding: 2px 20px 20px 20px; margin-bottom: 20px; border: 1px solid #e3e3e3; background-color: #fff; align-items: center; justify-content: center; width: 100%; border-radius: 8px;}
+.product_main_box h2, .product_main_box h3{width: 100%; margin: 0px; padding-left: 25px; line-height:normal; font-size:20px;}
+.product_main_box_img{width: 65%;}
+.product_main_box_list{width: 100%;}
+.check_icon{display: inline-block; transform: rotate(45deg); height: 14px; width: 8px; border-bottom: 2px solid #78b13f; border-right: 2px solid #78b13f; margin-left: 10px;}
+.cross_icon{position: relative; width: 24px; height: 24px;}
+.cross_icon:before, .cross_icon:after{position: absolute; left: 0; content: ' '; height: 16px; width: 2px; background: #ff0000; right: 0; margin: auto;}
+.cross_icon:before {transform: rotate(45deg);}
+.cross_icon:after {transform: rotate(-45deg);}
+
+.cube-wrap {width:100px;height: 100px;-webkit-perspective: 2000px;-webkit-perspective-origin: 50% -500px;position: relative;}
+#cubewrapid{position: fixed;bottom: 50px;right: 150px;z-index: 9999;}
+.single-box {background-size: cover;display: block;position: absolute;width: 80px;height: 80px;-webkit-transform: rotateY(45deg) translateZ(-200px) rotateX(15deg);-webkit-transform-origin: 50% 50% 0;}
+.box:hover{animation-play-state: paused;}
+.box a{width:100%;height:100%;float: left;}
+.box {-webkit-transform-style: preserve-3d;-webkit-animation: rotate 20s infinite linear;}
+.side-front { -webkit-transform: translateZ(40px);}
+.side-back { -webkit-transform: rotateY(180deg) translateZ(40px);}
+.side-top {background-image: var(--wpr-bg-5353333f-a0fd-4c70-b3cf-a9b766bf9745);-webkit-transform: rotateX(90deg) translateZ(40px);}
+.side-bottom { -webkit-transform: rotateX(-90deg) translateZ(40px);}
+.side-left { -webkit-transform: rotateY(-90deg) translateZ(40px); }
+.side-right { -webkit-transform: rotateY(90deg) translateZ(40px);}
+@-webkit-keyframes rotate {
+0% { -webkit-transform: rotateY(0); }
+100% { -webkit-transform: rotateY(-360deg); }
+   }
+.cube_close {background: var(--wpr-bg-d9642056-3da8-4976-8f20-7428bfc05081) no-repeat 0 0;position: relative;top: 18px;left: 76px;z-index: 999;width: 35px;height: 40px;text-align: center;color: #fff;display: flex;cursor: pointer;}
+.cube_close.toggle_side{background-position: 0px -41px;}
+.single_button{display: none;left: 0;background: red;text-align: center;border-radius: 20px;cursor: pointer;}
+.single_button img{ margin-top: 2px;}  
+@supports (-webkit-touch-callout: none) {
+#single_button{display: none!important}
+.cube_close {z-index: 99999;left: 90px;top: 10px;}
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+#cubewrapid{bottom: 100px;z-index: 999;right: 30px;}    
+.box{position: relative;z-index: 99;}
+.single-box{z-index: 99;}
+}
+.r_score_10{background: #47b92e !important;}
+blockquote.twitter-tweet, blockquote.twitter-tweet p{font-family: arial; font-size: 18px; line-height: 26px; color: #333; font-weight: normal; letter-spacing:0.5px;}
+blockquote.twitter-tweet a{color: #000 !important; font-weight:600;}
+.author_detail_box h3 a{color: #a90702;}
+.post-inner .numbering{background: #b1141a;}
+
+@media screen and (max-width: 767px) {
+.footer_tag{font-size: 1rem;}
+.footer_tag strong{display: inline-block; width: 100%; margin-bottom: 10px;}
+.cwv_footer_tag a{padding: 0.35rem 0.5rem; display: inline-block; font-size: 1rem; border-right: 2px solid #666975;}
+.cwv_footer_tag a.cwv_footer_menu_first{padding-left: 0.5rem;}
+.r_score_6 .overall-score, .r_score_7 .overall-score{color: #000;}
+.r_score_8 .overall-score, .r_score_9 .overall-score, .r_score_10 .overall-score{text-shadow: 1px 1px 2px #13300c;}
+
+.woo-top-actions .woo-button-actions-area .wpsm-button.rhwoosinglecompare{color: #9b4302; font-size: 14px;}
+.specs_box .rating_sec .rating_no.yellowtext{color: #000;}
+.specs_box .rating_sec .rating_no.greentext {text-shadow: 1px 1px 2px #13300c;}
+.review-top .overall-score span.overall.r_score_6, .review-top .overall-score span.overall.r_score_7{color: #000;}
+.review-top .overall-score span.overall.r_score_8, .review-top .overall-score span.overall.r_score_9, .review-top .overall-score span.overall.r_score_10{text-shadow: 1px 1px 2px #13300c;}
+.woo-avg-rating .orangecolor.font200.fontbold{color: #d37404;}
+.woo-avg-rating .greycolor.font90{color: #606060;}
+.comment-notes span{color: #606060;}
+
+.woo-single-meta .woostorewrap .brand_logo_small a{display:inline-block; width: 100%; line-height: normal; padding: 5px;}
+.woo-single-meta .woostorewrap .store_tax a{display:inline-block; vertical-align: middle; font-size: 20px; width: 100%; line-height: normal; padding: 5px;}
+
+}
+
+video{max-width: 100%; height: auto;}
+
+
+/*CWV-280624*/
+.footer_details_cont{padding-top: 25px;}
+.footer_details_cont .left_side{width: 100%;}
+.footer_details_cont .left_side img{margin-right: 15px;}
+.footer_details_cont .left_side p{width: calc(100% - 95px);}
+.list-social{margin-top: 20px;}
+.cwv_list_social a{vertical-align: middle;}
+.footer_border_added{margin-bottom: 15px; border-bottom: 1px solid #4e5056; padding-bottom: 25px; }
+.footer_title_head{font-size: 20px; display: inline-block; padding-right: 10px;}
+.cwv_footer_nav .footer_title_head{width:100%; margin-bottom:15px;}
+.cwv_footer_nav a{color: #aaa; font-weight: 400; text-transform: capitalize; font-size: 14px;}
+.cwv_footer_nav a span{border: solid #8b8b8b; border-width: 0 1px 1px 0; display: inline-block; padding: 3px; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); vertical-align: middle; margin-right: 5px; margin-top: -1px;}
+
+.cwv_footer_tag a:last-child{padding-right: 0px; border-right: none;}
+
+.tabs-item .topten_sidebar.width-100-calc{width: 100%; padding-left: 0px !important; float: left;}
+.Top10-Seller table tr td:first-child {
+    width: 25%; !important
+}
+.Top10-Seller table tr td:nth-child(2){width: 15%; }
+.morecontentintbl table tr td:nth-child(2){width: 30%; }
+.comtbl table tr td:first-child {
+    width: 30%; !important
+}
+.Top10-Seller table tr td a {
+       color: #a90702 !important;
+}
+
+/*listing & top-product design change -050824*/
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+    .rh_grid_image_wrapper{column-gap: 0px; grid-template-columns: auto; grid-template-rows: auto;}
+	.rh_gr_img{grid-row: 3; grid-column: 1; margin-bottom: 12px;}
+	.news-community .newsimage figure{top: 0;}
+	.rh_gr_img figure{width: 100%;}
+	.rh_gr_img figure img{max-height: none; vertical-align: middle; width: 100%;}
+	.rh_gr_top_right{grid-column: 1; grid-row: 1;}
+	.newsdetail.rh_gr_top_right.mb5{margin-bottom: 0px !important;}
+	.rh_gr_right_sec{grid-column: 1; grid-row: 2;}
+	.newsdetail.newstitleblock h2{min-height: 0; margin-bottom: 12px !important;}
+	.rh_gr_right_desc{grid-column: 1; grid-row: 4;}
+	.rh_gr_right_btn{grid-column: 1; grid-row: 5;}
+	
+	.rh_grid_image_3_col{grid-template-columns: auto; grid-template-rows: auto; column-gap: 0;}
+	.rh_gr_img_first{grid-row: 2; grid-column: 1;}
+	.rh_gr_top_middle{grid-row: 1; grid-column: 1;}
+	.rh_gr_middle_desc{grid-column: 1; grid-row: 3;}
+	.rh_grid_image_3_col .rh_gr_top_middle{margin: 0px !important; margin-top: -9px !important;}
+	.rh_grid_image_3_col .rh_gr_top_middle h3{padding-left: 30px;}
+	.rating_detail{width: 100%; display: flex; align-items: center;}
+	.review-small-square{width: auto; padding: 0px 12px;}
+	.review-small-square.mb10.mr10{margin: 0px !important;}
+	.rh_gr_middle_desc .font90.lineheight20.mb10{margin-top: 10px;}
+}
+
+ @media only screen and (max-width: 1000px) {
+
+  .add_box_top.text-center{
+		overflow: hidden;
+  }
+
+}
+
+.ce_woo_blocks .woo_bl_title h1{text-transform: inherit; text-transform: unset; text-transform: unset;}
+
+.product_sponsored{position: absolute; right: 5px; padding: 3px 6px; background: #e7e7e7; line-height: normal; top: 5px; border: 1px solid #e3e3e3; border-radius: 4px; font-size: 13px; color: #000;}
+.product_offer_details .rh_grid_image_3_col{color: #000;}
+.product_offer_details .egg-container .row-products{display: flex; width: 100%; align-items: center; justify-content: space-between;}
+
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+    .product_offer_details .rh_grid_image_3_col .rh_gr_top_middle {
+		margin-top: 10px !important;
+    }
+	.product_offer_details .rh_grid_image_3_col .rh_gr_img_first{
+		margin: 0px;
+		margin-bottom: 15px;
+    }
+	.product_offer_details  .rh_grid_image_3_col .rh_gr_top_middle h3{padding-left: 0;}
+	.product_offer_details .egg-container .row-products{display: flex; width: 100%; align-items: center; justify-content: space-between;}
+	.product_offer_details .egg-container .egg-listcontainer .row-products>div{width: auto;}
+	.product_offer_details .egg-container .row-products .btn{padding: 6px 12px;}
+}
+
+/* cegg */
+.price_for_grid.mr10{margin-right: 0px !important; width: 100%;}
+.price_for_grid .cegg5-container .card{border: none; box-shadow: none;}
+.card .cegg-list-card-body{line-height: 1.4em;}
+.price_for_grid .cegg5-container .card .row [class*=col-]{width:100%;}
+.price_for_grid .cegg5-container .card .row .col-9.col-md-3{border-bottom:1px solid rgba(206,206,206,.3); padding: 0px !important; padding-bottom:1rem !important; margin: 0;}
+.price_for_grid .cegg5-container .hstack{justify-content: center;}
+.price_for_grid .cegg5-container .text-body-secondary .cegg-price-disclaimer{margin-top: 0;}
+.cegg5-container .hstack .cegg-price{font-weight:600;}
+
+.top_share_small .cegg5-container .card .row [class*=col-]{width:auto;}
+.top_share_small .cegg5-container .card .row .col-3 .ratio{min-width:80px;}
+.cegg5-container .row{
+	    align-items: center;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+	.top_share_small .cegg5-container .card .row .col-3 .ratio{max-width: 150px; margin: auto;}
+	.top_share_small .cegg5-container .card .row [class*=col-]{
+width: 100%; margin: 5px 0px;}
+	.cegg5-container .hstack{
+		justify-content: center;
+	}
+}
+ul.wp-block-list{list-style: disc; margin-left: 25px;}
+ul.wp-block-list li{margin-bottom: 10px;}
+
+.hide_zero1_award{display: none !important;}
+.nav_link_remove_border{border-right: none !important;}
+@media screen and (max-width: 1024px) {
+.hide_zero1_award{display: block !important;} 
+}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><style id="wpr-lazyload-bg-container"></style><style id="wpr-lazyload-bg-exclusion"></style>
+<noscript>
+<style id="wpr-lazyload-bg-nostyle">.btn_offer_block.loading:before{--wpr-bg-8d2c2cc6-5b31-4ea7-ba9a-42dbdb0035ed: url('https://www.digit.in/wp-content/themes/rehub-theme/images/woo/ajax-loader.gif');}.coupon_modal_coupon{--wpr-bg-bc26c3b9-023a-46d6-95b7-4b925798ad72: url('https://www.digit.in/wp-content/themes/rehub-theme/images/cpnbg.webp');}.cpn_modal_container{--wpr-bg-2aec39db-3d77-4ca8-b3af-736004e323c4: url('https://www.digit.in/wp-content/themes/rehub-theme/images/check.webp');}.rll-youtube-player .play{--wpr-bg-99402602-e8b2-4a76-a95d-560411960a16: url('https://www.digit.in/wp-content/plugins/wp-rocket/assets/img/youtube.png');}.cube_close{--wpr-bg-d9642056-3da8-4976-8f20-7428bfc05081: url('https://static.digit.in/CUBE_icons.png');}.side-top{--wpr-bg-5353333f-a0fd-4c70-b3cf-a9b766bf9745: url('https://static.digit.in/image-6.jpg');}</style>
+</noscript>
+<script type="application/javascript">const rocket_pairs = [{"selector":".btn_offer_block.loading","style":".btn_offer_block.loading:before{--wpr-bg-8d2c2cc6-5b31-4ea7-ba9a-42dbdb0035ed: url('https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/woo\/ajax-loader.gif');}","hash":"8d2c2cc6-5b31-4ea7-ba9a-42dbdb0035ed","url":"https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/woo\/ajax-loader.gif"},{"selector":".coupon_modal_coupon","style":".coupon_modal_coupon{--wpr-bg-bc26c3b9-023a-46d6-95b7-4b925798ad72: url('https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/cpnbg.webp');}","hash":"bc26c3b9-023a-46d6-95b7-4b925798ad72","url":"https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/cpnbg.webp"},{"selector":".cpn_modal_container","style":".cpn_modal_container{--wpr-bg-2aec39db-3d77-4ca8-b3af-736004e323c4: url('https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/check.webp');}","hash":"2aec39db-3d77-4ca8-b3af-736004e323c4","url":"https:\/\/www.digit.in\/wp-content\/themes\/rehub-theme\/images\/check.webp"},{"selector":".rll-youtube-player .play","style":".rll-youtube-player .play{--wpr-bg-99402602-e8b2-4a76-a95d-560411960a16: url('https:\/\/www.digit.in\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png');}","hash":"99402602-e8b2-4a76-a95d-560411960a16","url":"https:\/\/www.digit.in\/wp-content\/plugins\/wp-rocket\/assets\/img\/youtube.png"},{"selector":".cube_close","style":".cube_close{--wpr-bg-d9642056-3da8-4976-8f20-7428bfc05081: url('https:\/\/static.digit.in\/CUBE_icons.png');}","hash":"d9642056-3da8-4976-8f20-7428bfc05081","url":"https:\/\/static.digit.in\/CUBE_icons.png"},{"selector":".side-top","style":".side-top{--wpr-bg-5353333f-a0fd-4c70-b3cf-a9b766bf9745: url('https:\/\/static.digit.in\/image-6.jpg');}","hash":"5353333f-a0fd-4c70-b3cf-a9b766bf9745","url":"https:\/\/static.digit.in\/image-6.jpg"}]; const rocket_excluded_pairs = [];</script><meta name="generator" content="WP Rocket 3.17.2.1" data-wpr-features="wpr_lazyload_css_bg_img wpr_delay_js wpr_defer_js wpr_minify_js wpr_lazyload_images wpr_lazyload_iframes wpr_minify_css wpr_desktop wpr_dns_prefetch wpr_preload_links" /></head>
+<body class="post-template-default single single-post postid-692818 single-format-standard wp-custom-logo wp-embed-responsive theme-rehub-theme woocommerce-no-js gspbody gspb-bodyfront noinnerpadding aa-prefix-wordp-">
+	               
+<!-- Outer Start -->
+<div data-rocket-location-hash="9d39400a0d63132e8ce6e933d02b9d06" class="rh-outer-wrap">
+    <div data-rocket-location-hash="27a2fbb25ac740524345ee359fdc9783" id="top_ankor"></div>
+    <!-- HEADER -->
+            <header data-rocket-location-hash="3c68d5f1c0d3030d6b3f54155ccc8855" id="main_header" class="white_style width-100p position-relative">
+            <div data-rocket-location-hash="164e55b0758e870216ec7bb1c17a68b1" class="header_wrap">
+                                                                                    <!-- Logo section -->
+<div class="logo_section_wrap hideontablet">
+    <div data-rocket-location-hash="b96a6175656bc72f99b1fd55998e4bdb" class="rh-container">
+        <div class="logo-section rh-flex-center-align tabletblockdisplay header_seven_style clearfix">
+            <div class="logo">
+          		          			<a href="https://www.digit.in" class="logo_image">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Digit.in" height="" width="" data-lazy-src="https://static.digit.in/digit_logo-2.png" /><noscript><img src="https://static.digit.in/digit_logo-2.png" alt="Digit.in" height="" width="" /></noscript>
+                    </a>
+          		       
+	    </div>
+<nav class="top_menu"><ul id="menu-top-digit-menu-en" class="menu"><li id="menu-item-235213" class="menu-item menu-item-type-taxonomy menu-item-object-contenttype"><a href="https://www.digit.in/news/">News</a></li>
+<li id="menu-item-290386" class="menu-item menu-item-type-post_type_archive menu-item-object-reviews"><a href="https://www.digit.in/reviews/">Reviews</a></li>
+<li id="menu-item-290390" class="menu-item menu-item-type-post_type_archive menu-item-object-top-products"><a href="https://www.digit.in/top-products/">Top 10s</a></li>
+<li id="menu-item-143322" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/features/">Features</a></li>
+<li id="menu-item-516699" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/how-to/">How To</a></li>
+<li id="menu-item-564804" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.digit.in/ai/">AI</a></li>
+<li id="menu-item-591561" class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" href="https://www.digit.in/digit-binge/">Digit Binge</a></li>
+<li id="menu-item-596403" class="nav_link_remove_border menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-recharge-plans/">Mobile Recharge Plans</a></li>
+<li id="menu-item-696984" class="hide_zero1_award menu-item menu-item-type-custom menu-item-object-custom"><a href="/zero1-awards/">DIGIT ZERO1 AWARDS</a></li>
+</ul></nav>
+            		
+
+                
+            <div class="search head_search position-relative">
+                                <form role="search" method="get" class="search-form product-search-form" action="https://www.digit.in/">
+	<label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
+	<input type="text" id="woocommerce-product-search-field-0"  name="s" placeholder="Search" value="" data-enable_compare="1" data-posttype="product" class="re-ajax-search" autocomplete="off" data-catid="" />
+	<input type="hidden" name="post_type" value="product" />
+		<button type="submit" class="btnsearch hideonmobile"  aria-label="Search"><i class="rhicon rhi-search"></i></button>
+</form>
+<div data-rocket-location-hash="e27fbec3157b88d14be336417f384cc2" class="re-aj-search-wrap rhscrollthin"></div>
+            </div>
+             
+            <div class=" rh-flex-right-align">
+                <div class="header-actions-logo rh-flex-right-align">
+                    <div class="tabledisplay">
+                                                                                <div class="celldisplay link-add-cell">
+                                <div class="celldisplay login-btn-cell text-center digitlang_menu">
+<div class="position-relative user-dropdown-intop rh-header-icon rh_login_icon_n_btn mobileinmenu digitlang_menu">
+<span class="user-ava-intop"><i class="rhicon rhi-globe font95"></i></span>
+<ul class="user-dropdown-intop-menu languages">
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/">English</a> </li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/hi/">Hindi</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/ta/">Tamil</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/kn/">Kannada</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/te/">Telugu</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/ml/">Malayalam</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/bn/">Bangla</a></li>
+<li class="user-name-and-badges-intop"><a href="https://www.digit.in/mr/">Marathi</a></li>
+</ul></div>  
+</div>
+                            </div>
+                         
+                                                                                <div class="celldisplay login-btn-cell text-center">
+                                                                                                <a class="act-rehub-login-popup rh-header-icon rh_login_icon_n_btn mobileinmenu " data-type="restrict" href="#"><i class="rhicon rhi-user font95"></i><span>Login / Register is disabled</span></a>                                <span class="heads_icon_label rehub-main-font login_icon_label">
+                                    Login                                </span>                                                   
+                            </div>                            
+                         
+                                                                                   
+                                                                        
+                    </div>                     
+                </div>  
+            </div> 
+                                
+        </div>
+    </div>
+</div>
+<!-- /Logo section -->  
+<!-- Main Navigation -->
+<div class="header_icons_menu search-form-inheader main-nav mob-logo-enabled dark_style">  
+    <div data-rocket-location-hash="5b5d46b8527fe3024523f742e0d33012" class="rh-container"> 
+	     
+
+    
+
+<nav class="top_menu"><ul id="menu-main-digit-menu-en" class="menu"><li id="menu-item-123490" class="rh-subitem-menus rh-megamenu menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Mobiles</a>
+    <ul class="sub-menu"> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Latest</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/hmd-fusion-price.html">HMD Fusion</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/tecno-phantom-v-fold-2-price.html">Tecno Phantom V Fold 2</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/nothing-phone-2a-plus-2-price.html">Nothing Phone (2a) Plus</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/poco-c75-5g-price.html">Poco C75 5G</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Popular</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/oneplus-nord-ce-3-lite-5g.html">OnePlus Nord CE 3 Lite 5G</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/redmi-12-5g-price-350241.html">Redmi 12 5G</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/samsung-galaxy-m14-5g-price-343086.html">Samsung Galaxy M14 5G</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/moto-g84-5g-price-351915.html">Moto G84 5G</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Best</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/top-10-android-smartphones-under-rs-15-000-18.html">Best Mobile Phones Under ₹15,000 in India</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-mid-range-smartphones-under-rs-20k-13.html">Best Mobile Phones Under 20000</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-smartphones-under-25000-in-india-195.html">Best Mobile Phones Under 25000</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-phones-under-rs-30-000-in-india-49.html">Best Mobile Phones Under 30000</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">News</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/mobile-phones/not-samsung-galaxy-s25-ultra-bixby-ai-can-steal-the-spotlight-at-unpacked-2025-heres-why.html">Not Samsung Galaxy S25 Ultra, Bixby AI can steal the spotlight at Unpacked 2025: Here&#8217;s why</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/mobile-phones/ios-19-release-date-features-supported-devices-and-everything-else-we-know.html">iOS 19 release date, features, supported devices and everything else we know</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/mobile-phones/nothing-phone-2a-available-for-under-rs-20500-on-amazon-heres-how-the-deal-works.html">Nothing Phone (2a) available for under Rs 20,500 on Amazon: Here&#8217;s how the deal works</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/mobile-phones/samsung-to-launch-ai-subscription-service-for-galaxy-phones-heres-when.html">Samsung to launch AI subscription service for Galaxy phones, here&#8217;s when</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Reviews</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/mobile-phones/oneplus-13-review-back-in-form.html">OnePlus 13 Review: Back in form?</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/mobile-phones/hmd-fusion-review-clever-add-ons-but-core-features-need-work.html">HMD Fusion Review: Clever add-ons, but core features need work</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/mobile-phones/redmi-note-14-pro-review-a-note-worthy-upgrade.html">Redmi Note 14 Pro Review: A note-worthy upgrade?</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/mobile-phones/vivo-x200-pro-review-nearly-picture-perfect.html">Vivo X200 Pro Review: Nearly picture perfect</a></li></ul></li></ul></li><li id="menu-item-123490" class="rh-subitem-menus rh-megamenu menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Laptops</a>
+    <ul class="sub-menu"> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Latest</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/dell-xps-13-9345-price.html">Dell XPS 13 9345</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/dell-inspiron-14-2-in-1-7440.html">Dell Inspiron 14 2-in-1 7440</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/dell-inspiron-14-5441-price.html">Dell Inspiron 14 5441</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/dell-vostro-14-3440-price.html">Dell Vostro 14 3440</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Popular</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/lenovo-yoga-slim-6-14iap8-12th-gen-core-i5-1240p.html">Lenovo Yoga Slim 6 14IAP8 12th Gen Core i5-1240P</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/infinix-x3-slim-12th-gen-core-i5-1235u-xl422-price-351951.html">Infinix X3 Slim 12th Gen Core i5-1235U (XL422)</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/lenovo-yoga-9i13th-gen-core-i7-i7-1360p-price-346092.html">Lenovo Yoga 9i 13th Gen (83B1004XIN)</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/laptops/hp-omen-17-ck2008tx-13th-gen-core-i7-13700hx-price-346659.html">HP Omen 17-ck2008TX 13th Gen Core i7-13700HX</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Best</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-laptops-under-30000-rs-in-india-94.html">Best Laptops Under 30000 in India (January 2025)</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-business-laptops-india-42.html">Best Business Laptops in India (January 2025)</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-budget-laptops-in-india-180.html">Best Budget Laptops in India (January 2025)</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/top-products/best-thin-and-light-laptops-in-india-3507.html">Best Thin and Light Laptops in India (January 2025)</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">News</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/laptops/hp-unveils-new-ai-powered-gaming-products-at-ces-2025-including-omen-ai-and-more.html">HP unveils new AI-powered gaming products at CES 2025, including Omen AI, and more</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/laptops/dell-introduces-new-rebranded-laptops-at-ces-2025-replaces-the-legacy-lineups.html">Dell introduces new rebranded laptops at CES 2025, replaces the legacy lineups</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/laptops/macbook-air-m3-now-available-for-under-rs-93500-during-new-year-sale-check-deal-here.html">MacBook Air M3 now available for under Rs 93,500 during New Year sale: Check deal here</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/news/laptops/apple-macbook-air-m2-price-falls-down-to-under-rs-69000-check-deal-here.html">Apple MacBook Air M2 price falls down to under Rs 69,000: Check deal here</a></li></ul></li> 
+    <li id="menu-item-123493" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Reviews</a>
+    <ul class="sub-menu"><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/laptops/benq-joybook-s32-le27-review-3414.html">BenQ Joybook S32-LE27 Review</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/laptops/asus-proart-px-13-specs-features-gaming-performance-benchmarks-review.html">ASUS ProArt PX 13 Review: A Powerful Creative Laptop — But What Are the Sacrifices?</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/hp-omnibook-ultra-flip-14-review-intel-core-series-ultra-2-delivers-but-theres-an-issue.html">HP Omnibook Ultra Flip 14 Review: Intel Core Series Ultra 2 Delivers</a></li><li id="menu-item-123496" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/reviews/laptops/asus-tuf-gaming-a14-review-a-solid-14-inch-gaming-laptop.html">ASUS TUF Gaming A14 Review: A Solid 14-Inch Gaming Laptop</a></li></ul></li></ul></li><li id="menu-item-291178" class="rh-subitem-menus rh-megamenu menu-item menu-item-type-post_type_archive menu-item-object-top-products"><a href="https://www.digit.in/top-products/">Top 10s</a></li>
+<li id="menu-item-143927" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/latest-mobile-phones/">Phone Finder</a></li>
+<li id="menu-item-143928" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/apps/">Apps</a></li>
+<li id="menu-item-143929" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/mobile-phones/">Mobiles</a></li>
+<li id="menu-item-266893" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/gaming/">SKOAR!</a></li>
+<li id="menu-item-266892" class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" href="https://store.digit.in/subscribe/">Magazine</a></li>
+<li id="menu-item-510726" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/zero1-awards/">DIGIT ZERO1 AWARDS</a></li>
+<li id="menu-item-585166" class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.digit.in/science/">Science</a></li>
+</ul></nav>   
+                <div class="responsive_nav_wrap rh_mobile_menu">
+            <div id="dl-menu" class="dl-menuwrapper rh-flex-center-align">
+                <button id="dl-trigger" class="dl-trigger" aria-label="Menu">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <line stroke-linecap="round" id="rhlinemenu_1" y2="7" x2="29" y1="7" x1="3"/>
+                            <line stroke-linecap="round" id="rhlinemenu_2" y2="16" x2="18" y1="16" x1="3"/>
+                            <line stroke-linecap="round" id="rhlinemenu_3" y2="25" x2="26" y1="25" x1="3"/>
+                        </g>
+                    </svg>
+                </button>
+                <div id="mobile-menu-icons" class="rh-flex-center-align rh-flex-right-align">
+                    <button class='icon-search-onclick' aria-label='Search'><i class='rhicon rhi-search'></i></button>
+                </div>
+            </div>
+                    </div>
+    </div>
+</div>
+<!-- /Main Navigation -->
+ 
+                
+
+            </div>  
+        </header>
+                <div data-rocket-location-hash="7f0a0a601245b1e666401cb0e9b0d3e5" class="text-center add_box_top">
+                    
+<div data-rocket-location-hash="c6fb08111ee4466b7b505815c6623242" style="margin-left: auto; margin-right: auto; text-align: center; " id="wordp-1432919471"><script type="rocketlazyloadscript" async data-rocket-src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script type="rocketlazyloadscript" >window.addEventListener('DOMContentLoaded', function() {	
+jQuery( document ).ready(function() {
+	// Get the current URL
+	var url = new URL(window.location.href);
+	
+	var slotId = 'div-gpt-ad-1717157281950-0_digit_desk_hp_header'; // area id to show the ads
+    var adSlotId = '/21806551354/Digit/Desktop/Homepage/digit_desk_hp_header'; // ad slot
+
+	// Use URLSearchParams to extract the query parameters
+	var params = new URLSearchParams(url.search);
+
+	// Check if the 'utm_source' parameter exists
+	if (params.has('utm_source')) {
+		var utmSource = params.get('utm_source');
+		//console.log('UtmParam:', utmSource)
+		
+		// Modify slotId if utm_source is 'iz'
+        if (utmSource.toLowerCase() === 'iz') {
+            adSlotId = '/21806551354/Digit/Desktop/Izooto/Digit_Desk_Izooto_Header'; // update slotId for 'iz' utm_source
+        }
+	}
+	
+	
+// 	Google Ads code start
+	window.googletag = window.googletag || {cmd: []};
+	  googletag.cmd.push(function() {
+		googletag.defineSlot(adSlotId, [[970, 90], [980, 90], [728, 90], [1200, 90]], slotId).addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+  		googletag.pubads().setTargeting('category', digitCatAlias);
+		googletag.enableServices();
+	  });
+	googletag.cmd.push(function() { googletag.display(slotId); });
+
+});
+// 	Google Ads code end
+});</script>
+<div id="div-gpt-ad-1717157281950-0_digit_desk_hp_header"  ></div></div>            </div>
+    
+
+    <!-- CONTENT -->
+<div class="rh-container"> 
+    <div data-rocket-location-hash="f30d72cada8716849fa6520fd6d5f401" class="rh-content-wrap clearfix">
+        <!-- Main Side -->
+        <div class="alignfulloutside main-side single post-readopt clearfix w_sidebar">
+             
+            <style scoped>
+              .post-readopt .post-inner > h2{font-size: 28px; line-height: 34px}
+              .post-readopt .post-inner > h3{font-size: 24px; line-height: 30px}
+              .post-readopt .title_single_area h1{ font-size: 38px; line-height: 40px; }
+              #rh_p_l_fullwidth_opt .post-readopt{max-width:900px; margin-left:auto; margin-right:auto}
+               @media (min-width: 1024px){
+                .post-readopt .ph-article-featured-image{    margin-left: 2.04082%;margin-right: 2.04082%;}
+                .post-readopt.full_width .post-inner, .post-readopt:not(.main-side){margin-left: auto;margin-right: auto; max-width: 800px}
+                .post-readopt.w_sidebar .post-inner{margin-left: 4%;margin-right: 4%;}
+                .post-readopt blockquote p{font-size: 28px; line-height: 1.3em; }
+                .post-readopt .wpsm_box, .post-readopt .rate_bar_wrap{font-size: 18px; line-height: 30px}
+                .post-readopt .title_comments{display: none;}
+                .post-readopt .post-meta-left{width: 100px; color: #666; text-transform: uppercase;}
+                .post-readopt .leftbarcalc{width: calc(100% - 140px);}
+              }
+              @media (min-width:500px){
+                .post-readopt .post-inner, .post-readopt:not(.main-side), .post-readopt .post{font-size: 18px;line-height: 1.85em;}
+              }
+            </style>           
+                            <article class="post pt0 pb0 pr0 pl0 post-692818 type-post status-publish format-standard has-post-thumbnail hentry category-general tag-ai-feature tag-cybersecurity tag-deepfake tag-quantum-computing tag-ransomware contenttype-features digitlang-en" id="post-692818"> 
+                     
+                           
+                        <!-- Title area -->
+                        <div class="rh_post_layout_metabig mt10">
+                            <div class="title_single_area mb15">
+                                <div class="breadcrumb font90 rh_opacity_7"><a href="https://www.digit.in/" >Home</a> &raquo; <a href="https://www.digit.in/features/" >Feature Story</a> &raquo; <a  href="https://www.digit.in/general/">General</a> &raquo; <span class="current">Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025</span></div><!-- .breadcrumbs --> 
+                                                 
+                                <h1>Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025</h1> 
+                                <div class="meta post-meta mb20 flowhidden">
+				    By <a href="https://www.digit.in/author/jayesh-shinde/" class="redopt-aut-link">
+Jayesh Shinde</a> |
+				Updated on 02-Jan-2025
+                                 
+				 
+                                </div>                        
+                            </div>
+                        </div>
+                        <div class="mediad mediad_top mb15"> 
+</div>                         
+                        <div class="feature-post-section mb35">
+			  
+
+
+<style scoped>
+                #rh_wide_inimage figure{height:550px;}
+                @media (max-width:567px){
+                    #rh_wide_inimage figure{height:250px;}
+                }
+            </style><div id="rh_wide_inimage" class="">
+
+<div class="leader_image">
+
+
+<img 
+  src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201280%20720'%3E%3C/svg%3E" 
+  width="1280" 
+  height="720" 
+  alt="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" 
+  title="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" 
+  data-lazy-srcset="https://static.digit.in/cybersecurity-trends-2025.png?tr=w-200 500w, https://static.digit.in/cybersecurity-trends-2025.png"
+  data-lazy-sizes="(max-width: 480px) 100vw, (max-width: 769px) 50vw" 
+  pinger-seen="true" data-lazy-src="https://static.digit.in/cybersecurity-trends-2025.png"><noscript><img 
+  src="https://static.digit.in/cybersecurity-trends-2025.png" 
+  width="1280" 
+  height="720" 
+  alt="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" 
+  title="Deepfake AI to quantum ransomware: Top cybersecurity threats of 2025" 
+  srcset="https://static.digit.in/cybersecurity-trends-2025.png?tr=w-200 500w, https://static.digit.in/cybersecurity-trends-2025.png"
+  sizes="(max-width: 480px) 100vw, (max-width: 769px) 50vw" 
+  pinger-seen="true"></noscript>
+  
+
+
+
+</div>
+</div>
+ <div class="topten_desc">
+ 
+</div>
+			    
+</div> 
+                        <div class="clearfix mb5"></div>  
+		      
+						 
+                                        <div class="post-inner clearbox">
+                        <div class="mobileblockdisplay rh-flex-columns">
+                        <div class="post-meta-left hideonstablet text-center">
+                                                          
+                                                                <a href="https://www.digit.in/author/jayesh-shinde/" class="redopt-aut-picture mb10 blockstyle">
+                                    <img alt='Jayesh Shinde' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2070%2070'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=140&#038;d=mm&#038;r=g 2x' class='avatar avatar-70 photo roundborder' height='70' width='70' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=70&#038;d=mm&#038;r=g"/><noscript><img alt='Jayesh Shinde' src='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=70&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=140&#038;d=mm&#038;r=g 2x' class='avatar avatar-70 photo roundborder' height='70' width='70' decoding='async'/></noscript>                   
+                                </a>
+                                <a href="https://www.digit.in/author/jayesh-shinde/" class="redopt-aut-link lineheight15 blockstyle font80 greycolor">             
+                                    Jayesh Shinde         
+                                </a>
+                                                                                        <div class="date_time_post font60 border-bottom pb10 mb15 lineheight15 fontnormal">
+                                                                             02-Jan-2025                                                                        </div>
+                                                                                       
+                                                                    <div id="rh-share-sticky">
+                                    <div class="social_icon rh-social-square rh-flex-columns"><div class="favour_in_row favour_btn_red"></div><span data-href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" class="fb share-link-image" data-service="facebook"><i class="rhicon rhi-facebook"></i></span><span data-href="https://twitter.com/share?url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html&text=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025" class="tw share-link-image" data-service="twitter"><i class="rhicon rhi-twitter"></i></span><span data-href="https://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html&amp;media=https://static.digit.in/cybersecurity-trends-2025.png&amp;description=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025" class="pn share-link-image" data-service="pinterest"><i class="rhicon rhi-pinterest-p"></i></span><span data-href="mailto:?subject=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025&body=Check out: https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html - Digit.in" class="in share-link-image" data-service="email"><i class="rhicon rhi-envelope"></i></span></div>                                    </div>
+                                             
+                                                                 
+                        </div> 
+                        <div class="post-inner-wrapper leftbarcalc">
+                             
+  
+
+ 
+ 
+
+<p>As we enter New Year 2025, one can’t help but feel some trepidation, thanks largely to an ever-shifting cybersecurity landscape poised for unprecedented challenges. The rapid evolution of technologies such AI and smart IoT has not only driven innovation but also expanded the attack vectors for cybercriminals. From AI-enhanced ransomware to the looming threats posed by quantum computing, experts warn organisations and individuals alike to brace themselves for a new era of sophisticated cyberattacks.&nbsp;</p>
+
+
+
+<p>Here we try to delve into the top cybersecurity threats anticipated in 2025, exploring how these emerging dangers could impact various sectors and what measures can be taken to mitigate them.</p>
+
+
+
+<h2 class="wp-block-heading" id="1-no-respite-from-ransomware">1) No respite from ransomware</h2>
+
+
+
+<p>Ransomware has evolved significantly through 2024, adopting more sophisticated and multifaceted tactics. Cybercriminals have increasingly leveraged AI to enhance the speed and precision of their attacks, enabling rapid propagation across networks and complicating early detection efforts. For instance, the Ymir ransomware, identified in November 2024, exploits memory management to evade detection, targeting corporate networks with advanced techniques.</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://static.digit.in/ransomware.png"><img fetchpriority="high" decoding="async" width="1024" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201024%20576'%3E%3C/svg%3E" alt="" class="wp-image-692822" data-lazy-srcset="https://static.digit.in/ransomware-1024x576.png 1024w, https://static.digit.in/ransomware-300x169.png 300w, https://static.digit.in/ransomware-768x432.png 768w, https://static.digit.in/ransomware-1536x864.png 1536w, https://static.digit.in/ransomware-2048x1152.png 2048w, https://static.digit.in/ransomware-267x150.png 267w, https://static.digit.in/ransomware-100x56.png 100w, https://static.digit.in/ransomware-622x350.png 622w, https://static.digit.in/ransomware-788x443.png 788w, https://static.digit.in/ransomware-599x337.png 599w, https://static.digit.in/ransomware-150x84.png 150w, https://static.digit.in/ransomware.png 1280w" data-lazy-sizes="(max-width: 1024px) 100vw, 1024px" data-lazy-src="https://static.digit.in/ransomware-1024x576.png" /><noscript><img fetchpriority="high" decoding="async" width="1024" height="576" src="https://static.digit.in/ransomware-1024x576.png" alt="" class="wp-image-692822" srcset="https://static.digit.in/ransomware-1024x576.png 1024w, https://static.digit.in/ransomware-300x169.png 300w, https://static.digit.in/ransomware-768x432.png 768w, https://static.digit.in/ransomware-1536x864.png 1536w, https://static.digit.in/ransomware-2048x1152.png 2048w, https://static.digit.in/ransomware-267x150.png 267w, https://static.digit.in/ransomware-100x56.png 100w, https://static.digit.in/ransomware-622x350.png 622w, https://static.digit.in/ransomware-788x443.png 788w, https://static.digit.in/ransomware-599x337.png 599w, https://static.digit.in/ransomware-150x84.png 150w, https://static.digit.in/ransomware.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></noscript></a></figure>
+
+
+
+<p>The rise of Ransomware-as-a-Service (RaaS) models has democratised access to advanced ransomware tools, allowing even less experienced actors to launch sophisticated attacks – a notable example is the attack on Newpark Resources, a major oilfield supplier, in November 2024, which disrupted critical systems and highlighted the accessibility of ransomware tools to a broader range of cybercriminals.&nbsp;</p>
+
+
+
+<p>The adoption of double and triple extortion tactics has become more prevalent. In October 2024, the University of Paris-Saclay experienced such an attack, where the RansomHouse group threatened to disclose 1 terabyte of sensitive data, including personal documents, unless a ransom was paid.&nbsp;</p>
+
+
+
+<p>Also read: <a href="https://www.digit.in/features/general/cybersecurity-in-ai-black-hat-2024-top-3-llm-security-risks.html" title="">Cybersecurity in Age of AI: Black Hat 2024’s top 3 LLM security risks</a></p>
+
+
+
+<p>Furthermore, as quantum computing advances, ransomware groups may begin employing quantum-proof encryption techniques, making it nearly impossible for victims to decrypt their data without paying the ransom. Critical infrastructure sectors, such as energy, water, and healthcare, have become prime targets, with attackers seeking maximum impact and leverage by disrupting essential services. By all indications the expanse of ransomware will continue to grow through 2025 and beyond, as much as we hate to say it.</p>
+
+
+
+<h2 class="wp-block-heading" id="2-deepfakes-will-get-worse">2) Deepfakes will get worse</h2>
+
+
+
+<p>Just like ransomware, deepfakes are projected to become more pervasive and sophisticated in 2025, posing significant challenges across various sectors, according to various cybersecurity reports. The increasing accessibility of AI tools enables malicious actors to create highly convincing fake videos and audio, facilitating the easy spread of misinformation, fraud, and identity theft. For example, in the US Presidential Election 2024, deepfake technology was used to spread misinformation by impersonating political figures, leading to incidents like the AI-generated robocalls in New Hampshire that discouraged voting by mimicking President Joe Biden&#8217;s voice.&nbsp;</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow">
+<p>A deepfake attack occurred every five minutes in 2024, according to a cybersecurity report</p>
+</blockquote>
+
+
+
+<p>Not just limited to impersonating popular figures, the financial sector is also increasingly at risk, with deepfakes being employed to bypass identity verification processes. A report from Entrust Cybersecurity Institute revealed that in 2024, a deepfake attack occurred every five minutes, highlighting the frequency and effectiveness of such tactics. Moreover, the proliferation of deepfake pornography has raised serious ethical and legal concerns. In South Korea, a surge in AI-generated explicit images led to legislative action criminalising the possession and distribution of non-consensual deepfake content. As deepfake technology continues to advance, the line between reality and fabrication blurs, necessitating robust detection mechanisms and regulatory frameworks to mitigate the associated risks.</p>
+
+
+
+<h2 class="wp-block-heading" id="3-automotive-security-threats-gearing-up">3) Automotive security threats gearing up</h2>
+
+
+
+<p>The automotive industry is experiencing a rapid evolution in cyber threats, with projections indicating significant developments through 2025 and beyond. By 2025, there are expected to be over 400 million connected cars in operation, up from 237 million in 2021, according to a Statista report. As vehicles become increasingly connected and autonomous, they are more susceptible to cyberattacks targeting their complex electronic systems. A report by Research and Markets highlights that effective automotive cybersecurity now requires cross-industry collaboration to address threats both within the vehicle and its external networks, including infrastructure.&nbsp;</p>
+
+
+
+<p>The integration of AI and machine learning into vehicular systems introduces new vulnerabilities. Cybercriminals will no doubt exploit these technologies to manipulate vehicle behaviour or access sensitive data. Trend Micro&#8217;s subsidiary, VicOne, emphasises that as vehicles progress toward software-defined models, the attack surface expands, necessitating robust cybersecurity measures.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-large"><a href="https://static.digit.in/auto-industry-cybersecurity-threats.png"><img decoding="async" width="1024" height="576" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201024%20576'%3E%3C/svg%3E" alt="" class="wp-image-692833" data-lazy-srcset="https://static.digit.in/auto-industry-cybersecurity-threats-1024x576.png 1024w, https://static.digit.in/auto-industry-cybersecurity-threats-300x169.png 300w, https://static.digit.in/auto-industry-cybersecurity-threats-768x432.png 768w, https://static.digit.in/auto-industry-cybersecurity-threats-1536x864.png 1536w, https://static.digit.in/auto-industry-cybersecurity-threats-2048x1152.png 2048w, https://static.digit.in/auto-industry-cybersecurity-threats-267x150.png 267w, https://static.digit.in/auto-industry-cybersecurity-threats-100x56.png 100w, https://static.digit.in/auto-industry-cybersecurity-threats-622x350.png 622w, https://static.digit.in/auto-industry-cybersecurity-threats-788x443.png 788w, https://static.digit.in/auto-industry-cybersecurity-threats-599x337.png 599w, https://static.digit.in/auto-industry-cybersecurity-threats-150x84.png 150w, https://static.digit.in/auto-industry-cybersecurity-threats.png 1280w" data-lazy-sizes="(max-width: 1024px) 100vw, 1024px" data-lazy-src="https://static.digit.in/auto-industry-cybersecurity-threats-1024x576.png" /><noscript><img decoding="async" width="1024" height="576" src="https://static.digit.in/auto-industry-cybersecurity-threats-1024x576.png" alt="" class="wp-image-692833" srcset="https://static.digit.in/auto-industry-cybersecurity-threats-1024x576.png 1024w, https://static.digit.in/auto-industry-cybersecurity-threats-300x169.png 300w, https://static.digit.in/auto-industry-cybersecurity-threats-768x432.png 768w, https://static.digit.in/auto-industry-cybersecurity-threats-1536x864.png 1536w, https://static.digit.in/auto-industry-cybersecurity-threats-2048x1152.png 2048w, https://static.digit.in/auto-industry-cybersecurity-threats-267x150.png 267w, https://static.digit.in/auto-industry-cybersecurity-threats-100x56.png 100w, https://static.digit.in/auto-industry-cybersecurity-threats-622x350.png 622w, https://static.digit.in/auto-industry-cybersecurity-threats-788x443.png 788w, https://static.digit.in/auto-industry-cybersecurity-threats-599x337.png 599w, https://static.digit.in/auto-industry-cybersecurity-threats-150x84.png 150w, https://static.digit.in/auto-industry-cybersecurity-threats.png 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></noscript></a></figure>
+
+
+
+<p>The rise of electric vehicles (EVs) and their associated infrastructure, such as charging stations, presents additional challenges. In India and around the world, there&#8217;s an increased need for securing clean energy infrastructure from potential cyberattacks, recognising the critical need to protect EVs and their charging networks. Furthermore, concerns about foreign-manufactured vehicles have emerged. According to reports, US officials have warned of potential dangers associated with Chinese technology in cars, citing risks of espionage and sabotage.</p>
+
+
+
+<h2 class="wp-block-heading" id="4-social-media-threats-will-continue-to-evolve">4) Social media threats will continue to evolve</h2>
+
+
+
+<p>Social media, once a platform for connection, is now a breeding ground for cybercrime. The integration of GenAI with social media has amplified these threats, making it easier for criminals to launch highly targeted and sophisticated attacks, according to Check Point Software Technologies Ltd – an American-Israeli cybersecurity solution provider.</p>
+
+
+
+<p>Also read: <a href="https://www.digit.in/news/general/researchers-develop-ai-agents-that-can-autonomously-hack-websites-more.html" title="">Researchers develop AI agents that can autonomously hack websites &amp; more</a></p>
+
+
+
+<p>They predict that throughout 2025 and beyond, AI-powered tools will enable criminals to mimic the behaviour, appearance, and voice of individuals, creating realistic impersonations. This is particularly dangerous on professional networks like LinkedIn, where the expectation of legitimate connections makes it easy for bad actors to infiltrate.</p>
+
+
+
+<p>Criminals are increasingly using social engineering tactics, employing AI to craft convincing impersonations and launch large-scale attacks. AI-driven bots and deepfakes can impersonate high-profile individuals, blurring the lines between reality and deception. The potential for these attacks to compromise corporate security and personal data is significant.</p>
+
+
+
+<h2 class="wp-block-heading" id="5-quantum-threats-will-debut">5) Quantum threats will debut</h2>
+
+
+
+<p>Quantum computing is poised to revolutionise cybersecurity, introducing both unprecedented capabilities and significant threats. By 2025, advancements in quantum technology are expected to challenge traditional cryptographic defences, particularly public-key algorithms like RSA and ECC, which could be rendered vulnerable to quantum attacks. The US National Institute of Standards and Technology (NIST) has been proactive in addressing these concerns, releasing post-quantum cryptography standards in 2024. However, the transition to these new standards is anticipated to be gradual, with larger enterprises, especially in finance, needing to begin planning for this quantum shift to protect sensitive data.&nbsp;</p>
+
+
+
+<p>Also read: <a href="https://www.digit.in/features/general/pqc-encryption-standardised-secure-our-digital-future-in-quantum-computing-era.html" title="">PQC encryption standardised: How they secure our digital future in quantum computing era</a></p>
+
+
+
+<p>The concept of &#8220;harvest now, decrypt later&#8221; underscores the urgency of adopting quantum-resistant encryption. Adversaries may collect encrypted data now, anticipating future quantum capabilities to decrypt it, compromising long-term data security. In response, organisations are expected to invest in quantum-safe encryption methods and develop comprehensive migration strategies to safeguard critical information. This proactive approach is essential to mitigate the looming quantum threat and ensure the integrity of digital communications in the quantum era.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="6-diversified-iot-attacks">6) Diversified IoT attacks</h2>
+
+
+
+<p>The proliferation of Internet of Things (IoT) devices is anticipated to significantly expand the cyber threat landscape through 2025 and beyond. As IoT adoption accelerates, the number of connected devices is projected to reach 21.5 billion by 2025, substantially increasing potential attack surfaces. Many IoT devices lack robust security measures, making them susceptible to exploitation. Cybercriminals are expected to target these vulnerabilities to launch large-scale Distributed Denial of Service (DDoS) attacks, infiltrate networks, and exfiltrate sensitive data.&nbsp;</p>
+
+
+
+<p>The integration of IoT in critical infrastructure sectors, such as healthcare, energy, and transportation, introduces additional risks. Compromises in these areas could lead to severe disruptions and safety hazards. For instance, vulnerabilities in medical IoT devices may jeopardise patient safety, while attacks on smart grids could disrupt power supplies. To mitigate these evolving threats, organisations must implement comprehensive security strategies, including device hardening, secure communication protocols, and continuous monitoring. Regulatory bodies are also expected to enforce stricter cybersecurity standards for IoT devices to foster a more secure ecosystem. To cut a long story short, the rapid expansion of IoT presents significant cybersecurity challenges that necessitate proactive measures to safeguard against emerging threats.</p>
+    	
+
+	    
+                                                            	<div class="post_share">
+	    	    <div class="social_icon  row_social_inpost"><span data-href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" class="fb share-link-image" data-service="facebook"><i class="rhicon rhi-facebook"></i></span><span data-href="https://twitter.com/share?url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html&text=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025" class="tw share-link-image" data-service="twitter"><i class="rhicon rhi-twitter"></i></span><span data-href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html&title=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025&source=Digit.in" class="in share-link-image" data-service="linkedin"><i class="rhicon rhi-linkedin"></i></span><span data-href="whatsapp://send?&text=Deepfake+AI+to+quantum+ransomware%3A+Top+cybersecurity+threats+of+2025 - https%3A%2F%2Fwww.digit.in%2Ffeatures%2Fgeneral%2Fdeepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html" data-action="share/whatsapp/share" class="wa share-link-image" data-service="whatsapp"><i class="rhicon rhi-whatsapp"></i></span><a href="https://news.google.com/publications/CAAqBwgKMOeK3AowrKTNAQ?hl=en-IN&gl=IN&ceid=IN%3Aen" target="_blank" class="icon-googlenews"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Follow Us on Google News" data-lazy-src="https://static.digit.in/icon-googlenews.jpg"><noscript><img src="https://static.digit.in/icon-googlenews.jpg" alt="Follow Us on Google News"></noscript> Follow Us</a></div>	</div>
+  
+                            
+                                                                         
+
+                                                        <div class="disclaimer_detail_box">
+</div>
+
+                            				                                        	    <div class="author_detail_box clearfix">
+				        <img alt='Jayesh Shinde' src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2070%2070'%3E%3C/svg%3E" data-lazy-srcset='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=140&#038;d=mm&#038;r=g 2x' class='avatar avatar-70 photo roundborder' height='70' width='70' decoding='async' data-lazy-src="https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=70&#038;d=mm&#038;r=g"/><noscript><img alt='Jayesh Shinde' src='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=70&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/577eb0cd124d70b1a65d5fc7001e4c31?s=140&#038;d=mm&#038;r=g 2x' class='avatar avatar-70 photo roundborder' height='70' width='70' decoding='async'/></noscript>                   
+
+                <style scoped>
+                    .author_detail_box { background-color: #fff; border: 1px solid #ededed; padding: 20px 0px; margin: 5px auto 40px auto; position: relative; min-height: 90px;width: 100%}
+                    .author_detail_box a{text-decoration: none;}
+                    .archive .author_detail_box { margin: 0 0 10px 0 }
+                    .author_detail_box .avatar {width: 71px; position: absolute; left: 20px; top: 15px; }
+                    .author_detail_box > div { width: 100%;    padding: 0 20px 0 110px }
+                    .author_detail_box div .social_icon { border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px; }
+                    .author_detail_box div h4 {margin: 0 0 8px 0;}
+                    .author_detail_box div p { font-size: 14px;line-height: 16px; color: #111111; margin: 0 0 10px 0 }
+                    .author_detail_box .rh_mycred-users-badges{display: inline-block; margin-right: 5px }
+                    .rtl .author_detail_box .avatar { left: inherit; right: 20px }
+                    .rtl .author_detail_box > div { padding: 0 110px 0 20px }
+                </style>
+                <div class="clearfix">
+                                    
+                    <h3>
+                        <a href="https://www.digit.in/author/jayesh-shinde/">Jayesh Shinde</a>
+                                                
+                    </h3>
+                    <div class="social_icon small_i">
+                         <a href="http://facebook.com/jayesh.shinde" class="author-social fb" rel="nofollow" aria-label="Facebook"><i class="rhicon rhi-facebook"></i></a>                        <a href="https://twitter.com/jshinde" class="author-social tw" rel="nofollow" aria-label="Twitter"><i class="rhicon rhi-twitter"></i></a>	                  </div>
+                    <p>Executive Editor at Digit. Technology journalist since Jan 2008, with stints at Indiatimes.com and PCWorld.in. Enthusiastic dad, reluctant traveler, weekend gamer, LOTR nerd, pseudo bon vivant. <a href="https://www.digit.in/author/jayesh-shinde/">View Full Profile
+</a>
+</p>                 </div>
+            </div>
+                                                    
+                        </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="clearfix"></div>                    
+                                     
+            <div id="comments" class="clearfix">
+        <div class="post-comments">
+                <div id="tab-1">
+        <ol class="commentlist">
+                    </ol>
+        <div id='comments_pagination'>
+                        </div>      
+    </div>
+
+    <ol id="loadcomment-list" class="commentlist">
+    </ol>
+            </div> <!-- end comments div -->
+</div>
+
+        </div>  
+
+        <!-- /Main Side --> 
+	<!-- Sidebar -->
+        <aside class="sidebar">
+	        </aside>
+	<aside class="sidebar">            
+    <!-- SIDEBAR WIDGET AREA -->
+ 			<div id="block-11" class="widget widget_block"><div style="margin-left: auto; margin-right: auto; text-align: center; " id="wordp-802530562"><script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {	
+jQuery( document ).ready(function() {
+	// Get the current URL
+	var url = new URL(window.location.href);
+	
+	var slotId = 'div-gpt-ad-1717157281950-0_Digit_Desk_AL_RHS_TOP_300'; // area id to show the ads
+    var adSlotId = '/21806551354/Digit/Desktop/ArticleList/Digit_Desk_AL_RHS_TOP_300'; // ad slot
+
+	// Use URLSearchParams to extract the query parameters
+	var params = new URLSearchParams(url.search);
+
+	// Check if the 'utm_source' parameter exists
+	if (params.has('utm_source')) {
+		var utmSource = params.get('utm_source');
+		//console.log('UtmParam:', utmSource)
+		
+		// Modify slotId if utm_source is 'iz'
+        if (utmSource.toLowerCase() === 'iz') {
+            adSlotId = '/21806551354/Digit/Desktop/Izooto/Digit_Desk_Izooto_RHS_MID_1_300'; // update slotId for 'iz' utm_source
+        }
+	}
+	
+	
+// 	Google Ads code start
+	window.googletag = window.googletag || {cmd: []};
+	  googletag.cmd.push(function() {
+		googletag.defineSlot(adSlotId, [300, 250], slotId).addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+  		googletag.pubads().setTargeting('category', digitCatAlias);
+		googletag.enableServices();
+	  });
+	googletag.cmd.push(function() { googletag.display(slotId); });
+
+});
+// 	Google Ads code end
+});</script>
+<div id="div-gpt-ad-1717157281950-0_Digit_Desk_AL_RHS_TOP_300" style='min-width: 300px; min-height: 250px;'></div></div></div><div id="rehub_posts_widget-2" class="widget posts_widget"><div class="title">Latest Article</div>	<div class="color_sidebar ">
+		<div class="tabs-item clearfix">
+					
+			<div class="clearfix flowhidden mb15 pb15 border-grey-bottom">	           
+	              <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/news/mobile-phones/poco-x7-and-poco-x7-pro-launched-in-india-price-specifications-availability.html" aria-label="Poco X7 and Poco X7 Pro Launched in India: Price, Specifications &amp; Availability"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2056'%3E%3C/svg%3E" alt="Poco X7 and Poco X7 Pro Launched in India: Price, Specifications &amp; Availability" width="100" height="56" data-lazy-src="https://static.digit.in/Poco-X7-X7-Pro-1.jpg?tr=w-100"><noscript><img src="https://static.digit.in/Poco-X7-X7-Pro-1.jpg?tr=w-100" alt="Poco X7 and Poco X7 Pro Launched in India: Price, Specifications &amp; Availability" width="100" height="56"></noscript></a>
+	            <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/news/mobile-phones/poco-x7-and-poco-x7-pro-launched-in-india-price-specifications-availability.html">Poco X7 and Poco X7 Pro Launched in India: Price, Specifications &amp; Availability</a> 
+            </div>	
+			
+			<div class="clearfix flowhidden mb15 pb15 border-grey-bottom">	           
+	              <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/news/apps/you-can-get-new-laptops-printers-and-monitors-within-10-minutes-from-blinkit-all-details.html" aria-label="You can get new laptops, printers and monitors within 10 minutes from Blinkit: All details"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2056'%3E%3C/svg%3E" alt="You can get new laptops, printers and monitors within 10 minutes from Blinkit: All details" width="100" height="56" data-lazy-src="https://static.digit.in/Blinkit-2.png?tr=w-100"><noscript><img src="https://static.digit.in/Blinkit-2.png?tr=w-100" alt="You can get new laptops, printers and monitors within 10 minutes from Blinkit: All details" width="100" height="56"></noscript></a>
+	            <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/news/apps/you-can-get-new-laptops-printers-and-monitors-within-10-minutes-from-blinkit-all-details.html">You can get new laptops, printers and monitors within 10 minutes from Blinkit: All details</a> 
+            </div>	
+			
+			<div class="clearfix flowhidden mb15 pb15 border-grey-bottom">	           
+	              <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/news/mobile-phones/oppo-reno-13-and-reno-13-pro-5g-launched-in-india-check-price-in-india-specifications-here.html" aria-label="Oppo Reno 13 and Reno 13 Pro 5G launched in India: Check price in India, specifications here"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2056'%3E%3C/svg%3E" alt="Oppo Reno 13 and Reno 13 Pro 5G launched in India: Check price in India, specifications here" width="100" height="56" data-lazy-src="https://static.digit.in/Oppo-Reno-13-1-1.png?tr=w-100"><noscript><img src="https://static.digit.in/Oppo-Reno-13-1-1.png?tr=w-100" alt="Oppo Reno 13 and Reno 13 Pro 5G launched in India: Check price in India, specifications here" width="100" height="56"></noscript></a>
+	            <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/news/mobile-phones/oppo-reno-13-and-reno-13-pro-5g-launched-in-india-check-price-in-india-specifications-here.html">Oppo Reno 13 and Reno 13 Pro 5G launched in India: Check price in India, specifications here</a> 
+            </div>	
+			
+			<div class="clearfix flowhidden mb15 pb15 border-grey-bottom">	           
+	              <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/news/mobile-phones/flipkart-republic-day-sale-iphone-16-16-plus-16-pro-discounted-price-revealed-ahead-of-mega-sale.html" aria-label="Flipkart Republic Day sale: iPhone 16, 16 Plus, 16 Pro discounted price revealed ahead of mega sale"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2056'%3E%3C/svg%3E" alt="Flipkart Republic Day sale: iPhone 16, 16 Plus, 16 Pro discounted price revealed ahead of mega sale" width="100" height="56" data-lazy-src="https://static.digit.in/iPhone-16-Pro-.png?tr=w-100"><noscript><img src="https://static.digit.in/iPhone-16-Pro-.png?tr=w-100" alt="Flipkart Republic Day sale: iPhone 16, 16 Plus, 16 Pro discounted price revealed ahead of mega sale" width="100" height="56"></noscript></a>
+	            <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/news/mobile-phones/flipkart-republic-day-sale-iphone-16-16-plus-16-pro-discounted-price-revealed-ahead-of-mega-sale.html">Flipkart Republic Day sale: iPhone 16, 16 Plus, 16 Pro discounted price revealed ahead of mega sale</a> 
+            </div>	
+			
+			<div class="clearfix flowhidden">	           
+	              <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/news/general/beware-of-international-missed-call-scam-reliance-jio-issues-warning.html" aria-label="Beware of international missed call scam, Reliance Jio issues warning"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%2056'%3E%3C/svg%3E" alt="Beware of international missed call scam, Reliance Jio issues warning" width="100" height="56" data-lazy-src="https://static.digit.in/Scam-16.png?tr=w-100"><noscript><img src="https://static.digit.in/Scam-16.png?tr=w-100" alt="Beware of international missed call scam, Reliance Jio issues warning" width="100" height="56"></noscript></a>
+	            <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/news/general/beware-of-international-missed-call-scam-reliance-jio-issues-warning.html">Beware of international missed call scam, Reliance Jio issues warning</a> 
+            </div>	
+				</div>
+	</div>	
+					
+	</div><div id="block-13" class="widget widget_block"><div style="margin-left: auto; margin-right: auto; text-align: center; " id="wordp-1152280244"><script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {	
+jQuery( document ).ready(function() {
+	// Get the current URL
+	var url = new URL(window.location.href);
+	
+	var slotId = 'div-gpt-ad-1717157281950-0_Digit_Desk_AL_RHS_MID_1_300'; // area id to show the ads
+    var adSlotId = '/21806551354/Digit/Desktop/ArticleList/Digit_Desk_AL_RHS_MID_1_300'; // ad slot
+
+	// Use URLSearchParams to extract the query parameters
+	var params = new URLSearchParams(url.search);
+
+	// Check if the 'utm_source' parameter exists
+	if (params.has('utm_source')) {
+		var utmSource = params.get('utm_source');
+		//console.log('UtmParam:', utmSource)
+		
+		// Modify slotId if utm_source is 'iz'
+        if (utmSource.toLowerCase() === 'iz') {
+            adSlotId = '/21806551354/Digit/Desktop/Izooto/Digit_Desk_Izooto_RHS_MID_2_300'; // update slotId for 'iz' utm_source
+        }
+	}
+	
+	
+// 	Google Ads code start
+	window.googletag = window.googletag || {cmd: []};
+	  googletag.cmd.push(function() {
+		googletag.defineSlot(adSlotId, [300, 250], slotId).addService(googletag.pubads());
+		googletag.pubads().enableSingleRequest();
+  		googletag.pubads().setTargeting('category', digitCatAlias);
+		googletag.enableServices();
+	  });
+	googletag.cmd.push(function() { googletag.display(slotId); });
+
+});
+// 	Google Ads code end
+});</script>
+<div id="div-gpt-ad-1717157281950-0_Digit_Desk_AL_RHS_MID_1_300" style='min-width: 300px; min-height: 250px;'></div></div></div><div id="latestvisualstory_widget-2" class="widget widget_latestvisualstory_widget"><div class="title">Visual Story</div><div class="color_sidebar">
+                <div class="tabs-item clearfix">
+
+                                        
+                
+                <div class="clearfix flowhidden mb15 pb15 border-grey-bottom">
+                    
+                        <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/web-stories/5-reasons-to-buy-galaxy-s24-ultra-instead-of-waiting-for-s25-ultra/" aria-label="5 Reasons to buy Galaxy S24 Ultra over S25 Ultra"><img src="https://www.digit.in/wp-content/themes/rehub-theme/images/default/noimage_100_70.png" data-src="https://static.digit.in/Main-Image-18-1-100x133.png" alt="Main Image (18)" data-skip-lazy="" class="lazyload " width="100" height="133"></a>
+                   
+                        <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/web-stories/5-reasons-to-buy-galaxy-s24-ultra-instead-of-waiting-for-s25-ultra/">5 Reasons to buy Galaxy S24 Ultra over S25 Ultra</a>
+                                
+                        
+                </div>
+
+
+                                        
+                
+                <div class="clearfix flowhidden mb15 pb15 border-grey-bottom">
+                    
+                        <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/web-stories/5-series-and-movies-like-squid-game-on-netflix/" aria-label="5 series and movies like Squid Game on Netflix"><img src="https://www.digit.in/wp-content/themes/rehub-theme/images/default/noimage_100_70.png" data-src="https://static.digit.in/5-series-and-movies-like-Squid-Game-on-Netflix-1-100x133.png" alt="5 series and movies like Squid Game on Netflix (1)" data-skip-lazy="" class="lazyload " width="100" height="133"></a>
+                   
+                        <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/web-stories/5-series-and-movies-like-squid-game-on-netflix/">5 series and movies like Squid Game on Netflix</a>
+                                
+                        
+                </div>
+
+
+                                        
+                
+                <div class="clearfix flowhidden mb15 pb15 border-grey-bottom">
+                    
+                        <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/web-stories/ott-movies-and-web-series-releasing-this-week-jan-8-to-11/" aria-label="OTT Movies And Web Series Releasing This Week (Jan 8 To 11)"><img src="https://www.digit.in/wp-content/themes/rehub-theme/images/default/noimage_100_70.png" data-src="https://static.digit.in/Main-Image-17-1-100x133.png" alt="Main Image (17)" data-skip-lazy="" class="lazyload " width="100" height="133"></a>
+                   
+                        <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/web-stories/ott-movies-and-web-series-releasing-this-week-jan-8-to-11/">OTT Movies And Web Series Releasing This Week (Jan 8 To 11)</a>
+                                
+                        
+                </div>
+
+
+                                        
+                
+                <div class="clearfix flowhidden mb15 pb15 border-grey-bottom">
+                    
+                        <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/web-stories/5-best-free-open-world-games-on-ps5-and-ps4-in-2025/" aria-label="5 Best Free Open World Games On PS5 And PS4 In 2025"><img src="https://www.digit.in/wp-content/themes/rehub-theme/images/default/noimage_100_70.png" data-src="https://static.digit.in/Untitled-design-2025-01-08T150210.983-100x133.png" alt="Untitled design - 2025-01-08T150210.983" data-skip-lazy="" class="lazyload " width="100" height="133"></a>
+                   
+                        <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/web-stories/5-best-free-open-world-games-on-ps5-and-ps4-in-2025/">5 Best Free Open World Games On PS5 And PS4 In 2025</a>
+                                
+                        
+                </div>
+
+
+                                        
+                
+                <div class="clearfix flowhidden mb15 pb15 border-grey-bottom">
+                    
+                        <a class="floatleft width-100 img-maxh-100 img-width-auto" href="https://www.digit.in/web-stories/top-5-realme-smartphones-under-rs-20000/" aria-label="Top 5 Realme Smartphones under Rs 20,000"><img src="https://www.digit.in/wp-content/themes/rehub-theme/images/default/noimage_100_70.png" data-src="https://static.digit.in/Untitled-design-9-3-100x133.png" alt="Untitled design (9)" data-skip-lazy="" class="lazyload " width="100" height="133"></a>
+                   
+                        <a class="detail floatright width-100-calc pl15 rtlpr15 mt0 lineheight20 fontnormal font95" href="https://www.digit.in/web-stories/top-5-realme-smartphones-under-rs-20000/">Top 5 Realme Smartphones under Rs 20,000</a>
+                                
+                        
+                </div>
+
+
+                                </div>
+	</div>
+</div>	        
+</aside>
+
+        <!-- /Sidebar --> 
+    </div>
+</div>
+<!-- /CONTENT -->     
+  
+
+<!-- FOOTER -->
+                <div data-rocket-location-hash="0fe45bba3c8961649f48e7523e63c652" id="footercustomarea"> 
+            <div data-rocket-location-hash="fd19240c86517090e7d86a25c13e2a73" id="block-8" class="footerside widget_block"></div><div data-rocket-location-hash="33b299fcd046a10723474ca2904873ce" id="custom_html-8" class="widget_text footerside widget_custom_html"><div class="textwidget custom-html-widget"><script type="rocketlazyloadscript" async data-rocket-src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script type="rocketlazyloadscript">
+  window.googletag = window.googletag || {cmd: []};
+  googletag.cmd.push(function() {
+googletag.defineSlot('/21806551354/Digit/Desktop/Across/Digit_Desk_Across_SKIN_RHS_120', [[160, 600], [120, 600]], 'div-gpt-ad-1719298753076-0').addService(googletag.pubads());
+ googletag.defineSlot('/21806551354/Digit/Desktop/Across/Digit_Desk_Across_SKIN_LHS_120', [[160, 600], [120, 600]], 'div-gpt-ad-1719298782481-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+
+<div class="skiner stick" id="skinerAd" style="">
+<div class="takeover-catfish">
+<div class="left-Add" id="left_ad">
+<div id='div-gpt-ad-1719298753076-0' style='min-width: 120px; min-height: 600px;'>
+  <script type="rocketlazyloadscript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1719298753076-0'); });
+  </script>
+</div>
+</div>
+ <div class="right-Add" id="right_ad" >
+<div id='div-gpt-ad-1719298782481-0' style='min-width: 120px; min-height: 600px;'>
+  <script type="rocketlazyloadscript">
+    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1719298782481-0'); });
+  </script>
+</div></div>
+</div>
+</div>
+ <style>
+@media only screen and (max-width: 1450px) and (min-width:0px){
+#skinerAd{display: none;}
+}
+.left-Add {
+    width: 120px;
+    height: 600px;
+    left: -156px;
+    position: absolute;
+}
+.right-Add {
+    width: 120px;
+    right: -116px;
+    height: 600px;
+    position: absolute;
+}
+.stick {    position: fixed;    margin-top: 140px;    z-index: 9;    top: 0;    left: 0;    right: 0;}
+.takeover-catfish {    width: 1214px;    margin: 0 auto;    position: relative;}
+</style>
+
+</div></div><div data-rocket-location-hash="eed0585791bac21127b9e0bc26fe2fb8" id="custom_html-4" class="widget_text footerside widget_custom_html"><div class="textwidget custom-html-widget"></div></div><div data-rocket-location-hash="cb14e877c0ea67274da711fe2e7d949e" id="block-12" class="footerside widget_block"></div>        </div>
+       
+
+                <div data-rocket-location-hash="e80b07f3a554f98ca910b0113c2e7f2c" class="custom_footer_sidebar"> 
+                    </div>
+
+                 
+<div data-rocket-location-hash="1f8c9f160ecf61fbc34ae88ea4d7668d" class="copyright footer">
+<div class="rh-container">
+ <div class="footer_tag cwv_footer_tag"><strong>New Mobiles</strong><br /><a title="HMD Fusion" href="https://www.digit.in/mobile-phones/hmd-fusion-price.html" class="cwv_footer_menu_first">HMD Fusion</a><a title="Tecno Phantom V Fold 2" href="https://www.digit.in/mobile-phones/tecno-phantom-v-fold-2-price.html" class="cwv_footer_menu_first">Tecno Phantom V Fold 2</a><a title="Nothing Phone (2a) Plus" href="https://www.digit.in/mobile-phones/nothing-phone-2a-plus-2-price.html" class="cwv_footer_menu_first">Nothing Phone (2a) Plus</a><a title="Poco C75 5G" href="https://www.digit.in/mobile-phones/poco-c75-5g-price.html" class="cwv_footer_menu_first">Poco C75 5G</a></div><div class="footer_tag cwv_footer_tag"><strong>Top-10s</strong><br /><a title="Best Mobile Phones Under ₹15,000 in India" href="https://www.digit.in/top-products/top-10-android-smartphones-under-rs-15-000-18.html" class="cwv_footer_menu_first">Best Mobile Phones Under ₹15,000 in India</a><a title="Best Mobile Phones Under 30000" href="https://www.digit.in/top-products/best-phones-under-rs-30-000-in-india-49.html" class="cwv_footer_menu_first">Best Mobile Phones Under 30000</a><a title="Best Phones Under 10000" href="https://www.digit.in/top-products/top-10-phones-under-rs-10-000-19.html" class="cwv_footer_menu_first">Best Phones Under 10000</a><a title="Best Mobile Phones Under 20000" href="https://www.digit.in/top-products/best-mid-range-smartphones-under-rs-20k-13.html" class="cwv_footer_menu_first">Best Mobile Phones Under 20000</a><a title="Best Mobile Phones Under 25000" href="https://www.digit.in/top-products/best-smartphones-under-25000-in-india-195.html" class="cwv_footer_menu_first">Best Mobile Phones Under 25000</a></div> <div class="footer_tag cwv_footer_tag"><strong>Latest News</strong><br /><a title="Not Samsung Galaxy S25 Ultra, Bixby AI can steal the spotlight at Unpacked 2025: Here&#8217;s why" href="https://www.digit.in/news/mobile-phones/not-samsung-galaxy-s25-ultra-bixby-ai-can-steal-the-spotlight-at-unpacked-2025-heres-why.html" class="cwv_footer_menu_first">Not Samsung Galaxy S25 Ultra, Bixby AI can steal the spotlight at Unpacked 2025: Here&#8217;s why</a><a title="CES 2025: Best gaming laptops with NVIDIA GeForce RTX 5090 graphics" href="https://www.digit.in/features/laptops/ces-2025-best-gaming-laptops-with-nvidia-geforce-rtx-5090-graphics.html" class="cwv_footer_menu_first">CES 2025: Best gaming laptops with NVIDIA GeForce RTX 5090 graphics</a><a title="GTA 6 release date delayed? Here&#8217;s what Rockstar Games senior employee has to say" href="https://www.digit.in/news/gaming/gta-6-release-date-delayed-heres-what-rockstar-games-senior-employee-has-to-say.html" class="cwv_footer_menu_first">GTA 6 release date delayed? Here&#8217;s what Rockstar Games senior employee has to say</a><a title="iOS 19 release date, features, supported devices and everything else we know" href="https://www.digit.in/news/mobile-phones/ios-19-release-date-features-supported-devices-and-everything-else-we-know.html" class="cwv_footer_menu_first">iOS 19 release date, features, supported devices and everything else we know</a></div> 
+<div class="footer_details_cont">
+
+<div class="left_side">
+<img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Digit" title="Digit" data-lazy-src="https://static.digit.in/digit-white.png"/><noscript><img src="https://static.digit.in/digit-white.png" alt="Digit" title="Digit"/></noscript>
+<p>Digit.in is one of the most trusted and popular technology media portals in India. At Digit it is our goal to help Indian technology users decide what tech products they should buy. We do this by testing thousands of products in our two test labs in Noida and Mumbai, to arrive at indepth and unbiased buying advice for millions of Indians.</p>
+
+</div>
+
+<div class="list-social list-inline cwv_list_social footer_border_added">
+<strong class="footer_title_head">Follow us :</strong>
+<a href="https://www.facebook.com/thinkdigit" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/f-1.png"/><noscript><img src="https://static.digit.in/f-1.png" alt="logo"/></noscript></a>
+<a href="https://twitter.com/digitindia" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/xtwitter_icon.png"/><noscript><img src="https://static.digit.in/xtwitter_icon.png" alt="logo"/></noscript></a>
+<a href="https://www.youtube.com/user/digit" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/youtube_icon.png"/><noscript><img src="https://static.digit.in/youtube_icon.png" alt="logo"/></noscript></a>
+<a href="https://www.instagram.com/digit.in/" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/f-6.png"/><noscript><img src="https://static.digit.in/f-6.png" alt="logo"/></noscript></a>
+<a href="https://in.linkedin.com/company/thinkdigit" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/linkdien_icon.png"/><noscript><img src="https://static.digit.in/linkdien_icon.png" alt="logo"/></noscript></a>
+<a href=" https://t.me/steal_this_deals" target="_blank"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="logo" data-lazy-src="https://static.digit.in/f-3.png"/><noscript><img src="https://static.digit.in/f-3.png" alt="logo"/></noscript></a>
+</div>
+
+<div class="footer-nav cwv_footer_nav">
+<strong class="footer_title_head">Company</strong>
+<a href="https://www.digit.in/about-us/" target="_blank"><span></span> About Us</a>
+<a href="https://www.digit.in/about-us/#ContactUs" target="_blank"><span></span> Contact Us</a>
+<a href="https://www.digit.in/about-us/#AdvertiseWithUs" target="_blank"><span></span> Advertise with us</a>
+<a href="https://www.digit.in/about-us/#rio" target="_blank"><span></span> Regulatory</a>
+<a href="https://www.digit.in/terms" target="_blank"><span></span> Terms & Conditions</a>
+<a href="https://www.digit.in/about-us/#privacypolicy" target="_blank"><span></span> Privacy Policy</a>
+<a href="https://www.digit.in/about-us/#disclaimer" target="_blank"><span></span> Disclaimer</a>
+<a href="https://www.digit.in/about-us/#cr" target="_blank"><span></span> Complaint Redressal</a>
+</div>
+
+
+</div>
+
+</div>
+<div data-rocket-location-hash="aa5f69d0ae2ad8a18371d88679a1ebf9" class="copey-text"> Copyright © 2025 Bennett, Coleman & Company Limited All Rights Reserved.</div>
+</div> 
+                <!-- FOOTER -->
+</div><!-- Outer End -->
+<span class="rehub_scroll" id="topcontrol" data-scrollto="#top_ankor"><i class="rhicon rhi-chevron-up"></i></span>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if the viewport width is less than or equal to 768px (commonly used mobile breakpoint)
+            if (window.innerWidth <= 768) {
+                var postMetaLeft = document.querySelector(".post-meta-left.hideonstablet.text-center");
+                if (postMetaLeft) {
+                    postMetaLeft.remove(); // Completely removes the div on mobile
+                }
+            }
+        });
+    </script>    <div data-rocket-location-hash="c73306cc0ea80cc9e1cc8d8fb5519cb9" id="logo_mobile_wrapper"><a href="https://www.digit.in" class="logo_image_mobile"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%2050'%3E%3C/svg%3E" alt="Digit.in" width="160" height="50" data-lazy-src="https://static.digit.in/digit_logo-2.png" /><noscript><img src="https://static.digit.in/digit_logo-2.png" alt="Digit.in" width="160" height="50" /></noscript></a></div>   
+
+     
+
+    <div data-rocket-location-hash="9401927246c5d94a1d050ab807a67be2" id="rhmobpnlcustom" class="rhhidden"><div data-rocket-location-hash="c47cb28f375731aa345148e2e2af6bd6" id="rhmobtoppnl" style="" class="pr15 pl15 pb15 pt15"><div data-rocket-location-hash="1ea99fb1f1ba6b3d5d1db219b5d710a1" class="text-center"><a href="https://www.digit.in"><img id="mobpanelimg" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%2045'%3E%3C/svg%3E" alt="Logo" width="150" height="45" data-lazy-src="https://static.digit.in/digit_logo-2.png" /><noscript><img id="mobpanelimg" src="https://static.digit.in/digit_logo-2.png" alt="Logo" width="150" height="45" /></noscript></a></div></div></div>    
+     
+    <div id="rhslidingMenu">
+        <div id="slide-menu-mobile"></div>
+    </div>
+    <div data-rocket-location-hash="80eaaf126c123188e89be748e19997fd" id="rhSplashSearch">
+        <div data-rocket-location-hash="7a5c883c170637d37d22999b3fd751ca" class="search-header-contents">
+            <div data-rocket-location-hash="8877775951054303761e721167e15d09" id="close-src-splash" class="rh-close-btn rh-hovered-scale position-relative text-center cursorpointer rh-circular-hover abdposright rtlposleft mt15 mr20 ml30" style="z-index:999"><span><i class="rhicon rhi-times whitebg roundborder50p rh-shadow4" aria-hidden="true"></i></span></div>
+            <form role="search" method="get" class="search-form product-search-form" action="https://www.digit.in/">
+	<label class="screen-reader-text" for="woocommerce-product-search-field-1">Search for:</label>
+	<input type="text" id="woocommerce-product-search-field-1"  name="s" placeholder="Search" value="" data-enable_compare="1" data-posttype="product" class="re-ajax-search" autocomplete="off" data-catid="" />
+	<input type="hidden" name="post_type" value="product" />
+		<button type="submit" class="btnsearch hideonmobile"  aria-label="Search"><i class="rhicon rhi-search"></i></button>
+</form>
+<div data-rocket-location-hash="639084bf9b8d2fb8ca267964b7970f04" class="re-aj-search-wrap rhscrollthin"></div>
+  
+        </div>
+    </div>
+
+        <div data-rocket-location-hash="ebfe064a5c8143f49528558719c76526" id="logo_mobile_wrapper"><a href="https://www.digit.in" class="logo_image_mobile"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20160%2050'%3E%3C/svg%3E" alt="Digit.in" width="160" height="50" data-lazy-src="https://static.digit.in/digit_logo-2.png" /><noscript><img src="https://static.digit.in/digit_logo-2.png" alt="Digit.in" width="160" height="50" /></noscript></a></div>   
+
+     
+
+    <div data-rocket-location-hash="7cee4e60afc07277cbc04f0102637879" id="rhmobpnlcustom" class="rhhidden"><div data-rocket-location-hash="6b86342e9265a4127c0ea6a2a0f7809a" id="rhmobtoppnl" style="" class="pr15 pl15 pb15 pt15"><div data-rocket-location-hash="0b880acb813130c95999eda2973666e6" class="text-center"><a href="https://www.digit.in"><img id="mobpanelimg" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%2045'%3E%3C/svg%3E" alt="Logo" width="150" height="45" data-lazy-src="https://static.digit.in/digit_logo-2.png" /><noscript><img id="mobpanelimg" src="https://static.digit.in/digit_logo-2.png" alt="Logo" width="150" height="45" /></noscript></a></div></div></div>    
+     
+	<div id="rhslidingMenu">
+		<div id="slide-menu-mobile"></div>
+	</div>
+	<div data-rocket-location-hash="b1bd6fa7e614138df42eb1e54493300b" id="rhSplashSearch">
+		<div data-rocket-location-hash="a375c4ea6dd1d1353d55f967ac435c4e" class="search-header-contents">
+			<div data-rocket-location-hash="51a05f25586bb4189abb6b5f53ba5381" id="close-src-splash" class="rh-close-btn rh-hovered-scale position-relative text-center cursorpointer rh-circular-hover abdposright rtlposleft mt15 mr20 ml30" style="z-index:999"><span><i class="rhicon rhi-times whitebg roundborder50p rh-shadow4" aria-hidden="true"></i></span></div>
+			<form role="search" method="get" class="search-form product-search-form" action="https://www.digit.in/">
+	<label class="screen-reader-text" for="woocommerce-product-search-field-2">Search for:</label>
+	<input type="text" id="woocommerce-product-search-field-2"  name="s" placeholder="Search" value="" data-enable_compare="1" data-posttype="product" class="re-ajax-search" autocomplete="off" data-catid="" />
+	<input type="hidden" name="post_type" value="product" />
+		<button type="submit" class="btnsearch hideonmobile"  aria-label="Search"><i class="rhicon rhi-search"></i></button>
+</form>
+<div class="re-aj-search-wrap rhscrollthin"></div>
+  
+		</div>
+	</div>
+
+		<script type="rocketlazyloadscript" data-rocket-type='text/javascript'>
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<link data-minify="1" rel='stylesheet' id='rhmegamenu-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/css/megamenu.css?ver=1736246227' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='rhcolumnmenu-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/css/columnmenu.css?ver=1736246227' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='rhcomments-css' href='https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/css/comments.css?ver=1736246227' type='text/css' media='all' />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=8.7.0" id="sourcebuster-js-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="wc-order-attribution-js-extra">
+/* <![CDATA[ */
+var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"ajaxurl":"https:\/\/www.digit.in\/wp-admin\/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=8.7.0" id="wc-order-attribution-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="advanced-ads-sticky-footer-js-js-extra">
+/* <![CDATA[ */
+var advanced_ads_sticky_settings = {"check_position_fixed":"","sticky_class":"wordp-sticky","placements":["sticky-footer"]};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/plugins/advanced-ads-sticky-ads/public/assets/js/sticky.js?ver=1736245764" id="advanced-ads-sticky-footer-js-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-browser-checker-js-after">
+/* <![CDATA[ */
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/tracker\/|\/zero1-awards\/|\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/wc-api\/v(.*)|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/www.digit.in","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="rocket-preload-links-js-after">
+/* <![CDATA[ */
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket_lazyload_css-js-extra">
+/* <![CDATA[ */
+var rocket_lazyload_css_data = {"threshold":"300"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket_lazyload_css-js-after">
+/* <![CDATA[ */
+!function o(n,c,a){function u(t,e){if(!c[t]){if(!n[t]){var r="function"==typeof require&&require;if(!e&&r)return r(t,!0);if(s)return s(t,!0);throw(e=new Error("Cannot find module '"+t+"'")).code="MODULE_NOT_FOUND",e}r=c[t]={exports:{}},n[t][0].call(r.exports,function(e){return u(n[t][1][e]||e)},r,r.exports,o,n,c,a)}return c[t].exports}for(var s="function"==typeof require&&require,e=0;e<a.length;e++)u(a[e]);return u}({1:[function(e,t,r){"use strict";{const c="undefined"==typeof rocket_pairs?[]:rocket_pairs,a=(("undefined"==typeof rocket_excluded_pairs?[]:rocket_excluded_pairs).map(t=>{var e=t.selector;document.querySelectorAll(e).forEach(e=>{e.setAttribute("data-rocket-lazy-bg-"+t.hash,"excluded")})}),document.querySelector("#wpr-lazyload-bg-container"));var o=rocket_lazyload_css_data.threshold||300;const u=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&c.filter(e=>t.target.matches(e.selector)).map(t=>{var e;t&&((e=document.createElement("style")).textContent=t.style,a.insertAdjacentElement("afterend",e),t.elements.forEach(e=>{u.unobserve(e),e.setAttribute("data-rocket-lazy-bg-"+t.hash,"loaded")}))})})},{rootMargin:o+"px"});function n(){0<(0<arguments.length&&void 0!==arguments[0]?arguments[0]:[]).length&&c.forEach(t=>{try{document.querySelectorAll(t.selector).forEach(e=>{"loaded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&"excluded"!==e.getAttribute("data-rocket-lazy-bg-"+t.hash)&&(u.observe(e),(t.elements||=[]).push(e))})}catch(e){console.error(e)}})}n(),function(){const r=window.MutationObserver;return function(e,t){if(e&&1===e.nodeType)return(t=new r(t)).observe(e,{attributes:!0,childList:!0,subtree:!0}),t}}()(document.querySelector("body"),n)}},{}]},{},[1]);
+/* ]]> */
+</script>
+<script type="text/javascript" id="advanced-ads-pro/front-js-extra">
+/* <![CDATA[ */
+var advanced_ads_cookies = {"cookie_path":"\/","cookie_domain":""};
+var advadsCfpInfo = {"cfpExpHours":"3","cfpClickLimit":"3","cfpBan":"7","cfpPath":"","cfpDomain":"digit.in"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/advanced-ads-pro/assets/js/advanced-ads-pro.min.js?ver=2.28.0" id="advanced-ads-pro/front-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/inview.js?ver=1736245764" id="rhinview-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/pgwmodal.js?ver=1736245764" id="rhpgwmodal-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/unveil.js?ver=1736245764" id="rhunveil-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/hoverintent.js?ver=1736245764" id="rhhoverintent-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/countdown.js?ver=1736245764" id="rhcountdown-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="rehub-js-extra">
+/* <![CDATA[ */
+var rhscriptvars = {"back":"back","ajax_url":"\/wp-admin\/admin-ajax.php","fin":"That's all","noresults":"No results found","your_rating":"Your Rating:","addedcart":"Added to Cart","nonce":"2abb119d16","hotnonce":"736e89b4d1","wishnonce":"6385a40b25","searchnonce":"e3a10b5eba","filternonce":"9fc534e9e5","rating_tabs_id":"01260622ef","max_temp":"10","min_temp":"-10","helpnotnonce":"b225bc8156"};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/custom.js?ver=1736245764" id="rehub-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/ajaxsearch.js?ver=1736245764" id="rehubajaxsearch-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-includes/js/comment-reply.min.js?ver=f4e939c64b9c9c465398d407ff92ccf0" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/plugins/wp-rocket/assets/js/heartbeat.js?ver=3.17.2.1" id="heartbeat-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/niceselect.js?ver=1736245764" id="rhniceselect-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/woodropcat.js?ver=1736245764" id="rhwoodropcat-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/userlogin.js?ver=1736245764" id="rehubuserlogin-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://www.digit.in/wp-content/themes/rehub-theme/js/jquery.waypoints.min.js?ver=4.0.2" id="rehubwaypoints-js" data-rocket-defer defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type="text/javascript" data-rocket-src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/readingprogress.js?ver=1736245767" id="rhreadingprogress-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/alignfull.js?ver=1736245767" id="rhalignfull-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.digit.in/wp-content/cache/min/1/wp-content/themes/rehub-theme/js/yall.js?ver=1736245767" id="rhyall-js" data-rocket-defer defer></script>
+<!--noptimize--><script type="rocketlazyloadscript">window.advads_admin_bar_items = [{"title":"Desktop Header","type":"ad"},{"title":"Desktop Sidebar Ad 1","type":"ad"},{"title":"Desktop Sidebar ad 2","type":"ad"}];</script><!--/noptimize--><!--noptimize--><script type="rocketlazyloadscript">!function(){window.advanced_ads_ready_queue=window.advanced_ads_ready_queue||[],advanced_ads_ready_queue.push=window.advanced_ads_ready;for(var d=0,a=advanced_ads_ready_queue.length;d<a;d++)advanced_ads_ready(advanced_ads_ready_queue[d])}();</script><!--/noptimize--><script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.digit.in/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt,l){var t='<img data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';if(l){t=t.replace('data-lazy-','');t=t.replace('loading="lazy"','');t=t.replace(/<noscript>.*?<\/noscript>/g,'');}t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?"":"&"+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var exclusions=["col-feat-grid","leader_img","rh-post-wrapper","featured_grid","item-1","item-2","item-3","item-4","item-5","col_item","rh-hovered-wrap","digit_ga4","digit_ga4_2","digit_gtm1","digit_gtm2","digit_comscore","digit_comscore_2","right_ad1"];var e,t,p,u,l,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)(e=document.createElement("div")),(u='https://i.ytimg.com/vi/ID/hqdefault.jpg'),(u=u.replace('ID',a[t].dataset.id)),(l=exclusions.some(exclusion=>u.includes(exclusion))),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query",a[t].dataset.query),e.setAttribute("data-src",a[t].dataset.src),(e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt,l)),a[t].appendChild(e),(p=e.querySelector(".play")),(p.onclick=lazyLoadYoutubeIframe)});</script><script>var rocket_beacon_data = {"ajax_url":"https:\/\/www.digit.in\/wp-admin\/admin-ajax.php","nonce":"6e43f0e529","url":"https:\/\/www.digit.in\/features\/general\/deepfake-ai-to-quantum-ransomware-top-cybersecurity-threats-of-2025.html","is_mobile":false,"width_threshold":1600,"height_threshold":700,"delay":500,"debug":null,"status":{"atf":true,"lrc":true},"elements":"img, video, picture, p, main, div, li, svg, section, header, span","lrc_threshold":1800}</script><script data-name="wpr-wpr-beacon" src='https://www.digit.in/wp-content/plugins/wp-rocket/assets/js/wpr-beacon.min.js' async></script></body>
+</html>
+
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

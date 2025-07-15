@@ -1,0 +1,47 @@
+
+Které jsou nejlepší nástroje pro zabezpečení cloudu?
+
+Poté, co se přesunou do cloudu, mají mnohé firmy dojem, že odpovědnost za bezpečnost nesou výhradně jejich cloudoví poskytovatelé. To je ale mylná představa, která může vést k únikům dat a dalším bezpečnostním problémům.
+Přestože odpovědnost za zabezpečení samotné cloudové infrastruktury samozřejmě leží na providerech cloudových služeb, na zákaznících naopak je, aby si nakonfigurovali využívané cloudové služby a zabezpečili své aplikace a citlivá firemní data.
+Přesně s tím jim mohou pomoci nástroje pro správu stavu zabezpečení cloudu (CSPM). Ty nepřetržitě a automaticky kontrolují případný výskyt nesprávných konfigurací, které by mohly vést k únikům dat a k jejich narušení.
+Nástroje CSPM uskutečňují průběžnou správu bezpečnostních rizik cloudu a zajišťují dodržování předpisů, takže podniky mohou průběžně dělat jakékoli nezbytné změny.
+„Řešení CSPM využívají šablony osvědčených postupů a dodržování předpisů k identifikaci odchylek a nezabezpečených konfigurací cloudové infrastruktury v oblasti výpočetních zdrojů, úložišť a sítí,“ uvádí Andras Cser, hlavní analytik společnosti Forrester Research.
+Nástroje CSPM podle něj mohou upozornit na nezabezpečené konfigurace a případně je napravit. Sledují pracovní zátěže, aby viděly, co se děje, a poskytují kontext, takže organizace vědí, která zranitelnost nebo problémy jsou nejdůležitější, dodává Charlie Winckless, šéf analýz v Gartneru.
+„Tyto nástroje umožňují společnostem rozhodovat o prioritách – volit, která rizika jsou skutečná, která jsou důležitá a u kterých si mohou dovolit nápravu trochu odložit,“ popisuje.
+Organizace vyhodnocující různé nástroje CSPM by si měly pohlídat, aby pokryly všechny jimi používané cloudové platformy, tvrdí Winckless.
+„Chcete být schopni normalizovat rizika konfigurací ve všech hlavních cloudových platformách. Většina organizací, které nakupují tyto nástroje, bude pravděpodobně využívat multicloud, vysvětluje.
+Podle něj budou tyto podniky používat minimálně dva cloudy, možná i více, protože samotní cloudoví poskytovatelé nabízejí některé z těchto funkcí jako vestavěné do jejich platforem.
+Philip Bues, manažer výzkumů pro oblast zabezpečení cloudu v IDC, říká, že novou realitou pro většinu organizací je hybridní multicloudové prostředí, „takže budete potřebovat něco, co vám poskytne skutečně rozsáhlý přehled o všech prostředích a pracovních zátěžích, které máte. A to by vám mělo řešení CSPM poskytnout.“
+Mezi další funkce, které by organizace měly v nástrojích CSPM hledat, patří:
+To zahrnuje možnost organizací sledovat, jak je každý úložný bucket nakonfigurovaný ve všech jejich službách úložiště, aby se zajistilo, že jejich data nebudou nedopatřením vystavená neoprávněným aplikacím či uživatelům.
+Nástroje CSPM nabízejí řadu výhod, které pomáhají společnostem zvýšit úroveň ochrany, minimalizovat vystavení rizikům v cloudových prostředích, a dokonce i snížit náklady. Mezi tyto výhody patří:
+Pokud jde o nástroje CSPM, existují určitá úskalí, o kterých by společnosti měly vědět. Jde například o:
+Nejlepším způsobem, jak nástroje CSPM implementovat, je zajistit týmům řádné školení a náležité informace o tom, jak má toto řešení v daném prostředí fungovat.
+Máte čas na rychlé a informativní video?
+„Nechcete přece, aby se bezpečnostní tým s malými nebo žádnými zkušenostmi s cloudem nebo vývojáři s omezenými zkušenostmi v oblasti zabezpečení snažili spravovat toto nové řešení,“ zdůrazňuje.
+„Vývojáři a tým zabezpečení by měli v tomto směru spolupracovat, protože každý má jiné potřeby.“
+Organizace by si měly zvolit takové nástroje CSPM, které poskytují skutečně multicloudové monitorování a ochranu.
+Podniky všech velikostí by však měly zajistit ochranu svých aktiv ve všech týmech, a to právě implementací nástrojů CSPM.
+Na trhu existuje řada nástrojů CSPM, takže abychom vám pomohli zahájit výzkum, vybrali jsme následující produkty na základě konzultací s analytiky a nezávislými výzkumníky.
+Poskytuje komplexní pohled na cloudová bezpečnostní rizika organizací v reálném čase a identifikuje nejzávažnější problémy, aby se bezpečnostní manažeři mohli soustředit na řešení potíží s vysokou prioritou.
+Řešení využívá skenování pracovní zátěže bez agenta ke kontrole pracovní zátěže a posouzení základního stavu potenciálních nebezpečí.
+Zjišťuje cloudová rizika a zachycuje hrozby, které se vyhýbají detekci bez agentů, včetně bezsouborového malwaru, útoků založených na paměti a neznámých pokusů o zneužití, jako jsou například ataky nultého dny.
+Poskytuje také kontextové poznatky, doporučuje nápravná opatření a stanovuje priority pro nejdůležitější bezpečnostní problémy. Propojuje problémy zjištěné v cloudu s vývojem.
+Detekuje nesprávné konfigurace, vizualizuje a hodnotí stav zabezpečení společnosti a vynucuje frameworky pro dodržování předpisů a osvědčené bezpečnostní postupy.
+Společnosti mohou spravovat zabezpečení a dodržování předpisů ve svých veřejných cloudových prostředích – Azure, AWS, GCP, Alibaba Cloud a také Kubernetes.
+Vizualizace sítě a aktiv produktem CloudGuard umožňuje firmám v reálném čase detekovat všechny ohrožené pracovní zátěže, zranitelnosti, nesprávné konfigurace a otevřené porty.
+Nabízí také podporu pro threat intelligence jako bezplatný doplněk. Tato funkce nabízí přehled o aktivitě účtu prostřednictvím výzkumu hrozeb a strojového učení.
+Společnostem umožňuje nepřetržitě monitorovat žádoucí stav všech jejich cloudových zdrojů z jediné konzole a řídicího/informačního panelu pro řadu předpisů včetně standardu zabezpečení dat platebních karet (PCI-DSS), Národního institutu pro standardy a technologie (NIST), SOC2 atd.
+Umožňuje společnostem porovnat konfigurace cloudových aplikací s organizačními a oborovými benchmarky s cílem detekovat nesrovnalosti a napravit je v reálném čase, aby byly jejich aplikace vždy dostupné.
+Poskytuje uživatelům úplný přehled o jejich cloudových prostředích, nabízí automatizované reakce a nepřetržitou detekci hrozeb. Analyzuje a normalizuje různorodé zdroje dat a umožňuje podnikům přehled pro řízení a správu rizik.
+Navíc nabízí i historickou viditelnost a viditelnost v reálném čase pro různá aktiva a konfigurace.
+Společnostem poskytuje podrobné pokyny k nápravě porušení předpisů a nesprávných konfigurací. Shromažďuje i protokoly událostí auditu, které bezpečnostním správcům umožňují vidět změny konfigurací a identifikovat, kdy k nim došlo.
+Firmám umožňuje zobrazit nesprávně nakonfigurovanou infrastrukturu a související rizika, zranitelnosti, nadměrná oprávnění a konfigurace sítě, které mohou způsobit expozici podnikových zdrojů.
+Dovoluje také automaticky napravovat nesprávnou konfiguraci, riziková oprávnění a porušení zásad. 
+Podniky mohou auditovat multicloudová prostředí podle oborových standardů včetně frameworku AWS Well-Architected, NIST, PCI-DSS, SOC2 a benchmarků CIS (Center for Internet Security) pro Kubernetes atd. A firmy si navíc mohou vytvořit i své vlastní kontroly.
+Tento příspěvek vyšel v tištěném Security Worldu 2/2024.
+ 
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the importance of cloud security and the role of Cloud Security Posture Management (CSPM) tools in managing security risks in cloud environments. It highlights the benefits of using CSPM tools, such as real-time monitoring, threat intelligence, and automated remediation, and provides examples of popular CSPM tools, including Check Point CloudGuard and AWS Well-Architected. The article also emphasizes the need for organizations to implement CSPM tools to protect their cloud assets and ensure compliance with regulatory standards."}]

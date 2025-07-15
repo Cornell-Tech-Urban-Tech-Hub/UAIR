@@ -1,0 +1,29 @@
+U.S. E-11A ‘Flying Gateway’ Takes Part In Counter-Drone And Integrated Missile Defense Exercise In Middle East
+Airmen from the 378th Air Expeditionary Wing teamed up with their Saudi counterparts for Exercise Yellow Sands, a regional training event aimed at boosting teamwork in Counter-Unmanned Aerial Systems (C-UAS) and Integrated Air and Missile Defense (IAMD), last month. The exercise series focuses on spotting, tracking, and taking down aerial threats, using the E-11A aircraft equipped with the Battlefield Airborne Communications Node (BACN) as a “flying gateway”, a communications hub to link up the many different systems used by coalition forces.
+During Yellow Sands, the E-11A’s BACN (or “Bacon”, as the system is commonly pronounced) provided secure, long-range communication links for both air and ground forces. This improved connectivity helped coalition partners coordinate better and effectively as they faced air and missile threats, strengthening the collective security of allied nations in the region.
+By connecting different communication networks, the E-11A makes it easier to share information in real time, smoothing out the flow of voice and data between allies. Its role in Yellow Sands was specifically about bridging these gaps and ensuring U.S. forces could work smoothly with their regional partners.
+“The E-11A fills a critical gap and adds an important capability when it comes to sharing information,” Allevato said. “The faster we can move information and break down barriers to sharing it, the stronger we become as a team.”
+At a strategic level, the E-11A helps improve coordination by speeding up information flow between warfighters. Exercises like Yellow Sands also offer the chance to test and improve these systems, making sure everything works as it should.
+“The BACN system has been used on other platforms,” Allevato noted. “But right now, the E-11A is the main vehicle carrying it in this region. Without BACN, there wouldn’t be an E-11 in this theater, and vice versa.”
+The BACN payload, defined as a “Wi-Fi in the sky”, was developed as a “gateway” system that allows aircraft with incompatible radio and datalink systems to transfer information and communicate. BACN is reportedly being modified to allow fourth- to fifth-generation data sharing between fighter jets, with upgraded navigation and GPS systems and Link-16.
+Home
+About
+Special Reports
+Contact
+Work With Us
+Advertise With Us
+Privacy Policy
+Terms & Conditions
+Military Aviation
+Aviation Safety
+Helicopter
+Drones
+Space
+Weapons
+Information Security
+Troubled Areas
+Sign in to your account
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing, specifically the use of the Battlefield Airborne Communications Node (BACN) system on the E-11A aircraft, which acts as a 'flying gateway' to connect different communication networks and facilitate information sharing between allies. The discussion is detailed, focusing on the technical aspects of the system and its role in improving coordination and security in the region. While the article also touches on non-technical themes, such as military operations and regional security, the centrality of computing to the topic is clear."}]

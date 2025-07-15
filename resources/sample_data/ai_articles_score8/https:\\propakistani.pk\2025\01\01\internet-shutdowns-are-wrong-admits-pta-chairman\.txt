@@ -1,0 +1,23 @@
+Internet Shutdowns Are Carried Out Under Govt Directives, Telecom, and PECA Act: PTA Chairman
+Chairman Pakistan Telecommunication Authority (PTA) Major General (R) Hafeez Ur Rehman said on Wednesday that internet shutdowns are wrong but stated that the practice had been ongoing long before his tenure began.
+He made these remarks during a session of the Senate Standing Committee on Information Technology in Islamabad. The session first convened to discuss internet disruptions, registration of virtual private networks (VPNs), and social media regulation.
+The PTA Chairman explained that internet shutdowns are initiated only upon receiving directives from the Ministry of Interior. When pressed further on why the internet is frequently blocked, he suggested that the Ministries of Law and Interior are better positioned to provide definitive legal opinions on the matter.
+One senator questioned the PTA’s authority to block the internet in specific areas, asking where such a power is explicitly stated in the law. In response, the PTA Chairman clarified that directives typically come from the Ministry of Interior, while the Special Secretary of IT explained that blocking all online content in an area requires suspending internet services entirely.
+The discussion also revisited past shutdowns, including those ordered by the Supreme Court and High Court. One senator urged the Ministry of IT to address legal ambiguities and, if necessary, seek reviews of court directives to clarify the scope of internet restrictions.
+Addressing complaints about social media content, the PTA Chairman revealed that the regulator receives around 500 daily complaints regarding objectionable material. While social media platforms comply with 80% of these requests, 20 percent of flagged content remains unaddressed, raising concerns among the committee members.
+Regarding VPN registrations, the PTA Chairman confirmed that the process commenced on December 19, with two internet service providers and one major corporation already applying for licenses. PTA has also engaged with the Pakistan Software Houses Association (P@SHA) to introduce a globally recognized model for VPN services.
+The committee explored Pakistan’s internet infrastructure. The PTA Chairman highlighted that the country currently ranks 97th in internet speed, however, efforts to improve connectivity are underway, including the addition of the “2 Africa” submarine cable this year and four additional cables in the coming years.
+Follow ProPakistani on Google News & scroll through your favourite content faster!
+If you want to join us in our mission to share independent, global journalism to the world, we’d love to have you on our side.
+        If you can, please support us on a monthly basis. It takes less than a minute to set up, and you can rest assured that you’re making a big impact every single month in support of open, independent journalism. Thank you.
+    
+Shares
+لگتا ہے لوگ اس طبقے کی باتوں کو نظر انداز کرنے لگے ہیں اور کمنٹ کرنا بھی مناسب نہیں سمجھتے ایس طبقے کی بے تکی باتوں پر۔
+© 2025 ProPakistani.PK - All rights reserved
+Follow ProPakistani to get latest news and updates.
+Join the groups below to get latest news and updates.
+Session expired
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about internet shutdowns, VPNs, social media regulation, and internet infrastructure in Pakistan, with a focus on the role of the Pakistan Telecommunication Authority (PTA) and the impact of government directives. While the discussion is centered around computing and technology, it lacks in-depth exploration of technical aspects, and the article's main theme is more regulatory and societal. The PTA Chairman's comments on internet speed and the country's ranking are the closest the article gets to discussing technical details."}]

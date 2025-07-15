@@ -1,0 +1,14 @@
+
+        Musk nejspíš vstoupí na italský telekomunikační trh. Zakázku pro vládu rozhýbala i schůzka Meloniové a Trumpa
+    
+Zdroje Bloombergu hovoří o pětileté smlouvě, kterou by mezi sebou měla uzavřít italská vláda a Muskova společnost SpaceX. Momentálně stále probíhají jednání, a nikdo žádnou dohodu zatím nepodepsal. Dohodu už ale schválily italské zpravodajské služby i italské ministerstvo obrany.
+Jednání, která nějakou dobu vázla, se pohnula poté, co italská premiérka Giorgia Meloniová v neděli navštívila na Floridě zvoleného amerického prezidenta Donalda Trumpa. 
+Hodnota dohody je 1,5 miliardy eur (zhruba 38 miliard korun) a jejím cílem je dodat Itálii celou škálu šifrování nejvyšší úrovně pro telefonní a internetové služby, které používá vláda.
+Součástí dohody jsou také komunikační služby pro italskou armádu v oblasti Středozemního moře a zavedení tzv. satelitních služeb přímého přenosu pro použití v mimořádných situacích, jako jsou teroristické útoky nebo přírodní katastrofy. Dohoda se posuzuje od poloviny roku 2023. Proti ní se postavili někteří italští představitelé, kteří se obávají, že by tyto služby mohly příliš konkurovat místním operátorům.
+Jen v roce 2024 přidala Muskova společnost SpaceX ke své satelitní internetové službě Starlink více než 20 zemí od Ghany po Argentinu. Nyní poskytuje služby více než čtyřem milionům lidí ve více než 100 zemích a teritoriích, čímž pokrývá celý svět širokopásmovými službami a vytlačuje tradiční telekomunikační operátory.
+Koncem loňského roku podepsal Kyivstar PJSC, největší ukrajinský mobilní operátor, dohodu se společností Starlink o zavedení satelitních mobilních služeb ve snaze umístit telekomunikační infrastrukturu mimo dosah ruských útoků.
+Itálie je jedním z nejkonkurenčnějších trhů na světě pro telefonní operátory, kteří se již několik let potýkají s klesajícími zisky. Místní odvětví čelí novému kolu fúzí, a také mnohamiliardovému rozprodávání majetku.
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses a potential deal between the Italian government and SpaceX, a company founded by Elon Musk, to provide high-level encryption services for phone and internet services. The deal, worth 1.5 billion euros, would also include communication services for the Italian army and the implementation of satellite services for emergency situations. While the article mentions SpaceX and its satellite internet service Starlink, the focus is on the business and political aspects of the deal rather than the technical details of the services provided."}]

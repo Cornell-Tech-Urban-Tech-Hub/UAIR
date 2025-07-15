@@ -1,0 +1,19 @@
+Italy discusses telecom deal with SpaceX
+The Italian government is said to be in advanced talks with SpaceX about purchasing telecom and data services from satellite company Starlink.
+Under the agreement, SpaceX will provide encryption of signals and telecom and data services for the military. That includes signals on and around the Mediterranean Sea. In addition, Defense must be able to use ordinary smartphones to make phone calls via Musk’s satellites in emergency situations. That technology has recently been up and running.
+ Either there are no banners, they are disabled or none qualified for this location! 
+The European Union last month commissioned a project to build its own satellite network capable of beaming telecom and broadband to Earth. This project is called Iris2. If all goes according to plan, by 2030 companies and governments will be able to have broadband in the most remote areas of the EU and surrounding areas.
+On 16 December the European Commission gave a 12-year license to the newly formed consortium SpaceRISE. That will allocate €10.6 billion to build a network with 290 space codes. Of that, 61% will be financed from public funds.
+Italy’s security and intelligence services have reviewed the technical details of the deal and appear to have no objections.
+Italy’s prime minister Giorgia Meloni is touting herself as a Trump ally. In turn, the presidential candidate maintains close ties with SpaceX boss Elon Musk.
+Outside the EU, the British government is holding exploratory talks with Cooper, the broadband project that Amazon will build in space. The first test satellites are in orbit, but the network is not comparable in size and capacity to Starlink.
+Emerce
+Eligible creators can receive up to $5,000 depending on their social media reach
+Three new devices boast new intuitive agents
+New development an important step on the way to bioprinting human organs
+Letter to EU says investment in content moderation efforts will continue
+Series of workshops introduces youth-led approach to sustainability and citizenship education
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily focused on the Italian government's discussions with SpaceX about purchasing telecom and data services from Starlink. The article mentions encryption of signals, telecom and data services, and the use of satellites for emergency phone calls, indicating a significant role of computing and AI in the discussion. However, the article also touches on non-technological aspects such as politics and international relations, reducing its centrality to computing. The discussion provides some depth, but other themes like politics and international relations play a notable role, making it an 8 out of 10 in terms of its relevance to computing."}]

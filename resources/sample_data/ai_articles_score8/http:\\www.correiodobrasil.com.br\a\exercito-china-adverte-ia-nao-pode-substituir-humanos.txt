@@ -1,0 +1,23 @@
+Exército da China adverte que a IA não pode substituir humanos
+Destaca-se que a IA pode ser usada para aumentar as capacidades humanas, através da análise de dados, simulações ou planejamento, mas não pode substituí-las.
+“À medida que a IA evolui, ela deve permanecer uma ferramenta guiada pelo julgamento humano, garantindo que responsabilidade, criatividade e adaptabilidade estratégica permaneçam no primeiro plano da tomada de decisões militares”, ressalta a mídia.
+Uma vez que a IA opera dentro de limites algorítmicos predefinidos e suas respostas muitas vezes não têm originalidade, a autonomia e a criatividade humanas são indispensáveis no campo de batalha.
+O ELP aponta que prefere uma estrutura onde as máquinas analisam dados, fornecem informações e sugerem ações potenciais. No entanto, “as decisões finais ficam com os comandantes humanos, protegendo contra erros decorrentes da natureza de caixa preta da IA”.
+O artigo acrescenta que outra fraqueza da tecnologia é sua incapacidade de refletir sobre suas próprias ações ou assumir a responsabilidade por suas decisões, ao contrário dos comandantes humanos que podem refinar seus planos em resposta às circunstâncias.
+Com mais dinheiro em caixa, as empresas de defesa planejam ampliar investimentos em tecnologias como inteligência artificial (IA), drones sofisticados e sistemas espaciais.
+De acordo com a apuração, o valor dos negócios de capital de risco no setor de defesa aumentou 18 vezes nos últimos dez anos impulsionado pela convergência tecnológica entre o setor comercial e o de defesa. Mas, apesar de questões éticas que antes eram levantadas por diversos governos na Europa, os investimentos e aplicações tecnológicas ganharam um novo fôlego com a guerra por procuração da Organização do Tratado do Atlântico Norte (Otan) contra a Rússia na Ucrânia.
+Dentre os acordos corporativos mais recentes estão a aquisição da Ball Aerospace pela BAE System, uma fornecedora de sistemas espaciais, sediada nos EUA, por US$ 5,6 bilhões (mais de R$ 34,6 bilhões), que foi anunciada em 2023.
+Ouvido pelo FT, o analista da Vertical Research Partners, Robert Stallard, acredita que enquanto os EUA continuam com sua consolidada visão de “vale tudo” para a indústria de defesa, na Europa “deve haver consolidação, fusões e aquisições, mas fazer os governos concordarem é outra coisa completamente diferente”.
+Para o analista, a Europa pensa na manutenção de sua capacidade soberana no setor, valorizando as joint ventures e parcerias em lugar de grandes aquisições, o que deve impossibilitar tais movimentações no mercado europeu.
+Mas o legado de 2024 para o setor de defesa foi, sem dúvida, a necessidade de modernização, uma oportunidade para o capital privado poder desempenhar um papel maior, preenchendo as lacunas de financiamento deixadas pelos Estados que tiveram de combater a inflação e contornar as crises políticas, garantindo taxas de juros e remodelando suas cadeias de produção ao longo do ano.
+
+
+ 
+ 
+ 
+Jornal Correio do Brasil - 2024
+ 
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the use of artificial intelligence (AI) in the military, highlighting its potential to enhance human capabilities but not replace them. The Chinese military emphasizes the importance of human judgment and decision-making in AI-guided systems, citing the limitations of AI in terms of autonomy, creativity, and accountability. The article also mentions the increasing investment in AI and other technologies in the defense sector, driven by the convergence of commercial and defense technologies. The discussion is centered around the role of AI in military decision-making and its limitations, making it a key topic with some depth."}]

@@ -1,0 +1,90 @@
+forskning.nos eiere
+Norske og internasjonale forskningsnyheter
+Forskningsnyheter for unge
+Science news from Norway in English
+Science news from Norway in English
+Meninger, debatt og blogger skrevet av forskere
+Meninger, debatt og blogger skrevet av forskere
+Forskning.nos stillingsmarked
+Norske og internasjonale forskningsnyheter
+Forskningsnyheter for unge
+Science news from Norway in English
+Science news from Norway in English
+Meninger, debatt og blogger skrevet av forskere
+Meninger, debatt og blogger skrevet av forskere
+Forskning.nos stillingsmarked
+Det hele startet med et valg Anastasiia Kolesnikova måtte ta som student på tredje semester
+på masterstudiet Global Management ved Handelshøgskolen på Nord
+universitet. 
+I stedet for bare å lære fra bøker fikk studentene jobbe
+med virkelige prosjekter som skulle gjøre byer i nord bedre.
+Dette er et initiativ på Nordområdesenteret ved Nord
+universitet. Der utfordret de studentene til å tenke nytt rundt teknologiske
+løsninger for samfunn i nord.
+For Kolesnikova betydde dette arbeid med noe banebrytende: verdens nordligste selvkjørende busser. Hun fikk praksis hos Nordland
+fylkeskommune.
+– Det var utrolig spennende å jobbe med et prosjekt som har
+den mest innovative teknologien. Vi hadde to selvkjørende busser i Bodø. Det
+var den nordligste ruten i verden for selvkjørende busser. 
+ Kolesnikova ble inspirert. Hun så hvordan de selvkjørende
+bussene brukte avansert teknologi for å kartlegge og forstå omgivelsene sine.
+Dette ga henne en idé.
+Ved å bruke et GoPro-kamera utviklet hun en systematisk
+metode for å kartlegge veisystemer. Metoden er inspirert av måten selvkjørende
+kjøretøy samler og analyserer data om omgivelsene sine.
+Metoden hennes er like enkel som den er effektiv:
+– Jeg brukte samme tankegang som de selvkjørende bussene. De
+samler kontinuerlig data om omgivelsene sine for å navigere trygt. Jeg
+tenkte: Hvorfor ikke bruke samme systematiske tilnærming for å gjøre
+veiene tryggere for syklister?
+All informasjonen ble så lagt inn i et geografisk
+informasjonssystem (GIS). 
+Dette ga en digital kartlegging. Den viste både hvor
+det trengs utbedringer og hvilke områder som fungerer bra.
+– Det handler om å se mønstrene. Hvor er de kritiske
+punktene? Hvor oppstår det farlige situasjoner? Med denne metoden får vi et
+solid datagrunnlag for å ta bedre beslutninger.
+Metoden vakte interesse hos Statens vegvesen.
+Funnene ble nemlig med som innspill i vurderingen av hvilke
+tiltak som kan gjennomføres for gående og syklende.
+– Etter å ha presentert funnene for styret i Bypakke
+Bodø ble det satt av to millioner kroner til å gjennomføre tiltak, forteller studenten.
+Hun ser en interesse for metoden også andre steder i
+landet:
+– Jeg er i dialog med Statens vegvesen og Innlandet
+fylkeskommune. Der planlegger de å bruke metoden og har behov for veiledning.
+Ole Wiggo Nerva bekrefter interessen. Han er
+prosjekteringsleder hos Statens vegvesen, Bypakke Bodø.
+– Metoden med filming og bilder gir et godt inntrykk av
+de enkelte punktene for å vurdere kompleksitet og mulighetene for utbedring,
+sier han.
+Han forteller at en arbeidsgruppe fra Bodø kommune, Nordland
+fylkeskommune og Statens vegvesen brukte dataene til å prioritere tiltak og
+vurdere kostnader.
+– Dette er et godt redskap. Det gir oversikt over tiltak som
+kan iverksettes. Samme metode kan brukes i andre kommuner hvor man ønsker å
+tilrettelegge bedre for skoleveger, syklende og trafikksikkerhet.
+Det som startet som et prosjekt inspirert av selvkjørende
+busser, kan altså nå bidra til å gjøre norske veier tryggere også andre steder
+i landet.
+Etter å ha fullført mastergraden jobbet Kolesnikova en periode i Statens
+vegvesen. Nå er hun i Nordland fylkeskommune som trainee. 
+
+    Les flere artikler fra Nord universitet her.
+
+Søknadsfrist: 23.02.2025
+Søknadsfrist: 28.02.2025
+Søknadsfrist: 12.02.2025
+Søknadsfrist: 10.02.2025
+Søknadsfrist: Løpende
+Søknadsfrist: 16.02.2025
+Søknadsfrist: 31.01.2025
+Søknadsfrist: 26.01.2025
+Ta kontakt med Preben ForbergTelefon 41 31 08 79 eller preben@forskning.no
+Vis alle stillinger
+Ung.forskning.no er nyheter om forskning for barn og unge.
+Forskersonen.no/kronikk og debatt: Frithjof Eide Fjeldstad, tlf 480 98 388 / frithjof@forskning.no
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about a student's innovative project using advanced technology, specifically self-driving buses, to develop a method for mapping and analyzing road systems. The student, Anastasiia Kolesnikova, uses a GoPro camera to collect data and creates a systematic approach inspired by self-driving cars. The method is then used to identify areas for improvement in road safety for cyclists. The article highlights the interest and potential application of this method in other parts of the country, making it a significant topic in the field of computing and technology."}]

@@ -1,0 +1,17 @@
+DigitalOcean Inc. Faces Criminal Investigation for Hosting Website Impersonating CYBERPOL: A Violation of International Cybercrime Laws 
+According to legal experts, this fraudulent activity directly violates Article 6 of the Budapest Convention, which criminalizes unauthorized access to computer systems, identity theft, and the use of fraudulent identities. By using the CYBERPOL name and logo for illicit purposes, recomeback.com has violated both international law and the operational mandates of CYBERPOL.
+By hosting recomeback.com, DigitalOcean is being accused of facilitating the unlawful use of CYBERPOL’s intellectual property. The website’s unauthorized use of CYBERPOL's name and branding for fraudulent purposes constitutes a clear violation of trademark law. Additionally, the site’s activities may also be subject to copyright infringement claims under the Berne Convention for the Protection of Literary and Artistic Works, which protects the rights of creators, including the creators of digital content such as logos and branding materials.
+Legal experts argue that DigitalOcean’s failure to remove recomeback.com from its platform has contributed to the continued infringement of CYBERPOL’s intellectual property rights. DigitalOcean, by continuing to host the website, is accused of enabling this illegal activity, which could have significant legal ramifications.
+The EU Cybercrime Directive (2013/40/EU) and the U.S. Computer Fraud and Abuse Act (18 U.S.C. § 1030) both criminalize actions related to online fraud, identity theft, and unauthorized access to computer systems. By hosting recomeback.com, DigitalOcean could be seen as complicit in facilitating these illegal activities.
+The investigation also underscores the importance of international cooperation in combating cybercrime. The Budapest Convention on Cybercrime, which aims to harmonize laws and promote collaboration between law enforcement agencies around the world, has been instrumental in addressing cross-border cybercrime. However, as this case demonstrates, there are still challenges in ensuring that companies adhere to international treaties and comply with legal obligations.
+As the investigation progresses, the outcome could have significant implications for DigitalOcean and the broader tech industry, raising important questions about the role of cloud hosting providers in the fight against cybercrime.
+Che cos'è fai informazione
+Come usare fai informazione
+Come contattarci
+Sviluppo Web/App
+Termini e condizioni d'uso
+Tutela della privacy
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses a criminal investigation into DigitalOcean for hosting a website that impersonates CYBERPOL, a violation of international cybercrime laws. The article mentions specific laws and regulations related to computer systems, identity theft, and intellectual property rights, indicating a strong connection to computing and technology. While the focus is on the legal implications and international cooperation, the discussion of cybercrime laws and regulations demonstrates a detailed exploration of technical and social aspects of computing."}]

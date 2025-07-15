@@ -1,0 +1,83 @@
+Propust u VW Grupi hakerima dao podatke o detaljnom kretanju 800.000 električnih vozila
+Procureli podaci uključuju GPS koordinate, nivo baterije i status vozila za Audi, VW, Seat i Škodu, ne samo u Nemačkoj, već širom Evrope i drugih delova sveta
+Posebno zabrinjavajuće je što su u 466.000 slučajeva podaci o lokaciji bili toliko precizni da je bilo moguće kreirati detaljan profil dnevnih aktivnosti vlasnika. Među pogođenima su nemački političari, preduzetnici, policijski službenici iz Hamburga, pa čak i zaposleni u obaveštajnim službama.
+Glavni krivac za ovaj propust je Cariad, softverska kompanija VW Grupe. Problem je nastao tokom leta 2024. godine, kada je greška u konfiguraciji sistema omogućila pristup podacima. Jedan anonimni uzbunjivač otkrio je problem koristeći slobodno dostupne alate, nakon čega je obavestio Chaos Computer Club (CCC), najveću hakersku organizaciju u Evropi.
+Uspešno ste se prijavili na na naš newsletter! Proverite vaš email nalog kako bi potvrdili prijavu.
+CCC je odmah alarmirao nemačke vlasti, uključujući Državnog poverenika za zaštitu podataka Donje Saksonije i Ministarstvo unutrašnjih poslova. VW Grupi i Cariadu dato je 30 dana da reše problem pre nego što se vest obelodani. Cariad je brzo reagovao i blokirao neovlašćen pristup podacima.
+VW Grupa je izdala saopštenje u kojem tvrdi da nisu procurili podaci poput lozinki ili informacija o plaćanju, te da korisnici ne moraju preduzimati nikakve mere. Međutim, nemački političari su izrazili zabrinutost. Jedna političarka opisala je incident kao „šokantan“, dok je drugi zvaničnik rekao da je slučaj „sraman i frustrirajući“.
+Ovo nije prvi put da je automobilski gigant kompromitovao podatke svojih kupaca. Prošle godine, Toyota je priznala da je zbog slične greške ugroženo 2,15 miliona vlasnika vozila u Japanu.
+U suprotnom, potrošači bi mogli izgubiti poverenje u tehnologije koje su zamišljene da im olakšaju život. „Industrija mora početi tretirati sajber bezbednost sa istim nivoom ozbiljnosti kao i bezbednost u slučaju sudara,“ zaključuje se u analizi. Za sada, čini se da mnogi proizvođači i dalje voze sa „digitalnim prozorima širom otvorenim“.
+Prijavi se na newsletter listu i jednom nedeljno cemo ti poslati email sa najnovijim testovima i vestima iz sveta tehnologije.
+Uspešno ste se prijavili na na naš newsletter! Proverite vaš email nalog kako bi potvrdili prijavu.
+
+                Trenutno nema komentara vezanih za ovu vest. Priključi se diskusiji na Benchmark forumu i budi prvi koje će ostaviti komentar na ovaj članak!
+            
+
+                Napredna tehnologija izrade stakla za ekrane i robustan dizajn čine zaštitne folije suvišnim
+            
+
+                Rastuća pretnja svemirskog otpada: da li i kako uopšte upravljamo otpadom iz orbite?
+            
+
+                Xiaomi definitivno otkazao dugo očekivanu funkcionalnost u HyperOS 2 verziji operativnog sistema
+            
+
+                Jednostavan trik za Xiaomi korisnike koji još uvek nisu dobili ažuriranje
+            
+
+                
+Četiri telefona iz Android flegšip kategorije mobilnih uređaja su najočekivaniji uređaji svoje vrste u 2025. godini, pre svega zbog inovativnog dizajna i vrhunskih performansi  
+
+            
+Prijavi se na newsletter listu i jednom nedeljno cemo ti poslati email sa najnovijim testovima i vestima iz sveta tehnologije.
+Uspešno ste se prijavili na na naš newsletter! Proverite vaš email nalog kako bi potvrdili prijavu.
+
+                Partnerstvo sa Samsungom i Qualcommom i nova akvizicija otkrivaju Google planove za budućnost XR projekta  
+            
+
+                Na Galaxy Unpacked događaju otkriveni Samsung planovi za uređaj koji će konkurisati Huawei Mate XT modelu  
+            
+
+                Poboljšani Nvidia dizajn i dodatne mere obećavaju bezbedniju upotrebu RTX 5090 grafičke kartice  
+            
+
+                Xiaomi Smart Ceiling Light D20 plafonjerka uskoro globalno debituje sa podrškom za glasovne komande i HyperOS povezivanje  
+            
+
+                Redizajnirani Magic7 mogao bi doneti veću bateriju, naprednu periskopsku kameru i još nekoliko dodatnih unapređenja
+            
+
+                Samsung se oprašta od svoje aplikacije za poruke, oslanjajući se na Google Messages kao standardno rešenje za Galaxy S25 seriju
+            
+
+                Moguća najava Nothing Phone (3) modela pokreće različite teorije među ljubiteljima ove marke
+            
+
+                Prva javna beta verzija Android 16 OS-a nudi adaptivne aplikacije, dinamične notifikacije i napredne video funkcije
+            
+
+                Bolja osvetljenost i intenzivniji prikaz boja najavljuju novu eru Hisense LED ekrana
+            
+
+                Rastuća pretnja svemirskog otpada: da li i kako uopšte upravljamo otpadom iz orbite?
+            
+
+                Pojavili su se podaci o dimenzijama iPhone SE 4, očekuju se performanse na nivou iPhone 16 modela
+            
+
+                Popularna Moovit aplikacija za planiranje putovanja, sada uvodi i kupovinu karata za voz, autobus ili trajekt širom Evrope
+            
+Prijavi se na newsletter listu i jednom nedeljno cemo ti poslati email sa najnovijim testovima i vestima iz sveta tehnologije.
+Uspešno ste se prijavili na na naš newsletter! Proverite vaš email nalog kako bi potvrdili prijavu.
+Koristimo kolačiće kako bismo vam pružili najbolje iskustvo na našoj veb stranici.
+Ova veb stranica koristi kolačiće kako bismo vam pružili najbolje moguće korisničko iskustvo.
+Informacije o kolačićima se čuvaju u vašem pretraživaču i obavljaju funkcije poput prepoznavanja kada se vratite na našu veb stranicu i pomažu našem timu da razume koje delove veb sajta smatrate najzanimljivijim i najkorisnijim.
+Strogo neophodni kolačići trebalo bi da budu uključeni u svakom trenutku kako bismo mogli da sačuvamo vaše preferencije za podešavanja kolačića.
+If you disable this cookie, we will not be able to save your preferences. This means that every time you visit this website you will need to enable or disable cookies again.
+Ova veb stranica koristi Google Analytics za prikupljanje anonimnih informacija kao što su broj posetilaca na sajtu i najpopularnije stranice.
+Omogućavanje ovih kolačića nam pomažete da unapredimo našu veb stranicu.
+Please enable Strictly Necessary Cookies first so that we can save your preferences!
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing, specifically cybersecurity, as it discusses a data breach in the Volkswagen Group's software company, Cariad, which exposed sensitive information of 800,000 electric vehicle owners. The article mentions GPS coordinates, battery levels, and vehicle status, highlighting the potential risks of connected vehicles. The discussion is centered around the technical aspects of the breach, the company's response, and the implications for consumers. The article provides some depth, exploring the consequences of the breach and the need for improved cybersecurity measures in the automotive industry."}]

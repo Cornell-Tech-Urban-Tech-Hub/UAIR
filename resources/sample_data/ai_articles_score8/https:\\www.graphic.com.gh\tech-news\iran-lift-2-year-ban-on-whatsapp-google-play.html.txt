@@ -1,0 +1,26 @@
+
+				Iran lift 2-year ban on WhatsApp, Google Play			
+Iranians can now access WhatsApp and Google Play without a VPN after the government lifted a two-year ban, signaling a shift in internet restrictions, but the fight for full online freedom continues.
+However, the 32-year-old lamented that he still needs a VPN to access Instagram and Telegram, which are the most popular platforms in Iran.
+While many had hoped for a complete removal of social media restrictions, the Supreme Council of Cyberspace, which includes the heads of the three branches of government, decided to lift the ban only on WhatsApp and Google Play for now.
+This marks a first step towards fulfilling a promise by President Masud Pezeshkian to ease internet restrictions.
+The Iranian Minister of Communications and Information Technology, Sattar Hashemi, reaffirmed this by stating that the “path continues.” He wrote tjhis on X, a platform officially used by the authorities despite being blocked in Iran.
+Despite the unblocking of WhatsApp and Google Play, Instagram, Telegram, X, and YouTube remain restricted.
+Kian, an employee at a currency exchange in Tehran, emphasized that while WhatsApp’s unblocking is significant, Instagram and Telegram are more critical for Iranians, particularly those using these platforms to promote businesses.
+“Thousands, if not millions, of Iranians rely on Instagram to market their businesses, services, and products,” Kian said.
+Despite these restrictions, many Iranians continue to access international platforms through VPNs.
+Former presidential assistant for social rights and freedoms, Sakineh Saadat, criticized the partial unblocking. “The unblockers remain on people’s phones, imposing an excessive cost on the people’s basic needs.”
+The unblocking of WhatsApp and Google Play has been widely covered in Iran’s official media, with some newspapers like Sazandegi and Jorasan optimistically headlining the event as “Cracks in the Wall of Censorship.”
+Others, however, view it as a “slow advance” towards full internet freedom.
+These internet restrictions were imposed during the 2022 protests following the death of Mahsa Amini, who was detained by the morality police for allegedly violating the country’s strict dress code.
+The Iranian government has long justified its censorship as a means to prevent opposition groups and “enemy countries” from using social media platforms to incite unrest and threaten national security.
+The policy has failed to fully contain the digital resistance, as Iranians continue to access blocked platforms with VPNs.
+According to Saeedreza Ameli, a member of the Supreme Council of Cyberspace, 97 percent of Iranians aged 15 to 17 use VPNs to access blocked content.
+A report from Sharif University of Tehran in July indicated that 79% of Iranians still access foreign platforms with VPNs, calling the government’s censorship policy “failed.”
+In September, the U.S. called on tech companies to help circumvent internet censorship in countries like Iran.
+Unofficial sources suggest that hundreds of Iranians have already installed Starlink satellite internet, which bypasses all government-imposed internet restrictions.
+Connect With Us : 0242202447 | 0551484843 | 0266361755 | 059 199 7513 |
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about the Iranian government's decision to lift a two-year ban on WhatsApp and Google Play, which is a significant development in the country's internet restrictions. The discussion centers around the impact of this decision on Iranian citizens, particularly those who rely on social media platforms for their businesses. The article also touches on the Iranian government's justification for its censorship policy and the failure of this policy to fully contain digital resistance. The centrality of computing to the article's main theme is high, as the discussion revolves around the use of social media platforms and the impact of internet restrictions on Iranian citizens. However, the depth of discussion is not extremely technical, but rather focuses on the social and economic implications of the government's decision."}]

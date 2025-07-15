@@ -1,0 +1,19 @@
+Arcana Network Launches Chain Abstraction SDK to Unify Multi-Chain Experience
+
+
+The SDK currently supports ETH, USDT, and USDC across Ethereum, Polygon, Arbitrum, Base, and Optimism, with more chains and assets coming soon.
+Mayur Relekar, CEO of Arcana Network, says:
+“As the Web3 ecosystem grows, chain abstraction is no longer optional — it’s essential for the next generation of applications. With the launch of our SDK, we enable new possibilities for developers and users across ecosystems while moving toward Arcana Network’s Mainnet launch in Q1 2025.”
+Since its inception in 2021, Arcana Network has introduced products that make web3 effortless. The upcoming Chain Abstraction Protocol built on a Modular Appchain and powered by $XAR, is the next evolution in simplifying Web3.
+$XAR is the utility token that captures protocol fees, secures the network, incentivizes early adopters, and rewards resource providers.
+Arcana Network’s innovative technology is backed by prominent investors, including Balaji S., Polygon founders, John Lilic, and Santiago Roel, and investment funds such as Fenbushi, Republic, Woodstock, Polygon Ventures, DCG, LD Capital, and others.
+Andria Efstathiou, Marketing Manager, Arcana Network
+January 25th, 2025
+January 25th, 2025
+January 24th, 2025
+Copyright © 2025 MDD Group FZE LLC All rights reserved.
+Reproduction in whole or in part in any form or medium without express written permission of MDD Group FZE LLC is prohibited.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about Arcana Network's Chain Abstraction SDK, which is a key technology for unifying the multi-chain experience. The SDK supports multiple chains and assets, and the article discusses its potential impact on the Web3 ecosystem. The article also mentions the underlying technology, such as the Modular Appchain and the utility token $XAR. While the article does not delve into technical details, it provides a clear overview of the technology and its significance, indicating a score of 8."}]

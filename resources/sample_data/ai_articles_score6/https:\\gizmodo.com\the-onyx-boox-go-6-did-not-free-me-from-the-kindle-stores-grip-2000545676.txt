@@ -1,0 +1,47 @@
+
+        The Onyx Boox Go 6 Did Not Free Me From the Kindle Store’s Grip
+    
+The Boox Go 6’s e-ink screen isn’t a problem for me—I like the 6-inch display, which features an adjustable backlight and brightness. Text and details on the screen appear sharp and crisp even with the backlight turned off. But the display’s slow refresh rate powered by a middling processor made my reading experience slower than a traditional, tangible book. It made me wait, and I hate waiting. No matter what I wanted to read, I had to wait for the screen to catch up to my fingerpress before the e-reader would load the desired content. It did this for ebooks I stored locally, books I’d borrowed from Libby, and a few other apps I tried out over the excitement of having nearly unfettered access to the Google Play Store. One of the selling points of the Go 6 is that it runs Android, making it easier to load third-party apps and stores. But interacting with the Boox Go 6 can be so frustrating; it almost doesn’t make the open nature of its software alluring, after all.
+The one saving grace of the Go 6’s frequent sluggishness is that the e-reader doesn’t “catch up” on notifications for the Android apps you have installed. When the e-reader is off and turned on again, you’re not immediately bombarded by useless notifications for stuff from days or weeks ago. You do get push notifications from news apps that support it, but it’s tempered. I noticed it pushes only the most recent alert since the screen has been on. 
+The Go 6 is a lighter device than the Kindle Paperwhite by nearly two ounces. Its 6-inch E Ink HD Carta 1300 display has a 1,448 by 1,072 resolution. There are bezels on the device, which is fine because I like to have a bit of chassis to hold onto when lying on my back. Boox also sent over the magnetic cover case to protect it. I like how svelte the whole package is, and I loved the look and feel of the device alongside my other everyday carry.
+If you are looking for a platform-agnostic, non-OLED solution to reading at night, the Go 6 isn’t a bad choice. Just temper your expectations. Remember that the e-ink screen is not the same as a smartphone. But the payoff is an incredible battery life for an e-reader—up to five days consecutive days of reading off the charger in my testing—and the ability to load up a digital library of books, comics, and magazines onto one dedicated device. At the very least, the Boox Go 6 reminds you to move slower than the pace of everything else these days, even if you are waiting a while for the page to load. 
+
+          Get the best tech, science, and culture news in your inbox daily.
+        
+
+          News from the future, delivered to your present.
+        
+
+      Please select your desired newsletters and submit your email to upgrade your inbox.
+    
+
+          The Bookcase will automatically enable DND on your phone as soon as you start reading.
+        
+
+          The new Colorsoft Kindle is available to order for $280.
+        
+
+          The Boox Palma feels like a device that’s confused between wanting to be an e-reader and a mobile phone.
+        
+
+          The  Phantasm  director (he also made  Beastmaster  and  Bubba Ho-Tep ) has a new book of short stories,  Phiction , inspired by his horror franchise.
+        
+
+          Google murdered a whole lot of products in 2023, but Apple, Amazon, and even Netflix have blood on their hands.
+        
+
+          It's been a robust year for fantasy, and even the most avid reader can struggle to keep up with it all. Here are our choices for the very best to gift.
+        
+Best of CES 2025 Awards ➜
+Mode
+
+                Follow us
+              
+Mode
+
+                Follow us
+              
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses the Boox Go 6, an e-reader that runs on Android, making it easier to load third-party apps and stores. However, the device's slow refresh rate and processor make the reading experience slower than a traditional book. The article also mentions the device's battery life, e-ink screen, and ability to load digital libraries, but the focus is more on the user experience and the device's limitations rather than the technical aspects of Android or computing."}, {"uses": ["reading ebooks", "loading third-party apps", "storing books and magazines", "receiving push notifications from news apps"]}]

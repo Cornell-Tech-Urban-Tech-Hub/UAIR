@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="preconnect" href="https://securepubads.g.doubleclick.net">
+		<title>Google Ads plans major AI Push in 2025, reshaping search marketing</title><link rel="preload" data-rocket-preload as="image" href="https://searchengineland.com/wp-content/seloads/2019/10/smxlogo_270x130.png" fetchpriority="high">
+		<meta property="fb:app_id" content="108479729193136" />
+		<meta property="fb:admins" content="684476602, 1269303818, 679476803, 549118759"/>
+		
+		<meta name="google-site-verification" content="c9app5XVp8lVmCyt-cHaPGOrTdwfrBbZW6HoZeH7Rnc" />
+					<meta property="fb:page_id" content="7138936668" />
+		
+		<meta name="news_keywords" content="">
+<meta itemprop="description" content="Google's VP of global search ads reveals that AI will drive a transformation of advertising in 2025 even more significant than the mobile revolution.">
+	<meta itemprop="datePublished" content="2025-01-02" />
+	<meta itemprop="dateModified" content="2025-01-02" />
+	<meta itemprop="image" content="https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501-800x458.png" />
+
+		<link rel="apple-touch-icon" href="https://searchengineland.com/apple-touch-icon.png">
+		<link rel="shortcut icon" href="https://searchengineland.com/favicon.ico" />
+		<link rel="alternate" type="application/rss+xml" title="Search Engine Land Feed: Get Every Post" href="https://searchengineland.com/feed" />
+
+		<script>
+				dataLayer = [];
+		</script>
+
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-TCJZ3LV');</script>
+		<!-- End Google Tag Manager -->
+
+		<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+                                    
+            
+	<!-- This site is optimized with the Yoast SEO Premium plugin v24.1 (Yoast SEO v24.1) - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Google&#039;s VP of global search ads reveals that AI will drive a transformation of advertising in 2025 even more significant than the mobile revolution." />
+	<link rel="canonical" href="https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Google Ads plans major AI Push in 2025, reshaping search marketing" />
+	<meta property="og:description" content="Google&#039;s VP of global search ads reveals that AI will drive a transformation of advertising in 2025 even more significant than the mobile revolution." />
+	<meta property="og:url" content="https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029" />
+	<meta property="og:site_name" content="Search Engine Land" />
+	<meta property="article:publisher" content="https://www.facebook.com/searchengineland" />
+	<meta property="article:published_time" content="2025-01-02T21:57:37+00:00" />
+	<meta property="article:modified_time" content="2025-01-02T21:57:43+00:00" />
+	<meta property="og:image" content="https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501-800x458.png" />
+	<meta property="og:image:width" content="800" />
+	<meta property="og:image:height" content="458" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="Anu Adegbola" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@TheMarketingAnu" />
+	<meta name="twitter:site" content="@sengineland" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Anu Adegbola" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="2 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"NewsArticle","@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#article","isPartOf":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029"},"author":{"name":"Anu Adegbola","@id":"https://searchengineland.com/#/schema/person/f410cd78bb7798ea71921ab3306d46fc"},"headline":"Google Ads plans major AI Push in 2025, reshaping search marketing","datePublished":"2025-01-02T21:57:37+00:00","dateModified":"2025-01-02T21:57:43+00:00","mainEntityOfPage":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029"},"wordCount":225,"publisher":{"@id":"https://searchengineland.com/#organization"},"image":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#primaryimage"},"thumbnailUrl":"https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501.png","articleSection":["Google","PPC"],"inLanguage":"en-US","copyrightYear":"2025","copyrightHolder":{"@id":"https://searchengineland.com/#organization"}},{"@type":"WebPage","@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029","url":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029","name":"Google Ads plans major AI Push in 2025, reshaping search marketing","isPartOf":{"@id":"https://searchengineland.com/#website"},"primaryImageOfPage":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#primaryimage"},"image":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#primaryimage"},"thumbnailUrl":"https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501.png","datePublished":"2025-01-02T21:57:37+00:00","dateModified":"2025-01-02T21:57:43+00:00","description":"Google's VP of global search ads reveals that AI will drive a transformation of advertising in 2025 even more significant than the mobile revolution.","breadcrumb":{"@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#primaryimage","url":"https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501.png","contentUrl":"https://searchengineland.com/wp-content/seloads/2025/01/SEL-Blog-2025-01-02T215353.501.png","width":1920,"height":1098},{"@type":"BreadcrumbList","@id":"https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Search Engine Land","item":"https://searchengineland.com/"},{"@type":"ListItem","position":2,"name":"PPC","item":"https://searchengineland.com/library/ppc"},{"@type":"ListItem","position":3,"name":"Google Ads plans major AI Push in 2025, reshaping search marketing"}]},{"@type":"WebSite","@id":"https://searchengineland.com/#website","url":"https://searchengineland.com/","name":"Search Engine Land","description":"News, Search Engine Optimization (SEO) &amp; Pay-Per-Click (PPC)","publisher":{"@id":"https://searchengineland.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://searchengineland.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://searchengineland.com/#organization","name":"Search Engine Land","url":"https://searchengineland.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://searchengineland.com/#/schema/logo/image/","url":"https://searchengineland.com/wp-content/seloads/2019/05/SearchEngineLand_logo_1920x1080.png","contentUrl":"https://searchengineland.com/wp-content/seloads/2019/05/SearchEngineLand_logo_1920x1080.png","width":1920,"height":1080,"caption":"Search Engine Land"},"image":{"@id":"https://searchengineland.com/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/searchengineland","https://x.com/sengineland","https://www.linkedin.com/company/search-engine-land","https://www.youtube.com/user/searchengineland"]},{"@type":"Person","@id":"https://searchengineland.com/#/schema/person/f410cd78bb7798ea71921ab3306d46fc","name":"Anu Adegbola","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://searchengineland.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/6cc1de5f9fda777f978e7fdf008c0df7?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/6cc1de5f9fda777f978e7fdf008c0df7?s=96&d=mm&r=g","caption":"Anu Adegbola"},"description":"Anu Adegbola has been Paid Media Editor of Search Engine Land since 2024. She covers paid search, paid social, retail media, video and more. In 2008, Anu's career started with&nbsp;delivering digital marketing campaigns (mostly but not exclusively Paid Search) by building strategies, maximising ROI, automating repetitive processes and bringing efficiency from every part of marketing departments through inspiring leadership both on agency, client and marketing tech side. &nbsp; Outside editing Search Engine Land article she is the founder of PPC networking event - PPC Live and host of weekly podcast PPCChat Roundup. &nbsp; She is also an international speaker with some of the stages she has presented on being SMX (US), SMX (Munich), Friends of Search (Amsterdam), brightonSEO, The Marketing Meetup, HeroConf (PPC Hero), SearchLove, BiddableWorld, SESLondon, PPC Chat Live, AdWorld Experience (Bologna) and more.","sameAs":["https://thirddoormedia.com/","https://www.linkedin.com/in/themarketinganu/","https://x.com/TheMarketingAnu"],"jobTitle":"Paid Media News Editor","worksFor":"Search Engine Land","url":"https://searchengineland.com/author/anu-adegbola"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//hcaptcha.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//www.googletagservices.com' />
+<link rel='dns-prefetch' href='//www.googleadservices.com' />
+<link rel='dns-prefetch' href='//script.crazyegg.com' />
+<link rel='dns-prefetch' href='//cdn.jst.ai' />
+
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://searchengineland.com/wp-includes/css/dist/block-library/style.min.css?ver=6.6.2' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link data-minify="1" rel='stylesheet' id='wp-ai-content-generator-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/css/wp-ai-content-generator-public.css?ver=1734976235' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap-css' href='https://searchengineland.com/wp-content/themes/tdm-editorial/css/bootstrap/bootstrap.min.css?ver=5.2.0' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='oswald-font-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/css/oswald.css?ver=1734976235' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='roboto-font-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/css/roboto.css?ver=1734976235' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='theme-styles-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/css/theme.css?ver=1734976235' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='default-styles-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/style.css?ver=1734976235' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='font-awesome-css' href='https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/css/font-awesome/all.min.css?ver=1734976235' type='text/css' media='all' />
+<style id='rocket-lazyload-inline-css' type='text/css'>
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player:focus-within{outline: 2px solid currentColor;outline-offset: 5px;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:100%;width:100%;left:0;top:0;position:absolute;background:url(https://searchengineland.com/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat center;background-color: transparent !important;cursor:pointer;border:none;}
+</style>
+<script type="text/javascript" src="https://searchengineland.com/wp-content/themes/tdm-editorial/js/jquery-1.11.0.min.js?ver=1.11.0" id="jquery-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/js/wp-ai-content-generator-public.js?ver=1734976235" id="wp-ai-content-generator-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/inc-conf/js/moment.js?ver=1734976235" id="script-moment-js"></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/inc-conf/js/moment-timezone.js?ver=1734976235" id="script-timezone-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/inc-conf/js/fuse.js?ver=1734976235" id="script-fuse-js" data-rocket-defer defer></script>
+<link rel="https://api.w.org/" href="https://searchengineland.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://searchengineland.com/wp-json/wp/v2/posts/450029" /><link rel='shortlink' href='https://searchengineland.com/?p=450029' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://searchengineland.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsearchengineland.com%2Fgoogle-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://searchengineland.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fsearchengineland.com%2Fgoogle-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029&#038;format=xml" />
+<!-- Stream WordPress user activity plugin v4.0.2 -->
+<style>
+.h-captcha{position:relative;display:block;margin-bottom:2rem;padding:0;clear:both}.h-captcha[data-size="normal"]{width:303px;height:78px}.h-captcha[data-size="compact"]{width:164px;height:144px}.h-captcha[data-size="invisible"]{display:none}.h-captcha::before{content:'';display:block;position:absolute;top:0;left:0;background:url(https://searchengineland.com/wp-content/plugins/hcaptcha-for-forms-and-more/assets/images/hcaptcha-div-logo.svg) no-repeat;border:1px solid #fff0;border-radius:4px}.h-captcha[data-size="normal"]::before{width:300px;height:74px;background-position:94% 28%}.h-captcha[data-size="compact"]::before{width:156px;height:136px;background-position:50% 79%}.h-captcha[data-theme="light"]::before,body.is-light-theme .h-captcha[data-theme="auto"]::before,.h-captcha[data-theme="auto"]::before{background-color:#fafafa;border:1px solid #e0e0e0}.h-captcha[data-theme="dark"]::before,body.is-dark-theme .h-captcha[data-theme="auto"]::before,html.wp-dark-mode-active .h-captcha[data-theme="auto"]::before,html.drdt-dark-mode .h-captcha[data-theme="auto"]::before{background-image:url(https://searchengineland.com/wp-content/plugins/hcaptcha-for-forms-and-more/assets/images/hcaptcha-div-logo-white.svg);background-repeat:no-repeat;background-color:#333;border:1px solid #f5f5f5}.h-captcha[data-theme="custom"]::before{background-color:initial}.h-captcha[data-size="invisible"]::before{display:none}.h-captcha iframe{position:relative}div[style*="z-index: 2147483647"] div[style*="border-width: 11px"][style*="position: absolute"][style*="pointer-events: none"]{border-style:none}
+</style>
+<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+									
+<script async src='https://securepubads.g.doubleclick.net/tag/js/gpt.js'></script>
+<script>
+	window.googletag = window.googletag || {cmd: []};
+	googletag.cmd.push(function() {
+	var mapping1 = googletag.sizeMapping()
+		.addSize([1920, 400], [[1920, 624], [970, 250], [728, 90]])
+		.addSize([1536, 400], [[1536, 499], [970, 250], [728, 90]])
+		.addSize([1440, 400], [[1440, 468], [970, 250], [728, 90]])
+		.addSize([1366, 350], [[1366, 444], [970, 250], [728, 90]])
+		.addSize([1280, 300], [[1280, 416], [970, 250], [728, 90]])
+		.addSize([970, 250], [[970, 315], [970, 250], [728, 90]])
+		.addSize([768, 400], [[728, 90]])
+		.addSize([470, 400], [])
+		.addSize([0, 0], [])
+		.build();
+
+	var mapping2 = googletag.sizeMapping()
+		.addSize([1024, 400], [[300, 250], [300, 600], [300, 481], [160, 600]])
+		.addSize([768, 400], [[300, 250], [300, 600], [300, 481]])
+		.addSize([470, 400], [])
+		.addSize([0, 0], [])
+		.build();
+
+	var mapping3 = googletag.sizeMapping()
+		.addSize([1200, 400], [[800, 440], [800, 260]])
+		.addSize([800, 260], [[800, 440], [800, 260]])
+		.addSize([0, 0], [])
+		.build();
+
+	var mapping4 = googletag.sizeMapping()
+		.addSize([1024, 400], [[300, 250]])
+		.addSize([768, 400], [[300, 250]])
+		.addSize([0, 0], [])
+		.build();
+
+	var mapping5 = googletag.sizeMapping()
+		.addSize([1024, 400], [])
+		.addSize([768, 400], [])
+		.addSize([470, 400], [])
+		.addSize([360, 400], [[300, 250]])
+		.addSize([0, 0], [[300, 250]])
+		.build();
+	var mapping6 = googletag.sizeMapping()
+		.addSize([1200, 400], [[800, 440], [800, 260], [800, 80]])
+		.addSize([1024, 260], [[800, 440], [800, 260], [650, 98]])
+		.addSize([360, 400], [400, 160])
+		.addSize([0, 0], [])
+		.build();
+	googletag.defineSlot('/1038259/SEL_Marquee', [[1920, 624], [1536, 499], [1440, 468], [1366, 444], [1280, 416], [970, 315], [970, 250], [728, 90], [1, 1]], 'div-gpt-ad-3191538-5')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping1)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_Sidebar-top', [[300,250],[300,600],[160,600]], 'div-gpt-ad-3191538-1')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping2)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_Sidebar-center', [[300,250],[300,600]], 'div-gpt-ad-3191538-2')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping2)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_Sidebar-lower', [[300,250],[300,600],[300,481]], 'div-gpt-ad-3191538-3')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping2)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_Leaderboard', [[970,250],[728,90]], 'div-gpt-ad-3191538-6')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping1)
+		.addService(googletag.pubads());
+	// googletag.defineSlot('/1038259/SEL_Post-text', [[650, 98], [800, 80], [400, 160]], 'div-gpt-ad-1693000027709-0')
+	// 	.setTargeting('SEL', ['PPC'])
+	// 	.defineSizeMapping(mapping6)
+	// 	.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_End-of-Story', [[800,440],[800,260]], 'div-gpt-ad-3191538-7')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping3)
+		.addService(googletag.pubads());
+	googletag.defineSlot('/1038259/SEL_Mobile', [[300,250], [1,1]], 'div-gpt-ad-3191538-8')
+		.setTargeting('SEL', ['PPC'])
+		.defineSizeMapping(mapping5)
+		.addService(googletag.pubads());
+	googletag.pubads().enableLazyLoad();
+	// googletag.pubads().enableSingleRequest();
+	googletag.pubads().disableInitialLoad();
+	googletag.enableServices();
+	
+	// //Check to see if the in-content ad slot has loaded
+	// googletag.pubads().addEventListener('slotOnload', (event) => {
+	// 	const slot = event.slot;
+	// 	// If slot has loaded, then add a line break below the ad slot
+	// 	if (slot.getSlotElementId() === 'div-gpt-ad-1693000027709-0') {
+	// 		//console.log('Post text ad slot has loaded');
+	// 		var postBreak = document.getElementById('post-break');
+	// 		postBreak.innerHTML = "<br />";
+	// 	}
+	// });
+});
+</script>
+
+		
+				
+		<!-- Cloudflare Turnstile captcha -->
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onloadTurnstileCallback" defer></script>
+		
+		<!-- ShareThis JS -->
+		<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=#{property?._id}&product=custom-share-buttons&source=platform" data-rocket-defer defer></script>
+		
+					<!-- ShareThis -->
+			<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6470c44940353a0019caefe2&product=sop' async='async'></script>
+		
+	<meta name="generator" content="WP Rocket 3.17.4" data-wpr-features="wpr_defer_js wpr_minify_js wpr_lazyload_images wpr_lazyload_iframes wpr_oci wpr_image_dimensions wpr_cache_webp wpr_minify_css wpr_desktop wpr_dns_prefetch wpr_preload_links" /></head>
+
+	<body class="template-article" itemscope itemtype="http://schema.org/NewsArticle">
+	
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCJZ3LV"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
+		<div  class="page-container main-outer-container">
+						
+<!-- START MARQUEE SPACE -->
+<!-- GPT AdSlot 5 for Ad unit 'SEL_Marquee' ### Size: [[1,1]] -->
+<style>
+@media screen and (min-width: 969px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+@media screen and (min-width: 1279px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+@media screen and (min-width: 1365px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+@media screen and (min-width: 1439px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+@media screen and (min-width: 1535px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+@media screen and (min-width: 1919px) {
+	#div-gpt-ad-3191538-5 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+}
+</style>
+<div id='div-gpt-ad-3191538-5'>
+
+</div>
+<!-- End AdSlot 5 -->
+<!-- END MARQUEE SPACE -->
+			
+			<header  class="bg-white outer-header-container sticky-top">
+	<nav class="navbar navbar-expand-xxl navbar-light shadow bg-white py-1">
+		<div class="container">
+			<a class="navbar-brand" href="/"><img class="nav-logo ms-3 ms-md-0 pb-1" width="150" height="24"  src="/wp-content/themes/tdm-editorial/img/logo/SEL-block-white.svg" alt="Search Engine Land"><p class="d-none">sel logo</p></a>
+			<div class="d-flex">
+				<a class="d-block d-xxl-none nav-email-icon me-3" href="/newsletters">
+					<span class="fas fa-2x fa-envelope pt-1" role="presentation"></span><span class="visually-hidden">Newsletters</span>
+				</a>
+								<button class="navbar-toggler me-3 me-md-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon" role="presentation"></span>
+				</button>
+							</div>
+					<div class="collapse navbar-collapse" id="navbarNav">
+				
+				<div class="menu-primary-menu-container"><ul id="menu-primary-menu" class="nav navbar-nav" itemscope itemtype="http://www.schema.org/SiteNavigationElement"><li  id="menu-item-351096" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children dropdown menu-item-351096 nav-item"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="dropdown-toggle nav-link" id="menu-item-dropdown-351096" data-bs-toggle="dropdown"><span itemprop="name">SEO</span></a>
+<ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-351096">
+	<li  id="menu-item-351126" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-351126 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo" class="dropdown-item"><span itemprop="name">> All SEO</span></a></li>
+	<li  id="menu-item-351111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351111 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/what-is-seo" class="dropdown-item"><span itemprop="name">> What Is SEO?</span></a></li>
+	<li  id="menu-item-388885" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388885 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/google/google-algorithm-updates" class="dropdown-item"><span itemprop="name">> Google algorithm updates</span></a></li>
+	<li  id="menu-item-351109" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-351109 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/ecommerce" class="dropdown-item"><span itemprop="name">> Ecommerce</span></a></li>
+	<li  id="menu-item-388739" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388739 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/content" class="dropdown-item"><span itemprop="name">> Content</span></a></li>
+	<li  id="menu-item-388741" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388741 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/enterprise-seo" class="dropdown-item"><span itemprop="name">> Enterprise</span></a></li>
+	<li  id="menu-item-433354" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-433354 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/international" class="dropdown-item"><span itemprop="name">> International</span></a></li>
+	<li  id="menu-item-388740" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388740 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/link-building" class="dropdown-item"><span itemprop="name">> Link building</span></a></li>
+	<li  id="menu-item-351098" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-351098 nav-item"><a itemprop="url" href="https://searchengineland.com/library/seo/local" class="dropdown-item"><span itemprop="name">> Local marketing</span></a></li>
+	<li  id="menu-item-351101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-351101 nav-item"><a itemprop="url" href="/seotable" class="dropdown-item"><span itemprop="name">> SEO Periodic Table</span></a></li>
+	<li  id="menu-item-437873" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-437873 nav-item"><a itemprop="url" href="https://searchengineland.com/library/generative-engine-optimization" class="dropdown-item"><span itemprop="name">> Artificial Intelligence Optimization (AIO)</span></a></li>
+	<li  id="menu-item-404104" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-404104 nav-item"><a itemprop="url" href="https://searchengineland.com/library" class="dropdown-item"><span itemprop="name">> All topics</span></a></li>
+</ul>
+</li>
+<li  id="menu-item-351097" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children dropdown active menu-item-351097 nav-item"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="dropdown-toggle nav-link" id="menu-item-dropdown-351097" data-bs-toggle="dropdown"><span itemprop="name">PPC</span></a>
+<ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-351097">
+	<li  id="menu-item-389025" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent active menu-item-389025 nav-item"><a itemprop="url" href="https://searchengineland.com/library/ppc" class="dropdown-item"><span itemprop="name">> All PPC</span></a></li>
+	<li  id="menu-item-351108" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351108 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/what-is-paid-search" class="dropdown-item"><span itemprop="name">> What is PPC?</span></a></li>
+	<li  id="menu-item-351127" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent active menu-item-351127 nav-item"><a itemprop="url" href="https://searchengineland.com/library/ppc" class="dropdown-item"><span itemprop="name">> Paid search</span></a></li>
+	<li  id="menu-item-351116" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-351116 nav-item"><a itemprop="url" href="https://searchengineland.com/library/ppc/paid-social" class="dropdown-item"><span itemprop="name">> Paid social</span></a></li>
+	<li  id="menu-item-388824" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388824 nav-item"><a itemprop="url" href="https://searchengineland.com/library/ppc/video" class="dropdown-item"><span itemprop="name">> Video</span></a></li>
+	<li  id="menu-item-351105" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351105 nav-item"><a itemprop="url" href="https://searchengineland.com/ppc-table" class="dropdown-item"><span itemprop="name">> PPC Periodic Table</span></a></li>
+	<li  id="menu-item-437874" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-437874 nav-item"><a itemprop="url" href="https://searchengineland.com/library/generative-engine-optimization" class="dropdown-item"><span itemprop="name">> Artificial Intelligence Optimization (AIO)</span></a></li>
+	<li  id="menu-item-404103" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-404103 nav-item"><a itemprop="url" href="https://searchengineland.com/library" class="dropdown-item"><span itemprop="name">> All topics</span></a></li>
+</ul>
+</li>
+<li  id="menu-item-351099" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children dropdown menu-item-351099 nav-item"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="dropdown-toggle nav-link" id="menu-item-dropdown-351099" data-bs-toggle="dropdown"><span itemprop="name">Platforms</span></a>
+<ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-351099">
+	<li  id="menu-item-388846" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent active menu-item-388846 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/google" class="dropdown-item"><span itemprop="name">> Google</span></a></li>
+	<li  id="menu-item-388853" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388853 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/amazon" class="dropdown-item"><span itemprop="name">> Amazon</span></a></li>
+	<li  id="menu-item-388886" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388886 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/apple-2" class="dropdown-item"><span itemprop="name">> Apple</span></a></li>
+	<li  id="menu-item-388857" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388857 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/duckduckgo" class="dropdown-item"><span itemprop="name">> DuckDuckGo</span></a></li>
+	<li  id="menu-item-389026" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-389026 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/meta" class="dropdown-item"><span itemprop="name">> Meta</span></a></li>
+	<li  id="menu-item-388863" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388863 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/microsoft" class="dropdown-item"><span itemprop="name">> Microsoft</span></a></li>
+	<li  id="menu-item-437869" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-437869 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/openai" class="dropdown-item"><span itemprop="name">> OpenAI</span></a></li>
+	<li  id="menu-item-388867" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388867 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/pinterest" class="dropdown-item"><span itemprop="name">> Pinterest</span></a></li>
+	<li  id="menu-item-437868" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-437868 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/reddit" class="dropdown-item"><span itemprop="name">> Reddit</span></a></li>
+	<li  id="menu-item-388869" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388869 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/shopify" class="dropdown-item"><span itemprop="name">> Shopify</span></a></li>
+	<li  id="menu-item-388870" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388870 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/snapchat" class="dropdown-item"><span itemprop="name">> Snapchat</span></a></li>
+	<li  id="menu-item-388871" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388871 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/tiktok" class="dropdown-item"><span itemprop="name">> TikTok</span></a></li>
+	<li  id="menu-item-388872" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388872 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/twitter" class="dropdown-item"><span itemprop="name">> Twitter</span></a></li>
+	<li  id="menu-item-388873" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388873 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/wordpress" class="dropdown-item"><span itemprop="name">> WordPress</span></a></li>
+	<li  id="menu-item-388874" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-388874 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms/google/google-youtube-video" class="dropdown-item"><span itemprop="name">> YouTube</span></a></li>
+	<li  id="menu-item-388884" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor menu-item-388884 nav-item"><a itemprop="url" href="https://searchengineland.com/library/platforms" class="dropdown-item"><span itemprop="name">> All library</span></a></li>
+</ul>
+</li>
+<li  id="menu-item-449843" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-449843 nav-item"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="dropdown-toggle nav-link" id="menu-item-dropdown-449843" data-bs-toggle="dropdown"><span itemprop="name">Guides</span></a>
+<ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-449843">
+	<li  id="menu-item-449850" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449850 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/sitemap" class="dropdown-item"><span itemprop="name">> Your guide to sitemaps</span></a></li>
+	<li  id="menu-item-449973" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449973 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/core-web-vitals" class="dropdown-item"><span itemprop="name">> Core Web Vitals: Measure &#038; improve UX</span></a></li>
+	<li  id="menu-item-449849" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449849 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/search-intent-seo" class="dropdown-item"><span itemprop="name">> What is search intent in SEO?</span></a></li>
+	<li  id="menu-item-449848" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449848 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/content-marketing-strategy" class="dropdown-item"><span itemprop="name">> Content marketing strategy</span></a></li>
+	<li  id="menu-item-449847" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449847 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/google-business-profile" class="dropdown-item"><span itemprop="name">> How to set up and optimize your Google Business Profile</span></a></li>
+	<li  id="menu-item-449844" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449844 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/query-deserves-freshness-qdf" class="dropdown-item"><span itemprop="name">> Query Deserves Freshness</span></a></li>
+	<li  id="menu-item-449845" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449845 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/conversion-rate" class="dropdown-item"><span itemprop="name">> Conversion rate</span></a></li>
+	<li  id="menu-item-449846" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449846 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/types-of-backlinks" class="dropdown-item"><span itemprop="name">> Types of backlinks</span></a></li>
+	<li  id="menu-item-449851" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449851 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/digital-marketing-strategies" class="dropdown-item"><span itemprop="name">> Digital marketing strategies</span></a></li>
+	<li  id="menu-item-449926" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449926 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/ppc-tracking" class="dropdown-item"><span itemprop="name">> PPC tracking for beginners</span></a></li>
+	<li  id="menu-item-449996" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449996 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/local-seo-in-2025" class="dropdown-item"><span itemprop="name">> Local SEO predictions 2025</span></a></li>
+	<li  id="menu-item-449997" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-449997 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/seos-are-quiet-quitting-x" class="dropdown-item"><span itemprop="name">> Quiet quitting X? Where next?</span></a></li>
+	<li  id="menu-item-450246" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450246 nav-item"><a itemprop="url" href="https://searchengineland.com/guide/best-ppc-keyword-tools" class="dropdown-item"><span itemprop="name">> Best PPC Keyword Tools</span></a></li>
+</ul>
+</li>
+<li  id="menu-item-450237" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-450237 nav-item"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="dropdown-toggle nav-link" id="menu-item-dropdown-450237" data-bs-toggle="dropdown"><span itemprop="name">Tools</span></a>
+<ul class="dropdown-menu" aria-labelledby="menu-item-dropdown-450237">
+	<li  id="menu-item-450239" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450239 nav-item"><a itemprop="url" href="https://searchengineland.com/tools/keyword-difficulty-checker-tool" class="dropdown-item"><span itemprop="name">> Keyword Difficulty Checker</span></a></li>
+	<li  id="menu-item-450240" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450240 nav-item"><a itemprop="url" href="https://searchengineland.com/tools/keyword-rank-checker" class="dropdown-item"><span itemprop="name">> Keyword Rank Checker</span></a></li>
+	<li  id="menu-item-450242" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450242 nav-item"><a itemprop="url" href="https://searchengineland.com/tools/keyword-generator" class="dropdown-item"><span itemprop="name">> Keyword Generator</span></a></li>
+	<li  id="menu-item-450238" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450238 nav-item"><a itemprop="url" href="https://searchengineland.com/tools/backlink-research" class="dropdown-item"><span itemprop="name">> Backlink Checker</span></a></li>
+	<li  id="menu-item-450241" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450241 nav-item"><a itemprop="url" href="https://searchengineland.com/tools/website-traffic-checker" class="dropdown-item"><span itemprop="name">> Website Traffic Checker</span></a></li>
+	<li  id="menu-item-450243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450243 nav-item"><a itemprop="url" href="https://searchengineland.com/searchbot" class="dropdown-item"><span itemprop="name">> SearchBot</span></a></li>
+	<li  id="menu-item-450244" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450244 nav-item"><a itemprop="url" href="https://searchengineland.com/searchbot/personas" class="dropdown-item"><span itemprop="name">> SearchBot Personas</span></a></li>
+	<li  id="menu-item-450245" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-450245 nav-item"><a itemprop="url" href="https://searchengineland.com/searchbot/image-generator" class="dropdown-item"><span itemprop="name">> SearchBot Image Generator</span></a></li>
+</ul>
+</li>
+<li  id="menu-item-351119" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-351119 nav-item"><a itemprop="url" href="https://searchengineland.com/smx/master-classes/" class="nav-link"><span itemprop="name">SMX</span></a></li>
+<li  id="menu-item-351095" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351095 nav-item"><a itemprop="url" href="https://searchengineland.com/webinars" class="nav-link"><span itemprop="name">Webinars</span></a></li>
+<li  id="menu-item-351094" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351094 nav-item"><a itemprop="url" href="https://searchengineland.com/intelligence-reports" class="nav-link"><span itemprop="name">Intelligence reports</span></a></li>
+<li  id="menu-item-351093" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-351093 nav-item"><a itemprop="url" href="https://searchengineland.com/white-papers" class="nav-link"><span itemprop="name">White papers</span></a></li>
+<li  id="menu-item-391970" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-391970 nav-item"><a itemprop="url" href="https://searchengineland.com/newsletters" class="nav-link"><span itemprop="name">Newsletter</span></a></li>
+</ul></div>				
+								
+								<div class="ms-xl-auto">
+					<a class="btn btn-navsemrush px-4" href="https://searchengineland.com/semrush-offer?content=Nav" type="button">Try Semrush</a>
+				</div>
+								
+			</div>
+				</div>
+	</nav>
+</header>			
+						
+						
+						
+			
+			<main  class="main-container-wrap">
+								<div  class="container-fluid">
+								
+					<!-- START LEADERBOARD SPACE -->
+<div class="d-flex justify-content-center">
+	<div id="leaderboard" class="d-none d-md-block">
+		<div class="advertise-leaderboard advertise-728x90">
+			<div id='div-gpt-ad-3191538-6'>
+				<!-- <script>
+					googletag.cmd.push(function() { googletag.display('div-gpt-ad-3191538-6'); });
+				</script> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="adSpacer"></div>
+<!-- END LEADERBOARD SPACE -->
+
+<div class="content mt-2 mx-auto">
+	<div class="row">
+		<div class="col-12 col-md-7 col-lg-8">
+			
+			<article class="article-content">
+
+				<div class="story-box">
+					<div class="channel">
+						<p id="breadcrumbs"><span><span><a href="https://searchengineland.com/">Search Engine Land</a></span> » <span><a href="https://searchengineland.com/library/ppc">PPC</a></span> » <span class="breadcrumb_last" aria-current="page">Google Ads plans major AI Push in 2025, reshaping search marketing</span></span></p>					</div>
+
+				
+					<h1 itemprop="headline">Google Ads plans major AI Push in 2025, reshaping search marketing</h1>
+
+					<h2 class="subhead" itemprop="alternativeHeadline">Google's VP of global search ads reveals that AI will drive a transformation of advertising in 2025 even more significant than the mobile revolution.</h2>
+					<div class="dateline">
+						<a href="https://searchengineland.com/author/anu-adegbola" title="Posts by Anu Adegbola" rel="author">Anu Adegbola</a> on January 2, 2025 at 4:57 pm | Reading time: 2 minutes 					</div>
+
+					<!-- ShareThis BEGIN -->
+<div id="st-1">
+	<div class="st-btn st-first st-custom-button" data-network="facebook"><i class="fab fa-facebook-f"></i></div> 
+	<div class="st-btn st-custom-button" data-network="twitter"><i class="fab fa-x-twitter"></i></div> 
+	<div class="st-btn st-custom-button" data-network="email"><i class="fa fa-envelope"></i></div> 
+	<div class="st-btn st-custom-button" data-network="linkedin"><i class="fab fa-linkedin-in"></i></div> 
+	<div class="st-btn st-custom-button" data-network="reddit"><i class="fab fa-reddit-alien"></i></div> 
+		<div class="st-btn st-last st-custom-button" data-network="searchbot" data-bs-toggle="modal" data-bs-target="#SearchBotModal"><!--<i class="fa fa-robot" data-bs-toggle="modal" data-bs-target="#SearchBot"></i>-->Chat with SearchBot</div>
+	</div>
+<!-- ShareThis END -->
+	
+<!-- SearchBot modal-->
+<div class="modal modal-lg fade" id="SearchBotModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<p class="modal-title fs-5" id="exampleModalLabel">Chat with SearchBot</p>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<style>
+    /* Styling the scrollbar track within the chatbot window only */
+    .wpaicg-chat-shortcode ::-webkit-scrollbar-track {
+        background-color: #f2f2f2; /* Light grey track */
+        border-radius: 10px;
+    }
+
+    /* Styling the scrollbar thumb within the chatbot window only */
+    .wpaicg-chat-shortcode ::-webkit-scrollbar-thumb {
+        background-color: #888; /* Dark grey thumb */
+        border-radius: 10px;
+        border: 3px solid #f2f2f2; /* White border around thumb */
+    }
+
+    /* Styling the scrollbar thumb on hover within the chatbot window only */
+    .wpaicg-chat-shortcode ::-webkit-scrollbar-thumb:hover {
+        background-color: #555; /* Black thumb on hover */
+    }
+
+    /* Setting the width of the scrollbar within the chatbot window only */
+    .wpaicg-chat-shortcode ::-webkit-scrollbar {
+        width: 8px; /* Narrow width */
+        height: 8px; /* For horizontal scrolling */
+    }
+    .wpaicg-conversation-starters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+        justify-content: center;
+        font-size: 16px;
+        visibility: hidden;
+    }
+
+    .wpaicg-conversation-starter {
+        background-color: #e5e5e5;
+        border: none;
+        border-radius: 20px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #000000;
+        transition: background-color 0.3s ease, transform 0.5s ease-out, opacity 0.5s ease-out;
+        display: flex;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .wpaicg-conversation-starter:hover {
+        filter: brightness(90%);
+    }
+</style>
+<style>
+    .wpaicg-img-spinner {
+        display: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .wpaicg-thumbnail-placeholder {
+        display: none;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+    }
+</style>
+
+<style>
+    .blinking-cursor {
+    font-weight: 100;
+    color: #ffffff; /* or the color you want */
+    animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        from, to { color: transparent }
+        50% { color: inherit }
+    }
+</style>
+
+<style>
+    .wpaicg-chat-shortcode {
+        width: 100%;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        overflow: hidden;
+        border: none;
+        transition: box-shadow 0.3s ease;
+        margin-right: 20px; /* Adjust as needed */
+    }
+    .wpaicg-chat-shortcode:hover {
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover for interaction feedback */
+    }
+    .wpaicg-chat-shortcode-content {
+        overflow-y: auto;
+        flex-grow: 1;
+        padding: 15px; /* Increased padding for more space around messages */
+    }
+    .wpaicg-chat-shortcode-content ul {
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .log_notification {
+        background: #f2f2f2;
+        color: #000000;
+        font-size: 11px;
+        font-style: italic;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .wpaicg-chat-shortcode-footer {
+        color: #495057;
+        background: #ffffff;
+        font-size: 0.75rem;
+        padding: 12px 20px;
+        border-top: 1px solid #ffffff;
+    }
+    .wpaicg-chat-shortcode-footer a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .wpaicg-chat-shortcode-content ul .wpaicg-user-message {
+        margin-left: auto; /* This pushes the user messages to the right */
+        background: #e5e5e5;
+        color: #000000;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        width: fit-content;
+    }
+    .wpaicg-chat-shortcode-content ul .wpaicg-ai-message {
+        color: #000000;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        width: fit-content;
+    }
+
+    .wpaicg-chat-shortcode .wpaicg-bot-thinking {
+        bottom: 0;
+        font-size: 11px;
+        color: #000000;
+        display: none;
+    }
+
+    .wpaicg-chat-message-error {
+        color: #f00;
+    }
+
+    .wpaicg-jumping-dots span {
+        position: relative;
+        bottom: 0;
+        -webkit-animation: wpaicg-jump 1500ms infinite;
+        animation: wpaicg-jump 2s infinite;
+    }
+    .wpaicg-jumping-dots .wpaicg-dot-1 {
+        -webkit-animation-delay: 200ms;
+        animation-delay: 200ms;
+    }
+    .wpaicg-jumping-dots .wpaicg-dot-2 {
+        -webkit-animation-delay: 400ms;
+        animation-delay: 400ms;
+    }
+    .wpaicg-jumping-dots .wpaicg-dot-3 {
+        -webkit-animation-delay: 600ms;
+        animation-delay: 600ms;
+    }
+
+    .wpaicg-chat-shortcode-type {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        color: #55afd4;
+    }
+
+    .wpaicg-chat-shortcode-send {
+        color: #55afd4;
+    }
+
+    textarea.wpaicg-chat-shortcode-typing {
+        flex: 1;
+        border: 1px solid #55afd4;
+        background-color: #ffffff;
+        resize: vertical;
+        border-radius: 10px;
+        line-height: 90px;
+        padding-left: 1em;
+        color: #495057;
+        font-size: 16px;
+    }
+
+    textarea.auto-expand {
+        overflow: hidden; /* Prevents scrollbar flash during size adjustment */
+        transition: box-shadow 0.5s ease-in-out;
+        line-height: 2;
+    }
+
+    textarea.auto-expand.resizing {
+        transition: box-shadow 0.5s ease-in-out;
+        box-shadow: 0 0 12px rgba(81, 203, 238, 0.8);
+        line-height: 2;
+    }
+
+
+    textarea.auto-expand:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        line-height: 2;
+    }
+
+    textarea.wpaicg-chat-shortcode-typing::placeholder {
+        color: #495057;
+    }
+
+    @-webkit-keyframes wpaicg-jump {
+        0%   {bottom: 0px;}
+        20%  {bottom: 5px;}
+        40%  {bottom: 0px;}
+    }
+
+    @keyframes wpaicg-jump {
+        0%   {bottom: 0px;}
+        20%  {bottom: 5px;}
+        40%  {bottom: 0px;}
+    }
+    /* Adjustments for screens that are 768px wide or less (typical for tablets and smartphones) */
+    @media (max-width: 768px) {
+        .wpaicg-chat-shortcode {
+            /* Adjust the width and right margin for smaller screens */
+            width: auto; /* This makes the chat window adapt to the screen size */
+            margin-right: 10px; /* Smaller margin for smaller devices */
+            margin-left: 10px; /* Add some space on the left as well */
+        }
+    }
+
+    /* Further adjustments for very small screens, like iPhones */
+    @media (max-width: 480px) {
+        .wpaicg-chat-shortcode {
+            /* You might want even smaller margins here */
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+    }
+    .wpaicg-chat-shortcode .wpaicg-mic-icon {
+        color: #000000;
+    }
+    .wpaicg-chat-shortcode .wpaicg-img-icon {
+        color: #55afd4;
+    }
+    .wpaicg-chat-shortcode .wpaicg-pdf-icon {
+        color: #000000;
+    }
+    .wpaicg-chat-shortcode .wpaicg-pdf-remove {
+        color: #000000;
+        font-size: 33px;
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        line-height: unset;
+        font-family: Arial, serif;
+        border-radius: 50%;
+        font-weight: normal;
+        padding: 0;
+    }
+    .wpaicg-chat-shortcode .wpaicg-pdf-loading {
+        border-color: #000000;
+        border-bottom-color: transparent;
+    }
+    .wpaicg-chat-shortcode .wpaicg-mic-icon.wpaicg-recording {
+        color: #000000;
+    }
+    .wpaicg_chat_additions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 20px;
+    }
+
+    .wpaicg-chat-shortcode .wpaicg-chatbox-action-bar {
+        position: absolute;
+        top: 0; /* Position it at the top of the chat window */
+        right: 0;
+        left: 0; /* Ensure it spans the full width */
+        height: 40px;
+        padding: 0 10px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        color: #000000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: background-color 0.3s ease;
+        min-height: 40px;
+    }
+
+    .wpaicg-icon-container {
+        position: relative;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+
+    .wpaicg-copy-button, .wpaicg-thumbs-up-button, .wpaicg-thumbs-down-button {
+        position: absolute;
+        bottom: -25px;
+        display: inline-block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        outline: none;
+    }
+
+    .wpaicg-copy-button {
+        left: 10px;
+    }
+
+    .wpaicg-thumbs-up-button {
+        left: 40px;
+    }
+
+    .wpaicg-thumbs-down-button {
+        left: 70px;
+    }
+
+    /* Keep buttons visible when hovering over either the container or the buttons */
+    .wpaicg-icon-container:hover .wpaicg-copy-button,
+    .wpaicg-icon-container:hover .wpaicg-thumbs-up-button,
+    .wpaicg-icon-container:hover .wpaicg-thumbs-down-button,
+    .wpaicg-copy-button:hover,
+    .wpaicg-thumbs-up-button:hover,
+    .wpaicg-thumbs-down-button:hover {
+        opacity: 1;
+        visibility: visible;
+        background-color: transparent !important;
+        color: inherit !important;
+    }
+    /* Ensure no hover color change for links inside icon containers */
+    .wpaicg-icon-container a:hover {
+        color: inherit !important;
+        background-color: transparent !important;
+        text-decoration: none !important;
+    }
+
+    .wpaicg-copy-button img,
+    .wpaicg-thumbs-up-button img,
+    .wpaicg-thumbs-down-button img {
+        width: 16px;
+        height: 16px;
+        filter: none; /* Ensure no filter (like grayscale or color change) is applied */
+        color: inherit; /* Inherit the current color from the parent */
+        transition: none; /* Remove any transitions that might change appearance on hover */
+    }
+
+    .wpaicg-copy-button img:hover,
+    .wpaicg-thumbs-up-button img:hover,
+    .wpaicg-thumbs-down-button img:hover {
+        filter: none; /* Ensure no hover filter is applied */
+        color: inherit; /* Keep the color consistent on hover */
+    }
+
+    .wpaicg-copy-button,
+    .wpaicg-thumbs-up-button,
+    .wpaicg-thumbs-down-button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        color: inherit; /* Keep the color of the button consistent */
+        outline: none; /* Remove default browser outline on focus */
+    }
+
+    .wpaicg-copy-button:hover,
+    .wpaicg-thumbs-up-button:hover,
+    .wpaicg-thumbs-down-button:hover {
+        background: none; /* Remove any background color change on hover */
+        color: inherit; /* Keep the color the same on hover */
+    }
+    /* Remove outline (focus border) on buttons */
+    .wpaicg-copy-button:focus,
+    .wpaicg-thumbs-up-button:focus,
+    .wpaicg-thumbs-down-button:focus {
+        outline: none;
+    }
+    .wpaicg-feedback-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px; /* Added padding to prevent edge cutoff */
+    }
+
+    .wpaicg-feedback-modal {
+        background-color: #fff;
+        color: #333;
+        padding: 20px;
+        border-radius: 10px; /* Slightly increased border-radius for better aesthetics */
+        width: 100%;
+        max-width: 400px; /* Max width for larger screens */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Increased shadow for better visibility */
+        text-align: center;
+        position: relative; /* To position the close button */
+        margin: 0 auto; /* Centering the modal horizontally */
+        box-sizing: border-box; /* Ensures padding is included in width */
+    }
+
+    .wpaicg-feedback-modal h2 {
+        margin-top: 0;
+    }
+
+    .wpaicg-feedback-textarea {
+        width: 100%;
+        height: 80px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    .wpaicg-feedback-modal-buttons {
+        display: flex;
+        justify-content: flex-end; /* Aligns the submit button to the right */
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .wpaicg-feedback-message {
+        flex-grow: 1; /* Takes up available space on the left */
+        margin-right: 10px;
+        text-align: left; /* Ensures the text aligns left */
+    }
+
+    .wpaicg-feedback-modal-submit {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        margin-left: 10px; /* Adds space between the button and the message */
+    }
+
+    .wpaicg-feedback-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #333;
+        cursor: pointer;
+    }
+
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        .wpaicg-feedback-modal {
+            max-width: 95%; /* Reduce max width on smaller screens to ensure it doesn't touch the edges */
+            padding: 15px;
+            margin: 0 auto; /* Ensure modal is centered */
+        }
+        .wpaicg-feedback-modal-submit {
+            padding: 8px 16px; /* Slightly smaller padding on mobile */
+        }
+
+        .wpaicg-feedback-textarea {
+            height: 60px; /* Reduce height on mobile */
+        }
+    }
+
+    /* Button Styles */
+    .wpaicg-chatbox-download-btn,
+    .wpaicg-chatbox-clear-btn,
+    .wpaicg-chatbox-fullscreen,
+    .wpaicg-chatbox-audio-btn,
+    .wpaicg-chatbox-close-btn {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center content */
+        margin: 0 5px; /* Adjust spacing between buttons */
+        transition: background-color 0.3s ease; /* Smooth transition for interactions */
+    }
+
+    /* SVG Icon Adjustments */
+    .wpaicg-chatbox-download-btn svg,
+    .wpaicg-chatbox-clear-btn svg,
+    .wpaicg-chatbox-fullscreen svg,
+    .wpaicg-chatbox-audio-btn,
+    .wpaicg-chatbox-close-btn svg {
+        fill: currentColor;
+        height: 16px; /* Adjust size for visibility */
+        width: 16px;
+    }
+    /* Hover States for Button Interactions */
+    .wpaicg-chatbox-download-btn:hover,
+    .wpaicg-chatbox-clear-btn:hover,
+    .wpaicg-chatbox-fullscreen:hover,
+    .wpaicg-chatbox-close-btn:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Slight highlight on hover */
+    }
+    .wpaicg-chatbox-fullscreen svg.wpaicg-exit-fullscreen {
+        display: none;
+        fill: none;
+        height: 16px;
+        width: 16px;
+    }
+    /* Fullscreen Button SVG Paths */
+    .wpaicg-chatbox-fullscreen svg.wpaicg-exit-fullscreen path,
+    .wpaicg-chatbox-fullscreen svg.wpaicg-active-fullscreen path {
+        fill: currentColor; /* Ensure visibility */
+    }
+    .wpaicg-chatbox-fullscreen svg.wpaicg-active-fullscreen {
+        fill: none;
+        height: 16px;
+        width: 16px;
+    }
+
+    /* Adjusting visibility for fullscreen icons */
+    .wpaicg-chatbox-fullscreen.wpaicg-fullscreen-box svg.wpaicg-active-fullscreen {
+        display: none; /* Hide when in fullscreen */
+    }
+    .wpaicg-chatbox-fullscreen.wpaicg-fullscreen-box svg.wpaicg-exit-fullscreen {
+        display: block; /* Show exit icon in fullscreen mode */
+    }
+    .wpaicg-fullscreened {
+        border-radius: 0;
+        border: none; /* Remove border in fullscreen */
+    }
+    .wpaicg-fullscreened .wpaicg-chatbox-action-bar {
+        top: 0;
+        z-index: 99;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 3px;
+    }
+
+    .wpaicg-chat-shortcode .wpaicg-chatbox-action-bar {
+        position: relative;
+        top: 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+</style>
+<div class="wpaicg-chat-shortcode"
+     data-user-bg-color="#e5e5e5"
+     data-color="#000000"
+     data-fontsize="16"
+     data-ai-bg-color="#ffffff"
+     data-nonce="d0d9beb324"
+     data-post-id="450029"
+     data-url="https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029"
+     data-bot-id="0"
+     data-width="100%"
+     data-height="600px"
+     data-footer="true"
+     data-has-bar="true"
+     data-speech=""
+     data-voice=""
+     data-elevenlabs-model=""
+     data-voice-error=""
+     data-typewriter-effect = ""
+     data-typewriter-speed="1"
+     data-text_height="100"
+     data-text_rounded="10"
+     data-chat_rounded="10"
+     data-voice_service=""
+     data-voice_language="en-US"
+     data-voice_name="en-US-Studio-M"
+     data-voice_device=""
+     data-voice_speed="1"
+     data-voice_pitch="0"
+     data-openai_model="tts-1"
+     data-openai_voice="alloy"
+     data-openai_output_format="mp3"
+     data-openai_voice_speed="1.0"
+     data-openai_stream_nav="0"
+     data-autoload_chat_conversations="0"
+     data-copy_btn=""
+     data-feedback_btn = ""
+     data-feedback_title = "Feedback"
+     data-feedback_message = "Please provide details: (optional)"
+     data-feedback_success = "Thank you for your feedback!"
+     data-user-voice-control = ""
+     data-voice-muted-by-default=""
+     data-memory-limit = "10"
+     data-lead-collection = "0"
+     data-lead-title = "Let us know how to contact you"
+     data-lead-name = "Name"
+     data-enable-lead-name = "1"
+     data-lead-email = "Email"
+     data-enable-lead-email = "1"
+     data-lead-phone = "Phone"
+     data-enable-lead-phone = "1"
+     data-bg_text_field = "#ffffff"
+     data-bg_text_field_font_color = "#495057"
+     data-bg_text_field_border_color = "#55afd4"
+     data-assistant-enabled="false"
+     data-type="shortcode"
+>
+    <div class="wpaicg-chatbox-action-bar">
+                    <span class="wpaicg-chatbox-download-btn" data-type="shortcode" role="button" aria-label="Download" tabindex="0">
+                <svg role="presentation" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"  xml:space="preserve"><path class="st0" d="M243.591,309.362c3.272,4.317,7.678,6.692,12.409,6.692c4.73,0,9.136-2.376,12.409-6.689l89.594-118.094 c3.348-4.414,4.274-8.692,2.611-12.042c-1.666-3.35-5.631-5.198-11.168-5.198H315.14c-9.288,0-16.844-7.554-16.844-16.84V59.777 c0-11.04-8.983-20.027-20.024-20.027h-44.546c-11.04,0-20.022,8.987-20.022,20.027v97.415c0,9.286-7.556,16.84-16.844,16.84 h-34.305c-5.538,0-9.503,1.848-11.168,5.198c-1.665,3.35-0.738,7.628,2.609,12.046L243.591,309.362z"/><path class="st0" d="M445.218,294.16v111.304H66.782V294.16H0v152.648c0,14.03,11.413,25.443,25.441,25.443h461.118 c14.028,0,25.441-11.413,25.441-25.443V294.16H445.218z"/></svg>
+            </span>
+                            <span data-type="shortcode" class="wpaicg-chatbox-fullscreen" role="button" aria-label="Fullscreen" tabindex="0">
+                <svg role="presentation" class="wpaicg-active-fullscreen" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 15H15V10H13.2V13.2H10V15ZM6 15V13.2H2.8V10H1V15H6ZM10 2.8H12.375H13.2V6H15V1H10V2.8ZM6 1V2.8H2.8V6H1V1H6Z"/></svg>
+                <svg role="presentation" class="wpaicg-exit-fullscreen" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 6L6 6L6 1L4.2 1L4.2 4.2L1 4.2L1 6Z"/><path d="M15 10L10 10L10 15L11.8 15L11.8 11.8L15 11.8L15 10Z"/><path d="M6 15L6 10L1 10L1 11.8L4.2 11.8L4.2 15L6 15Z"/><path d="M10 1L10 6L15 6L15 4.2L11.8 4.2L11.8 1L10 1Z"/></svg>
+            </span>
+                            <span class="wpaicg-chatbox-clear-btn" data-type="shortcode" role="button" aria-label="Clear Chat" tabindex="0">
+            <svg role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg>
+    </span>
+        
+    </div>
+<div class="wpaicg-chat-shortcode-content">
+    <ul class="wpaicg-chat-shortcode-messages">
+                    <li class="log_notification">
+                <p>
+                <span class="wpaicg-chat-message">
+                    Please note that your conversations will be recorded.                </span>
+                </p>
+            </li>
+                <li class="wpaicg-ai-message" style="color: #000000; font-size: 16px; background-color: #ffffff">
+            <span class="wpaicg-chat-message">
+                I am trained with Search Engine Land content. Ask me anything!            </span>
+        </li>
+    </ul>
+</div>
+<!-- Conversation Starters -->
+<span class="wpaicg-bot-thinking" style="padding-left: 20px;color: #000000;">SearchBot is thinking&nbsp;<span class="wpaicg-jumping-dots"><span class="wpaicg-dot-1">.</span><span class="wpaicg-dot-2">.</span><span class="wpaicg-dot-3">.</span></span></span>
+<div class="wpaicg-chat-shortcode-type">
+    <textarea type="text" name="wpaicg-chat-shortcode-typing" class="auto-expand wpaicg-chat-shortcode-typing" placeholder="Message SearchBot..."></textarea>
+    <div class="wpaicg_chat_additions">
+        <span class="wpaicg-thumbnail-placeholder"></span>
+        <span class="wpaicg-mic-icon" data-type="shortcode" role="button" aria-label="Mic" tabindex="0" style="display:none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M176 0C123 0 80 43 80 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM48 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H104c-13.3 0-24 10.7-24 24s10.7 24 24 24h72 72c13.3 0 24-10.7 24-24s-10.7-24-24-24H200V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>
+        </span>
+        <span class="wpaicg-img-icon" data-type="shortcode" style="display:none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <input type="file" id="imageUpload" class="wpaicg-img-file" accept="image/png, image/jpeg, image/webp, image/gif" style="display: none;" />
+            <!-- add nonce -->
+            <input type="hidden" id="wpaicg-img-nonce" value="5e242ed35e" />
+        </span>
+        <span class="wpaicg-img-spinner"></span>
+                <span class="wpaicg-pdf-icon" data-type="shortcode" style="display:none">
+            <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"  xml:space="preserve"><path class="st0" d="M378.413,0H208.297h-13.182L185.8,9.314L57.02,138.102l-9.314,9.314v13.176v265.514 c0,47.36,38.528,85.895,85.896,85.895h244.811c47.353,0,85.881-38.535,85.881-85.895V85.896C464.294,38.528,425.766,0,378.413,0z M432.497,426.105c0,29.877-24.214,54.091-54.084,54.091H133.602c-29.884,0-54.098-24.214-54.098-54.091V160.591h83.716 c24.885,0,45.077-20.178,45.077-45.07V31.804h170.116c29.87,0,54.084,24.214,54.084,54.092V426.105z"/><path class="st0" d="M171.947,252.785h-28.529c-5.432,0-8.686,3.533-8.686,8.825v73.754c0,6.388,4.204,10.599,10.041,10.599 c5.711,0,9.914-4.21,9.914-10.599v-22.406c0-0.545,0.279-0.817,0.824-0.817h16.436c20.095,0,32.188-12.226,32.188-29.612 C204.136,264.871,192.182,252.785,171.947,252.785z M170.719,294.888h-15.208c-0.545,0-0.824-0.272-0.824-0.81v-23.23 c0-0.545,0.279-0.816,0.824-0.816h15.208c8.42,0,13.447,5.027,13.447,12.498C184.167,290,179.139,294.888,170.719,294.888z"/><path class="st0" d="M250.191,252.785h-21.868c-5.432,0-8.686,3.533-8.686,8.825v74.843c0,5.3,3.253,8.693,8.686,8.693h21.868 c19.69,0,31.923-6.249,36.81-21.324c1.76-5.3,2.723-11.681,2.723-24.857c0-13.175-0.964-19.557-2.723-24.856 C282.113,259.034,269.881,252.785,250.191,252.785z M267.856,316.896c-2.318,7.331-8.965,10.459-18.21,10.459h-9.23 c-0.545,0-0.824-0.272-0.824-0.816v-55.146c0-0.545,0.279-0.817,0.824-0.817h9.23c9.245,0,15.892,3.128,18.21,10.46 c0.95,3.128,1.62,8.56,1.62,17.93C269.476,308.336,268.805,313.768,267.856,316.896z"/><path class="st0" d="M361.167,252.785h-44.812c-5.432,0-8.7,3.533-8.7,8.825v73.754c0,6.388,4.218,10.599,10.055,10.599 c5.697,0,9.914-4.21,9.914-10.599v-26.351c0-0.538,0.265-0.81,0.81-0.81h26.086c5.837,0,9.23-3.532,9.23-8.56 c0-5.028-3.393-8.553-9.23-8.553h-26.086c-0.545,0-0.81-0.272-0.81-0.817v-19.425c0-0.545,0.265-0.816,0.81-0.816h32.733 c5.572,0,9.245-3.666,9.245-8.553C370.411,256.45,366.738,252.785,361.167,252.785z"/></svg>
+        </span>
+            <span class="wpaicg-pdf-loading" style="display: none"></span>
+            <span data-type="shortcode" alt="Clear" title="Clear" class="wpaicg-pdf-remove" style="display: none">&times;</span>
+            <input data-type="shortcode" data-limit="120" type="file" accept="application/pdf" class="wpaicg-pdf-file" style="display: none">
+                        <span class="wpaicg-chat-shortcode-send" role="button" aria-label="Send" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </span>
+            </div>
+</div>
+    <div class="wpaicg-chat-shortcode-footer">
+        Powered by Search Engine Land (and love)    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textareas = document.querySelectorAll('.auto-expand');
+        textareas.forEach(textarea => {
+            function adjustHeight() {
+                    // Store the current scroll position to restore it after resizing
+                    var scrollLeft = window.pageXOffset || (document.documentElement || document.body.parentNode || document.body).scrollLeft;
+                    var scrollTop  = window.pageYOffset || (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
+                    // Add the resizing class to trigger the pulsing effect
+                    textarea.classList.add('resizing');
+
+                    // Temporarily shrink the textarea to potentially reduce its size
+                    textarea.style.height = 'auto';
+                    // Adjust the height based on the current content, allowing it to grow or shrink
+                    textarea.style.height = textarea.scrollHeight + 'px';
+
+                    // Restore the scroll position after resizing the textarea
+                    window.scrollTo(scrollLeft, scrollTop);
+
+                    // Remove the resizing class after a delay to show the pulsing effect
+                    setTimeout(() => {
+                        textarea.classList.remove('resizing');
+                    }, 500); // Adjust this time to match your CSS animation duration
+                }
+
+            // Bind the adjustHeight function to the input event
+            textarea.addEventListener('input', adjustHeight);
+
+            // Perform an initial adjustment in case the textarea is pre-populated
+            if (textarea.value.length) {
+                adjustHeight();
+            }
+        });
+    });
+</script>			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"><i class="fas fa-times text-danger"></i>&nbsp; Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End SearchBot modal-->
+					<div itemprop="articleBody" class="body-content pt-3">
+
+													<div class="d-sm-none">
+															</div>
+						
+						<div class="bialty-container">
+<p>Google Ads is preparing for what executives call a &ldquo;seismic shift&rdquo; in consumer search behavior, with AI playing a central role in transforming how users discover information and interact with businesses.</p>
+
+
+
+<p>The transformation represents a bigger change than the mobile revolution, according to Brendon Kraham, VP of global search ads and commerce, signaling a fundamental shift in how advertisers will need to approach digital marketing.</p>
+
+
+
+<p><strong>Key changes coming. </strong>Google is focusing on three major areas:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Evolution of search behavior beyond keywords toward multimodal experiences</li>
+
+
+
+<li>AI-powered creative tools for marketers</li>
+
+
+
+<li>Enhanced measurement capabilities across all channels</li>
+</ul>
+
+
+
+<p><strong>Why we care.</strong> Google&rsquo;s AI-driven transformation of search and advertising in 2025 could fundamentally change how consumers discover products and services, requiring you to adapt strategies quickly or risk falling behind competitors who will prioritise mastering the new tools and capabilities. </p>
+
+
+
+<p>It will be essential to keep testing how AI should work for your campaigns, even though you may initially see poor results. </p>
+
+
+
+<p><strong>Behind the scenes. </strong><a href="https://www.mediapost.com/publications/article/402219/google-ads-chief-outlines-plans-for-2025.html">The initiative</a> ties into Google CEO Sundar Pichai&rsquo;s broader strategy to scale Gemini, the company&rsquo;s AI platform, amid increasing competition and regulatory challenges.</p>
+
+
+
+<p><strong>What&rsquo;s next.</strong> Google plans to enhance its core advertising products:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Performance Max</li>
+
+
+
+<li>Demand Gen</li>
+
+
+
+<li>Search capabilities All will be powered by Google AI while maintaining user privacy standards</li>
+</ul>
+</div>
+
+						<hr>
+						
+						<div class="google-news-link text-center">
+							<a class="" href="https://news.google.com/publications/CAAqBggKMLXKIzD8vAQ?hl=en-US&gl=US&ceid=US%3Aen" target="_blank" aria-label="opens in a new tab"><em>Add Search Engine Land to your Google News feed.</em>&nbsp;&nbsp;&nbsp;&nbsp;<img class="img-fluid" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20140%2038'%3E%3C/svg%3E" alt="Google News" width="140" height="38" data-lazy-src="https://searchengineland.com/wp-content/themes/tdm-editorial/img/icons/google_news.png"><noscript><img class="img-fluid" src="https://searchengineland.com/wp-content/themes/tdm-editorial/img/icons/google_news.png" alt="Google News" width="140" height="38"></noscript></a>
+							<hr>
+						</div>
+
+						<div class="row">
+							<div class="col-12 col-md-6">
+								
+<div class="container-fluid px-0 sel-new-articles">
+	<div class="row">
+		<div class="col-12">
+			<p class="pb-1">Related stories</p>
+			<section class="global-content-stream">
+				<ul class="wpp-list">
+
+					
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="related">
+										<a href="https://searchengineland.com/meta-special-content-moderation-treatment-top-advertisers-450316">Meta gave special content moderation treatment to top advertisers</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="related">
+										<a href="https://searchengineland.com/google-pmax-budget-reallocation-experiments-450313">Google Ads Performance Max gets budget reallocation experiments</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="related">
+										<a href="https://searchengineland.com/maximize-conversions-bidding-google-ads-guide-450273">Mastering Maximize conversions bidding in Google Ads: A 3-minute guide</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="related">
+										<a href="https://searchengineland.com/reddit-business-analytics-tools-ama-ads-450270">Reddit introduces business analytics tools and AMA ads</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="related">
+										<a href="https://searchengineland.com/google-ad-scheduling-smart-bidding-campaigns-450233">Confirmed: Google isn&#8217;t dropping ad scheduling for Smart Bidding campaigns</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+				</ul>
+			</section>
+		</div>
+	</div>
+</div>							</div>
+							<div class="col-12 col-md-6">
+								
+<div class="container-fluid px-0 sel-new-articles">
+	<div class="row">
+		<div class="col-12">
+			<p class="pb-1">New on Search Engine Land</p>
+			<section class="global-content-stream">
+				<ul class="wpp-list">
+
+					
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="recent">
+										<a href="https://searchengineland.com/google-ads-scripts-everything-you-need-to-know-450294">Google Ads scripts: Everything you need to know</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="recent">
+										<a href="https://searchengineland.com/mobile-first-indexing-everything-you-need-to-know-450286">Mobile-first indexing: Everything you need to know</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="recent">
+										<a href="https://searchengineland.com/google-testing-audio-version-of-google-discover-named-daily-listen-450319">Google testing audio version of Google Discover named Daily Listen</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="recent">
+										<a href="https://searchengineland.com/meta-special-content-moderation-treatment-top-advertisers-450316">Meta gave special content moderation treatment to top advertisers</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+					<article class="stream-article latest my-1">
+						<div class="row pb-2 mx-1">
+							<div class="col-12 px-0">
+								<div class="article-text">
+									<span class="recent">
+										<a href="https://searchengineland.com/google-pmax-budget-reallocation-experiments-450313">Google Ads Performance Max gets budget reallocation experiments</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					
+				</ul>
+			</section>
+		</div>
+	</div>
+</div>							</div>
+						</div>
+
+
+											<style>
+@media screen and (min-width: 800px) {
+	#div-gpt-ad-3191538-7 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		min-width:770px;
+		min-height:260px;
+	}
+}
+@media screen and (min-width: 1279px) {
+	#div-gpt-ad-3191538-7 {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+		min-width:800px!important;
+		min-height:440px!important;
+	}
+}
+</style>
+<!-- START EOS SPACE -->
+<div id='div-gpt-ad-3191538-7'>
+	<!-- <script>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-3191538-7'); });
+	</script> -->
+</div>
+<!-- END EOS SPACE -->					
+						
+<style>
+			.avatar-border {
+			border: 3px solid #1b57a4;
+		}
+		.badge-color {
+			border: 1px solid #1b57a4 !important;
+			background-color: #1b57a4 !important;
+		}
+		</style>
+
+<div class="about-author">
+	<p>About the author</p>
+	<div class="information">
+		<div class="author-module">
+			<div class="row">
+				<div class="col-12 col-lg-3 text-center">
+					<div class="avatar">
+						<img class="img-fluid rounded-circle avatar-border" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20140%20140'%3E%3C/svg%3E" alt="Anu Adegbola" width="140" height="140" data-lazy-src="https://searchengineland.com/anu-adegbola-2"><noscript><img class="img-fluid rounded-circle avatar-border" src="https://searchengineland.com/anu-adegbola-2" alt="Anu Adegbola" width="140" height="140"></noscript>													<div class="mt-n3">
+								<div class="badge badge-color text-wrap">
+									Staff								</div>
+							</div>
+											</div>
+				</div>
+				<div class="col-12 col-lg-9">
+					<div class="about">
+						<div class="name">
+							<strong><a href="https://searchengineland.com/author/anu-adegbola" title="Posts by Anu Adegbola" rel="author">Anu Adegbola</a></strong>
+						</div>
+						<div class="row g-2 pt-2">
+														<div class="col-auto twitter">
+									<a href="https://twitter.com/intent/follow?original_referer=https%3A%2F%2Fsearchengineland.com%2F&amp;region=follow_link&amp;screen_name=TheMarketingAnu&amp;tw_p=followbutton&amp;variant=2.0" rel="me" target="_blank" aria-label="opens in a new tab"><i class="fab fa-x-twitter"></i></a>
+							</div>
+								
+															<div class="col-auto">
+									<a href="https://www.linkedin.com/in/themarketinganu/" target="_blank" aria-label="opens in a new tab"><i class="fab fa-linkedin"></i></a>
+								</div>
+													</div>
+
+						<span style="color: #212529; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px;">Anu Adegbola has been Paid Media Editor of Search Engine Land</span><span style="color: #212529; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px;"> since 2024. She covers</span><span style="color: #212529; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; font-size: 16px;"> paid search, paid social, retail media, video and more.<br /><br />In 2008, Anu's career started with</span><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">&nbsp;delivering digital marketing campaigns (mostly but not exclusively Paid Search) by building strategies, maximising ROI, automating repetitive processes and bringing efficiency from every part of marketing departments through inspiring leadership both on agency, client and marketing tech side.</span></span>
+<div><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">&nbsp;</span></span></div>
+<div><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">Outside editing Search Engine Land article she is the founder of PPC networking event - PPC Live and host of </span></span><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">weekly podcast PPCChat Roundup.</span></span></div>
+<div><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">&nbsp;</span></span></div>
+<div><span style="color: #212529; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Noto Sans, Liberation Sans, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;"><span style="font-size: 16px;">She is also an international speaker with some of the stages she has presented on being SMX (US), SMX (Munich), Friends of Search (Amsterdam), brightonSEO, The Marketing Meetup, HeroConf (PPC Hero), SearchLove, BiddableWorld, SESLondon, PPC Chat Live, AdWorld Experience (Bologna) and more.</span></span></div>					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+						<div class="related-topics row">
+	<div class="secondary topics col-12 mb-3">
+		<p>Related topics</p>
+		<a href="https://searchengineland.com/library/platforms/google">Google</a><a href="https://searchengineland.com/library/ppc">PPC</a>	</div>
+</div>
+						<br/>
+					</div><!-- .body_copy -->
+
+				</div><!-- story-box -->
+
+
+			</article><!-- article-content -->
+
+		
+			<script type="text/javascript">
+				dataLayer.push({
+					event: 'pageview',
+					"dimension2": "PPC",
+					"dimension3": "Anu Adegbola",
+					"dimension5": "2025-01-02 16:57:37",
+					"dimension8": "Google, PPC",
+					"dimension9": "editorial_staff",
+					"dimension10": "450029"
+				});
+			</script>
+
+					</div>
+
+		<div class="col-12 col-md-5 col-lg-4">
+			<div class="d-flex justify-content-center justify-content-md-end">
+				<aside class="right-rail">
+	<div class="right-rail-content pb-4">
+
+					<!-- START SIDEBAR TOP SPACE -->
+<div class="ad mb-3">
+	<div id='div-gpt-ad-3191538-1' style='min-width:300px;min-height:250px;'>
+		<!-- <script>
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-3191538-1'); });
+		</script> -->
+	</div>
+</div>
+<!-- END SIDEBAR TOP SPACE -->
+		
+				<div class="mb-4 d-none d-md-block">
+			
+<div class="nl-stacked-form border p-2 ms-auto">
+	<div id="nls-error" class="alert alert-danger mb-1 d-none"></div>
+		<div class="nls-container">
+		<p class="stacked-form-text mb-2 mt-1 text-center">Get the newsletter search marketers rely on.</p>
+		<form id="nls" class="mb-1 px-2 nls" method="POST">
+			<div class="form-group mb-1">
+									<input type="hidden" name="formid" value="5685" />
+					<input type="hidden" name="programid" value="1121">
+					<input type="hidden" name="SEL_Sign_Up" value="Sidebar Newsletter Form" />
+																												<input type="hidden" name="pageLink" value="https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029" />
+								<input type="hidden" name="ipAddress" value="82.13.113.41" />
+				<input id="munchkinCookieStacked" type="hidden" name="munchkinCookieValue" />
+				<input class="first_name d-none" type="text" name="first_name">
+				<label for="nl-stackedEmail" class="visually-hidden">Business email address</label>
+				<input id="nl-stackedEmail" class="stackedFormEmail nlfp form-control rounded-0 px-1" style="font-size: .65rem; height: 38px;" type="email" name="email" placeholder="Trusted insights on SEO, PPC, AI, career, and more." aria-label="Business email address" aria-required="true" required>
+			</div>
+			<div id="nls_captcha"></div>
+			<button id="stacked-button" class="btn btn-sel w-100 rounded-0 stackedFormButton" type="submit" name="submit_button">Sign me up!</button>
+			<button id="nls-processing" class="d-none btn btn-dark w-100 rounded-0 stackedFormButton" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Processing...</button>
+		</form>
+		<p class="text-center mb-0" style="font-size: .75rem;"><a href="https://searchengineland.com/termsofuse" target="_blank" aria-label="opens in a new tab">See terms.</a></p>
+	</div>
+</div>
+
+<script>
+	function getCookie(cname) {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(';');
+		for(let i = 0; i <ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	document.getElementById('munchkinCookieStacked').value = getCookie('_mkto_trk');
+</script>		</div>
+		
+		
+
+		
+<div class="sb-events mb-4">
+
+	<!-- SMX Events -->
+
+	<div class="pb-1">
+		<span role="heading">Attend our events</span>
+
+		<a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SMX Logo', 'sel_item_url': 'https://searchengineland.com/smx'});" href="https://searchengineland.com/smx">
+			<img fetchpriority="high" src="https://searchengineland.com/wp-content/seloads/2019/10/smxlogo_270x130.png" class="img-fluid pb-3" width="270" height="130" alt="Search Marketing Expo" />
+		</a>
+
+		
+
+							<p class=show-section>Learn actionable search marketing tactics that can help you drive more traffic, leads, and revenue. </p>
+
+							
+
+							<p class=show-section>Available on-demand: <a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SMX Next ', 'sel_item_url': 'https://searchengineland.com/smx/next'});" href="https://searchengineland.com/smx/next" style="text-decoration: underline;">SMX Next </a></p>
+
+							
+
+							<p class=show-section>Available on-demand: <a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SMX Advanced', 'sel_item_url': 'https://searchengineland.com/smx/advanced'});" href="https://searchengineland.com/smx/advanced" style="text-decoration: underline;">SMX Advanced</a></p>
+
+							
+
+							<p class=show-section>Available on-demand: <a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SMX Master Classes', 'sel_item_url': 'https://searchengineland.com/smx/master-classes'});" href="https://searchengineland.com/smx/master-classes" style="text-decoration: underline;">SMX Master Classes</a></p>
+
+							
+		<!-- <a target="_blank" href="" class="btn btn-primary" role="button" onclick=""></a> -->
+
+		<div class="hide-section">
+			<a href="https://searchengineland.com/awards">
+				<img width="300" height="250" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20250'%3E%3C/svg%3E" alt="Search Engine Land Awards" data-lazy-src="https://searchengineland.com/wp-content/seloads/2019/10/sel_awards_300x250_learn.jpg"><noscript><img width="300" height="250" src="https://searchengineland.com/wp-content/seloads/2019/10/sel_awards_300x250_learn.jpg" alt="Search Engine Land Awards"></noscript>
+			</a>
+		</div>
+
+	</div>
+
+	<!-- MarTech Events -->
+
+	<div>
+		<br>
+
+		<a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Martech Logo', 'sel_item_url': 'https://www.martech.org/conference/?utm_source=sel&utm_medium=textlink&utm_campaign=martech+home&utm_content=standunit+logo'});" href="https://www.martech.org/conference/?utm_source=sel&utm_medium=textlink&utm_campaign=martech+home&utm_content=standunit+logo">
+			<img src="https://searchengineland.com/wp-content/seloads/2021/12/martech21_logo_hrzntl2.png.webp" class="img-fluid pb-3" width="300" height="65"  alt="Martech: Martech is Marketing" />
+		</a>
+
+		
+
+							<p class=show-section>Discover time-saving technologies and actionable tactics that can help you overcome crucial marketing challenges.</p>
+
+							
+
+							<p class=hide-section>April 15-17, 2020: <a target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'San Jose', 'sel_item_url': 'https://martech.org/conference/west/?utm_source=ml&utm_medium=textlink&utm_campaign=mt+west+2020&utm_content=standunit'});" href="https://martech.org/conference/west/?utm_source=ml&utm_medium=textlink&utm_campaign=mt+west+2020&utm_content=standunit" style="text-decoration: underline;">San Jose</a></p>
+
+							
+		<!-- <a target="_blank" href="" class="btn btn-primary" role="button" onclick=""></a> -->
+	</div>
+
+</div>
+
+					<!-- START SIDEBAR CENTER SPACE -->
+<div class="ad-space mb-4">
+	<div class="ad">
+		<div id='div-gpt-ad-3191538-2'>
+			<!-- <script>
+				googletag.cmd.push(function() { googletag.display('div-gpt-ad-3191538-2'); });
+			</script> -->
+		</div>
+	</div>
+</div>
+<!-- END SIDEBAR CENTER SPACE -->
+				
+		<div class="sb-semrush mb-4">
+	<div class="text-center sb-semrush-bg px-4 py-5">
+		<p class="sb-semrush-heading" role="heading">Free 14 day Semrush trial</p>
+		<p class="sb-semrush-subheading mb-4" role="sub-heading">Get 55+ tools to gain insights and grow your audience.</p>
+		<a class="btn sb-semrush-smt text-uppercase rounded-pill w-100 my-3 py-3" href="https://www.semrush.com/billing/offers/buy/4o5r4fa7?promo=SEL-77GRNUVH" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Start my trial', 'sel_item_url': 'https://www.semrush.com/billing/offers/buy/4o5r4fa7?promo=SEL-77GRNUVH&utm_campaign=home&utm_source=searchengineland.com&utm_medium=referral'});" type="button" target="_blank">Start my trial</a>
+		<br>
+		<a class="btn sb-semrush-lm text-uppercase rounded-pill w-100 py-3" href="https://searchengineland.com/semrush-offer?content=Sidebar" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Learn more', 'sel_item_url': 'https://searchengineland.com/semrush-offer?content=Sidebar'});" type="button">Learn more</a>
+	</div>
+</div>		
+		
+		
+<div class="sb-dmd mb-4">
+	<div>
+		<span role="heading">Webinars</span>
+
+		<p class="dmd-sidebar mb-2"><a rel="sponsored" href="https://downloads.digitalmarketingdepot.com/MNT_2412_RpMsrmtCTV_landingpage_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=webinars" title="Date of Webninar: " target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Your Guide to Reporting and Measurement on Connected TV', 'sel_item_url': 'https://downloads.digitalmarketingdepot.com/MNT_2412_RpMsrmtCTV_landingpage_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=webinars'});">Your Guide to Reporting and Measurement on Connected TV</a></p><p class="dmd-sidebar mb-2"><a rel="sponsored" href="https://www.bigmarker.com/third-door-media/Elevate-your-data-strategy-From-cookies-to-universal-consent-preferences?utm_source=dmd&utm_medium=webpage&utm_bmcr_source=dmdhome&utm_term=dmdhome?utm_source=sel&utm_medium=textlink&utm_campaign=webinars" title="Date of Webninar: 2024-12-05" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Elevate Your Data Strategy: From Cookies to Universal Consent & Preferences', 'sel_item_url': 'https://www.bigmarker.com/third-door-media/Elevate-your-data-strategy-From-cookies-to-universal-consent-preferences?utm_source=dmd&utm_medium=webpage&utm_bmcr_source=dmdhome&utm_term=dmdhome?utm_source=sel&utm_medium=textlink&utm_campaign=webinars'});">Elevate Your Data Strategy: From Cookies to Universal Consent & Preferences</a></p><p class="dmd-sidebar mb-2"><a rel="sponsored" href="https://www.bigmarker.com/third-door-media/The-40-Shift-How-AI-is-Radically-Reshaping-Marketing-Budgets?utm_source=dmd&utm_medium=webpage&utm_bmcr_source=dmdhome&utm_term=dmdhome?utm_source=sel&utm_medium=textlink&utm_campaign=webinars" title="Date of Webninar: 2024-12-10" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'The 40% Shift: How AI is Radically Reshaping Marketing Budgets', 'sel_item_url': 'https://www.bigmarker.com/third-door-media/The-40-Shift-How-AI-is-Radically-Reshaping-Marketing-Budgets?utm_source=dmd&utm_medium=webpage&utm_bmcr_source=dmdhome&utm_term=dmdhome?utm_source=sel&utm_medium=textlink&utm_campaign=webinars'});">The 40% Shift: How AI is Radically Reshaping Marketing Budgets</a></p>
+	</div>
+	<a target="_blank" aria-label="opens in a new tab" href="/webinars" class="btn btn-primary w-100" role="button" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'See more webinars', 'sel_item_url': 'https://searchengineland.com/webinars'});">See more webinars</a>
+</div>
+		
+<div class="sb-dmd mb-4">
+	<div>
+		<span role="heading">Intelligence reports</span>
+
+		<p class="dmd-sidebar mb-2"><a href="https://downloads.martech.org/MIR_1512_SEOPlatfrm_landingpage_responsive_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Enterprise SEO Platforms: A Marketer’s Guide', 'sel_item_url': 'https://downloads.martech.org/MIR_1512_SEOPlatfrm_landingpage_responsive_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports'});">Enterprise SEO Platforms: A Marketer’s Guide</a></p><p class="dmd-sidebar mb-2"><a href="https://downloads.martech.org/MIR_2203_EmailMrktg_landingpage_responsive_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Email Marketing Platforms: A Marketer’s Guide', 'sel_item_url': 'https://downloads.martech.org/MIR_2203_EmailMrktg_landingpage_responsive_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports'});">Email Marketing Platforms: A Marketer’s Guide</a></p><p class="dmd-sidebar mb-2"><a href="https://downloads.martech.org/MIR_1808_CusDatPlat_landingpage_responsive.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Customer Data Platforms: A Marketer’s Guide', 'sel_item_url': 'https://downloads.martech.org/MIR_1808_CusDatPlat_landingpage_responsive.html?utm_source=sel&utm_medium=textlink&utm_campaign=intelligencereports'});">Customer Data Platforms: A Marketer’s Guide</a></p>
+	</div>
+	<a target="_blank" aria-label="opens in a new tab" href="/intelligence-reports" class="btn btn-primary w-100" role="button" onClick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'See more intelligence reports', 'sel_item_url': 'https://searchengineland.com/intelligence-reports'});">See more intelligence reports</a>
+</div>
+
+		
+<div class="sb-dmd mb-4">
+	<div>
+		<span role="heading">Featured white paper</span>
+
+		<p class="dmd-sidebar mb-2"><a href="https://downloads.digitalmarketingdepot.com/UNB_2412_ConvBnchRp_landingpage_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=whitepapers" target="_blank" aria-label="opens in a new tab" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'Conversion Benchmark Report 2024', 'sel_item_url': 'https://downloads.digitalmarketingdepot.com/UNB_2412_ConvBnchRp_landingpage_dmdhome.html?utm_source=sel&utm_medium=textlink&utm_campaign=whitepapers'});">Conversion Benchmark Report 2024</a></p>
+	</div>
+	<a target="_blank" aria-label="opens in a new tab" href="/white-papers" class="btn btn-primary w-100" role="button" onClick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'See more white papers', 'sel_item_url': 'https://searchengineland.com/white-papers'});">See more white papers</a>
+</div>
+
+					<!-- START SIDEBAR LOWER SPACE -->
+<div class="ad-space mb-4">
+	<div class="ad">
+		<div id='div-gpt-ad-3191538-3'>
+			<!-- <script>
+				googletag.cmd.push(function() { googletag.display('div-gpt-ad-3191538-3'); });
+			</script> -->
+		</div>
+	</div>
+</div>
+<!-- END SIDEBAR LOWER SPACE -->
+		
+		<div class="sb-dmd mb-3">
+			<div>
+				<span role="heading">Search our site</span>
+				<div id="sidebar-search" class="sidebar-search-form">
+	<form name="searchform" class="sidebar-form" role="search" action="/" method="get" onsubmit="return noEmptySubmissions(this)">
+		<div class="row g-0">
+			<div class="form-group col-8 col-md-8 col-lg-10 mb-0">
+				<label for="sli_search_sidebar" class="visually-hidden">Search the Search Engine Land site</label>
+				<div ce-dont-mask>
+					<input id="sli_search_sidebar" class="form-control rounded-0" type="text" placeholder="Search the Search Engine Land site" name="q" value="" onfocus="this.value=''" autocomplete="off" aria-label="Sidebar search">
+				</div>
+			</div>
+			<div class="form-group col-4 col-md-4 col-lg-2 mb-0">
+				<button type="submit" class="btn btn-dark px-1 rounded-0 sidebar-submit">Search</button>
+			</div>
+		</div>
+	</form>
+</div>			</div>
+		</div>
+		<div class="sb-dmd mb-4">
+			<div class="row">
+				<div class="col-12">
+					<span role="heading">SearchBot</span>
+				</div>
+				<div class="col-8">
+					<p>Meet your new AI-powered marketing assistant!</p>
+				</div>
+				<div class="col-4">
+					<a href="/searchbot" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SearchBot Logo', 'sel_item_url': 'https://searchengineland.com/searchbot'});">
+						<img width="513" height="501" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20513%20501'%3E%3C/svg%3E" class="img-fluid" data-lazy-src="https://searchengineland.com/wp-content/seloads/2023/11/searchbot_template_logo.png.webp"><noscript><img width="513" height="501" src="https://searchengineland.com/wp-content/seloads/2023/11/searchbot_template_logo.png.webp" class="img-fluid"></noscript>
+					</a>
+				</div>
+				<div class="col-12">
+					<a href="/searchbot" onclick="dataLayer.push({event: 'Sidebar', 'sel_item_name': 'SearchBot', 'sel_item_url': 'https://searchengineland.com/searchbot'});" class="btn btn-primary w-100" role="button">Start chatting now!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+			</div>
+		</div>
+	</div> <!-- /.row -->
+</div> <!-- /.content col-12 mt-4 mb-4 mx-auto -->
+
+
+				</div> <!-- /.container-fluid -->
+
+				<footer  class="site-footer">
+	<div class="bg-ftr-subscribe py-2">
+		<div class="container">
+			<div class="row">
+								<div class="col-12 col-lg-5 col-xl-4 px-md-0">
+					<p class="ftr-nl-text text-md-center text-lg-left pt-lg-1 mb-2 mb-lg-0" role="heading">Get the newsletter search marketers rely on.</p>
+				</div>
+				<div class="ff-inner col-12 col-lg-7 col-xl-8 px-md-0">
+					<div class="nlf-container">
+	<div id="nlf-error" class="alert alert-danger mb-1 d-none"></div>
+		<form id="nlf" method="POST">
+		<div class="row g-0">
+			<div class="col-12 col-md-8">
+				<div class="form-group mb-0">
+					<input type="hidden" name="formid" value="13374" />
+					<input type="hidden" name="programid" value="1121">
+					<input type="hidden" name="SEL_Sign_Up" value="Footer Newsletter Form">
+																														<input type="hidden" name="pageLink" value="https://searchengineland.com/google-ads-plans-major-ai-push-in-2025-reshaping-search-marketing-450029" />
+										<input type="hidden" name="ipAddress" value="82.13.113.41" />
+					<input id="munchkinCookieFooter" type="hidden" name="munchkinCookieValue" />
+					<input name="first_name" type="text" class="first_name d-none">
+					<label for="nl-ftrEmail" class="visually-hidden">Business email address</label>
+					<input id="nl-ftrEmail" class="footerEmail nlfp form-control rounded-0" type="email" name="email" placeholder="Trusted insights on SEO, PPC, AI, career, and more." aria-label="Business email address" aria-required="true" required>
+				</div>
+			</div>
+			<div class="col-12 col-md-4">
+				<div id="nlf_captcha"></div>
+				<button id="footer-button" class="btn btn-sel footerButton w-100 rounded-0" type="submit" name="submit_button">Sign me up!</button>
+				<button id="nlf-processing" class="d-none btn btn-sel footerButton w-100 rounded-0" type="button" disabled><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Processing...</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+	function getCookie(cname) {
+		let name = cname + "=";
+		let decodedCookie = decodeURIComponent(document.cookie);
+		let ca = decodedCookie.split(';');
+		for(let i = 0; i <ca.length; i++) {
+			let c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+	document.getElementById('munchkinCookieFooter').value = getCookie('_mkto_trk');
+</script>				</div>
+							</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="footer-inner row row-cols-3 row-cols-md-5 pt-3">
+			<div class="col">
+				<p>Topics</p>
+				<ul class="list-unstyled">
+					<li><a href="https://searchengineland.com/library/seo">SEO</a></li>
+					<li><a href="https://searchengineland.com/library/ppc">PPC</a></li>
+					<li><a href="https://searchengineland.com/library/platforms">Platforms</a></li>
+					<li><a href="https://searchengineland.com/library">All topics</a></li>
+					<li><a href="https://searchengineland.com/searchbot">SearchBot</a></li>
+				</ul>
+			</div>
+			<div class="col">
+				<p>Our events</p>
+				<ul class="list-unstyled">
+					<li><a href="https://searchengineland.com/smx" target="_blank" aria-label="opens in a new tab">Search Marketing Expo - SMX</a></li>
+					<li><a href="https://martech.org/conference/" target="_blank" aria-label="opens in a new tab">MarTech</a></li>
+				</ul>
+			</div>
+			<div class="col">
+				<p>Semrush</p>
+				<ul class="list-unstyled">
+					<li><a href="https://searchengineland.com/semrush-coupon">Semrush coupon</a></li>
+					<li><a href="https://searchengineland.com/semrush-offer">Semrush offer</a></li>
+				</ul>
+			</div>
+			<div class="col">
+				<p>About</p>
+				<ul class="list-unstyled">
+					<li><a href="https://searchengineland.com/about">About us</a></li>
+					<li><a href="https://searchengineland.com/contact">Contact</a></li>
+					<li><a href="https://searchengineland.com/privacypolicy">Privacy</a></li>
+					<li><a href="https://searchengineland.com/termsofuse">Terms</a></li>
+					<li><a href="https://thirddoormedia.com/generative-ai-policy/" target="_blank" aria-label="opens in a new tab">AI policy</a></li>
+					<li><a href="https://thirddoormedia.com/?utm_source=sel&utm_medium=textlink&utm_campaign=TDM&utm_content=footer" target="_blank" aria-label="opens in a new tab">Marketing opportunities</a></li>
+					<li><a href="https://searchengineland.com/staff">Staff</a></li>
+									<li><a href="https://searchengineland.com/wp-login.php">Login</a></li>
+								</ul>
+			</div>
+			<div class="col">
+				<p>Follow us</p>
+				<ul class="list-unstyled">
+					<li><a href="https://www.facebook.com/searchengineland" rel="me" target="_blank" aria-label="opens in a new tab"><i class="fab fa-facebook-f pe-2" role="presentation"></i>Facebook</a></li>
+					<li><a href="https://twitter.com/sengineland" target="_blank" aria-label="opens in a new tab"><i class="fab fa-x-twitter pe-1" role="presentation"></i>X (formerly Twitter)</a></li>
+					<li><a href="https://www.linkedin.com/company/search-engine-land/" rel="me" target="_blank" aria-label="opens in a new tab"><i class="fab fa-linkedin-in pe-2" role="presentation"></i>LinkedIn</a></li>
+					<li><a href="https://searchengineland.com/newsletters" target="_blank" aria-label="opens in a new tab"><i class="fas fa-envelope pe-1" role="presentation"></i>Newsletters</a></li>
+					<li><a href="https://searchengineland.com/feed" target="_blank" aria-label="opens in a new tab"><i class="fas fa-rss pe-2" role="presentation"></i>RSS</a></li>
+					<li><a href="https://www.youtube.com/user/SearchEngineland" target="_blank" aria-label="opens in a new tab"><i class="fab fa-youtube pe-1" role="presentation"></i>YouTube</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="copyright text-center mb-5">
+			<p class="small" style="color: gray;">&copy; 2025 Search Engine Land is a Trademark of Semrush Inc.</p>
+			<p class="small" style="color: gray;">Third Door Media operates business-to-business media properties and produces events, including SMX. It is the publisher of Search Engine Land, the leading digital publication covering the latest search engine optimization (SEO) and pay-per-click (PPC) marketing news, trends and advice. The company headquarters is 800 Boylston Street, Suite 2475, Boston, MA USA 02199.</p>
+		</div>
+	</div>
+</footer>
+
+			</main> <!-- /.main-container-wrap -->
+		</div> <!-- /.page-container main-outer-container -->
+
+		            <script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/lib/js/pdf.js?ver=1734976235" id="wpaicg-pdf-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/lib/js/user-pdfs.js?ver=1734976235" id="wpaicg-chat-user-pdfs-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/lib/js/wpaicg-chat-pro.js?ver=1734976235" id="wpaicg-chat-pro-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/js/wpaicg-form-shortcode.js?ver=1734976235" id="wpaicg-gpt-form-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="wpaicg-init-js-extra">
+/* <![CDATA[ */
+var wpaicgParams = {"ajax_url":"https:\/\/searchengineland.com\/wp-admin\/admin-ajax.php","search_nonce":"d0d9beb324","logged_in":"0","languages":{"source":"Sources","no_result":"No result found","wrong":"Something went wrong","prompt_strength":"Please enter a valid prompt strength value between 0 and 1.","num_inference_steps":"Please enter a valid number of inference steps value between 1 and 500.","guidance_scale":"Please enter a valid guidance scale value between 1 and 20.","error_image":"Please select least one image for generate","save_image_success":"Save images to media successfully","select_all":"Select All","unselect":"Unselect","select_save_error":"Please select least one image to save","alternative":"Alternative Text","title":"Title","edit_image":"Edit Image","caption":"Caption","description":"Description","save":"Save","removed_pdf":"Your pdf session is cleared"}};
+/* ]]> */
+</script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/js/wpaicg-init.js?ver=1734976235" id="wpaicg-init-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/js/wpaicg-chat.js?ver=1734976235" id="wpaicg-chat-script-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/plugins/gpt3-ai-content-generator-premium/public/js/marked.js?ver=1734976235" id="wpaicg-markdown-script-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="rocket-browser-checker-js-after">
+/* <![CDATA[ */
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/fwth|\/my-account|\/register|\/newsletters|\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/searchengineland.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-after">
+/* <![CDATA[ */
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://searchengineland.com/wp-content/themes/tdm-editorial/js/jquery-ui-1.10.3.custom.min.js?ver=1.10.3" id="jquery-ui-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://searchengineland.com/wp-content/themes/tdm-editorial/js/jquery.ba-throttle-debounce.min.js?ver=1.1" id="jquery-debounce-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://searchengineland.com/wp-content/themes/tdm-editorial/js/jquery.validate.min.js?ver=1.11.1" id="jquery-validate-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://searchengineland.com/wp-content/themes/tdm-editorial/js/bootstrap/bootstrap.bundle.min.js?ver=1" id="bootstrap-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/js/custom.js?ver=1734976235" id="custom-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://searchengineland.com/wp-content/cache/min/1/wp-content/themes/tdm-editorial/js/sponsors.js?ver=1734976235" id="sponsors-js" data-rocket-defer defer></script>
+<script>window.lazyLoadOptions=[{elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:100,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}},{elements_selector:".rocket-lazyload",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:100,}];window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://searchengineland.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script><script>function lazyLoadThumb(e,alt,l){var t='<img data-lazy-src="https://i.ytimg.com/vi_webp/ID/maxresdefault.webp" alt="" width="1280" height="720"><noscript><img src="https://i.ytimg.com/vi_webp/ID/maxresdefault.webp" alt="" width="1280" height="720"></noscript>',a='<button class="play" aria-label="play Youtube video"></button>';if(l){t=t.replace('data-lazy-','');t=t.replace('loading="lazy"','');t=t.replace(/<noscript>.*?<\/noscript>/g,'');}t=t.replace('alt=""','alt="'+alt+'"');return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.parentNode.dataset.query.length?"":"&"+this.parentNode.dataset.query;e.setAttribute("src",t.replace("ID",this.parentNode.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow","accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.parentNode.replaceChild(e,this.parentNode)}document.addEventListener("DOMContentLoaded",function(){var exclusions=["wp-block-media-text__media","nav-logo","mosaic-left","mosaic-center"];var e,t,p,u,l,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)(e=document.createElement("div")),(u='https://i.ytimg.com/vi_webp/ID/maxresdefault.webp'),(u=u.replace('ID',a[t].dataset.id)),(l=exclusions.some(exclusion=>u.includes(exclusion))),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query",a[t].dataset.query),e.setAttribute("data-src",a[t].dataset.src),(e.innerHTML=lazyLoadThumb(a[t].dataset.id,a[t].dataset.alt,l)),a[t].appendChild(e),(p=e.querySelector(".play")),(p.onclick=lazyLoadYoutubeIframe)});</script>		
+		
+							<script type="text/javascript">
+				googletag.cmd.push(function() {
+					// Marquee 3200x1040
+					googletag.display('div-gpt-ad-3191538-5');
+															// Sidebar Top 300x250
+					googletag.display('div-gpt-ad-3191538-1');
+										// Sidebar Center 300x250
+					googletag.display('div-gpt-ad-3191538-2');
+					// Sidebar Lower 300x250
+					googletag.display('div-gpt-ad-3191538-3');
+										// Leaderboard 728x90
+					googletag.display('div-gpt-ad-3191538-6');
+										// In Content
+					// googletag.display('div-gpt-ad-1693000027709-0');
+					// End of Story
+					googletag.display('div-gpt-ad-3191538-7');
+										// Mobile 300x250
+					// googletag.display('div-gpt-ad-3191538-8');
+
+				
+					googletag.pubads().refresh();
+				});
+			</script>
+		
+				
+				
+				
+		<script>
+			// Inline newsletter form
+			function getCookie(cname) {
+				let name = cname + "=";
+				let decodedCookie = decodeURIComponent(document.cookie);
+				let ca = decodedCookie.split(';');
+				for(let i = 0; i <ca.length; i++) {
+					let c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+			var element = document.getElementById('munchkinCookieInline');
+			if (element) {
+				element.value = getCookie('_mkto_trk');
+			}
+		</script>
+
+	</body>
+
+</html><!-- Rocket has webp -->
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

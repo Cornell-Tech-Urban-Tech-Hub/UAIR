@@ -1,0 +1,29 @@
+
+        ‘Our Own Little Y2K’: LA Sheriff’s Dispatch System Down After New Year’s Day Computer Crash
+    
+The Los Angeles County Sheriff’s Department’s computer dispatch system is still down after it crashed on New Year’s Eve. Authorities haven’t been clear on what caused the crash, nor have they said when their systems will be up and running again.
+The anonymous deputy quoted by the Times also provided more details about the trouble the department was having as a result of the crash: “Now, the call takers have to write down all the information for each call and then the dispatch has to voice all the details and the patrol unit has to write it all down,” they said. “They don’t have the ability to run people or plates. They can’t pull report numbers to give to people, so they have to call dispatch.”
+It’s unclear when the system will come back online. “The Department is collaborating closely with our LA County partners at the Internal Services Department to find both temporary and long-term solutions to resolve this technical issue,” an LASD statement said. “Since taking office, the Sheriff has emphasized the urgent need to improve and upgrade our internal systems. In mid-2023, the Department issued a formal request for proposals to acquire a new modernized, centralized CAD system that will greatly enhance our capabilities,” the statement continues.
+Gizmodo reached out to the LASD for more information and will update this story when we receive a response.
+
+          Get the best tech, science, and culture news in your inbox daily.
+        
+
+          News from the future, delivered to your present.
+        
+
+      Please select your desired newsletters and submit your email to upgrade your inbox.
+    
+Best of CES 2025 Awards ➜
+Mode
+
+                Follow us
+              
+Mode
+
+                Follow us
+              
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses a computer dispatch system crash at the Los Angeles County Sheriff\u2019s Department, highlighting the impact of the technical issue on their operations. The department is working to resolve the issue and upgrade their internal systems, with a formal request for proposals issued in mid-2023. The crash has resulted in manual processes and limitations, such as inability to run people or plates, and the article mentions the department's emphasis on improving and upgrading their systems. This indicates a significant focus on computing and technology, with a detailed discussion of the technical issue and its implications."}]

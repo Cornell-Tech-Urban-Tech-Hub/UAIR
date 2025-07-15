@@ -1,0 +1,23 @@
+
+Huawei’s new smartphone OS faces uphill battle even within China
+
+
+                    FILE PHOTO: Visitors look at Huawei's newly unveiled Mate 70 smartphone series at a flagship store in Beijing, China November 26, 2024.  REUTERS/Xiaoyu Yin/File Photo
+                                          | Photo Credit: XIAOYU YIN
+                                      
+Huawei Corp. is staring at an uphill battle popularising its HarmonyOS Next operating system, built from the ground up as an alternative to Android and iOS, the dominant smartphone platforms throughout much of the world, including in China. The new Mate 70 phone, launched only in China by the telecommunications-and-hardware giant with an advanced 7 nanometre chip fabricated in spite of U.S. sanctions, had been released presumably with the intent of breaking away from American technology, of which the Android mobile is a central piece.
+But, an expert says, the software side of the platform faces steep challenges even within China, in spite of overwhelming pressure to shift away from American technology. Last year, Hosuk Lee-Makiyama, the Brussels-based director of the European Centre for International Political Economy (ECIPE), co-authored a paper positively evaluating the achievement of Huawei’s chip manufacturing achievement, noting that the firm outspends most global firms on research and development, dedicating a quarter of its profits to that end, far above firms like Apple Inc.
+While China is a key market—and manufacturing centre—for Apple the bulk of the smartphone market is occupied by phonemakers that release Android devices: Huawei, Vivo, Xiaomi and Oppo are among the country’s major brands. Apple controls 15% of the market, and research from market intelligence firm IDC shows that the firm’s reach is actually shrinking.
+Huawei, Oppo and Vivo did not respond to emailed questions.
+Huawei’s hardware accomplishment cannot be understated: “In the time it takes Europe to even find a chip designer—one year—they [Huawei] have managed to design a chipset,” Mr. Lee-Makiyama said. From the stinging technology-sharing limits imposed by the U.S. in 2022, the firm has been able to reach a position where it is just “one generation behind” on chip technology.
+But software is far from a comparable challenge that can be solved with high upfront investments alone. Pointing to the failure of Windows Mobile devices, Mr. Lee-Makiyama questioned the viability of a third operating system ecosystem, even within China. “The question really becomes about [getting] other manufacturers to get on HarmonyOS,” he said. The Mate 70—and thus HarmonyOS Next, has not launched anywhere outside China.
+Even HarmonyOS faces these challenges—the Mate 70 has a “virtualisation” of Android baked into the phone, allowing users to run apps that are built for that OS, an acknowledgement of the sway the platform has over the third-party developers whose interest is crucial for a platform’s growth over time.
+Additionally, HarmonyOS is in and of itself is an “iteration” of Android, Mr. Lee-Makiyama said, muddling its credentials as a clean break from U.S. technology. While the most popular version of Android is the one released by Google, pre-installed with the tech giant’s apps, the Android Open Source Project is free for any manufacturer to use for their devices, and harder to restrict under trade sanctions in the same way advanced semiconductor technology is.
+
+					Copyright© 2025, THG PUBLISHING PVT LTD. or its affiliated companies. All rights reserved.
+				
+We have migrated to a new commenting platform. If you are already a registered user of The Hindu and logged in, you may continue to engage with our articles. If you do not have an account please register and login to post comments. Users can access their older comments by logging into their accounts on Vuukle.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses Huawei's new smartphone OS, HarmonyOS Next, and its challenges in popularizing it within China. The OS is built as an alternative to Android and iOS, but the software side of the platform faces steep challenges due to the dominance of Android in the market. The article highlights the difficulties in getting other manufacturers to adopt HarmonyOS and its similarities to Android, which makes it harder to break away from US technology. The discussion is centered around the technical and market aspects of HarmonyOS, making it a key topic in the article."}]

@@ -1,0 +1,14 @@
+AutoNavi, Great Wall Motor inaugurate 'Mobility Joint Innovation Lab'
+        
+          
+    
+Photo credit: AutoNavi
+The Mobility Joint Innovation Lab leverages both parties' expertise in mobility and automotive industries, combining resources, sharing data, and fostering interdisciplinary research. By analyzing users' pain points and integrating cross-platform data, the lab seeks to improve trip planning accuracy and efficiency, prioritizing user-centric solutions.
+The joint lab also plans to collaborate with academic institutions, research organizations, and industry associations, promoting the integration of research and application for scalable innovation.  
+Photo credit: AutoNavi
+The joint lab represents a deepening of the long-standing partnership between AutoNavi and GWM. Since 2018, AutoNavi's in-car navigation system has been integrated into GWM vehicles, achieving coverage across the automaker's entire brand lineup by 2019. In 2020, their collaboration advanced with the integration of AutoNavi's AutoSDK product version, supporting GWM's intelligent upgrades. To date, the partnership extends to over 55 vehicle models across GWM's five major brands, focusing on high-precision mapping and lane-level navigation.  
+Looking ahead, the duo is set to deliver innovative features, such as blind-spot crossing alerts, smart parking, adaptive traffic light navigation, and intelligent voice guidance based on AutoSDK 810 version navigation system. These functionalities will debut in GWM's vehicle models, marking another step forward in enhancing user experiences and driving efficiency.
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article is related to computing, specifically in-car navigation systems and intelligent upgrades, but the discussion lacks depth. The focus is shared with non-technological topics like partnership and user experience. The article mentions AutoSDK product version and AutoSDK 810 version navigation system, which are computing concepts. However, the article does not provide in-depth exploration of technical developments or implications, making it a 6 out of 10."}]

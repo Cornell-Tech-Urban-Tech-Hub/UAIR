@@ -1,0 +1,28 @@
+China New Growth: Infrastructure goes vertical and digital
+Source: Xinhua
+Editor: huaxia
+2025-01-07 13:28:16
+   BEIJING, Jan. 7 (Xinhua) -- A large drone ascended from a fishing vessel and soared across the sky, delivering fresh seafood--such as crabs and croakers--caught in the morning in Zhoushan, an archipelago eastern Chinese city, to Shanghai's kitchens across the sea within two hours. This innovative approach is significantly faster than previous methods of sea transport.
+   The launch of this 100-kilometer drone sea-crossing route last year was made possible by the world's first hundred-kilometer-level 5G-Advanced (5G-A) network, which offers extensive coverage over the sea.
+   As Chinese startups race to capitalize on the burgeoning low-altitude economy, the swarm of drones they produce are increasingly facing existential questions in the sky: "Who am I? Where do I come from? Where am I going?"
+   Now, the Chinese government has taken on a new task: developing extensive infrastructure and intelligent networking systems that will unlock the vast economic potential of vertical mobility, with expectations of reaching a scale of 2 trillion yuan (278 billion U.S. dollars) by 2030.
+   The National Development and Reform Commission, China's top economic planner, had established a new department for low-altitude economy development by the end of 2024. The department has pledged to advance infrastructure and intelligent networking system building.
+   5G UPDATING
+   Telecom operators in the country, including China Unicom, China Mobile and China Telecom, are rapidly advancing toward 5G-A, an enhanced version of 5G that features improved high-precision sensing capabilities, enabling accurate detection of location and speed within its coverage area.
+   The 5G-A network surpasses the current 5G network in terms of speed, latency, connection scale, and energy consumption. It can achieve a peak data rate of 10 gigabits per second for downloads and 1 gigabit per second for uploads, millisecond-level latency, and low-cost connectivity for the Internet of Things.
+   "In the future, the airspace between 120 and 300 meters could see hundreds of millions of aircraft and no existing infrastructure can manage this scale," Wei Jinwu, a researcher from China Unicom, told China Electronics News.
+   "To scale the low-altitude economy, constructing a low-altitude intelligent network is essential," he added.
+   China has a vast network of about 4.2 million 5G base stations, and over 300 Chinese cities have begun deploying 5G-A, aiming to create the world's largest low-altitude communication network.
+   China Mobile plans to achieve 5G-plus-BDS accuracy of 3 to 5 centimeters horizontally and 4 to 8 centimeters vertically in an airspace up to 120 meters in key cities and routes by 2025.
+   These telecom operators are also set to integrate the country's existing 5G base stations with its homegrown BeiDou Navigation Satellite System (BDS). These technologies are designed to help the drones navigate the sky and stay in their lanes.
+   PILOT PROJECTS
+   At a high-tech zone in central Chinese city of Wuhan, a demonstration area for low-altitude economy has been established. This area uses China Telecom's 5G-A network to monitor drone data in real time.
+   The project includes 186 drones and 128 automated hangars, with 24/7 inspections covering a space of 518 square kilometers.
+   The southwestern Chinese city of Chongqing is using real-scene 3D technology to develop maps that define suitable flight areas and routes for drones, creating an integrated digital-twin space for low-altitude airspace.
+   "As the number of low-altitude aircraft increases, drones need to follow separate routes," said Chen Guang, a local surveying engineer. "Digital twin maps are expected to customize flight paths for short-haul transport drones in the future."
+   Chongqing has already achieved 97 percent coverage of city-level 3D real-scene for towns and streets.
+   To realize the full signal coverage across the sea, a team of telecom engineers in Zhoushan chose to construct 5G base stations on uninhabited islands. They devised an innovative solution by building solar energy panels to provide a sufficient power supply for the communication network.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily focused on China's development of extensive infrastructure and intelligent networking systems for vertical mobility, with a significant emphasis on 5G technology and its applications in low-altitude economy. The discussion delves into the technical aspects of 5G-Advanced networks, including improved sensing capabilities, high-precision location detection, and low-cost connectivity for the Internet of Things. The article also explores the integration of 5G base stations with the BeiDou Navigation Satellite System and the use of digital twin maps for drone navigation. While the article touches on other themes, such as the economic potential of vertical mobility and the development of low-altitude economy, the technical aspects of computing and AI are central to the discussion."}]

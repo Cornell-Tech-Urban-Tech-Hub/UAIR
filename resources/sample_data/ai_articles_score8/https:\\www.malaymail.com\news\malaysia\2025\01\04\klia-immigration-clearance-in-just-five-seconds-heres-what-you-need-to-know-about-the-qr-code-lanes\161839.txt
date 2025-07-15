@@ -1,0 +1,48 @@
+KLIA immigration clearance in just five seconds? Here’s what you need to know about the QR code lanes
+About Us
+Advertise
+KUALA LUMPUR, Jan 4 — Those who entered Malaysia from Kuala Lumpur International Airport (KLIA) Terminal 1 and 2 since January 1 may have noticed the dedicated lanes with a quick response (QR) code system for immigration clearance.
+The initiative is part of Putrajaya’s effort to provide faster immigration clearance for travellers.
+The trial will take place at KLIA Terminals 1 and 2, utilising 40 special lanes designed to expedite the immigration process.
+The initiative aims to enhance efficiency and security, allowing passengers to complete checks in five to seven seconds, compared to the conventional 15 to 25 seconds.
+Here’s what you need to know about the new system:
+What is a QR Code system for immigration clearance?
+A QR code system at airports involves using machine-readable codes that store passengers’ travel and identification information digitally.
+The codes are scanned at immigration checkpoints, allowing for rapid data retrieval and verification without the need for passports.
+This system is part of efforts to modernise airport operations by leveraging digital technology to improve traveller convenience and also boost efficiency, helping to reduce congestion at manual checkpoint counters.
+However, according to the Home Ministry’s statement, manual counters and the existing conventional automatic gates can still be used as usual, even with the QR code system taking effect.
+article_body_images.blade.php
+How does it work?
+According to the Immigration Department, travellers must use the MyBorderPass mobile application to generate QR codes linked to their personal and travel details for passing through the checkpoint.
+The mobile application was introduced last August for the Johor-Singapore border crossing.
+Once at the autogate, passengers simply present the self-generated QR codes for scanning, eliminating the need to physically present their passports.
+The system verifies travellers’ identities by cross-referencing the data stored within the code with the airport’s database, enabling quick and efficient clearance.
+A post shared by Imigresen KLIA (@imigresen_klia)
+How does it benefit travellers?
+The QR code system serves to streamline and expedite the immigration clearance process.
+By reducing manual interactions and automating data retrieval, it enhances processing speed and efficiency.
+This can be advantageous during peak travel periods, such as year-end holidays or festive seasons, where minimising wait times is essential for smooth passenger flow.
+Moreover, it also aims to improve the overall travel experience by incorporating modern solutions.
+For now, the facility is available to citizens of 63 eligible countries, as well as Malaysian citizens.
+Is it secure?
+The QR code system is designed with security in mind.
+According to the ministry, the system is intended to boost security and service efficiency through the use of the latest technology and reduce leakages.
+The codes are often encrypted and contain only relevant travel and identification information needed for verification.
+The technology also promises enhanced security by reducing the chances of manual errors and potential breaches, such as misuse of data in conventional methods.
+As for the monitoring of foreign nationals, the Immigration Department has assured that comprehensive security procedures are in place to screen visitors using the newly introduced facility.
+Foreign nationals using the autogates must still submit the Malaysia Digital Arrival Card, except for Singaporeans, who are exempt from this requirement.
+Entry information for foreign nationals will also be cross-checked against biometric data and facial recognition contained in their passport chips.
+article_body_images.blade.php
+Do you still need to carry your passport?
+Yes, you do.
+Although there is no need for a physical passport when using the QR code system, travellers are still required to carry their passports throughout the journey.
+Are we the only one using this system? 
+Malaysia isn’t the only country to have introduced such technology to travellers.
+Globally, several countries have embraced QR code technology to modernise their immigration processes.
+Singapore uses QR code scanners to enhance the efficiency and security of its clearance systems.
+Similarly, Japan and some European nations have adopted or piloted QR code systems, facilitating quicker and more secure border crossings.
+ 
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "This article is primarily about a new QR code system for immigration clearance at Kuala Lumpur International Airport, which utilizes digital technology to improve traveller convenience and efficiency. The system involves using machine-readable codes, mobile applications, and autogates to expedite the immigration process. While the article does not delve deeply into technical aspects, it explores the benefits, security features, and implementation of the system, making it a relevant topic in the realm of computing and technology."}]

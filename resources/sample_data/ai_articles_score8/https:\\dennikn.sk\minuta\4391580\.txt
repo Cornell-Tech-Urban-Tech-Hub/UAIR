@@ -1,0 +1,7 @@
+Ranných 5 minút:
+Denník N
+Prihláste sa do svojho konta
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the potential impact of artificial intelligence on the Slovak economy, mentioning its growing presence in various sectors. It highlights the need for a comprehensive strategy to address the benefits and challenges of AI, including its potential to create new jobs and increase productivity. The article also mentions the importance of education and retraining programs to help workers adapt to the changing job market. While the article touches on other themes, such as the need for government support and international cooperation, AI is the dominant topic and is discussed in detail, making it a score of 8."}]

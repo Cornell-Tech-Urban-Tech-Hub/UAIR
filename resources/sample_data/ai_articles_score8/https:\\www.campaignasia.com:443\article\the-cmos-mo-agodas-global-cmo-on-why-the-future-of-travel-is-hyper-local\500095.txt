@@ -1,0 +1,47 @@
+The CMO's MO: Agoda's global CMO on why the future of travel is hyper-local
+Say goodbye to generic travel ads. Agoda's Matteo Frigerio, talks about using AI to craft personalised video ads that speak your language, whisper your dreams, and ignite your wanderlust. Much like a pocket-sized AI travel agent.
+
+	Meet Matteo Frigerio. He's not your average CMO. He's a self-proclaimed "flag nerd" who somehow blends the precision of an engineer with the heart of a storyteller. As travel roars back to life, he's facing a challenge at Agoda: how do you connect with millions of people across Asia, each with their own unique culture and dreams of adventure? "It's like throwing a party where everyone from 20 different countries feels welcome," he says.
+
+	Frigerio's background is a bit unusual. He started as a strategist at Boston Consulting Group, then spent the last decade at travel platform Agoda, moving from product development to marketing leadership. This experience has given him a unique perspective. He's all about using data to tell better stories, an approach he's been honing for years as technology has reshaped the marketing landscape. He talks about taking one ad campaign with Bollywood star Ayushmann Khurrana and transforming it into 250 personalised versions. That's the power of AI for Agoda under Matteo's guidance. It's also how he's managed to cut production time by a mind-blowing 86%.
+
+	Take a read:
+
+	It's the classic global-local balancing act. APAC’s online travel market is booming—Phocuswright projects 10% annual growth for the foreseeable future. People are travelling more, spending more, and spending more time booking online. That’s a huge opportunity, but here’s the catch: what works in Bangkok won’t necessarily fly in Tokyo or Hyderabad.   
+
+	So, we’ve got to be scalable, but also adapt to local customer preferences. It’s like trying to host a party that feels intimate and fun even though there are guests from 20 different countries there. We’re making sure we offer exactly what travelers in each market want, whether it’s local payment methods or marketing that speaks their language -both literally and figuratively!   
+
+	We’re doubling down on AI-powered video creation. The dream is to produce hundreds of hyper-localised, inspiring videos that resonate with users across markets—with minimal human intervention. Think of it as a content assembly line, but with creativity and personality baked in.  
+
+	We’re also diving deeper into using generative AI for analysing our campaigns and experiments. Newer LLM models like ChatGPT o1 can make our teams more efficient in data crunching, which can be hugely time consuming, so that they can focus on the important stuff such as being even more creative.   
+
+	As for cuts, we’re scaling back on organic social media targeting. We’ve learned (sometimes the hard way) that going viral is exciting but unpredictable. It's a lot like catching lightning in a bottle—great if it happens, but not a solid strategy. Paid campaigns are where we see more consistent and measurable results.
+
+	Generative AI has been a game-changer for us over the last one and a half years. Our creative team went from dabbling in the technology to being fully-fledged AI ninjas, mastering all sorts of tools that can create high-quality, engaging videos faster than you can say “hyper-localised content.” We’ve seen a 86% reduction in the time it takes to go from concept to video adaptation. The result is a massively increased ability to test and optimise creatives to different markets and audiences.  
+
+	The biggest shift is the move away from traditional search engines to algorithm-driven discovery on platforms like TikTok, Reels, and Shorts. Consumers are no longer searching for information—it’s finding them based on their behaviour.
+
+	Advertising on these platforms is still evolving, and big brands haven’t cracked the code yet. That’s where the opportunity lies. At Agoda, we’re experimenting with content tailored to this “serendipity-first” approach. Combine that with AI-powered localisation, and the potential to engage consumers in new ways is enormous.
+
+	Less marketing "guru" fluff, more data-driven experimentation. I’d love to see us ditch the buzzwords and get back to being curious, experimenting, and—dare I say—having a little fun when trying out new ideas and see what really works.  
+
+	Two things: first, become best friends with data. I’m talking SQL, Tableau, statistics—you name it. Marketing isn’t just about clever campaigns; it’s about understanding what really works, pivoting and proving it. I use these tools daily, and trust me, they’re game-changers.  
+
+	Second, remember that career success is a bit of luck, but you can always increase your chances. Think of it as maximising your “luck surface area”—the more people you know, the more meaningful conversations you have, the more opportunities you’ll find. So, get out there, network, and make sure people know who you are. Sometimes the best opportunities come from the most unexpected connections.    
+Top news, insights and analysis every weekday
+
+            She once dreamed of covering war zones, not crafting ad campaigns. But a surprising turn of events led this TBWA Australia creative director to a career where "smashing it like an avocado" became her unexpected motto.
+        
+
+            As supermarket price wars heat up, Woolworths and Coles are losing ground to Aldi, according to data from YouGov. 
+        
+
+            With clients increasingly handling business-as-usual tasks in-house, agency profitability is at risk unless agencies redefine the value of their creative services, says brand and marketing consultant Andreas Moellmann.
+        
+
+            Campaign's weekly, fun-filled interview series with APAC creatives is now open for entries. No deadlines, just pure creativity. Get the details here. 
+        
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about Agoda's use of AI in crafting personalized video ads and hyper-localized content. The company's CMO, Matteo Frigerio, discusses the benefits of AI in reducing production time and increasing efficiency. The article also mentions the use of generative AI for analyzing campaigns and experiments, as well as the shift towards algorithm-driven discovery on platforms like TikTok. While other topics are briefly mentioned, AI and computing are the dominant theme and are discussed in detail."}]

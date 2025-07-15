@@ -1,0 +1,8 @@
+Japan firm uses AI to train new staff in handling difficult customers, coping with stress
+Technology offers rookie customer service staff chance to hone pacification skills on non-humans before being posted to frontline
+A company in Japan has turned to artificial intelligence (AI) technology to train staff how to deal with demanding customers.
+The move is aimed at boosting the adaptability of staff and enhancing their ability to cope with stress.
+Constant exposure to high-pressure customer interactions has left many employees in the telephone service industry overworked, resulting in persistent labour shortages.
+The technology company Interactive-Solutions has recently created iRolePlay, a ChatGPT-powered AI tool that trains customer service staff using simulated conversations.
+ChatGPT, developed by OpenAI and launched in 2022, enables lifelike dialogue and smart text responses.
+Tokyo Television reported that iRolePlay can simulate a range of customer personalities to provide training for customer service personnel.

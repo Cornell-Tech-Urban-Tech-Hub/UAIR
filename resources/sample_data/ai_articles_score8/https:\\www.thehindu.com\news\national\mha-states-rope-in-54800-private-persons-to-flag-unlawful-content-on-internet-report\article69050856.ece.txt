@@ -1,0 +1,27 @@
+
+MHA, States rope in 54,800 private persons to flag unlawful content on Internet: report
+
+
+                    According to I4C, the Cyber Volunteer Framework enables citizens to enrol as cyber volunteers for reporting unlawful content, dissemination of cyber hygiene, and as cyber expert to aid law enforcement. File
+                                          | Photo Credit: Getty Images
+                                      
+The Union Ministry of Home Affairs and various State governments have roped in around 54,800 persons as cyber crime volunteers to flag unlawful content on the Internet, according to the Ministry’s annual report for the year 2023-24.
+The Indian Cyber Crime Coordination Centre (I4C) under the Ministry launched the programme in 2020 aiming to “bring together citizens with passion to serve the nation on a single platform and contribute in fight against cybercrime in the country.”
+According to I4C, the Cyber Volunteer Framework enables citizens to enrol as cyber volunteers for reporting unlawful content, dissemination of cyber hygiene, and as cyber expert to aid law enforcement.
+The report stated that 54,833 cyber volunteers have been enrolled, including 22,942 for reporting unlawful content, 22,071 awareness promoters and 9,819 experts.
+The Internet Freedom Foundation (IFF), a digital liberties organisation, had criticised the scheme stating that it will lead to a “culture of surveillance and constant suspicion in society creating potential social distrust.”
+A student at a Central university in Gujarat who volunteers with the I4C, said that during the G-20 conference last year in India, he along with others flagged several cyber-attacks on government websites and servers.
+“Government websites were being targeted and the country’s flag on the websites were being defaced by hackers. A coordinated attack was launched and we flagged it to the 14C,” said the volunteer.
+On January 3, Rajesh Kumar, CEO of I4C had told a press conference that the website, ‘g20.in’, hosted by India was subjected to an organised cyber attack that peaked on the days of the summit, September 9 and 10, 2023.
+On an average, the cyber crime portal linked with nodal police stations in States and banks, receives 67,000 calls every day and security agencies identify around 1,500-2,000 mule accounts that are used to defraud people daily.
+The volunteers can register through the portal www.cybercrime.gov.in and flag unlawful content which has been categorised as “any material against sovereignty and integrity of India, against defence of India, against security of the State, and against friendly relations with foreign States”. It also includes content aimed at disturbing public order, disturbing communal harmony, and material related to child sex abuse.
+The Ministry’s annual report added that cyber fraudsters have been using Google services platforms for initiating “organised investment crimes” and the I4C has partnered with the Internet search giant to flag such content. “Google Advertisement platform provides a convenient facility for targeted advertisement from across the border,” the report said.
+It said that “big tech” plays an important role in proactive identification and action on cyber criminals and I4C has partnered with Google and Facebook for sharing intelligence and signals. From January to March, 2024, there were at least 1,10,925 cybercrime complaints involving platforms such as WhatsApp (43,797 complaints), Telegram (22,680), Instagram (19,800), Facebook (20,766) and YouTube (3,882).
+
+					Copyright© 2025, THG PUBLISHING PVT LTD. or its affiliated companies. All rights reserved.
+				
+We have migrated to a new commenting platform. If you are already a registered user of The Hindu and logged in, you may continue to engage with our articles. If you do not have an account please register and login to post comments. Users can access their older comments by logging into their accounts on Vuukle.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing and AI, specifically cybercrime and online safety, with a focus on the Indian government's efforts to combat cyber threats. The article mentions various technology platforms, such as Google, Facebook, WhatsApp, and YouTube, and discusses the role of 'big tech' in identifying and acting on cybercriminals. The discussion is detailed and explores technical aspects, regulatory partnerships, and societal implications, making it a significant topic in the field of computing and AI."}]

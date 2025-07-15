@@ -1,0 +1,92 @@
+El mundo necesita una agenda de IA pro-humana
+DOLAR
+$981,25
+UF
+$38.401,76
+S&P 500
+6.121,22
+
+FTSE 100
+8.501,24
+
+SP IPSA
+7.072,06
+
+Bovespa
+122.601,00
+
+Dólar US
+$981,25
+
+Euro
+$1.031,98
+
+Real Bras.
+$167,19
+
+Peso Arg.
+$0,94
+
+Yuan
+$135,47
+
+Petr. Brent
+78,46 US$/b
+
+Petr. WTI
+74,58 US$/b
+
+Cobre
+4,33 US$/lb
+
+Oro
+2.783,64 US$/oz
+
+UF Hoy
+$38.401,76
+
+UTM
+$67.429,00
+
+¿Eres cliente nuevo?
+Si prevalece la exageración y las empresas adoptan la IA para trabajos que las máquinas no pueden hacer muy bien, podríamos tener una mayor desigualdad sin un gran impulso compensatorio de la productividad.
+Publicado: Jueves 2 de enero de 2025 a las 04:00 hrs.
+Estamos viviendo tiempos inciertos y confusos. No solo lidiamos con pandemias, cambio climático, envejecimiento de las sociedades en las economías principales y crecientes tensiones geopolíticas, sino que la inteligencia artificial va a cambiar al mundo tal cual lo conocemos. Lo que todavía está por verse es con qué nivel de celeridad cambiarán las cosas y en beneficio de quién.
+Si escuchamos a los expertos de la industria o a los periodistas especializados en tecnología de los principales periódicos, pensaríamos que la inteligencia artificial general (IAG) -las tecnologías de IA que pueden llevar a cabo cualquier tarea cognitiva humana- está a la vuelta de la esquina. En consecuencia, existe un intenso debate sobre si estas capacidades asombrosas nos harán más prósperos más allá de nuestros sueños más descabellados (con observadores menos hiperbólicos que estiman un crecimiento del PIB más de 1%-2% más acelerado) o, en cambio, traerán aparejado el fin de la civilización humana, donde modelos de IA superinteligente se convierten en nuestros amos.
+La IA puede generar alzas de la productividad mucho mayores que las avizoradas en mis propios pronósticos magros. Si la IA se utiliza para automatización, reemplazará a los trabajadores; pero si se la utiliza para brindar mejor información a los trabajadores, aumentará la demanda de sus servicios y, por ende, sus ganancias.
+Pero si vemos lo que está sucediendo en la economía real, hasta ahora no encontraremos ningún quiebre con el pasado. Aún no hay pruebas de que la IA ofrezca beneficios revolucionarios en materia de productividad. Contrariamente a lo que prometieron muchos tecnólogos, seguimos necesitando radiólogos (de hecho, más que antes), periodistas, asistentes legales, contadores, oficinistas y conductores humanos.
+Como señalé recientemente, no deberíamos esperar que mucho más de un 5% de lo que hacen los seres humanos sea reemplazado por IA en los próximos 10 años. Tomará mucho más tiempo para que los modelos de IA adquieran el criterio, las capacidades de razonamiento multidimensional y las habilidades sociales necesarias para la mayoría de los empleos, y para que las tecnologías de IA y visión por computadora avancen al punto en que puedan combinarse con robots para realizar tareas físicas de alta precisión (como manufactura y construcción).
+Por supuesto, estas son predicciones, y las predicciones siempre pueden ser erróneas. Dado que los expertos de la industria se están volviendo aún más explícitos sobre el ritmo del progreso, quizás los avances innovadores en IA se produzcan antes de lo esperado. Pero la historia de la IA está plagada de predicciones ambiciosas por parte de los expertos. A mediados de los ‘50, Marvin Minsky, probablemente el abuelo de la IA, predijo que las máquinas superarían a los seres humanos en pocos años y, cuando esto no sucedió, siguió mostrándose convencido. En 1970, todavía insistía en que: “Dentro de tres a ocho años tendremos una máquina con la inteligencia general de un ser humano promedio. Me refiero a una máquina que podrá leer a Shakespeare, engrasar un auto, hacer política de oficina, contar un chiste, pelearse. En ese momento, la máquina empezará a educarse a sí misma con una velocidad fantástica. En cuestión de meses habrá alcanzado un nivel de genio y pocos meses después sus poderes serán incalculables”.
+Desde entonces se han reiterado predicciones igual de optimistas, solo para ser abandonadas en periódicos “inviernos IA”. ¿Esta vez podría ser diferente?
+Sin duda, las capacidades de la IA generativa superan con creces cualquier cosa que la industria haya producido hasta ahora. Pero eso no significa que los plazos esperados de la industria sean correctos. A los desarrolladores de IA les interesa dar la impresión de avances revolucionarios inminentes, para atizar la demanda y atraer inversionistas.
+Pero hasta un ritmo más lento de progreso es motivo de preocupación, dado el daño que la IA ya puede hacer: las falsedades profundas (deep fakes), la manipulación de votantes y consumidores y la vigilancia masiva son apenas la punta del iceberg.
+La IA también se puede utilizar para una automatización a gran escala, incluso cuando esos usos tengan poco sentido. Ya tenemos ejemplos de tecnologías digitales que se introducen en lugares de trabajo sin una idea clara de cómo aumentarán la productividad, mucho menos impulsar la productividad de los trabajadores existentes. Con todo el revuelo en torno a la IA, muchas empresas sienten la presión de subirse al tren antes de saber de qué manera la IA puede ayudarlas.
+Seguir las tendencias tiene sus costos. En mi trabajo con Pascual Restrepo, demostramos que una automatización mediocre representa lo peor de ambos mundos. Si una tecnología todavía no es capaz de aumentar mucho la productividad, implementarla de manera extensiva para sustituir el trabajo humano en una variedad de tareas produce mucho dolor y ningún beneficio. Según mis predicciones -donde la IA reemplaza alrededor del 5% de los empleos en los próximos 10 años-, las implicancias para la desigualdad son bastante limitadas. Pero si prevalece la exageración y las empresas adoptan la IA para trabajos que las máquinas no pueden hacer muy bien, podríamos tener una mayor desigualdad sin un gran impulso compensatorio de la productividad.
+Por ende, no podemos descartar el peor de todos los mundos posibles: nada del potencial transformador de la IA, pero todo el desplazamiento laboral, la desinformación y la manipulación. Esto sería trágico, no solo por los efectos negativos en los trabajadores y en la vida social y política, sino también porque representaría una enorme oportunidad perdida.
+¿Progreso para quién?
+Es técnicamente factible y socialmente deseable tener un tipo diferente de IA, con aplicaciones que complementen a los trabajadores, protejan nuestros datos y nuestra privacidad, mejoren nuestro ecosistema de información y afiancen la democracia.
+La IA es una tecnología de la información. Ya sea en su forma predictiva (como los motores de recomendación de las plataformas de redes sociales) o en su forma generativa (grandes modelos de lenguaje), su función es cribar cantidades gigantescas de información e identificar patrones relevantes. Esta capacidad es un antídoto perfecto contra lo que nos aqueja. Vivimos en una época en la que la información abunda, pero la información útil es escasa. Todo lo que uno puede querer está en Internet (junto con muchas cosas que uno no quiere), pero hay que tener mucha suerte para encontrar lo que se necesita para un trabajo o un propósito específico.
+La información útil impulsa el crecimiento de la productividad y, como he argumentado junto a David Autor y Simon Johnson, es más importante que nunca en la economía de hoy. Muchas profesiones -desde enfermeras y educadores hasta electricistas, plomeros, obreros y otros artesanos modernos- se ven obstaculizadas por la falta de información y capacitación específicas para abordar problemas cada vez más complejos. ¿Por qué algunos alumnos se rezagan? ¿Qué equipos y vehículos necesitan un mantenimiento preventivo? ¿Cómo detectar fallas de funcionamiento en productos complejos como los aviones? Este es exactamente el tipo de información que puede proporcionar la IA.
+Cuando se la aplica a este tipo de problemas, la IA puede generar alzas de la productividad mucho mayores que las avizoradas en mis propios pronósticos magros. Si la IA se utiliza para automatización, reemplazará a los trabajadores; pero si se la utiliza para brindar mejor información a los trabajadores, aumentará la demanda de sus servicios y, por ende, sus ganancias.
+Desafortunadamente, tres barreras formidables nos impiden seguir este camino. La primera es la obsesión por la IAG. Los sueños de máquinas superinteligentes están llevando a la industria a ignorar el verdadero potencial de la IA como tecnología de la información que puede ayudar a los trabajadores. Lo que importa es el conocimiento preciso en el ámbito pertinente, pero esto no es en lo que la industria ha venido invirtiendo. Los chatbots que pueden escribir sonetos de Shakespeare no capacitarán a los electricistas para realizar nuevas tareas sofisticadas. Pero si realmente se cree que la IAG está a la vuelta de la esquina, ¿por qué preocuparse por ayudar a los electricistas?
+El problema no es solo la obsesión con la IAG. Como principio general, las herramientas deberían hacer cosas que los seres humanos no saben hacer de forma eficiente. Esto es lo que hacen los martillos y las calculadoras, y es lo que podría haber hecho Internet si no hubiera sido corrompida por las redes sociales. Pero la industria tecnológica ha adoptado la perspectiva opuesta, favoreciendo las herramientas digitales que pueden sustituir a los seres humanos en lugar de complementarlos. Esto se debe, en parte, a que muchos líderes tecnológicos infravaloran el talento humano y exageran las limitaciones y la falibilidad de los seres humanos. Obviamente, las personas cometen errores, pero también aportan una mezcla única de perspectivas, talentos y herramientas cognitivas a cada tarea. Necesitamos un paradigma industrial que, en lugar de celebrar la superioridad de las máquinas, haga hincapié en su mayor fortaleza: aumentar y ampliar las capacidades humanas.
+Un segundo obstáculo es la falta de inversión en los seres humanos. La IA solo puede ser una herramienta de empoderamiento humano si invertimos lo mismo en capacitación y habilidades. Las herramientas de IA que complementan a los trabajadores no servirán de nada si la mayoría de los seres humanos no saben utilizarlas o no pueden adquirir y procesar la información que proporcionan. Los seres humanos tardaron mucho tiempo en descubrir cómo gestionar la información procedente de nuevas fuentes como la imprenta, la radio, la televisión e Internet, pero los plazos de la IA se acelerarán (aunque el escenario de una “IAG inminente” siga siendo pura palabrería).
+La única forma de garantizar que los seres humanos se beneficien de la IA, en lugar de ser engañados por ella, es invertir en formación y educación en todos los niveles. Eso significa ir más allá del consejo trillado de invertir en habilidades que serán complementarias a la IA. Aunque esto, por supuesto, es necesario, no alcanza. Lo que realmente necesitamos es enseñar a estudiantes y trabajadores a convivir con las herramientas de la IA y a utilizarlas de la forma adecuada.
+La tercera barrera son los modelos de negocio de la industria tecnológica. No conseguiremos una IA mejor a menos que las empresas tecnológicas inviertan en ella; pero el sector ahora está más concentrado que nunca, y las empresas dominantes están completamente dedicadas a la búsqueda de IAG y de aplicaciones que sustituyan y manipulen a los seres humanos. Un gran porcentaje de los ingresos de la industria procede de los anuncios digitales (basados en la recopilación de numerosos datos de usuarios y en conseguir que estos se vuelvan adictos a las plataformas y a sus ofertas), y de la venta de herramientas y servicios de automatización.
+Pero es poco probable que los nuevos modelos de negocios surjan por sí solos. Los modelos existentes han construido grandes imperios y monopolizado recursos clave -capital, datos, talento-, dejando a los nuevos aspirantes en una situación de creciente desventaja. Aun en el caso de que algún actor nuevo logre abrirse paso, es más probable que termine siendo comprado por uno de los gigantes tecnológicos y no que desafíe su modelo de negocios.
+La conclusión es que necesitamos una agenda anti-IAG y pro-humana para la IA. Los trabajadores y los ciudadanos deberían poder impulsar la IA en una dirección que pueda cumplir su promesa como tecnología de la información. Pero para que eso ocurra, necesitaremos una nueva narrativa en los medios de comunicación, en los círculos políticos y en la sociedad civil, así como mejores normativas y respuestas políticas. Los gobiernos pueden ayudar a cambiar el rumbo de la IA, en lugar de limitarse a reaccionar ante los problemas que vayan surgiendo. Pero, primero que todo, los responsables de las políticas tienen que reconocer el problema.
+Copyright: Project Syndicate, 2024.www.project-syndicate.org
+El también gerente general de la CSAV deberá abandonar su rol en la entidad, ya que cumplirá 12 años como consejero del gremio industrial, tiempo máximo que permiten los estatutos de dicha organización.
+La intersección del Paseo Ahumada con Huérfanos lideró por años el listado con los mayores precios de alquiler, zona que fue desplazada por Apoquindo con Tobalaba.
+Álvaro Jalaff mantendrá reclusión total y su hermano, Antonio, nocturna, luego de que el juzgado no dio por acreditados los delitos de lavado de activos ni soborno. Los socios de LarrainVial, Manuel Bulnes y Felipe Porzio, quedaron con firma mensual.
+Tienen seis Enfermeras de Práctica Avanzada (EPA) trabajando en los hospitales de Rancagua, Van Buren y Sótero del Río, las que han logrado aumentar en 40% la atención de pacientes.
+Viajamos hasta Costa Rica para conocer las nuevas versiones de un referente entre las big size pick ups
+Viajamos hasta Costa Rica para conocer las nuevas versiones de un referente entre las big size pick ups
+Tattersall Automotriz sigue expandiéndose en Chile
+La exitosa serie de Audi se renueva tanto en sus variantes hatchback y sedán,
+Lee la edición de hoy
+Aplicación DF para móviles
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "El art\u00edculo est\u00e1 relacionado con la inteligencia artificial (IA), espec\u00edficamente con su impacto en la productividad y la sociedad. La IA se menciona como una tecnolog\u00eda que puede generar alzas de la productividad, pero tambi\u00e9n puede reemplazar a los trabajadores si no se utiliza de manera adecuada. El autor destaca la necesidad de invertir en capacitaci\u00f3n y habilidades para que los seres humanos puedan aprovechar al m\u00e1ximo la IA. El art\u00edculo tambi\u00e9n menciona la obsesi\u00f3n por la inteligencia artificial general (IAG) y la falta de inversi\u00f3n en los seres humanos como barreras para que la IA pueda cumplir su promesa como tecnolog\u00eda de la informaci\u00f3n."}]

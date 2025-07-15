@@ -1,0 +1,81 @@
+2024: A year marked by the rise of drone warfare
+With its distinctive, pulsating, motorbike-like sound, the V1 flying bomb — or "buzz bomb" — was one the most fear-inducing weapons of World War II.
+Launched by Nazi Germany to wreak havoc on England, Londoners were terrorised by the noise of the bomb approaching.
+Once the buzz stopped, people had about 12 seconds to take cover before the missile would plummet from the sky and explode.
+Today, that similar nightmare has been recreated with drones.
+The weaponry has evolved, but the ominous buzzing overhead remains.
+Throughout 2024, the conflicts in Ukraine and the Middle East illustrated the growing impact of drones in modern warfare.
+They have been manufactured and launched in record numbers.
+New artificial intelligence (AI) capabilities, jammer-evading fibre optics, and even dog drones entered the battlefield.
+Analysts say 2024 showed the threat of drones was not going away, and countries needed to take note.
+These are some of the developments that defined the year in drone warfare.
+Drone production was virtually non-existent in Ukraine before Russia's invasion in February 2022.
+Now, the country is capable of ramping up production to 4 million annually, President Volodymyr Zelenskyy said.
+In October, he announced Ukraine was set to produce 1.5 million drones by the end of the year.
+That was compared with about 300,000 in 2023.
+Russia has also been boosting local manufacturing.
+The country had produced nearly 1.4 million drones throughout 2024.
+"This year, the production of drones is planned to increase significantly," Russian President Vladimir Putin said.
+"Well, to be more precise, almost 10 times."
+The cheaply-produced attack drones were mostly imported, but Russia has tweaked the model and now mass produces them locally.
+According to figures from Ukraine's air force, Moscow deployed a total of 2,576 drones during November.
+Similar scenarios have been playing out in the Middle East.
+At the time, analysts said it was one of the largest drone attacks in history.
+Israel said 99 per cent of the weapons used were intercepted, including all the drones.
+Samuel Bendett, adjunct senior fellow with the Center for a New American Security, said we had witnessed how countries involved in drone development had "really progressed" this year.
+And more and more militaries around the world were adopting both tactical and mid-range Unmanned Aerial Vehicles (UAVs).
+"For instance, in the civil wars in Sudan, Myanmar and Syria, and the war between Israel and Hezbollah," he told the ABC.
+"Clearly, unmanned systems of all kinds are having an impact."
+Drones serve a variety of purposes, including reconnaissance, collecting intelligence, terrorising troops, and direct attacks.
+After gaining prominence in 2023, the Ukrainian government set out to make a million FPV drones last year.
+FPV drones — originally designed for civilian racers — are operated using a remote controller and a headset providing a front-on-view camera feed.
+They carry an explosive warhead that can be dropped with more accuracy than most artillery because they are guided to their target.
+Depending on the drone's size and payload, the range can vary from 5 kilometres to more than 20km.
+Mr Bendett said both Russia and Ukraine had scaled up development and production of FPVs over the year and were experimenting with new models.
+The Ukrainian military was increasingly using new fixed-wing FPV strike drones with a longer range.
+FPVs have been used to drop munitions down tank hatches, and chase down troops on the battlefield.
+The incidents are often caught on camera and posted to social media.
+Mr Bendett said the new drone that shaped 2024 was the fibre optic UAV.
+They are a variation of the FPV drones, fitted with a fibre optic cable to transmit signals from the drone to the operator.
+Defence analyst Sam Cranny-Evans said the cable-connected design made the drone's signal "unjammable".
+"There is no way for an electronic warfare system to insert its own signals into the link between the FPV and its operator," he wrote in analysis for Calibre Defence.
+"These drones still use radio frequency signals to operate, but they aren't sent via fragile radio waves carried through the air, instead they travel over a fibre optic cable that is spooled underneath the drone."
+Electronic warfare (EW) systems have proved to be the most effective way of stopping drones.
+When a drone's signal is jammed, the pilot loses the ability to control it, or the operator can no longer see the video signal, depending on which frequency has been disrupted.
+The tethered FPV drones are generally equipped with a 20km cable, and can reportedly fly for 20 minutes at a speed of 60 kilometres per hour.
+They carry a payload of about 5.5 kilograms, but some of the weight is taken up by the fibre optic cable spool.
+Kamikaze drones continued to be a prominent fixture in 2024.
+"Of course, none of the other drones have gone away," Mr Bendett said.
+"Throughout it all, we have seen both sides (in Ukraine) use long-range, one-way kamikaze drones to strike each other's energy, military, and industrial infrastructure."
+The cheaply-produced "suicide" drones were also commonly used in the Middle East.
+Hezbollah was using the Iranian technology to challenge Israeli air defence systems.
+They then switched to using new kamikaze drone boats in attacks.
+Dimitris Maniatis, CEO of maritime risk managers MARISKS, said the boat drones represented a sophisticated shift in tactics.
+These drones enabled the Houthis to strike with more precision and at a greater distance, he said.
+There has been greater use of buggy-like uncrewed ground vehicles (UGVs) this year, Mr Bendett said.
+They are used in kamikaze missions, and to shuttle ammunition and supplies to troops in the trenches and evacuate wounded soldiers.
+"We're witnessing a lot of those developments take shape in Ukraine … there are several hundred companies working on drone developments, including on unmanned ground vehicles," Mr Bendett said.
+Robotic dogs, which have been described as "ground-based, stealthy drones" also made an appearance on the battlefield.
+The dogs were being used to conduct reconnaissance missions and deliver medicines to soldiers on the front line.
+However, the US and China revealed this year they were experimenting with robot dogs fitted with machine guns.
+In response to the increasing challenges posed by electronic warfare systems, both Ukraine and Russia were racing to develop drones guided by AI.
+AI drones have the potential to identify and lock onto their targets without the need for communication with their pilot, making them impervious to signal jamming.
+Developments in Ukraine had been broadly split between visual systems helping identify targets and fly drones into them, and terrain mapping for navigation.
+Paul Lushenko, director of special operations at the US Army War College, said the integration of AI could herald the fourth drone age.
+But he was hesitant to say the technologies would be game-changing.
+"I'm really cautious when people start talking about the so-called Oppenheimer moment that hearkens back to the development of the nuclear bomb," he told the ABC.
+He said AI would likely continue to play a predominantly supportive and informational role.
+And it was unlikely that swarms of AI killer robots would enter the battlefield anytime soon.
+"We have a tendency to dramatise the potential for drone swarms, and oversell how easy it is to incorporate AI into these capabilities. It's very, very challenging," he said.
+"But it's different for robotic dogs fitted with machine guns, they are scary as hell."
+While drones were capable of shifting the offence-defence balance between countries at war, they were not creating huge battlefield "breakthroughs," Professor Lushenko said.
+"I think that this year has been excellent to determine the merits and the limits of this emerging practice of drone warfare," he said.
+"They haven't really achieved strategic level effects … drones have been tactically effective."
+Mr Bendett said several trends were tracked throughout the year, and militaries around the world would be taking note.
+"I think 2025 can also bring its own surprises," he said.
+"It may be AI, it may be greater use of unmanned ground vehicles with UAVs … I guess we're going to stand by and see what happens."
+ABC
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about drone warfare and its developments in 2024, with a significant focus on the role of artificial intelligence (AI) in drones, such as AI-guided drones, fibre optic UAVs, and robotic dogs. The article explores the technical, social, and economic aspects of AI in drone warfare, including its potential to identify and lock onto targets, navigate terrain, and evade electronic warfare systems. While other themes, such as the production and deployment of drones, are also present, AI is a dominant topic in the article, and its discussion provides depth and detail."}]

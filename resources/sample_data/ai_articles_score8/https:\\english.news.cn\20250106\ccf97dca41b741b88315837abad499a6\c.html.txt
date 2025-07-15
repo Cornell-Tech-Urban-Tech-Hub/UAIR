@@ -1,0 +1,35 @@
+Explainer: How clashes over skilled-worker visas expose Trump camp's fault line
+Source: Xinhua
+Editor: huaxia
+2025-01-06 22:11:15
+Though Trump's decision to side with Musk and Musk's backpedaling on the issue seemed to have cooled down the public dispute for the time being, the resilience of the Trump coalition drew more attention.
+NEW YORK, Jan. 6 (Xinhua) -- High-profile online clashes over the need for H-1B visas and a skilled-worker immigration program recently erupted between U.S. billionaire Elon Musk and President-elect Donald Trump's far-right supporters.
+Trump was caught between technology executives and his core nationalist base as the rift spilled into public view during the recent holiday week.
+Though Trump's decision to side with Musk and Musk's backpedaling on the issue seemed to have cooled down the public dispute for the time being, the resilience of the Trump coalition drew more attention.
+ESCALATING RIFT
+U.S. far-right activist Laura Loomer on Dec. 23 criticized Trump's choice of Sriram Krishnan, an Indian-American technology entrepreneur and investor, as his senior policy adviser on artificial intelligence.
+"It's alarming to see the number of career leftists who are now being appointed to serve in Trump's admin when they share views that are in direct opposition to Trump's America First agenda," Loomer wrote on X.
+Loomer pointed to Krishnan's previous support for removing some caps on green cards and easing the process for skilled foreign workers to come to the United States.
+The critique sparked a broader debate about immigration in the tech industry, which relies heavily on foreigners with technical skills to work in the United States under H-1B nonimmigrant status.
+Musk, who once held an H-1B visa and has relied on the program to employ thousands of Tesla employees, made a foray into the dispute by defending the tech industry's need to bring over workers from abroad.
+"The number of people who are super talented engineers AND super motivated in the USA is far too low," Musk wrote on X, adding that a "shortage of excellent engineering talent" is a "fundamental limiting factor in Silicon Valley."
+"The reason I'm in America along with so many critical people who built SpaceX, Tesla, and hundreds of other companies that made America strong is because of H1B ... I will go to war on this issue the likes of which you cannot possibly comprehend," said Musk in another X post.
+Steve Bannon, who served as chief strategist during Trump's first term, warned that Musk's "true colors" were showing in the debate.
+"H1B Visa Program Should be Zeroed-Out - Used to Constantly Drive Wages Down and Replace American Tech Workers - the Foreign Worker Replacements are Treated Like Indentured Servants ...," Bannon posted on X.
+TRUMP TAKES SIDES
+The battle that erupted on X between Musk and far-right factions over H-1B visas was dubbed by The Washington Post as a "MAGA civil war." Trump waded in to ease the tension between the two sides.
+"I have many H-1B visas on my properties. I've been a believer in H-1B. I have used it many times. It's a great program," Trump was quoted as saying by the New York Post on Dec. 28.
+However, Musk said the program was "broken" and in need of major reform in a Dec. 29 thread. Musk proposed raising the minimum salary for visa holders and adding a yearly maintenance fee to make it more costly to hire foreign workers than domestic ones.
+"I didn't change my mind. I've always felt we have to have the most competent people in our country, and we need competent people," Trump said on Jan. 2.
+Trump's public support for the H-1B visa left many confused, said Fox News host Rachel Campos-Duffy.
+While Trump's supporters continue to assert his victory and mandate, his fragile coalition appears to be fracturing even before he takes office, according to the Milwaukee Independent.
+A VITAL VISA
+The U.S. tech industry has long relied on foreign skilled workers to spearhead innovation, which is seen as one of the critical competitiveness of the country and a major driver of productivity growth.
+Research shows that H-1B workers complement U.S. workers, filling gaps in science, technology, engineering, and mathematics fields, and expanding job opportunities across the board, said American Immigration Council in a report published on Friday.
+The United States has currently maintained an annual cap of 65,000 H-1B visas, with 20,000 additional visas for foreign professionals holding a master's degree or doctorate from a U.S. institution of higher learning.
+California is by far the biggest user of the H-1B program. More than 9,600 employers in California sought clearance for at least one H-1B worker in fiscal 2024, with 78,860 visa applications for new and continuing employment being approved, according to data from U.S. Citizenship and Immigration Services.
+The top 10 beneficiaries of H-1B visas in California were dominated by tech giants, most of them in the Bay Area, where Silicon Valley is located.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the controversy over H-1B visas, which is a program for skilled foreign workers in the tech industry. The article mentions the reliance of the U.S. tech industry on foreign skilled workers, the benefits of H-1B workers, and the debate over the program's cap. The discussion is centered around the technical and societal aspects of the H-1B visa program, making it a key topic in the article. However, the article also explores other themes such as politics and immigration, which reduces the centrality of AI or computing to the topic."}]

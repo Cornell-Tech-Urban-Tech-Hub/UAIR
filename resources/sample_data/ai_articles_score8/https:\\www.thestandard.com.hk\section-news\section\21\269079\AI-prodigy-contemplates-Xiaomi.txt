@@ -1,0 +1,15 @@
+The Standard
+"AI Genius Girl" Luo Fuli has not yet decided whether to accept China's handset and tech giant Xiaomi's job offer, according to Chinese media quoting Li Bo, Luo's high school homeroom teacher.
+
+Xiaomi is developing its own AI foundation model and the 10,000-GPU cluster it is deploying is led by the chairman Lei Jun himself, aiming to improve the company's competitiveness in the AI field.
+
+It is estimated that Xiaomi's research and development expenses will climb to 30 billion yuan (HK$31.96 billion) in 2025.
+
+It will mainly focus on technologies such as AI, OS, and chips, according to Lu Weibing, the president of Xiaomi.
+
+Earlier, it was reported that Lei Jun personally recruited Luo, one of the key developers of the open-source foundation model DeepSeek-V2, to join the team and lead its foundation model.
+Today's Standard
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about Xiaomi's investment in AI research and development, with a focus on their AI foundation model and 10,000-GPU cluster. The company's president, Lu Weibing, mentions that they will focus on technologies such as AI, OS, and chips. The article also mentions that Lei Jun personally recruited a key developer of the open-source foundation model DeepSeek-V2 to join the team. This indicates a significant emphasis on AI and computing, with some depth in the discussion of technical aspects."}]

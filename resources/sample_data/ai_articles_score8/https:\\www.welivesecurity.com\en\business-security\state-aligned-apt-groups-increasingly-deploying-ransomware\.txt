@@ -1,0 +1,44 @@
+State-aligned actors are increasingly deploying ransomware – and that’s bad news for everyone
+
+      Award-winning news, views, and insight from the ESET security community
+    
+
+        Award-winning news, views, and insight from the ESET security community
+      
+Business Security
+The blurring of lines between cybercrime and state-sponsored attacks underscores the increasingly fluid and multifaceted nature of today’s cyberthreats
+Phil Muncaster
+This has potentially major implications for IT and security leaders – not only increasing the risk of attack, but also changing the calculus around how to mitigate that risk.
+It worked closely with NoEscape, Ransomhouse, and ALPHV (aka BlackCat) – not only providing initial access, but also helping to lock down victim networks and collaborate on ways to extort victims.
+It’s obvious why government-backed groups are using ransomware. At the very least, it provides them with a useful cover of plausible deniability which can confuse investigators. And in many cases, it does so while increasing state revenue and helping to motivate government-employed hackers who are often little more than poorly paid civil servants. The big question is whether it really matters who is doing the attacking? After all, Microsoft has even uncovered evidence of government agencies outsourcing work wholesale – although in the case of Storm-2049 (UAC-0184 and Aqua Blizzard, no ransomware was involved.
+There are two schools of thought here. On the one hand, best practice security advice should still ring true – and be an effective way to build resilience and accelerate incident response—whoever is doing the attacking. In fact, if state-aligned APT groups end up using cybercrime tactics, techniques and procedures (TTPs), this may even benefit network defenders, as these are likely to be easier to detect and defend against than sophisticated custom tools.
+That said, if you don’t know the identity of your adversary, there are still ways to mitigate the impact of their ransomware attacks. Here are 10 best practice steps:
+Ensure all sensitive assets are protected by multi-layered security software from a reputable supplier, including for desktops, servers and laptops/mobile devices
+
+      Sign up for our newsletters
+    
+Business Security
+The evolving landscape of data privacy: Key trends to shape 2025
+Business Security
+The evolving landscape of data privacy: Key trends to shape 2025
+Business Security
+Under lock and key: Protecting corporate data from cyberthreats in 2025
+Business Security
+Under lock and key: Protecting corporate data from cyberthreats in 2025
+Business Security
+Cybersecurity is never out-of-office: Protecting your business anytime, anywhere
+Business Security
+Cybersecurity is never out-of-office: Protecting your business anytime, anywhere
+Business Security
+State-sponsored or financially motivated: Is there any difference anymore?
+ESET research
+ESET Threat Report H2 2024
+ESET research
+ESET APT Activity Report Q2 2024–Q3 2024
+
+            Award-winning news, views, and insight from the ESET security community
+          
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "This article is primarily about cybersecurity, specifically the use of ransomware by state-aligned actors. While it doesn't delve deeply into technical aspects of AI or computing, it extensively discusses the implications and mitigation strategies for ransomware attacks, which is a significant aspect of computing security."}]

@@ -1,0 +1,56 @@
+Savvy young men snag the best deals by outsmarting the algorithms
+It is common knowledge that takeout or travel platforms often offer discounts or bonuses to new customers while neglecting their regular customers.
+However, media reports suggest that some young consumers have discovered ways to manipulate the algorithm, such as intentionally leaving a trail of messages complaining about their services or threatening to uninstall a specific app to obtain better deals.
+A young person, who was attempting to book an air ticket, repeatedly voiced complaints about the price. "The airfare is so high that I cannot afford it; I would rather give up the trip." But, when he checked the price again, the listed price had dropped from 4,309 (US$590) to 1,903 yuan!
+Several travel platforms explained that the ticket price is subject to multiple variables, and it is not known if the price drop is a direct result of certain tendentious messages left by the user.
+There are also a number of other money-saving tricks that have gone viral on social media platforms.
+In November, a national circular clearly outlaws pricing discrimination based on age, profession or consumption capability.
+Could these attempts to create a fake character help customers get a better deal? Despite the fact that many customers have complained about discrimination, takeout platforms refrain from talking about it.
+While arranging a group supper through a popular site, Tom Qian, a reporter, observed that the pricing he received on his phone was 280 yuan (US$38), 10 yuan cheaper than another diner who used the platform more frequently.
+Other tactics for getting a good deal include using incognito or "in private" surfing to leave no trace for the algorithm to follow. Some simply reduced the amount of time they spent on a certain program.
+According to a recent CCTV poll, the majority of respondents reported big data price discrimination.
+A woman surnamed Liu would use her phone to reserve a hotel in Beijing, near her child's college, for nearly 800 yuan per night. She later discovered that another guest had booked the identical type of room for 600 yuan.
+Another pretty prevalent tactic is for takeaway platforms to initially offer bonuses of 12-13 yuan, which would eventually reduce to 6 or 7 if you ordered regularly.
+Last year, a woman surnamed Xu, a VIP user of Ximalaya, an audio resource app, paid 238 yuan for a lecture series on the Tang Dynasty (AD 618-907). She was disappointed to see that a non-member had reserved the series for 199 yuan.
+"I considered bringing this matter to the attention of customer support but decided against it," she explained. She added, however, that the lecture series now has a uniform price of 199 yuan.
+According to experts, discrimination happens when digital platforms use relevant data to map a customer's consumption capacity and then offer a certain item at a higher price point.
+Strict regulations apply to this practice. Although some academics find it difficult to distinguish differential marketing from algorithm discrimination, nearly all agree that differential marketing cannot explain prejudice.
+Lu Yanhui, a cybersecurity specialist, defines algorithm discrimination as marketing the same product at various pricing based on client age, occupation or consumption norms.
+"In their pursuit of technical innovation and economic expansion, relevant firms should properly handle legitimacy and security concerns, so as not to harm consumer interests in violation of the law," he said.
+Zhu Wei, an associate professor at China University of Political Science and Law, explains that eliminating the practice is a challenging task. For starters, current legislative laws do not see providing subsidies to newcomers or differential discounts to different customers as price discrimination.
+Another consumer rights expert, Chen Yinjiang, noted that if algorithm-based discrimination develops more intricate and subtle, it may violate customers' rights to knowledge and choice, making it unfair to them.
+Despite a national circular issued in November expressly outlawing price discrimination based on age, profession or consumption ability, experts think that while some techniques work, they are insufficient to address discrimination as a systematic issue.
+Relevant authorities should boost up routine platform policing, but relevant platforms must also increase self-regulation efforts to encourage fair use of the algorithm.
+In Focus
+Metro
+Nation
+World
+Sport
+Economy
+Tech
+Auto
+Company
+Property
+Finance
+Event
+Art & Culture
+Travel
+Lifestyle
+Taste
+Entertainment
+Wellness
+MENTAL
+Book
+Education
+iDEALShanghai
+沪公网安备 31010602001940号
+沪公网安备 31010602001940号
+About Us
+Contact Us
+Feedback
+Privacy Policy
+Terms of Use
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses how young consumers manipulate algorithms on travel and takeout platforms to obtain better deals, and how these platforms use big data to discriminate against customers. While the article does not delve deeply into the technical aspects of AI or computing, it highlights the role of algorithms in pricing and the consequences of their misuse."}]

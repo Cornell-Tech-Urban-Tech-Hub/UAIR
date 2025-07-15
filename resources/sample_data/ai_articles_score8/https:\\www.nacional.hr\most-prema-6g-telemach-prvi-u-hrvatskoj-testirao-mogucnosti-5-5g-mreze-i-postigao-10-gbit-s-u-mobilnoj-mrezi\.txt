@@ -1,0 +1,27 @@
+Komentari
+telemach
+07. 01. 2025. 13:28
+Foto: Telemach
+Osim boljih performansi, odnosno brzina prijenosa podataka, ključne prednosti 5.5G tehnologije su još niža latencija i znatno veća učinkovitost u smislu potrošnje energije, a sve to zahvaljujući umjetnoj inteligenciji koja postaje sastavni dio mrežne infrastrukture.
+Također, značajno povećanje kapaciteta omogućuje povezivanje do deset puta više uređaja istovremeno u odnosu na 5G. Niža latencija, odnosno još brži odaziv mreže, donosi bolje iskustvo u stvarnom vremenu što je neophodno za vrhunski online gaming, servise proširene i virtualne stvarnosti (AR/VR) te mogućnost primjene autonomnih vozila.
+Članica Uprave i glavna direktorica za tehniku Telemacha Danijela Morović Bistrički objasnila je: “Potrošnja mobilnih podataka već godinama eksponencijalno raste te će 5.5G nadogradnja na postojeći 5G standard biti odgovor na buduće dugoročne tržišne zahtjeve po pitanju mobilne povezivosti. Ujedno, to je i most prema 6G tehnologiji”.
+Najveće brzine u Hrvatskoj u mobilnoj mreži postignute su agregacijom dva nositelja u frekvencijskom pojasu 800MHz i 26GHz te agregacijom pet nositelja u frekvencijskim pojasevima 700MHz, 1800MHZ, 2100MHz, 2600 MHz i 3.5GHZ uz tehniku višestrukog odašiljanja i višestrukog prijema (2×2 i 4×4 MIMO).
+To su glavne metode na temelju kojih 5G donosi revolucionarne brzine u mobilnoj mreži te se maksimalno iskorištava frekvencijski spektar. Mjerenja su odrađena u kontroliranim uvjetima na testnoj opremi u podatkovnom centru Telemacha na dva komercijalna routera koji podržavaju 5.5G mrežu.
+Predsjednik Uprave Telemacha Adrian Ježina zaključio je: “Telemach je još jednom pokazao da je inovativna kompanija koja testira i ulaže u najmodernije tehnologije. Duh izazivača koji ne pristaje na kompromis te stalno teži boljem doveo nas je u par godina na poziciju jedne od najboljih mobilnih mreža u Hrvatskoj, ali itekako konkurentnoj na Europskom nivou. I korisnici su prepoznali našu mrežu kao onu koja donosi najveću vrijednost za novac u okviru zaokruženog 5G ekosustava – nacionalno dostupne 5G mreže koja pokriva 98 posto populacije, tarife s neograničenim podatkovnim prometom te naprednih, ali i cjenovno dostupnih 5G uređaja poput Telemach 5G Pro”.
+Upravo je paradigma Telemacha omogućiti pristupačan i brzi internet svima pa im tako približiti najmodernije tehnologije, neovisno o platežnoj moći. Isti pristup kompanija ima i za fiksni internet koji je po gigabitnoj brzini dostupan za samo 20,90 eura preko optičkog priključka. Sve to potvrđuje predanost Telemacha digitalizaciji društva i gospodarstva.
+
+                                        NOVI PODACI Porezna objavila da je iznos računa u trgovinama 50 posto manji nego prošli…                                    
+
+                                        OTROVNA POLITIKA HDZ u biranom društvu                                    
+
+                                        USPOREDILI CIJENE Evo koliko je hrana jeftinija u Sloveniji i Italiji                                    
+
+                                        ČOP JE RIJEŠEN Golgeter dolazi, Rijeka puna optimizma: ‘Normalno da možemo do naslova’                                    
+
+                                        ‘PUMPANJE’ BDP-A Hajdaš Dončić: Vlada EU novcem gradi katedrale u pustinji. Piletić odgovorio: Izjava mu…                                    
+
+                                        BERLIN I VUČIĆ, ZALJUBLJENI PAR… ‘Skandalozna je podrška Njemačke jednom od posljednjih autokrata Europe’                                    
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the advancements of 5.5G technology, which utilizes artificial intelligence to reduce latency and increase efficiency in energy consumption. The technology also enables a significant increase in capacity, allowing for the connection of up to ten times more devices simultaneously compared to 5G. The article highlights the importance of low latency for applications such as online gaming, AR/VR services, and autonomous vehicles, making it a key topic in the field of computing and technology."}]

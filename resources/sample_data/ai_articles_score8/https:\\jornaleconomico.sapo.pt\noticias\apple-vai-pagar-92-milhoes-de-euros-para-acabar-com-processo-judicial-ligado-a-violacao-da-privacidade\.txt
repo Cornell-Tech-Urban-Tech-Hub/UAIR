@@ -1,0 +1,25 @@
+        Apple paga 92 milhões de euros para acabar com processo judicial sobre violação da privacidade    
+
+#line-5cm{
+  height: 1px;
+  width: 5cm;
+  background-color: #d9d6d6;
+    margin-bottom: 8px;
+    margin-top:-10px;
+}
+
+A agência noticiosa referiu que os queixosos reclamavam que a Siri gravava conversas privadas depois dos utilizadores ativarem a Siri de forma involuntária, alegando também que essas conversas foram depois divulgadas a terceiros, como por exemplo anunciantes. No processo há referência a utilizadores que, usando a Siri, fizeram menção às sapatilhas Air Jordan, da Nike, e aos restaurantes Olive Garden, tendo recebido depois anúncios ligados a essas marcas e restaurantes.
+A Reuters diz que os queixosos podem receber até 20 dólares (19 euros) por dispositivo com Siri, enquanto que os advogados podem receber até 28,5 milhões de dólares (27,6 milhões de euros) em taxas e mais 1,1 milhões de dólares (um milhão de euros) para despesas.
+As nossas marcas
+Estatuto Editorial
+Código de Ética e Livro de Estilo
+Termos e Condições
+Ficha Técnica
+Assinaturas
+Publicidade
+JE Eventos
+JE Lab
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to a lawsuit over privacy violations involving Siri, an AI-powered virtual assistant developed by Apple. The case revolves around users' concerns that Siri recorded private conversations without their consent and shared them with third parties, such as advertisers. The discussion centers around the technical and social implications of Siri's functionality, including its ability to recognize and respond to voice commands. While not exclusively focused on AI or computing, the article delves into the technical aspects of Siri's capabilities and the regulatory concerns surrounding its use. The centrality of AI or computing to the article's main theme is high, with a detailed discussion of technical, regulatory, and societal aspects."}]

@@ -1,0 +1,19 @@
+Computer outage causes disruption across German airports
+Source: Xinhua
+Editor: huaxia
+2025-01-04 02:26:00
+Passengers are seen at check-in counters at Frankfurt Airport in Frankfurt, Germany, on Jan. 3, 2025. (Xinhua/Zhang Fan)
+BERLIN, Jan. 3 (Xinhua) -- Technical issues caused widespread disruption at airports across Germany on Friday.
+The federal police's computer systems experienced a nationwide outage, forcing officers to manually process the tasks that were typically handled electronically, a spokesperson from the federal police told German newspaper Bild.
+Dusseldorf airport reported that "a nationwide IT malfunction" at the federal police led to delays in both entry and exit at border control.
+According to Bild, passengers were experiencing waiting times of up to two hours at Dusseldorf airport, while passengers at Berlin airport also expected similar delays.
+At 18:13 local time (1713 GMT), Dusseldorf airport, one of the most affected ones, announced that the IT malfunction at the federal police had been resolved, allowing unrestricted entry and exit for non-Schengen flights.
+The outage, lasting approximately four hours, was attributed to a technical problem in the Federal Criminal Police Office's information system. Airports in Frankfurt, Hamburg, Munich, and Berlin experienced only minor delays.
+A passenger talks with a staff member at a service desk at Frankfurt Airport in Frankfurt, Germany, on Jan. 3, 2025. (Xinhua/Zhang Fan)
+Passengers walk past service desks at Frankfurt Airport in Frankfurt, Germany, on Jan. 3, 2025. (Xinhua/Zhang Fan)
+People gather at a departure entry at Frankfurt Airport in Frankfurt, Germany, on Jan. 3, 2025. (Xinhua/Zhang Fan)
+Passengers are seen at a Lufthansa's counter at Frankfurt Airport in Frankfurt, Germany, on Jan. 3, 2025. (Xinhua/Zhang Fan)
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about a computer outage that caused disruptions across German airports, with a focus on the technical issues and their impact on airport operations. The discussion centers around the IT malfunction, its causes, and the effects on passengers and airport staff. While the article does not delve deeply into the technical aspects of the information system, it highlights the significance of computer systems in modern airport management and the consequences of their failure."}]

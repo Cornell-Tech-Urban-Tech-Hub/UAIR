@@ -1,0 +1,23 @@
+India Probes Musk’s Starlink Over Smuggling Allegations
+While Starlink is not authorized to operate in India due to security concerns, the company is pursuing an Indian license.
+The investigation gained momentum after the Indian Coast Guard seized 6,000kg of methamphetamines from a Myanmarese crew near the Andaman and Nicobar Islands in November. Officials reported that the smugglers used Starlink-powered devices to create WiFi hotspots for communication. When the Indian government requested information on the ownership of the equipment, Starlink reportedly refused, citing data privacy laws.
+In December, security forces confiscated Starlink devices in Manipur, a state in northeastern India that has been a hotspot for ethnic clashes since May 2023. Reports suggest that Starlink equipment has been used by armed groups, including the People’s Liberation Army of Manipur (PLA), to maintain internet access despite government-imposed blocks in the region.
+Musk denied the allegations on X (formerly Twitter), stating, “This is false. Starlink satellite beams are turned off over India.” However, the service is operational in Myanmar, which shares a border with Manipur.
+While Starlink is not authorized to operate in India due to security concerns, the company is pursuing an Indian license. Telecom Minister Jyotiraditya Scindia confirmed in November that Starlink is working to meet security requirements.
+The Guardian recently reported that Starlink devices have been active in several parts of Manipur, citing sources from armed groups and law enforcement. These developments have added urgency to the ongoing investigation as India grapples with the security implications of unregulated satellite technology.
+The Sri Lanka Guardian is an online web portal founded in August 2007 by a group of concerned Sri Lankan citizens including journalists, activists, academics and retired civil servants. We are independent and non-profit. Email: editor@slguardian.org
+Your email address will not be published.
+India’s Adani Group has firmly rejected reports suggesting the cancellation of its $440 million power purchase
+Former President Mahinda Rajapaksa has filed a fundamental rights (FR) petition with the Supreme Court, seeking
+by Our Economic Affairs Editor The inexorable march of time has always been mankind’s most immutable
+Conservative commentator Candace Owens has sparked outrage after doubling down on a baseless conspiracy theory that
+OpenAI has launched Operator, its first AI agent capable of performing online tasks within a web
+Most people learn to count and do basic arithmetic at a young age and don’t give
+When artificial intelligence and science intersect, the results can be groundbreaking. Consider AlphaFold, the protein-folding program
+A Chinese aerospace company has unveiled its prototype for a next-generation supersonic passenger aircraft capable of
+by Our Correspondent in Doha The Islamic Resistance in Lebanon (Hezbollah) has issued a strongly worded
+Oleh Druz, the chief psychiatrist of Ukraine’s armed forces, has been arrested on suspicion of corruption
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about Starlink's alleged involvement in smuggling and security concerns in India, but it delves into the technical aspects of satellite technology and the implications of unregulated internet access. The discussion is detailed, with references to specific devices and security requirements. However, the article also touches on unrelated topics, such as politics and corruption, which reduces its centrality to computing."}]

@@ -1,0 +1,5 @@
+TikTok on steroids: ByteDance shaking up AI with sanctions workaround
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses ByteDance's use of a sanctions workaround to develop AI, indicating a significant role of AI in the story. The focus is on the company's actions and implications, with some depth in explaining the technical aspects of AI development. However, the article also touches on non-technological themes such as business strategies and regulatory challenges, making AI the dominant but not exclusive topic."}]

@@ -1,0 +1,15 @@
+New service launched for Goa tourists
+Information on tourist and cultural hot spots – forts, beaches, heritage sites, religious sites, waterfalls and other places of interest will now be available at the tips of your fingers.
+Information on tourist and cultural hot spots – forts, beaches, heritage sites, religious sites, waterfalls and other places of interest will now be available at the tips of your fingers. In an effort to be more tourist-friendly, Goa tourism has embarked on a tech-savvy project which will make it possible for tourists to receive information on popular sightseeing spots on their cell phones. 
+The Government of Goa along with the Infotech Corporation of Goa Ltd (ITGL) recently launched the Mobile Governance (m-governance) programme in the state. As part of the government to citizen (G2C) initiative, Goa Tourism is working with ITGL on this unique project.
+In an effort to make the state more accessible to tourists, every place in the state which is of significant tourist interest will undergo a coding process. Explained Swapnil Naik, Director Tourism, Government of Goa “Locations which are of significance to tourists in Goa will be allocated with a specific unique code number. 
+Texting the code number in the format MGoa_(code of place) to the number 56070, will give tourists information about that particular place. Messages can be delivered in text as well as audio format.” Places of tourist importance – forts, beaches, cultural hot spots, heritage sites, religious sites, waterfalls, adventure tourism sites and other places of interest will be included in the project said Naik.
+Sign boards listing the codes for each place will be placed at strategic spots across the state. The tourism department will also increase awareness through the department’s official website and through publicity material including brochures and other travel literature.
+Speaking about the innovative use of technology to promote tourism, Swapnil Naik said, “Goa Tourism is constantly innovating and improving in keeping up with the expectations of our guests. Getting tech-savvy was the need of the hour. We believe that this tourist-friendly project will be of immense help to the millions of travelers who visit our state year after year.”
+He added, “We have been working closely with the ITGL on developing this mobile application which will aid tourists in providing information on the touristic attractions of the state within a matter of seconds, be it in the text or audio formats.”
+Upcoming Partner Events
+Copyright @2024 TravelNewsGroup | eTurboNews
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing as it discusses the implementation of a mobile governance project, where tourists can receive information on tourist spots by texting specific codes to a number. The project involves coding places of tourist interest, creating sign boards with codes, and utilizing a mobile application. The discussion is relatively in-depth, exploring the technical aspects of the project and its potential benefits for tourists."}]

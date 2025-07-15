@@ -1,0 +1,22 @@
+Can AI And Sustainability Co-exist?
+  Professor John visits the Indonesian Bureau of Meteorology, Climate and Geophysics (BMKG)'s centre for Earthquakes and Tsunami early warnings to discuss research related to incorporating AI in modeling. This is an example of an application where AI could make a difference between life, and death. Photo credit: Ali Azimi, BMKG
+You might think that my work is self-contradictory. As Professor of Data Science for Sustainability and the Environment at Queen Mary University of London, I use artificial intelligence (AI) to address environment-related challenges. Yet a picture is emerging of the negative environmental impacts of AI, as people all over the world incorporate it into their daily lives. So how do I justify using technology which is harming the environment to undo environmental harm?
+On the one hand, AI presents serious environmental risks due to the high energy and water consumption of data centres. On the other, it brings unprecedented opportunities to tackle many of the world's most urgent sustainability issues.
+So, given AI is becoming more and more embedded in how we work and live, we need to ask ourselves: how we can use AI to drive sustainability, while minimising the harm it causes to the environment?
+Why worry?
+Training large models – like those behind ChatGPT or other large language systems – requires vast computational resources. In fact, it can take as long as weeks or months, using supercomputers that require significant amounts of power. Once trained, the models also require substantial energy for inference because they are accessed repeatedly by millions of users.
+Can AI help?
+Despite these challenges and the harm that AI poses to the environment, it also holds immense promise in advancing sustainability, especially in the Earth Sciences.
+Traditional physics-based models, like ENS and those used at other meteorological offices, are computationally expensive, slow, and energy intensive, meaning forecasts are typically run every six hours.
+Enter AI. As well as predicting both-day-to-day and extreme weather more accurately than current methods, AI can reduce the computational demands of weather forecasting while improving accuracy by providing forecasts hourly – or even at a higher frequency. This means AI could provide faster, more detailed weather predictions at a fraction of the energy cost. It's a win-win situation that could help identify potential natural disasters before they strike, minimising their impact on the environment and on human life.
+In doing this – by more closely studying the environment and climate change using AI technology – we can develop a better understanding of what has happened to date, if / how it can be undone and what can be done to stop – or at least slow down and adapt to – climate change moving forwards.
+Yes, AI can help
+Equity is vital
+Like any new development in technology, AI's positive sustainability applications stand to disproportionately serve the Global North, where infrastructure, funding, and expertise are more readily available. This imbalance risks exacerbating existing global inequalities, leaving communities in the Global South without access to tools that could significantly improve their resilience to climate change and minimise its negative impact.
+We also need policies that incentivise energy efficiency and investment in the energy transition. Governments, universities and the private sector must collaborate to ensure that AI is developed sustainably, something we at Queen Mary will continue to lead the way in, by continuing to drive innovative practices, equitable partnerships, and sharing of knowledge. 
+Because when it comes to AI and the environment – the challenge is huge, but so is the opportunity.
+Professor John is Head of Data Science for the Environment and Sustainability at Queen Mary's Digital Environment Research Institute (DERI).
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the potential of AI to drive sustainability while minimizing its environmental harm. It highlights the energy consumption of data centers, but also showcases AI's ability to improve weather forecasting accuracy and reduce energy costs. The article explores the benefits and challenges of AI in sustainability, including the need for equitable access and sustainable development policies. The discussion is detailed and focuses on the intersection of AI and sustainability, with minor mentions of non-technological topics."}]

@@ -1,0 +1,22 @@
+
+                  Thai industrial estate stocks in spotlight                
+PUBLISHED : 2 Jan 2025 at 04:00
+Industrial estate stocks are poised to take centre stage in 2025, driven by a surge in foreign direct investment (FDI) amid ongoing trade tensions between China and the US, says Bualuang Securities (BLS).
+Geopolitical conflict between the world's two superpowers is prompting major global corporations to relocate production bases, especially data centres, which is expected to inject around 300 billion baht into Thailand's industrial estates.
+Despite the strong FDI momentum, rising land costs and the global minimum tax policy could challenge profit margins in the sector. As a result, BLS has adjusted its outlook for industrial estate stocks from "overweight" to "market perform".
+"The US-China trade war continues to benefit Thailand as global investors, particularly from China, increasingly view the country as a prime manufacturing hub," the brokerage said in its research note, adding that Thailand's strategic advantages are cementing its position as a key industrial production hub in Southeast Asia.
+Sectors like automotive, electronics and consumer goods are driving this influx, supported by competitive government incentives for foreign investors, modern infrastructure ready for industrial expansion and established supply chain networks with skilled labour.
+In 2025, there will be a rapid expansion of data centre expansion in Thailand, as global tech giants plan to invest over 300 billion baht in building them here, requiring an additional 500-1,000 megawatts of electricity.
+This surge highlights Thailand's growing importance in the digital economy and its potential for sustained growth, BLS noted.
+The rise of data centres also brings spillover benefits, attracting electronics manufacturers to neighbouring industrial estates. This will boost demand for land, infrastructure and skilled labour, further fuelling growth in the industrial sector, it added.
+Industrial land prices surged by 10-20% in 2024 and are projected to rise further this year. Previously acquired low-cost land has already been sold, leaving developers with higher-cost land for future sales.
+The 15% global minimum tax under the Organisation for Economic Co-operation and Development's BEPS 2.0 protocol is aimed at multinational corporations with annual revenues exceeding €750 million. While this policy may impact global FDI trends, its direct effect on Thailand's industrial developers is expected to be minimal.
+Most multinationals operating in Thailand fall below the income threshold, and the Board of Investment (BoI) is likely to implement measures to mitigate potential challenges, the brokerage noted.
+Among industrial estate developers, WHA Corporation (WHA) stands out as the most promising. BLS highlighted WHA's strong market position and its proven ability to attract global tech giants, making it a key player with long-term growth potential.
+While industrial estate stocks remain a compelling story for 2025, challenges from rising costs and tax regulations may limit profit growth. "While selling prices have risen, they are not sufficient to significantly boost profitability."
+The sector's strength lies in its ability to attract FDI, particularly from technology-driven investments like data centres. Investors are advised to monitor key developments, including land price trends, BoI measures and sector adjustments.
+With geopolitical dynamics and digital transformation reshaping the landscape, 2025 could be a pivotal year for Thailand's industrial estates, BLS stated.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about the growth of Thailand's industrial estates, with a focus on the surge in foreign direct investment (FDI) driven by the US-China trade war. Data centres are mentioned as a key driver of this growth, with global tech giants planning to invest over 300 billion baht in building them in Thailand. The article highlights the potential for sustained growth in the digital economy and the spillover benefits of data centres, including attracting electronics manufacturers and boosting demand for land, infrastructure, and skilled labour. While the discussion is not entirely technical, it provides a detailed exploration of the implications of data centres on Thailand's industrial sector."}]

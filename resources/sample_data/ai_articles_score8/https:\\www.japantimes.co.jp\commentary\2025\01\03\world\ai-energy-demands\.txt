@@ -1,0 +1,11 @@
+We need energy for AI, and AI for energy
+Subscribe
+Today's print edition
+Home Delivery
+In 1903, Mark Twain wrote that “It takes a thousand men to invent a telegraph, or a steam engine, or a phonograph, or a photograph, or a telephone or any other important thing.” This observation still mostly holds true. The invention of artificial intelligence required decades of work by thousands of scientists, engineers, and industry leaders. It will require many more men and women to develop the technology in the years ahead.
+The data centers that underpin AI development at scale — powering GPT-4, Gemini and other frontier models — need around-the-clock access to power. They already account for roughly 3% of annual U.S. electricity consumption, and this share is expected to more than double in the next five to 10 years. More broadly, AI’s electricity usage is projected to increase from four terawatt-hours in 2023 to 93 TWh in 2030 — more than Washington State used in 2022. And that’s a conservative estimate; AI could consume this much power as early as 2025.
+Sponsored contents planned and edited by JT Media Enterprise Division.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about the relationship between energy consumption and the development of Artificial Intelligence (AI). It mentions the increasing power requirements of data centers that support AI development, such as GPT-4 and Gemini, and projects a significant increase in AI's electricity usage over the next few years. While the article does not delve deeply into technical aspects of AI, it centers around the topic of AI and its energy consumption, making it a relevant and dominant theme in the discussion."}]

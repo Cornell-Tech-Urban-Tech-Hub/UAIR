@@ -1,0 +1,26 @@
+ZEEKR unveils four strategies for global market expansion at CES 2025
+        
+          
+    
+Photo credit: ZEEKR
+At the convention, ZEEKR announced a partnership with Qualcomm for intelligent cockpits, the launch of a NVIDIA DRIVE AGX Thor-based smart driving domain controller platform, the plans for overseas 800V ultra-fast charging infrastructure, and plans for mass delivery of the ZEEKR RT, the brand's first mass-produced native autonomous vehicle model.
+ZEEKR also showcased several key vehicle models at the CES 2025, including the ZEEKR MIX and ZEEKR 009 Grand MPVs, and the ZEEKR 001 FR all-electric shooting brake, highlighting its strengths in design, performance, and user experience.  
+At the CES, ZEEKR announced its four major strategies for global market expansion, demonstrating its ambition to lead China's technology expansion on the global stage:  
+Intelligent cockpit strategy
+ZEEKR is collaborating with Qualcomm to develop next-generation intelligent cockpits, offering immersive multi-sensory experiences. The Kr AI large model system, powered by Qualcomm's 8295 platform, supports OTA updates for continuous optimization. Additionally, ZEEKR launched the ZEEKR Navigation 2.0, a dedicated navigation service for overseas users. Thanks to a partnership with leading mapping service company Mapbox, ZEEKR is able to enhance navigation safety and convenience for global users.  
+Smart driving strategy
+ZEEKR introduced its self-developed ADCU MAX, the world's first NVIDIA DRIVE AGX Thor-based platform mass produced by an OEM, said the company. The platform delivers high computational power, energy efficiency, and advanced interfaces. In addition, ZEEKR's SEA 2.0 smart driving system, which utilizes end-to-end Plus architecture and digital foresight networks for human-like intelligent driving in complex scenarios.  
+Photo credit: ZEEKR
+Ultra-fast charging strategy  
+Currently, ZEEKR holds three self-developed 800V high-voltage charging technologies, including full-stack 800V architecture, all components and circuit system meeting 800V demands, and a SiC four-electric motor 800V high-performance system. Meanwhile, the company launched an ultra-fast charging 800V battery, offering "5 minutes of charging for 2 hours of highway driving." Its third-generation 800V charging piles are capable of 800kW output.
+Photo credit: ZEEKR
+Photo credit: ZEEKR
+Additionally, ZEEKR rolled out its overseas 800V energy replenishment plan. With its 800V vehicle models gradually hitting the global markets, the 800V surper-fast charging piles will also be deployed accordingly. In 2025, the company aims to establish a network of 1,000 charging piles in markets like Thailand, Australia, and Brazil, with the support of local partners.
+The ZEEKR 7X luxury five-seat SUV, ZEEKR's first 800V model to be launched in overseas markets, is set for European and global release in early 2025.  
+Smart architecture strategy
+ZEEKR unveiled its partnership with Alphabet-backed autonomous driving company Waymo to develop the ZEEKR RT, the world's first mass-produced native autonomous vehicle. The vehicle is scheduled for large-scale delivery in 2025.
+Built on ZEEKR's SEA-M architecture, which is dedicated to future mobility solutions, the ZEEKR RT offers superior safety, adaptability, and efficiency, redefining global mobility standards.  
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about ZEEKR's strategies for global market expansion, with a focus on intelligent cockpits, smart driving, ultra-fast charging, and smart architecture. The use of AI is evident in the Kr AI large model system, the SEA 2.0 smart driving system, and the ZEEKR RT autonomous vehicle. The discussion is detailed, with technical aspects of AI and computing being explored, such as the use of Qualcomm's 8295 platform and NVIDIA DRIVE AGX Thor-based platform. The article also mentions the development of 800V high-voltage charging technologies, which is a significant aspect of computing and technology."}]

@@ -1,0 +1,20 @@
+HSR to encircle Taiwan
+Elon Musk, CEO of US electric vehicle brand Tesla, praised Taiwan’s “massive” pool of tech talent as the basis for its success in the semiconductor industry in an X post on Dec. 28.
+“The massive untapped technical talent in Taiwan was the main reason. At least, that’s my understanding,” Musk said.
+The businessman was responding to a post by Bojan Tunguz, who used to be a data scientist at US artificial intelligence chip designer Nvidia Corp.
+Photo: CNA
+In the post, Tunguz said Morris Chang (張忠謀) founded Taiwan Semiconductor Manufacturing Co (TSMC) in Taiwan instead of the US due to “the rampant anti-immigrant and racist sentiment in the industry at the time.”
+Tunguz said it was the biggest error made by the US technology industry in history, adding: “In the coming few years we might pay an EXTREMELY high price for it.”
+Musk said he did not quite understand this point of view and went on to praise Taiwan’s talent pool.
+Taiwan rolls out the majority of high-end chips globally, with TSMC playing a dominant role.
+According to the Taipei-based market information advisory firm TrendForce, TSMC’s market share rose to 64.9 percent in the third quarter of last year. South Korea’s Samsung Electronics Co, the No. 2 supplier, fell further behind with 9.3 percent.
+Musk’s praise is in contrast to previous comments he has made about Taiwan. In 2022, he said in a Financial Times column: “My recommendation ... would be to figure out a special administrative zone for Taiwan that is reasonably palatable, probably won’t make everyone happy,” when discussing Taiwan and China relations.
+“And it’s possible, and I think probably, in fact, that they could have an arrangement that’s more lenient than Hong Kong,” Musk said.
+Political parties in Taiwan criticized Musk for the comments. Then-premier Su Tseng-chang (蘇貞昌) of the ruling Democratic Progressive Party said Musk did not understand Taiwan and cross-strait issues.
+In addition, Musk said Taiwan was an “integral part of China” in the “All In” podcast in September 2023. He also compared Taiwan’s ties with China to Hawaii’s relationship with the US.
+At the time, the Ministry of Foreign Affairs responded by saying if Musk was making the comments to boost his business interests, he was not worth listening to.
+Then-minister of foreign affairs Joseph Wu (吳釗燮) also fired back on X, saying: “Listen up, #Taiwan is not part of the #PRC & certainly not for sale!”
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about the semiconductor industry, with a focus on Taiwan Semiconductor Manufacturing Co (TSMC), which is a key player in the production of high-end chips. The discussion includes technical details about TSMC's market share and its dominant role in the industry. Elon Musk's comments also touch on the importance of Taiwan's tech talent in the industry. While Musk's previous comments about Taiwan's relationship with China are mentioned, they are not the main focus of the article. Overall, the article provides a detailed discussion of the technical and economic aspects of the semiconductor industry, making it a strong 8 in terms of its relevance to computing."}]

@@ -1,0 +1,14 @@
+2025 to bring broader recognition of eDocuments app 
+The arrival of 2025 is expected to speed up the process of digitization in all areas of the public sphere. More ministries will provide services online and the eDocuments app (eDoklady), which was officially launched last year, will now be recognized by the vast majority of municipalities and institutions.
+The eDocuments app, which was introduced as a pilot project last year, was immediately downloaded by over half a million people, despite the fact that only a restricted number of institutions recognized it at the time.
+It was upgraded shortly after its launch, when it emerged that it sent more information about users than was necessary to a central server, storing information about their movements and whereabouts. This is no longer possible with the new version and all users have re-registered.
+Last year the app, which serves as an electronic version of the standard plastic ID card, was gradually recognized by government ministries, police, labour offices, financial institutions and courts. As of the start of this year the app should be recognized at post offices, banks, health insurance companies and at polling stations. All municipalities should also be ready to accept the electronic version of the ID and hotels in the regions have also been preparing to accept electronic documents.
+Later this year it should also be possible to upload a driving license, study certificate or insurance card to the app, according to the Digital and Information Agency which operates the service.
+All Czech citizens can download the app from the App Store and Google Play for free. All they need is a smartphone and their Citizen ID number, which is required to log in. The app then works both online and offline. It will automatically disappear if the user’s ID card expires. Ninety days before the due expiry date the user will be notified about the need to extend its validity.
+
+
+© 1997-2025 Radio Prague International
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing, specifically the eDocuments app, which is an electronic version of the standard plastic ID card. The app is expected to be widely recognized by municipalities and institutions, allowing users to store and access various documents digitally. The article discusses the app's features, such as online and offline functionality, and its potential uses, including uploading driving licenses and insurance cards. The focus on the app's technical aspects and its impact on digitization in the public sphere indicates a high score for computing relevance."}]

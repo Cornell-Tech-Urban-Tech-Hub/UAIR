@@ -1,0 +1,11 @@
+Google: minden a Geminiről fog szólni 2025-ben is
+Elég egyértelmű, hogy mik a techóriás tervei a következő 12 hónapra.
+Minden jel arra utal, hogy a Google számára 2025 is a Gemini, annak további fejlesztése és különböző alkalmazásokba történő integrálása körül forog majd.
+"Szerintem nagyon fontos, hogy felfogjuk ennek a pillanatnak a sürgősségét, valamint azt, hogy vállalatként gyorsabban kell lépnünk. Bomlasztó pillanatok ezek. 2025-ben fáradhatatlanul arra kell összpontosítanunk, hogy kiaknázzuk a technológia előnyeit, és valódi felhasználói problémákat oldjunk meg. A Gemini fogyasztói oldalról történő skálázása lesz a legnagyobb fókuszunk a következő évben."
+- fogalmazott Pichai.
+A Google kétségkívül jó úton halad ezen tervek megvalósítása felé: a Gemini mobilalkalmazást választó felhasználók száma a februári indulás óta ugrásszerűen nőtt, a tendencia pedig várhatóan idén is folytatódik majd.
+A Google DeepMind társalapítója, Demis Hassabis ehhez kapcsolódóan megemlítette, hogy "maguk a termékek is masszívan fejlődni fognak a következő egy-két évben" - állítása szerint Gemini-frissítések tömkelege fog érkezni 2025 első felében.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is related to computing, specifically the Google's plans for the Gemini technology in 2025. The topic is central to the discussion, with the CEO, Pichai, emphasizing the importance of scaling up the Gemini consumer side and solving real user problems. The article also mentions the growth of Gemini mobile app users and the expected future development of products, including a flood of Gemini updates in the first half of 2025. The discussion lacks depth in terms of technical details, but the centrality of computing to the article's theme is clear."}]

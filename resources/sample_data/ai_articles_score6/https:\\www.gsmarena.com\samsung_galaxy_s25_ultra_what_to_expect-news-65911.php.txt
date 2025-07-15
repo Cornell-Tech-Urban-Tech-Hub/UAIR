@@ -1,0 +1,20 @@
+Samsung Galaxy S25 Ultra: What to expect?
+Login
+But do you know which phone overtook it for the past month? You guessed it, the Galaxy S25 Ultra. So, let's discuss what to expect from Samsung's next flagship.
+Reports suggest that Samsung will start taking pre-orders on January 24 (Friday) and will start shipping units earlier than expected.
+Samsung will surely have some pre-order bonuses ready for launch but even better, the Galaxy S25 Ultra price will reportedly remain the same as the S24 Ultra. That means the base model 256GB unit will be €1,449 - expect Samsung to double the storage for free, netting you a 512GB model.
+The phone will have more rounded corners on all sides, making it more comfortable to hold.
+The S25 Ultra will come in no less than seven colors - Titanium SilverBlue, Titanium WhiteSilver, Titanium Gray, Titanium JadeGreen, Titanium PinkGold and two black/grey models in Titanium Black and Titanium JetBlack. The final one reminds us of the Jet Black iPhone 7, which has a glossy piano black finish.
+Some of these colors will likely be exclusive to Samsung's online store - possibly JetBlack, JadeGreen, and PinkGold.
+It's expected to be an ISOCELL S5KJN3 sensor, commonly known as the GN3 - a 1/1.57-inch imager with 1.0µm pre-binned pixels. We have no word yet on the lens in front of the sensor, but it could be a brighter f/2.0 unit than the ongoing f/2.2.
+Expect the rest of the camera system to remain unchanged - 200 MP ISOCELL HP2 (1/1.3", 0.6µm-2.4µm), f/1.7, 23mm sensor for the main camera, a 12 MP Sony IMX754 (1/3.52", 1.12µm), f/2.4, 67mm 3x zoom, 50 MP Sony IMX854 (1/2.52", 0.7-1.4µm), f/3.4, 111mm 5x telephoto, and a 12 MP ISOCELL S5K3LU (1/3.2", 1.12µm), f/2.2, 26mm selfie camera.
+However, reports suggest that Samsung could finally bump its flagship to 16GB of RAM, putting it level with its competition. While highly likely, it's not a sure thing.
+As part of its Galaxy AI perks, Samsung will offer a year of free Gemini Advanced on the Galaxy S25 Ultra. This is the paid subscription version of Google's AI, and it's normally going to cost you $19.99 per month (but you do get 2TB of Google Drive storage as well).
+So, are the new design and build, new 50 MP ultrawide camera, Snapdragon 8 Elite, and One UI 7 with Gemini Advanced a solid upgrade over the Galaxy S24 Ultra?
+Well, I only buy folding mobile phones because it's great that it's actually both a mobile phone and a folding tablet, and an ordinary mobile phone is useless to me.  It is true that the last time I bought a Samsung Galaxy Z Fold5, but afte...
+I have pre-booked it. I am upgrading from S20 FE 5G so it totally makes sense to get the latest and greatest device, after a 5 year gap. Really looking forward to the launch today and getting my own device by the end of this month.
+Nothing really new compared to S24u
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses the upcoming Samsung Galaxy S25 Ultra, which features a new design, improved camera system, and increased storage. The phone will also come with a year of free Gemini Advanced, a paid subscription version of Google's AI, and 2TB of Google Drive storage. While not the primary focus, AI and computing concepts are central to the discussion, particularly in the context of the phone's features and subscription services."}, {"uses": ["AI", "Google's AI", "Gemini Advanced", "Google Drive storage"]}]

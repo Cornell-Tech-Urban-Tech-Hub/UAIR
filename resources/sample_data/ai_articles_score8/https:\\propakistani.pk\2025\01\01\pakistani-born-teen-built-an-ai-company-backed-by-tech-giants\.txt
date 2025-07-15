@@ -1,0 +1,28 @@
+Pakistani-Born Teen Built an AI Company Backed by Tech Giants
+Now 20, he’s landed partnerships with major US retailers like Sur La Table, Backcountry, Beginning Boutique and Cuyana, while attracting seven figures in investment from prominent tech figures including Nick Molnar (founder of Afterpay), George Ruan (founder of Honey), and Justin Yoshimura (founder of CSC Generation).
+LTV.ai uses AI to make email and SMS marketing personal – actually personal, not just the basic segmentation most companies use. “Every e-commerce company sends basically the same generic messages to their customers,” Asad explains. “We’re changing that by having AI create genuinely individual conversations based on things like location, past purchases, and customer feedback.”
+Here’s one of LTV.ai’s emails:
+The approach seems to be working – clients are seeing 13-22% increases in sales through these channels.
+Getting major brands to trust a new company led by a 19-year-old takes some doing. Asad took an analytical approach to the problem: “I looked at what brands would actually want to see from our cold emails, knowing we do something different from everyone else.”
+He spent four months refining the outreach strategy. “I basically lived in a room for 16 hours a day, testing different approaches until we figured it out,” says Asad. The result was a 2.5-3% booking rate for cold emails – an impressive number for B2B outreach.
+The issue is bigger than just generic emails. Marketing teams are spending massive resources – “we’re talking hundreds of thousands of dollars and teams of 5+ people” – to build campaigns that only resonate with about 10-20% of their audience. Meanwhile, customer acquisition costs keep rising while lifetime value falls.
+“We’re seeing email and SMS performance declining year over year across the industry,” Asad notes. “That’s why brands are willing to try something new, and the fact that we drive actual incremental revenue means that brands want to keep us around.”
+Major clients include:
+Investors include:
+After raising seven figures ($) in investment in 2023 and building the company entirely remotely, the company is now closing its larger Series A round and moving in-person to Austin to continue its expansion.
+As Head of Growth, Asad led LTV.ai to double month over month from July through December 2024, due to which they’re currently hiring across all departments, from engineering to customer success, as they scale to meet demand.
+While Asad said he can’t name names just yet, he mentions that some of the largest retailers in the world – “brands everyone would recognize” – are set to adopt LTV.ai through early 2025 and beyond. The goal is ambitious but straightforward: become the main way brands communicate with their customers.
+“We want to replace complicated marketing systems with something simpler – a couple of decision-makers working with an AI co-pilot that can write copy, spot opportunities, automatically suggest segments and maximize revenue by holding one long continuous conversation with each individual” says Asad.
+Follow ProPakistani on Google News & scroll through your favourite content faster!
+If you want to join us in our mission to share independent, global journalism to the world, we’d love to have you on our side.
+        If you can, please support us on a monthly basis. It takes less than a minute to set up, and you can rest assured that you’re making a big impact every single month in support of open, independent journalism. Thank you.
+    
+Shares
+© 2025 ProPakistani.PK - All rights reserved
+Follow ProPakistani to get latest news and updates.
+Join the groups below to get latest news and updates.
+Session expired
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about a Pakistani-born teenager's AI company, LTV.ai, which uses AI to personalize email and SMS marketing for e-commerce companies. The company has secured partnerships with major US retailers and attracted significant investment from prominent tech figures. The discussion explores the technical aspects of AI, its applications in marketing, and the company's growth and expansion plans. The article also touches on the industry's challenges, such as declining email and SMS performance, and the potential of AI to revolutionize marketing systems. The centrality of AI to the article's main theme is high, and the discussion provides some depth, making it a score of 8."}]

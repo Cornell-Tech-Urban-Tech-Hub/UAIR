@@ -1,0 +1,20 @@
+Microsoft to invest $80bn in AI data centres to counter China’s influence in Africa, Asia
+Brad Smith, Microsoft’s vice-chairman and president, says the technology company plans to invest $80 billion in artificial intelligence (AI)-enabled data centres globally in 2025.
+He said the investment will accelerate the global development and deployment of advanced AI models and cloud-based applications, with more than half allocated to the United States.
+“In FY 2025, Microsoft is on track to invest approximately $80 billion to build out AI-enabled data centers to train AI models and deploy AI and cloud-based applications around the world,” Smith said.
+According to the vice-chairman, in 2024, Microsoft announced plans to invest $35 billion within three years to establish AI and cloud data centres across 14 countries.
+He said the initiatives will target regions influenced by China’s Belt and Road Initiative.
+China’s Belt and Road Initiative is a strategy by the country to invest in infrastructure that connect Asia to Africa and Europe through land and maritime networks.
+Also, Smith compared China’s current approach to AI to its dominance in telecommunications, achieved through government subsidies.
+The vice-chairman expressed concerns that China’s approach, including subsidised access to critical technologies like chips and AI infrastructure, could potentially impact the global AI landscape.
+To counter China’s influence, Smith emphasised the “trust, privacy, and security” of Microsoft’s AI technology, positioning the company as a strong contender in the global AI market.
+He also highlighted Microsoft’s commitment to developing AI systems that prioritise cybersecurity, privacy, digital safety, and responsible AI practices.
+Smith added that many United States companies, including Microsoft, have invested heavily in building AI that is “more trustworthy than most products from China”.
+The vice-chairman said the Chinese government will spend public funds on international subsidies to support the adoption of the Asian country’s technology, especially in places like Africa, Asia, and Latin America.
+However, Smith said it will be difficult for China to match United States’ private sector investments and international capital funds.
+
+
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is primarily about Microsoft's investment in AI data centres to counter China's influence in Africa and Asia, with a focus on the technology company's plans to accelerate the global development and deployment of advanced AI models and cloud-based applications. The discussion is in-depth, exploring technical aspects, regulatory concerns, and societal implications of AI. While the article also touches on non-technological themes, such as geopolitics and international competition, AI remains the central topic."}]

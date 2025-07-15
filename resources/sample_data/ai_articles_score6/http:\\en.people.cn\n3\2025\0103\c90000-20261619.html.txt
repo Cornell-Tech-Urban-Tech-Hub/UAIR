@@ -1,0 +1,8 @@
+China solicits public opinion on adjustment of tech export ban catalog
+BEIJING, Jan. 2 (Xinhua) -- China's Ministry of Commerce (MOC) on Thursday issued a notice soliciting public opinion on the adjustment of a catalog of technologies that are subject to export bans or restrictions, as part of efforts to strengthen the management of technology imports and exports.
+The adjustment, initiated by the MOC and other authorities such as the Ministry of Science and Technology, would add one item, revise one item and remove three items from the catalog to create favorable conditions to strengthen international technological exchange and cooperation.
+The soliciting of public opinion will last until Feb. 1, 2025, and the specific content of the adjustment can be found on MOC's official website.
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses China's adjustment of a catalog of technologies subject to export bans or restrictions, aiming to strengthen international technological exchange and cooperation. While AI is not explicitly mentioned, the context implies that computing and technology are central to the discussion, with a focus on export management and international cooperation. However, the article lacks depth in exploring technical, social, or economic aspects of AI or computing, making it a 6 out of 10 in terms of relevance to computing."}]

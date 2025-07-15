@@ -1,0 +1,26 @@
+Others Also Read
+
+                    Wednesday, 01 Jan 2025
+                
+KUALA LUMPUR: Under the framework that takes effect today, social media platforms with over eight million users will be required to obtain a Class A Application Service License under the Communications and Multimedia Act (CMA) 1998 to continue operating in the country.
+The move is intended to create a safer online ecosystem and better user experience for children and families, according to the Malaysian Communications and Multimedia Commission (MCMC).
+This includes requirements for platforms to take action against digital ills, such as fake news, online gambling, and cyber-bullying, while also curbing social network registrations of children aged 13 or under.
+Social media giants failing to do so may be subject to jail time or fines, said Communications Minister Fahmi Fadzil, with action taken under Section 126 of the CMA.
+Offending platforms could face fines of up to RM500,000, five years in prison, or both. Additionally, a daily fine of RM1,000 will be imposed for each ongoing offence.
+Fahmi has also assured the public that no Internet censorship will be implemented once the licensing is enforced.
+At the same time, his deputy Teo Nie Ching said there will be no mandatory identity verification for social media users.
+MyDigital ID, the national digital identification system for secure access to online public and private services, surpassed one million registrations in October last year and is poised to expand integration across multiple platforms in 2025.
+Once fully integrated, it will allow Malaysians to log in using a single verification system, removing the need for separate passwords across platforms.
+Last year, services such as the Human Resources Management Information System (HRMIS), MySejahtera, MyGov, MyJPJ, and myTNB saw integration with the system, with its operator, the MyDigital Corporation confirming plans for further integration with government services and banking systems.
+As part of Malaysia’s transition to a Dual Wholesale Network (DWN) model for its 5G rollout, U Mobile was designated in November last year as the mobile network operator (MNO) to spearhead the nation’s second 5G network.
+Gobind further clarified that government funding for the first network consisted of a RM500mil equity injection in 2021, and RM450mil shareholder loan from Ministry of Finance Inc in May 2023. The timeline for the deployment of the second 5G network is currently uncertain.
+The transition is expected to benefit both consumers and businesses, with Fahmi stating in June that it would end the monopolistic element over the 5G network introduced via the previous Single Wholesale Network (SWN) model via DNB, and bring about more competition and sustainability in the telecommunications industry.
+He said later in July that the DWN approach would ensure affordable 5G plans and quality of service for Malaysians, with telcos expressing their commitment to maintaining these standards without increasing costs to consumers.
+Thank you for your report!
+Best viewed on Chrome browsers.
+We would love to keep you posted on the latest promotion. Kindly fill the form below
+We hope you enjoy this feature!
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "This article is related to computing, specifically to the regulation and governance of social media platforms and the development of Malaysia's digital ecosystem. The discussion is detailed, with a focus on the technical and regulatory aspects of the new licensing framework, the national digital identification system, and the transition to a Dual Wholesale Network (DWN) model for 5G rollout. The article also explores the implications of these developments on user experience, competition, and sustainability in the telecommunications industry. While the article touches on non-technological themes, such as law enforcement and public services, the centrality of computing to the discussion is clear, earning a score of 8."}]

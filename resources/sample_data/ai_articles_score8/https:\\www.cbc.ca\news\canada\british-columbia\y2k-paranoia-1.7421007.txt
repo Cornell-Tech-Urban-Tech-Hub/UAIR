@@ -1,0 +1,24 @@
+It seems funny now, but 25 years ago Y2K paranoia had many fearing the worst
+It was New Year's Eve, 1999, and anxiety over potential Y2K doomsday scenarios about to be unleashed in the new year was real.
+Anything relying on automation — from the electrical grid to traffic lights, even your VCR — was at risk of failing, warned some experts. Banking systems could go haywire. And planes could fall from the sky, predicted others.
+In fact, a member of British Columbia's Action 2000 squad, charged with troubleshooting the problem at the provincial level, gave this dire warning in a 1999 CBC interview. 
+Two digits bad
+"If you're going to take air travel, then I would get on a plane at least a week or two before the change in the millennium, and I'd schedule my return date at least a week or two past the change in the millennium," he advised. "That's mainly due to the unknown traffic control status in a lot of foreign countries."
+The fear was caused by the so-called millennium bug, said to lurk deep in electronic devices and computer software of the day, an unseen bogeyman poised to attack the moment the clock struck midnight and the calendar flipped to the year 2000.
+A CBC Vancouver TV report set to ominous music described the millennium bug this way:
+"Up until recently, computers were programmed to read the year using two digits: 97, 98, or 99. The concern is that when the year 2000 comes around, computers will go bonkers when [they] read the last two years as 00 and confuse it as 1900."
+Of course, computers did not go bonkers, and no planes fell out of the sky. There was no cascading computer network failure and emergency responders on standby for the crisis that might transpire mostly had a quiet night. 
+Y2K came and went, a big nothing-burger that left those who had stocked up on canned beans, propane canisters and batteries just in case, with a home full of canned beans, propane canisters and batteries.
+Vancouverites prepare for Y2K in 1999
+It was OK in the rest of the world as well. And in the end, no major problems were reported.  
+And for that, Y2K alarmists deserve some credit for highlighting the problem early, prompting governments, institutions and businesses to address the issue before the year 2000 arrived.
+In fact, months before then-prime minister Jean Chrétien had already reassured Canadians that efforts to stamp out the millennium bug were well on track. 
+"Getting our country ready for the Year 2000 is serious business," said Chrétien. "It must, and it will remain a national priority to ensure that Canada makes a safe and prosperous passage into the new century."
+As it turns out, Canada did slide into the new century without a problem. And like many things, a quarter century later, Y2K panic seems quaint, if not a little funny looking back now. 
+@CBCLarsen
+Karin Larsen is a former Olympian and award winning sports broadcaster who covers news and sports for CBC Vancouver.
+It is a priority for CBC to create products that are accessible to all in Canada including people with visual, hearing, motor and cognitive challenges.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the Y2K scare, which was primarily caused by the millennium bug in electronic devices and computer software. The article explains how computers were programmed to read the year using two digits and how this could cause confusion when the year 2000 came around. The discussion is centered around the technological aspects of the issue, and the article provides some depth in explaining the problem. However, the focus is shared with non-technological topics, such as the fear and preparation for the Y2K scare."}]

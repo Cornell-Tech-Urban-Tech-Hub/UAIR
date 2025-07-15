@@ -1,0 +1,20 @@
+Why Denmark hasn't had a bank robbery in three years
+The interest organisation for banks, Finans Danmark, published the count and said that the low incidence of bank robberies is likely related to a declining use of cash.
+ATM robberies are also in steep decline with only one attempt in 2024 at breaking into a cash machine using explosives, the organisation said.
+But the near-absence of bank and ATM robberies does not necessarily mean crime has fallen.
+Criminals who want to steal money are more likely than ever to focus their efforts online, Finans Danmark’s director for digitisation Michael Busk-Jepsen said in a press statement.
+“So it’s not surprising that criminals follow the money and now focus their energy on tricking Danes into transferring money to them from their private accounts,” he said.
+Busk-Jepsen urged members of the public to keep in mind that a genuine police officer or bank representative would never ask you to transfer money to another account.
+The lack of bank robberies in recent years is in clear contrast to records from the beginning of the century.
+Some 221 bank robberies took place in 2000 according to Finans Danmark. That corresponds to almost one every weekday. Four years later, the figure had dropped to 121 and since 2017, it has not exceeded 10 within a single year.
+The number of ATM attacks peaked at 16 in 2016.
+The data from Nets, the company which operates the country’s card payment system, revealed that 28 percent of people now only use card or digital payments.
+“We see it as a reflection of the fact that more and more Danes no longer really feel the need for cash in their everyday lives,” Nets national director Allan Bonke said at the time.
+“That’s also because you can pay digitally everywhere,” he added.
+Many people no longer take a wallet with them when they go out, he said.
+Neighbouring Norway and Sweden have jettisoned cash to a greater degree than Denmark, however, with around 40 percent in those two countries no longer using physical currency.
+2025 The Local, All Rights Reserved.
+
+
+
+[{"about_computing_score": 6, "about_computing_explanation": "The article discusses the decline of bank and ATM robberies in Denmark, attributing it to the decreasing use of cash and the increasing reliance on digital payments. The director of digitisation for Finans Danmark mentions that criminals are now focusing their efforts online, tricking people into transferring money to them from their private accounts. While the article does not delve deeply into the technical aspects of digital payments or online crime, it highlights the shift towards digital transactions as a significant factor in the decline of traditional robberies."}]

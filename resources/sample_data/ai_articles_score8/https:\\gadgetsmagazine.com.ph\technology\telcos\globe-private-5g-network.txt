@@ -1,0 +1,17 @@
+Globe deploys PH’s 1st Private 5G Network for B2B connectivity
+Globe has successfully deployed the Philippines’ first fully functional Private 5G Network designed to address major operational pain points and challenges in different industries.
+Installed at a Globe facility in Makati City, this dedicated, on-premise wireless network showcases the potential of 5G to power advanced digital solutions that support critical functions with utmost reliability and efficiency.
+Unlike traditional public networks shared by multiple users, Globe’s Private 5G Network offers businesses a dedicated bandwidth, providing a higher level of control and security over their network environment.  
+It also enables customization to deliver high-performance, low-latency, and secure connectivity exclusive to a specific organization, facility, or operation.
+The service will soon be available to Globe’s Business-to-Business (B2B) clients, including those in ports, mining, and manufacturing, unlocking new possibilities across various sectors.
+“This milestone demonstrates our drive to provide cutting-edge connectivity solutions that cater to the varying needs of our clients,” said Gerhard Tan, senior director and head of technology strategy and innovations at Globe.  “As businesses and organizations continue to adapt to the rapidly changing technological landscape, Globe’s private 5G network solution will be a key enabler in overcoming connectivity challenges, enabling new applications for different use cases and driving the next wave of digital transformation.”
+To ensure its private 5G solutions remain at the forefront of innovation, Globe has been working closely with leading technology providers, systems integrators, and global enterprises.
+The pilot run, done in partnership with Nokia Shanghai Bell, featured the integration of a Video Surveillance and Analytics Solution that enables people counting, facial recognition, gender detection, and vehicle plate tracking.
+These capabilities are particularly beneficial in ensuring operational safety, workforce management, and asset tracking, to help businesses operate more efficiently and securely.
+Globe’s Private 5G Network deployment signals the company’s continued commitment to driving digital innovation and providing B2B clients with the tools they need to thrive in an increasingly connected world.
+Related Posts
+© 2020 - Great Minds Media Inc.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article is about Globe deploying the Philippines' first Private 5G Network for Business-to-Business (B2B) connectivity, which is a key topic in the article. The discussion provides some depth, particularly in the technical aspects of the network, such as its ability to offer dedicated bandwidth, high-performance, low-latency, and secure connectivity. The article also explores the potential benefits of this technology, including its ability to support critical functions with utmost reliability and efficiency. However, the focus is shared with non-technological topics, such as the potential applications in various sectors and the company's commitment to driving digital innovation."}]

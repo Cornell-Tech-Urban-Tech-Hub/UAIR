@@ -1,0 +1,20 @@
+HSR to encircle Taiwan
+Taiwan should seek opportunities to cooperate with the US on drone production, a Taiwanese researcher said yesterday, after the US Department of Commerce on Thursday announced a potential ban on drones with Chinese components.
+The department said it was seeking to safeguard the supply chain for drones, as Russia and China could potentially access drones remotely and manipulate them to gain sensitive data, Reuters reported. 
+US Secretary of Commerce Gina Raimondo in September last year announced a similar ban on Chinese vehicles, it added.
+Photo: CNA
+“Taiwan should take this opportunity to clearly define the ‘non-red’ supply chain, and to become a trusted partner of the US in drone production,” Kuma Academy chief executive officer Ho Cheng-hui (何澄輝) said yesterday.
+China and Russia have shown their intention to use cyberespionage to endanger US infrastructure and security, so Washington is likely to amend legislation to require private companies to cooperate on protecting national security, he said.
+The geospatial information captured or collected by drones is highly sensitive and could have implications for national security. To address the issue, the US could take a phased approach, he said.
+“To start with, it could clarify security concerns and require drone manufacturers to use databases and servers located in the US,” he said, adding that it could be strictly prohibited for drones to send any data back to China or be remotely accessible.
+“Taiwan should also follow the US approach and implement inspection and control measures in stages,” Ho said.
+Taiwan’s government already enforces measures for regulating drones in three stages starting from last year and would require registration measures for all drones on the market by the end of this year, he said.
+“In the future, drones weighing more than 500g must undergo different tests related to information security, and manufacturers would be required to obtain registration certificates,” he said.
+The Chungshan Institute of Science and Technology has also bolstered drone production in Taiwan through the establishment of an aerospace industrial park in Chiayi, which uses wind tunnels and artificial intelligence to aid development, he said. 
+“The park also facilitates customized site design, and there are facilities for hydrogen production and energy storage,” he said.
+“The hope is to attract private enterprises to open in the park, with the aim of establishing a drone industry ecosystem,” he added.
+While a full ban on Chinese drones for the commercial sector would be challenging, Taiwan must take steps to protect its domestic market and build a trustworthy supply chain to facilitate cooperation with the US and other partners, he said.
+
+
+
+[{"about_computing_score": 8, "about_computing_explanation": "The article discusses the US potential ban on drones with Chinese components, citing national security concerns. The Taiwanese researcher suggests that Taiwan should cooperate with the US on drone production, leveraging AI in the development process. The article highlights the importance of a trustworthy supply chain, inspection, and control measures in stages, which involves technical aspects of drone production, including databases, servers, and information security tests. The Chungshan Institute of Science and Technology also uses AI and wind tunnels to aid drone development, making AI a significant part of the discussion."}]
