@@ -1,0 +1,24 @@
+# Uses Hydra Submitit Slurm launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 480
+nodes: 1
+tasks_per_node: 1
+cpus_per_task: 8
+mem_gb: 64
+gpus_per_node: 2
+partition: pierson
+array_parallelism: 1
+name: C_ctx_simple_grid
+additional_parameters:
+  gres: gpu:2
+  wckey: ""
+setup:
+  - export HYDRA_FULL_ERROR=1
+  - source ~/.bashrc
+  - source activate /share/ju/matt/conda/cillm-lora
+  - export CUDA_VISIBLE_DEVICES=0,1
+  - export VLLM_WORKER_MULTIPROC_METHOD=spawn
+  - export VLLM_USE_V1=1
+  - export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True
+  - export CUDA_LAUNCH_BLOCKING=0

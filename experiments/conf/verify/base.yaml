@@ -1,0 +1,8 @@
+verify:
+  method: combo
+  top_k: 3
+  thresholds: "sim=0.55,ent=0.85,contra=0.05"
+  device: cpu
+  output: verification
+
+

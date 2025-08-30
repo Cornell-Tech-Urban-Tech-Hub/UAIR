@@ -1,0 +1,14 @@
+taxonomy:
+  model_source: ${model.model_source}
+  tensor_parallel_size: ${model_runtime.tensor_parallel_size}
+  batch_size: ${model_runtime.batch_size}
+  concurrency: ${model_runtime.concurrency}
+  max_model_len_tokens: ${model_runtime.max_model_len_tokens}
+  max_output_tokens: 8
+  gpu_memory_utilization: ${model_runtime.gpu_memory_utilization}
+  tokenizer_pool_size: ${model_runtime.tokenizer_pool_size}
+  kv_cache_dtype: auto
+  max_num_batched_tokens: 3072
+  max_num_seqs: 4
+
+

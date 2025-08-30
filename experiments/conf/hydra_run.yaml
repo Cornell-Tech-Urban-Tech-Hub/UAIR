@@ -1,0 +1,12 @@
+hydra:
+  run:
+    dir: /share/ju/matt/sensing-ai-risks/outputs/${now:%Y-%m-%d_%H-%M-%S}
+  sweep:
+    dir: /share/ju/matt/sensing-ai-risks/multirun/${now:%Y-%m-%d_%H-%M-%S}
+    subdir: ${hydra.job.override_dirname}
+  job:
+    config:
+      override_dirname:
+        exclude_keys: [seed, wandb.mode, wandb.project, run_id, output_dir]
+
+

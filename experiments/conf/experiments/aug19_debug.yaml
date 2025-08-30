@@ -1,0 +1,21 @@
+# Debug experiment profile similar to experiments/aug19-test.sh
+
+defaults:
+  - /model: vllm_qwen3-4b
+  - /prompts: base
+  - /taxonomy: weitz
+  - /keywords: base
+  - /relevance: base
+  - /runtime: local
+  - /vllm: runtime
+  - /loggers: wandb
+  - /data: inputs
+  - /verify: base
+  - /taxonomy: runtime
+  - /debug: on
+  - /pipeline: default
+  - hydra_run
+  - _self_
+
+seed: 777
+

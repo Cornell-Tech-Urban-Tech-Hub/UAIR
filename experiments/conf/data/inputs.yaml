@@ -1,0 +1,4 @@
+data:
+  input_parquet: ${env:DATA_ROOT,/share/ju/matt/sensing-ai-risks/data}/global_subset/all_articles.parquet
+
+

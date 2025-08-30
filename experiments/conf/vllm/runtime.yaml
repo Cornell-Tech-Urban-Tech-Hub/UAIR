@@ -1,0 +1,9 @@
+model_runtime:
+  max_model_len_tokens: 8192
+  gpu_memory_utilization: 0.65
+  tensor_parallel_size: 2
+  batch_size: 16
+  concurrency: 1
+  tokenizer_pool_size: 4
+
+

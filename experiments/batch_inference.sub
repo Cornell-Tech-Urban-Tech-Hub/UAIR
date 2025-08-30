@@ -1,0 +1,51 @@
+#!/bin/bash 
+#SBATCH -J batch_inference
+#SBATCH -o /share/ju/matt/sensing-ai-risks/log/batch_inference/%j.out 
+#SBATCH -e /share/ju/matt/sensing-ai-risks/log/batch_inference/%j.err
+#SBATCH --mail-type=ALL 
+#SBATCH --mail-user=mwf62@cornell.edu 
+#SBATCH -N 1
+#SBATCH -n 8
+#SBATCH --get-user-env 
+#SBATCH --mem=64gb
+#SBATCH -t 24:00:00
+#SBATCH --gpus=2
+#SBATCH --partition=pierson
+
+pwd
+source /home/mwf62/.bashrc
+ 
+source activate /share/ju/matt/conda/cillm-lora
+
+nvidia-smi
+
+nvidia-smi topo -m
+
+cd /share/ju/matt/sensing-ai-risks
+
+# run the python command in the script in $1. cat the script and echo it to the screen.
+cat $1
+
+# Verification controls (override per-job or export before sbatch)
+export VERIFY_METHOD=${VERIFY_METHOD:-combo}
+export VERIFY_TOP_K=${VERIFY_TOP_K:-3}
+export VERIFY_THRESHOLDS=${VERIFY_THRESHOLDS:-sim=0.55,ent=0.85,contra=0.05}
+export VERIFY_OUTPUT=${VERIFY_OUTPUT:-verification}
+export VERIFY_DEVICE=${VERIFY_DEVICE:-cpu}
+
+# vLLM and CUDA safety knobs (reduce memory fragmentation and graph capture overhead)
+export VLLM_WORKER_MULTIPROC_METHOD=${VLLM_WORKER_MULTIPROC_METHOD:-spawn}
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True
+export CUDA_LAUNCH_BLOCKING=0
+export VLLM_USE_V1=${VLLM_USE_V1:-1}
+export VLLM_LOGGING_LEVEL=${VLLM_LOGGING_LEVEL:-WARNING}
+
+bash $1
+
+
+
+
+
+
+
+

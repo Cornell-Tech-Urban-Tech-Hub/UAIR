@@ -1,0 +1,16 @@
+defaults:
+  - override hydra/launcher: ray
+
+hydra:
+  launcher:
+    _target_: hydra_plugins.hydra_ray_launcher.ray_launcher.RayLauncher
+    ray_remote:
+      num_cpus: ${resources.num_cpus}
+      num_gpus: ${resources.num_gpus}
+    # Optional: runtime_env if needed
+    # runtime_env:
+    #   env_vars:
+    #     VLLM_USE_V1: "1"
+    #     VLLM_WORKER_MULTIPROC_METHOD: spawn
+
+

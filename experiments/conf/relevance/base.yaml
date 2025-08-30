@@ -1,0 +1,21 @@
+relevance:
+  model_source: ${model.model_source}
+  tensor_parallel_size: ${model_runtime.tensor_parallel_size}
+  batch_size: ${model_runtime.batch_size}
+  concurrency: ${model_runtime.concurrency}
+  tokenizer_pool_size: ${model_runtime.tokenizer_pool_size}
+  max_model_len_tokens: ${model_runtime.max_model_len_tokens}
+  max_output_tokens: 8
+  safety_margin_tokens: 2048
+  chunk_overlap_tokens: 512
+  gpu_memory_utilization: ${model_runtime.gpu_memory_utilization}
+  prefilter_mode: pre_gating
+  disable_keyword_prefilter: false
+  disable_chunking: false
+  kv_cache_dtype: auto
+  max_num_batched_tokens: 3072
+  max_num_seqs: 4
+  conservative_vllm: false
+  log_rationales: false
+
+

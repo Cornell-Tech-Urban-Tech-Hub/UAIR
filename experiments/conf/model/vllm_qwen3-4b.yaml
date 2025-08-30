@@ -1,0 +1,13 @@
+model_source: /share/ju/matt/zoo/models/Qwen3-4B-Instruct-2507
+engine_kwargs:
+  enable_chunked_prefill: true
+  max_num_batched_tokens: 4096
+  max_model_len: ${model_runtime.max_model_len_tokens}
+  max_num_seqs: 8
+  gpu_memory_utilization: ${model_runtime.gpu_memory_utilization}
+  tensor_parallel_size: ${model_runtime.tensor_parallel_size}
+  enforce_eager: true
+batch_size: ${model_runtime.batch_size}
+concurrency: ${model_runtime.concurrency}
+
+
