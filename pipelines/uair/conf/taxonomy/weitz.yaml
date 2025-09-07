@@ -1,0 +1,110 @@
+# @package taxonomy
+metadata:
+  created: "2025-06-23"
+  id: "7f5ba14d378670aded988cf737595d1f"
+  description: "weitz-taxonomy-2025-05-15"
+
+taxonomy:
+  Water:
+    - Desalination and Brackish Water Treatment
+    - Engineered Flood Defenses (Seawalls, Levees, Revetments, Breakwaters, Surge Barriers)
+    - Groundwater Recharge, Watershed Protection, Aquifer Restoration
+    - Hydrological Modeling, Simulation and Forecasting
+    - Integrated Water Resource Management (IWRM)
+    - Leak Detection, Water Efficiency, and Evaporation Protection
+    - Pipeline Rehabilitation, Subsurface Inspection and Repair
+    - Stormwater Drainage Systems
+    - Usage Metering, Conservation Tools and Water Risk Monitoring
+    - Wastewater Reclamation and Grey Water Recycling
+    - Water Harvesting (Rainwater Collection, Atmospheric Water Generation)
+    - Water Level Monitoring and Alerting (Flood, River Flow, Sea Level, Sewer Overflow)
+    - Water Quality Monitoring, Pollution Control and Remediation
+    - Water Storage, Pumping Systems and Pressure Management
+    - Water Treatment, Filtration, and Distributed Treatment Facilities
+  Food:
+    - Climate-Resilient Crop Traits and Crop Protection
+    - Cold Chain And Food Storage
+    - Drought Monitoring
+    - Farm Digitization, Agronomics, and Soil Health Monitoring
+    - Food Waste Reduction
+    - Hyperlocal Weather Stations
+    - Precision Agriculture, Efficient Irrigation Systems and Fertilizer Efficiency
+    - Urban Food Production (Controlled Environment Agriculture, Rooftop, Urban Pollinators)
+  Buildings:
+    - Building Code and Permit Management, Code Enforcement, and Land Use Planning
+    - Building Management Systems for Energy Efficiency and Demand Response
+    - Climate-Resilient Building Materials (Fire Resistant, Waterproof, Insulation)
+    - Damage Recovery (Flood, Fire, Cyclone)
+    - Efficient Cooling Systems (Heat Pumps, Efficient Fans)
+    - Modular and Prefabricated Resilient Housing
+    - Reflective Coatings (Cool Roof, Green Roof)
+    - Resilient Building Design, Planning and Construction
+    - Shade Structures (Outdoor Cooling, Misting)
+    - Ventilation, Passive Cooling and Air Filtration
+    - Wildfire Resilience Systems
+  Infrastructure:
+    - Climate-Ready Manufacturing, Warehouses, Logistics Hubs, Data Centers
+    - Infrastructure Inspection and Hardening
+    - Infrastructure Monitoring
+    - Infrastructure Planning and Relocation
+    - Permeable Surfaces
+    - Predictive Maintenance and Repair
+    - Smart City Systems and Digital Twins
+    - Waste Management, Smart Waste Collection, Recycling and Circular Economy
+  Energy:
+    - Battery Storage Backup Power for Residential and Commercial
+    - Energy Asset and Distribution Grid Hardening
+    - Grid Monitoring, Stability and Outage Detection
+    - Microgrid Systems and Controllers
+    - Transmission Line Undergrounding
+    - Vegetation Management
+    - Vehicle to Grid and Vehicle to Building
+    - Virtual Power Plants, Distributed Energy Resource Management Systems (DERMS)
+  Transportation:
+    - Disaster Response Logistics
+    - Fleet Electrification and Charging Systems
+    - Hardening of Roads, Bridges, Tunnels, Maritime and Rail
+    - High Albedo Pavement and Surfaces
+    - Micromobility Systems
+    - Resilient Mass Transit Systems
+    - Supply Chain Agility and Visibility
+    - Traffic Management, Curb Management, Congestion Reduction
+    - Transportation Monitoring
+  Nature:
+    - Biodiversity Protection, Ecosystem Monitoring and Rehabilitation
+    - Invasive Species, Pest and Vector Control
+    - Natural Coastal Protection (Reefs, Mangroves)
+    - Natural Water Drainage (Bioswales, Rain Gardens, Wetlands)
+    - Riparian Zone Protection, Erosion Control
+    - Shoreline Restoration and Stabilization
+    - Urban Greening (Green Spaces, Street Trees, Parks, Reforestation)
+  Health:
+    - Air Quality Measurement and Filtration
+    - Disease Surveillance, Pathogen Detection and Response
+    - Emergency Response Equipment, Mobile Units, Shelter, Sanitation
+    - Heat Stress Monitoring
+    - Public Cooling Facilities
+    - Wearable Cooling Devices and Heat Stress Protective Gear
+  Finance:
+    - Adaptation Finance Mechanisms
+    - Asset Risk Modeling, Vulnerability Analysis And Reporting
+    - Climate Insurance (Parametric, Drought, Flood, Project Insurance)
+    - Insurtech Solutions
+    - Resilience Lending and Incentives Programs for Residential, SMEs
+  Planning And Monitoring:
+    - Climate Analytics, Hazard Forecasting and Weather Monitoring
+    - Climate Data Exchanges and Standards
+    - Decision Support for Climate Adaptation Planning and Urban Planning
+    - Drone-based Observation and Analytics
+    - Integrated Sensor Networks
+    - Migration and Resettlement Management
+    - Remote Sensing and Geospatial Data (Earth Observation Platforms)
+    - Urban Heat Island Mapping and Planning
+    - Wildfire Prediction, Detection And Suppression
+  Communication And Community:
+    - Commmunity Engagement Platforms for Planning, Education / Training and Crowd-Sourcing
+    - Early Warning Systems And Alerts (Heat, Wildfire, Air Quality, Flood, Water)
+    - First Responder and Public Safety Tech
+    - Telecommunication And Connectivity Hardening
+
+

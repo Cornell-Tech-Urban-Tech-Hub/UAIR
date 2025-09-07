@@ -1,0 +1,23 @@
+# Lightweight Submitit Slurm launcher for the UAIR orchestrator parent (monitor)
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 120
+nodes: 1
+tasks_per_node: 1
+cpus_per_task: 2
+mem_gb: 8
+gpus_per_node: 0
+partition: pierson
+array_parallelism: 1
+name: UAIR-monitor
+additional_parameters:
+  wckey: ""
+setup:
+  - export HYDRA_FULL_ERROR=1
+  - source ~/.bashrc
+  - conda activate /share/ju/matt/conda/cillm-lora || source activate /share/ju/matt/conda/cillm-lora
+  - unset WANDB_DISABLED
+  - export RULE_TUPLES_SILENT=1
+  - export TOKENIZERS_PARALLELISM=false
+
+

@@ -1,0 +1,90 @@
+# Top-level Hydra config for E_CI-rule-tuples
+
+defaults:
+  - data: inputs
+  - prompt: classify
+  - prompt@prompt_taxonomy: taxonomy
+  - model: vllm_qwen3-30b
+  - override hydra/launcher: g2_slurm_pierson
+  - _self_
+
+experiment:
+  name: UAIR
+
+runtime:
+  stage: classify   # classify | taxonomy | verification | pipeline
+  debug: false
+  sample_n: null
+  output_csv: null
+  use_llm_classify: true
+  use_llm_decompose: false
+  max_errored_blocks: 0
+  guided_decoding_decompose: false
+  streaming_io: false
+  output_dir: null
+  serialize_nested_json: true
+  # Relevance/taxonomy controls
+  prefilter_mode: pre_gating   # pre_gating | post_gating | off
+  keyword_buffering: true
+  keyword_window_words: 100
+  job_memory_gb: 64
+  child_launcher: g2_slurm_pierson
+  pipeline_local: false
+  gate_on_relevance: true
+
+sampling_params:
+  seed: 777
+  temperature: 0.0
+  top_p: 1.0
+  top_k: -1
+  max_tokens: 16384
+
+# Stage-specific sampling overrides
+sampling_params_classify:
+  max_tokens: 4
+  detokenize: false
+  guided_decoding:
+    choice:
+      - "YES"
+      - "NO"
+
+sampling_params_decompose:
+  max_tokens: 1024
+  detokenize: false
+
+# Taxonomy stage sampling overrides
+sampling_params_taxonomy:
+  max_tokens: 16
+  detokenize: false
+
+# Path/config for taxonomy
+taxonomy_json: ${oc.env:TAXONOMY_JSON,/share/ju/matt/sensing-ai-risks/pipelines/uair/conf/taxonomy/weitz.yaml}
+
+# Verification defaults
+verify:
+  method: embed   # off | embed | nli | combo | combo_judge
+  top_k: 3
+  thresholds: "sim=0.55,ent=0.85,contra=0.05"
+  device: ${oc.env:VERIFY_DEVICE,null}
+
+wandb:
+  enabled: true
+  name_prefix: null
+  project: ${oc.env:WANDB_PROJECT,UAIR}
+  entity: ${oc.env:WANDB_ENTITY,""}
+  group: ${oc.env:WANDB_GROUP,""}
+  table_sample_rows: 1000
+  single_run: true
+
+
+hydra:
+  job:
+    name: ${experiment.name}
+  run:
+    dir: ${oc.env:HYDRA_RUN_DIR,outputs}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${oc.env:HYDRA_SWEEP_DIR,multirun}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+
+
+

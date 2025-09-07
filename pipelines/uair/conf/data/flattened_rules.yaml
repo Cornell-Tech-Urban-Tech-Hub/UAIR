@@ -1,0 +1,10 @@
+parquet_path: /share/ju/matt/structured-ci-extraction/data/reddit/processed/subreddits_rules_flattened.parquet
+columns:
+  name: name
+  public_description: public_description
+  subscribers: subscribers
+  rule_text: rule_text
+  rule_index: rule_index
+  total_rules_count: total_rules_count
+
+
