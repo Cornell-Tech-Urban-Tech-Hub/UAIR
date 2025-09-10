@@ -321,56 +321,7 @@ def run_decomposition_stage(df: pd.DataFrame, cfg):
     for c in base_cols:
         if c not in out_df.columns:
             out_df[c] = None
-    # Stage-scoped W&B logging (optional)
-    try:
-        if bool(getattr(cfg.wandb, "enabled", False)):
-            try:
-                import wandb as _wandb  # type: ignore
-            except Exception:
-                _wandb = None  # type: ignore
-            if _wandb is not None:
-                try:
-                    group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-                except Exception:
-                    group = None
-                try:
-                    proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                except Exception:
-                    proj = "UAIR"
-                try:
-                    ent = getattr(cfg.wandb, "entity", None)
-                    ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                except Exception:
-                    ent = None
-                try:
-                    run = _wandb.init(project=proj, entity=ent, job_type=str(getattr(cfg.runtime, "stage", "decompose")), name=f"{getattr(cfg.experiment, 'name', 'UAIR')}-decompose", group=group, config=OmegaConf.to_container(cfg, resolve=True))
-                except Exception:
-                    run = None  # type: ignore
-                try:
-                    total = int(len(out_df))
-                except Exception:
-                    total = 0
-                have_any = 0
-                try:
-                    if total > 0:
-                        have_any = int((out_df[[
-                            "ci_subject","ci_sender","ci_receiver","ci_information","ci_transmission_principle"
-                        ]].notna().any(axis=1)).sum())
-                except Exception:
-                    pass
-                try:
-                    _wandb.log({
-                        "decompose/rows": total,
-                        "decompose/any_tuple_present": have_any,
-                    })
-                except Exception:
-                    pass
-                try:
-                    _wandb.finish()
-                except Exception:
-                    pass
-    except Exception:
-        pass
+    # Stage-scoped logging is handled by the orchestrator
     return out_df
 
 

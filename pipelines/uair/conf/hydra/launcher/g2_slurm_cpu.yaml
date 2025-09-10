@@ -4,41 +4,36 @@ submitit_folder: ${hydra.sweep.dir}/.submitit/%j
 timeout_min: 2880
 nodes: 1
 tasks_per_node: 1
-cpus_per_task: 8
-mem_gb: ${runtime.job_memory_gb}
+cpus_per_task: 2
+mem_gb: 16
 partition: pierson
 array_parallelism: 1
-gpus_per_node: 2
 name: UAIR
 additional_parameters:
-  gres: gpu:2
+  gres: "none"
   wckey: ""
+srun_args:
+  - --gres=none
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
   # Ensure conda is available in non-interactive batch shells
-  # Robust conda activation across batch shells
   - if [ -f /share/ju/matt/conda/etc/profile.d/conda.sh ]; then source /share/ju/matt/conda/etc/profile.d/conda.sh; fi
   - if [ -x /share/ju/matt/conda/bin/conda ]; then eval "$(/share/ju/matt/conda/bin/conda shell.bash hook)"; fi
-  - |
-      if ! command -v conda >/dev/null 2>&1; then
-        echo "[launcher] conda command not found; trying direct env activation" >&2
-      fi
   - conda activate /share/ju/matt/conda/cillm-lora || { [ -f /share/ju/matt/conda/cillm-lora/bin/activate ] && source /share/ju/matt/conda/cillm-lora/bin/activate; } || true
+  # W&B is controlled via config; avoid forcing mode here
   - unset WANDB_DISABLED
   - if [ -n "$WANDB_MODE" ]; then export WANDB_MODE="$WANDB_MODE"; fi
+  # propagate base URL if configured
   - if [ -n "$WANDB_BASE_URL" ]; then export WANDB_BASE_URL="$WANDB_BASE_URL"; fi
   - if [ -n "$WANDB_GROUP" ]; then export WANDB_GROUP="$WANDB_GROUP"; fi
   - export RULE_TUPLES_SILENT=1
   - export WANDB_SILENT=true
   # Ensure Ray detached actors are created in a stable namespace per run
   - export RAY_NAMESPACE=${oc.env:WANDB_GROUP,uair}
-  - export VLLM_WORKER_MULTIPROC_METHOD=spawn
-  - export VLLM_USE_V1=1
-  - export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True
-  - export CUDA_LAUNCH_BLOCKING=0
   - export TOKENIZERS_PARALLELISM=false
-  - export CUDA_VISIBLE_DEVICES=0,1
-  # Fallback: disable CPU bind via env if launcher ignores srun_args
-  - export SLURM_CPU_BIND=none
+  # Avoid GPU-related exports in CPU-only parent
+  - unset CUDA_VISIBLE_DEVICES
+  - unset PYTORCH_CUDA_ALLOC_CONF
+  - unset CUDA_LAUNCH_BLOCKING
 

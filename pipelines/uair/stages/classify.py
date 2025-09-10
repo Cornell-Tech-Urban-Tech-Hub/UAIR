@@ -32,6 +32,216 @@ def _maybe_silence_vllm_logs() -> None:
         pass
 
 
+def _read_int_file(path: str) -> int:
+    try:
+        with open(path, "r") as f:
+            s = f.read().strip()
+        if s.lower() == "max":
+            return -1
+        return int(s)
+    except Exception:
+        return -1
+
+
+def _detect_cgroup_mem_limit_bytes() -> int:
+    """Return cgroup memory limit in bytes when available; otherwise -1.
+
+    Supports cgroup v2 (memory.max) and v1 (memory.limit_in_bytes).
+    """
+    # cgroup v2
+    v2 = "/sys/fs/cgroup/memory.max"
+    lim = _read_int_file(v2)
+    if lim > 0:
+        # Filter out unrealistically large values (no limit)
+        try:
+            if lim > (1 << 56):
+                return -1
+        except Exception:
+            pass
+        return lim
+    # cgroup v1
+    v1 = "/sys/fs/cgroup/memory/memory.limit_in_bytes"
+    lim = _read_int_file(v1)
+    if lim > 0:
+        try:
+            if lim > (1 << 56):
+                return -1
+        except Exception:
+            pass
+        return lim
+    return -1
+
+
+def _parse_int(val: str) -> int:
+    try:
+        return int(val)
+    except Exception:
+        return -1
+
+
+def _parse_cpus_on_node(val: str) -> int:
+    if not isinstance(val, str):
+        return -1
+    try:
+        # Common forms: "32", "16(x2)", "2,2", "2,1"
+        v = val.strip()
+        if "(x" in v and v.endswith(")"):
+            import re as _re
+            m = _re.match(r"^(\d+)\(x(\d+)\)$", v)
+            if m:
+                a = int(m.group(1))
+                b = int(m.group(2))
+                return max(1, a * b)
+        if "," in v:
+            parts = [p for p in v.split(",") if p.strip()]
+            acc = 0
+            for p in parts:
+                try:
+                    acc += int(p)
+                except Exception:
+                    return -1
+            return max(1, acc)
+        return max(1, int(v))
+    except Exception:
+        return -1
+
+
+def _detect_slurm_job_mem_bytes() -> int:
+    """Infer SLURM job memory allocation in bytes from env vars.
+
+    Prefers SLURM_MEM_PER_NODE; otherwise uses SLURM_MEM_PER_CPU * SLURM_CPUS_ON_NODE.
+    Values are MB according to SLURM docs.
+    """
+    try:
+        mem_per_node_mb = os.environ.get("SLURM_MEM_PER_NODE")
+        if mem_per_node_mb:
+            mb = _parse_int(mem_per_node_mb)
+            if mb > 0:
+                return mb * 1024 * 1024
+    except Exception:
+        pass
+    try:
+        mem_per_cpu_mb = os.environ.get("SLURM_MEM_PER_CPU")
+        cpus_on_node = os.environ.get("SLURM_CPUS_ON_NODE")
+        if mem_per_cpu_mb and cpus_on_node:
+            mb = _parse_int(mem_per_cpu_mb)
+            cpus = _parse_cpus_on_node(cpus_on_node)
+            if mb > 0 and cpus > 0:
+                return mb * cpus * 1024 * 1024
+    except Exception:
+        pass
+    return -1
+
+
+def _effective_total_memory_bytes() -> int:
+    """Best-effort job-aware total memory for sizing Ray object store.
+
+    Order of preference:
+    1) cgroup memory limit (container/SLURM cgroup)
+    2) SLURM env-based memory inference
+    3) System total memory (psutil/sysconf)
+    """
+    # cgroup limit first
+    cg = _detect_cgroup_mem_limit_bytes()
+    if cg > 0:
+        return cg
+    # SLURM-derived
+    sj = _detect_slurm_job_mem_bytes()
+    if sj > 0:
+        return sj
+    # Fallback to system total
+    try:
+        import psutil  # type: ignore
+        tot = int(getattr(psutil.virtual_memory(), "total", 0))
+        if tot > 0:
+            return tot
+    except Exception:
+        pass
+    try:
+        return int(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES"))
+    except Exception:
+        pass
+    return -1
+
+
+def _ensure_ray_init(cfg) -> None:
+    try:
+        import ray  # type: ignore
+        if not ray.is_initialized():
+            # Detect SLURM CPU allocation
+            cpus_alloc = None
+            try:
+                cpt = os.environ.get("SLURM_CPUS_PER_TASK")
+                if cpt is not None and str(cpt).strip() != "":
+                    cpus_alloc = int(cpt)
+                else:
+                    con = os.environ.get("SLURM_CPUS_ON_NODE")
+                    if con is not None and str(con).strip() != "":
+                        cpus_alloc = _parse_cpus_on_node(con)
+            except Exception:
+                cpus_alloc = None
+            # Prefer proportion of system memory when available; fallback to job_memory_gb.
+            obj_store_bytes = None
+            try:
+                # Allow explicit override via cfg.runtime.object_store_proportion (0.0-1.0)
+                prop = getattr(cfg.runtime, "object_store_proportion", None)
+                prop = float(prop) if prop is not None else None
+            except Exception:
+                prop = None
+            # Honor env proportion if set and no explicit override provided
+            try:
+                if prop is None:
+                    env_prop = os.environ.get("RAY_DEFAULT_OBJECT_STORE_MEMORY_PROPORTION")
+                    if env_prop is not None and str(env_prop).strip() != "":
+                        prop = float(env_prop)
+            except Exception:
+                pass
+            if prop is not None and 0.0 < prop <= 0.95:
+                try:
+                    total_bytes = _effective_total_memory_bytes()
+                    if total_bytes:
+                        obj_store_bytes = int(total_bytes * float(prop))
+                except Exception:
+                    obj_store_bytes = None
+            if obj_store_bytes is None:
+                try:
+                    # Prefer SLURM job mem if available to avoid using full node memory
+                    slurm_bytes = _detect_slurm_job_mem_bytes()
+                    if slurm_bytes > 0:
+                        job_mem_gb = max(1, int(slurm_bytes / (1024 ** 3)))
+                    else:
+                        job_mem_gb = int(getattr(cfg.runtime, "job_memory_gb", 64) or 64)
+                except Exception:
+                    job_mem_gb = 64
+                try:
+                    job_mem_gb = int(getattr(cfg.runtime, "job_memory_gb", 64) or 64)
+                except Exception:
+                    job_mem_gb = 64
+                try:
+                    obj_store_bytes = int(max(1, job_mem_gb) * (1024 ** 3) * 0.90)
+                except Exception:
+                    obj_store_bytes = int(64 * (1024 ** 3) * 0.90)
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ray.init(log_to_driver=True, object_store_memory=int(obj_store_bytes), num_cpus=int(cpus_alloc))
+                else:
+                    ray.init(log_to_driver=True, object_store_memory=int(obj_store_bytes))
+            except Exception:
+                # Best-effort fallback: let Ray auto-init
+                try:
+                    ray.init(log_to_driver=True)
+                except Exception:
+                    pass
+            # Constrain Ray Data CPU limits to SLURM allocation when available
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ctx = ray.data.DataContext.get_current()
+                    ctx.execution_options.resource_limits = ctx.execution_options.resource_limits.copy(cpu=int(cpus_alloc))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
 def _to_json_str(value: Any):
     """Serialize Python objects to JSON string for Arrow/Parquet friendliness.
 
@@ -157,12 +367,37 @@ def run_classification_stage(df: pd.DataFrame, cfg):
       else fall back to UAIR classify prompt. Produces both `relevance_answer` and `is_relevant`.
     Uses `article_text` as the canonical input text column.
     """
+    # Ensure Ray is initialized with desired object store cap based on job_memory_gb
+    _ensure_ray_init(cfg)
     # Streaming path: if a Ray Dataset is passed, use it end-to-end
     is_ray_ds = hasattr(df, "map_batches") and hasattr(df, "count") and _RAY_OK
     if not is_ray_ds:
         if df is None or len(df) == 0:
-            return pd.DataFrame(columns=["article_text","is_relevant"])  # minimal
+            return pd.DataFrame(columns=["article_id","article_text","is_relevant"])  # minimal
         out = df.copy()
+        # Ensure article_id exists for all rows (deterministic hash of path or text)
+        try:
+            import hashlib as _hash
+            if "article_id" not in out.columns:
+                out["article_id"] = None
+            def _gen_id_row(r: pd.Series) -> str:
+                try:
+                    src = r.get("article_path")
+                    if not isinstance(src, str) or src.strip() == "":
+                        src = r.get("article_text") or r.get("chunk_text") or ""
+                    return _hash.sha1(str(src).encode("utf-8")).hexdigest()
+                except Exception:
+                    return _hash.sha1(str(r.get("article_text") or r.get("chunk_text") or "").encode("utf-8")).hexdigest()
+            try:
+                mask_missing = (~out["article_id"].astype(str).str.strip().astype(bool))
+            except Exception:
+                mask_missing = True
+            if isinstance(mask_missing, bool):
+                out["article_id"] = out.apply(_gen_id_row, axis=1)
+            else:
+                out.loc[mask_missing, "article_id"] = out[mask_missing].apply(_gen_id_row, axis=1)
+        except Exception:
+            pass
     def _heuristic(text: Any) -> bool:
         s = str(text or "").lower()
         if not s:
@@ -191,65 +426,6 @@ def run_classification_stage(df: pd.DataFrame, cfg):
         out["is_relevant"] = out["article_text"].apply(_heuristic)
         out["classification_mode"] = "heuristic"
         out_df = out
-        # Stage-scoped W&B logging (optional) even for heuristic path
-        try:
-            if bool(getattr(cfg.wandb, "enabled", False)):
-                try:
-                    import wandb as _wandb  # type: ignore
-                except Exception:
-                    _wandb = None  # type: ignore
-                if _wandb is not None:
-                    _created_run = False
-                    try:
-                        group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-                    except Exception:
-                        group = None
-                    try:
-                        proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                    except Exception:
-                        proj = "UAIR"
-                    try:
-                        ent = getattr(cfg.wandb, "entity", None)
-                        ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                    except Exception:
-                        ent = None
-                    try:
-                        existing = getattr(_wandb, "run", None)
-                        if existing is None:
-                            run = _wandb.init(project=proj, entity=ent, job_type=str(getattr(cfg.runtime, "stage", "classify")), name=f"{getattr(cfg.experiment, 'name', 'UAIR')}-classify", group=group, config=OmegaConf.to_container(cfg, resolve=True))
-                            _created_run = True
-                        else:
-                            run = existing
-                    except Exception:
-                        run = None  # type: ignore
-                    try:
-                        total = int(len(out_df))
-                    except Exception:
-                        total = 0
-                    rel_count = 0
-                    ratio = 0.0
-                    try:
-                        if total > 0 and "is_relevant" in out_df.columns:
-                            rel_count = int(out_df["is_relevant"].astype(bool).sum())
-                            ratio = float(rel_count) / float(total) if total > 0 else 0.0
-                    except Exception:
-                        pass
-                    try:
-                        _wandb.log({
-                            "classify/rows": total,
-                            "classify/relevant_count": rel_count,
-                            "classify/relevant_ratio": ratio,
-                            "classify/avg_latency_s": None,
-                        })
-                    except Exception:
-                        pass
-                    try:
-                        if _created_run and not bool(getattr(cfg.wandb, "single_run", False)):
-                            _wandb.finish()
-                    except Exception:
-                        pass
-        except Exception:
-            pass
         return out_df
 
     if not _RAY_OK:
@@ -439,8 +615,22 @@ def run_classification_stage(df: pd.DataFrame, cfg):
 
     def _pre(row: Dict[str, Any]) -> Dict[str, Any]:
         _maybe_silence_vllm_logs()
+        # Ensure article_id is present on every row
+        try:
+            import hashlib as _hash
+            r = dict(row)
+            aid = r.get("article_id")
+            if not (isinstance(aid, str) and aid.strip() != ""):
+                src = r.get("article_path")
+                if not isinstance(src, str) or src.strip() == "":
+                    src = r.get("article_text") or r.get("chunk_text") or ""
+                r["article_id"] = _hash.sha1(str(src).encode("utf-8")).hexdigest()
+            row = r
+        except Exception:
+            pass
         if enable_kw_buf and kw_regex is not None:
             row = _attach_chunk_text(dict(row))
+        # Construct user content; avoid per-row tokenizer loads to prevent massive overhead.
         user = _format_user(row.get("article_text"), row)
         try:
             if isinstance(user, str) and len(user) > int(_approx_user_char_budget):
@@ -495,196 +685,92 @@ def run_classification_stage(df: pd.DataFrame, cfg):
         ds_in = df
         # Keyword flag + gating
         if prefilter_mode in ("pre_gating", "post_gating"):
+            # First mark keyword and tally BEFORE any filter so W&B sees true totals
+            usage_actor = None  # type: ignore
+            try:
+                if _RAY_OK:
+                    usage_actor = ray.get_actor("uair_usage_agg")  # type: ignore
+            except Exception:
+                usage_actor = None  # type: ignore
             ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("article_text"))})
+            if usage_actor is not None:
+                def _acc_kw(pdf: pd.DataFrame) -> pd.DataFrame:
+                    try:
+                        total_checked = int(len(pdf))
+                    except Exception:
+                        total_checked = 0
+                    try:
+                        marked = int(pdf["relevant_keyword"].astype(bool).sum()) if "relevant_keyword" in pdf.columns else 0
+                    except Exception:
+                        marked = 0
+                    try:
+                        usage_actor.record.remote("classify", kw_marked=int(marked), kw_checked=int(total_checked))  # type: ignore
+                    except Exception:
+                        pass
+                    return pdf
+                try:
+                    ds_in = ds_in.map_batches(_acc_kw, batch_format="pandas", batch_size=512)
+                except Exception:
+                    pass
             if prefilter_mode == "pre_gating":
                 ds_in = ds_in.filter(lambda r: bool(r.get("relevant_keyword", True)))
         # Attach chunk_text
         if enable_kw_buf and kw_regex is not None:
             ds_in = ds_in.map(_attach_chunk_text)
         # Trim chunk_text to fit model context budget
-        tok = _get_tokenizer(str(getattr(cfg.model, "model_source", "")))
         sys_text = system_prompt
         def _trim_row(r: Dict[str, Any]) -> Dict[str, Any]:
             txt = r.get("chunk_text") or r.get("article_text")
-            r["chunk_text"] = _trim_text_for_prompt(str(txt or ""), tok, sys_text)
+            # Use char-based trimming to avoid heavy tokenizer in Ray workers.
+            r["chunk_text"] = _trim_text_for_prompt(str(txt or ""), None, sys_text)
             return r
         ds_in = ds_in.map(_trim_row)
         processor = build_llm_processor(engine_config, preprocess=_pre, postprocess=_post)
         return processor(ds_in)
 
-    # Pandas path: prefilter, attach chunk_text, trim, then Ray Dataset
-    out = out.copy()
-    # Track keyword gating statistics before filtering
-    _kw_orig_total = None
-    _kw_marked_total = None
-    _kw_kept_after_gate = None
+    # Pandas path: build Ray Dataset directly and push prefilter/trim into maps
+    # Build a Ray Dataset with multiple blocks to enable true streaming.
+    # A single huge block (default from_pandas behavior) forces upstream UDFs
+    # like ChatTemplateUDF/TokenizeUDF to process the entire dataset before
+    # the vLLM stage sees any rows, causing large startup latency.
+    try:
+        total_rows = int(len(out))
+    except Exception:
+        total_rows = 0
+    try:
+        desired_rows_per_block = int(getattr(cfg.runtime, "rows_per_block", 2000) or 2000)
+    except Exception:
+        desired_rows_per_block = 2000
+    step = max(1, desired_rows_per_block)
+    if total_rows > step:
+        try:
+            dfs_list = [out.iloc[i:i + step] for i in range(0, total_rows, step)]
+            ds = ray.data.from_pandas(dfs_list)
+        except Exception:
+            ds = ray.data.from_pandas(out)
+    else:
+        ds = ray.data.from_pandas(out)
+
+    # Apply keyword flag + pre-gating and trimming in Ray maps (same as streaming path)
+    ds_in = ds
     if prefilter_mode in ("pre_gating", "post_gating"):
-        try:
-            _kw_orig_total = int(len(out))
-        except Exception:
-            _kw_orig_total = None
-        try:
-            out["relevant_keyword"] = out["article_text"].apply(lambda t: _kw_flag(t))
-        except Exception:
-            out["relevant_keyword"] = True
-        try:
-            _kw_marked_total = int(out["relevant_keyword"].astype(bool).sum())
-        except Exception:
-            _kw_marked_total = None
+        ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("article_text"))})
         if prefilter_mode == "pre_gating":
-            out = out[out["relevant_keyword"] == True]
-            try:
-                _kw_kept_after_gate = int(len(out))
-            except Exception:
-                _kw_kept_after_gate = None
+            ds_in = ds_in.filter(lambda r: bool(r.get("relevant_keyword", True)))
     if enable_kw_buf and kw_regex is not None:
-        try:
-            out["chunk_text"] = out["article_text"].apply(lambda t: "\n\n".join(_generate_relevant_blocks(t, kw_regex, window_words)) or str(t or ""))
-        except Exception:
-            out["chunk_text"] = out["article_text"].astype(str)
-    # Early W&B log of keyword gating (before vLLM) so metrics appear promptly
-    try:
-        if bool(getattr(cfg.wandb, "enabled", False)):
-            try:
-                import wandb as _wandb  # type: ignore
-            except Exception:
-                _wandb = None  # type: ignore
-            if _wandb is not None:
-                _created_run_early = False
-                try:
-                    group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-                except Exception:
-                    group = None
-                try:
-                    proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                except Exception:
-                    proj = "UAIR"
-                try:
-                    ent = getattr(cfg.wandb, "entity", None)
-                    ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                except Exception:
-                    ent = None
-                try:
-                    existing = getattr(_wandb, "run", None)
-                    if existing is None:
-                        run = _wandb.init(project=proj, entity=ent, job_type=str(getattr(cfg.runtime, "stage", "classify")), name=f"{getattr(cfg.experiment, 'name', 'UAIR')}-classify", group=group, config=OmegaConf.to_container(cfg, resolve=True))
-                        _created_run_early = True
-                    else:
-                        run = existing
-                except Exception:
-                    run = None  # type: ignore
-                try:
-                    payload_early = {}
-                    if _kw_orig_total is not None and _kw_marked_total is not None and _kw_orig_total > 0:
-                        payload_early["keyword/marked"] = int(_kw_marked_total)
-                        payload_early["keyword/marked_ratio"] = float(_kw_marked_total) / float(_kw_orig_total)
-                        payload_early["keyword/total_checked"] = int(_kw_orig_total)
-                    if _kw_kept_after_gate is not None:
-                        payload_early["keyword/pre_gated_rows"] = int(_kw_kept_after_gate)
-                    if payload_early:
-                        _wandb.log(payload_early)
-                except Exception:
-                    pass
-                try:
-                    if _created_run_early and not bool(getattr(cfg.wandb, "single_run", False)):
-                        _wandb.finish()
-                except Exception:
-                    pass
-    except Exception:
-        pass
-    tok = _get_tokenizer(str(getattr(cfg.model, "model_source", "")))
-    try:
-        sys_text = system_prompt
-        out["chunk_text"] = out["chunk_text"].apply(lambda t: _trim_text_for_prompt(str(t or ""), tok, sys_text))
-    except Exception:
-        pass
-    ds = ray.data.from_pandas(out)
+        ds_in = ds_in.map(_attach_chunk_text)
+    sys_text = system_prompt
+    def _trim_row(r: Dict[str, Any]) -> Dict[str, Any]:
+        txt = r.get("chunk_text") or r.get("article_text")
+        # Use char-based trimming to avoid heavy tokenizer in Ray workers.
+        r["chunk_text"] = _trim_text_for_prompt(str(txt or ""), None, sys_text)
+        return r
+    ds_in = ds_in.map(_trim_row)
+
     processor = build_llm_processor(engine_config, preprocess=_pre, postprocess=_post)
-    out_ds = processor(ds).materialize()
-    out_df = out_ds.to_pandas()
-    # Stage-scoped W&B logging (optional)
-    try:
-        if bool(getattr(cfg.wandb, "enabled", False)):
-            try:
-                import wandb as _wandb  # type: ignore
-            except Exception:
-                _wandb = None  # type: ignore
-            if _wandb is not None:
-                _created_run = False
-                try:
-                    group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-                except Exception:
-                    group = None
-                try:
-                    proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                except Exception:
-                    proj = "UAIR"
-                try:
-                    ent = getattr(cfg.wandb, "entity", None)
-                    ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                except Exception:
-                    ent = None
-                try:
-                    existing = getattr(_wandb, "run", None)
-                    if existing is None:
-                        run = _wandb.init(project=proj, entity=ent, job_type=str(getattr(cfg.runtime, "stage", "classify")), name=f"{getattr(cfg.experiment, 'name', 'UAIR')}-classify", group=group, config=OmegaConf.to_container(cfg, resolve=True))
-                        _created_run = True
-                    else:
-                        run = existing
-                except Exception:
-                    run = None  # type: ignore
-                try:
-                    total = int(len(out_df))
-                except Exception:
-                    total = 0
-                rel_count = 0
-                ratio = 0.0
-                avg_lat = None
-                try:
-                    if total > 0 and "is_relevant" in out_df.columns:
-                        rel_count = int(out_df["is_relevant"].astype(bool).sum())
-                        ratio = float(rel_count) / float(total) if total > 0 else 0.0
-                except Exception:
-                    pass
-                try:
-                    if "latency_s" in out_df.columns:
-                        lat = [float(v) for v in out_df.get("latency_s", []).tolist() if isinstance(v, (int, float))]
-                        avg_lat = (sum(lat) / len(lat)) if lat else None
-                except Exception:
-                    pass
-                try:
-                    payload = {
-                        "classify/rows": total,
-                        "classify/relevant_count": rel_count,
-                        "classify/relevant_ratio": ratio,
-                        "classify/avg_latency_s": avg_lat,
-                    }
-                    _wandb.log(payload)
-                    # Log keyword gating under its own section
-                    kw_payload = {}
-                    try:
-                        if _kw_orig_total is not None and _kw_marked_total is not None and _kw_orig_total > 0:
-                            kw_payload["keyword/marked"] = int(_kw_marked_total)
-                            kw_payload["keyword/marked_ratio"] = float(_kw_marked_total) / float(_kw_orig_total)
-                            kw_payload["keyword/total_checked"] = int(_kw_orig_total)
-                    except Exception:
-                        pass
-                    try:
-                        if _kw_kept_after_gate is not None:
-                            kw_payload["keyword/pre_gated_rows"] = int(_kw_kept_after_gate)
-                    except Exception:
-                        pass
-                    if kw_payload:
-                        _wandb.log(kw_payload)
-                except Exception:
-                    pass
-                try:
-                    if _created_run and not bool(getattr(cfg.wandb, "single_run", False)):
-                        _wandb.finish()
-                except Exception:
-                    pass
-    except Exception:
-        pass
+    # Avoid an extra materialize; converting to pandas will trigger execution.
+    out_df = processor(ds_in).to_pandas()
+    # Stage-scoped logging is handled by the orchestrator
     return out_df
 
 

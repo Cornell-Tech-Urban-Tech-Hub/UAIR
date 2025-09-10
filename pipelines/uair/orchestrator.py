@@ -13,6 +13,13 @@ import subprocess
 import shlex
 import threading
 import time as _time
+from .logging_util import (
+    is_enabled as _wb_enabled,
+    start_run as _wb_start,
+    finish_run as _wb_finish,
+    log_metrics as _wb_log,
+    log_table as _wb_log_table,
+)
 try:
     import ray  # type: ignore
     _RAY_OK_E = True
@@ -27,10 +34,10 @@ if _RAY_OK_E:
             def __init__(self):
                 # Stage-scoped and overall cumulative counters
                 self._totals: Dict[str, Dict[str, int]] = {
-                    "classify": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
-                    "decompose": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
-                    "taxonomy": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
-                    "overall": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+                    "classify": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
+                    "decompose": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
+                    "taxonomy": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
+                    "overall": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
                 }
 
             def _coerce_int(self, v: Any) -> int:
@@ -47,7 +54,7 @@ if _RAY_OK_E:
                 except Exception:
                     return 0
 
-            def record(self, stage: str, calls: Any = 0, prompt_tokens: Any = 0, completion_tokens: Any = 0, total_tokens: Any = 0) -> None:
+            def record(self, stage: str, calls: Any = 0, prompt_tokens: Any = 0, completion_tokens: Any = 0, total_tokens: Any = 0, kw_marked: Any = 0, kw_checked: Any = 0) -> None:
                 st = str(stage or "overall").strip().lower()
                 if st not in self._totals:
                     st = "overall"
@@ -55,10 +62,14 @@ if _RAY_OK_E:
                 p = self._coerce_int(prompt_tokens)
                 q = self._coerce_int(completion_tokens)
                 t = self._coerce_int(total_tokens)
+                km = self._coerce_int(kw_marked)
+                kc = self._coerce_int(kw_checked)
                 self._totals[st]["calls"] += c
                 self._totals[st]["prompt_tokens"] += p
                 self._totals[st]["completion_tokens"] += q
                 self._totals[st]["total_tokens"] += t
+                self._totals[st]["kw_marked"] += km
+                self._totals[st]["kw_checked"] += kc
                 # Mirror into overall
                 if st != "overall":
                     self._totals["overall"]["calls"] += c
@@ -68,6 +79,8 @@ if _RAY_OK_E:
                     if t == 0 and (p or q):
                         t = p + q
                     self._totals["overall"]["total_tokens"] += t
+                    self._totals["overall"]["kw_marked"] += km
+                    self._totals["overall"]["kw_checked"] += kc
 
             def snapshot(self) -> Dict[str, Dict[str, int]]:
                 # Return a cheap copy
@@ -96,9 +109,15 @@ def _load_parquet_dataset(parquet_path: str, columns: Dict[str, str], debug: boo
     present = {src: dst for src, dst in col_map.items() if src in df.columns}
     if present:
         df = df.rename(columns=present)
-    # Ensure the canonical article text column exists
-    if "article_text" not in df.columns:
-        raise RuntimeError("Parquet missing required text column (article_text); configure data.columns.article_text to map your source text column")
+    # If dataset is empty, allow it to pass through (downstream will no-op)
+    try:
+        if len(df) == 0:
+            return df
+    except Exception:
+        pass
+    # Ensure a usable text column exists: prefer article_text; allow chunk_text for downstream stages
+    if "article_text" not in df.columns and "chunk_text" not in df.columns:
+        raise RuntimeError("Parquet missing required text column (article_text) or chunk_text; configure data.columns.article_text or provide chunk_text")
 
     # Normalize a minimal working set; coerce a few known text-ish columns when present
     def _safe_str(x: Any) -> str:
@@ -179,15 +198,85 @@ def run_experiment(cfg) -> None:
     parquet_path = str(getattr(cfg.data, "parquet_path"))
     columns = dict(getattr(cfg.data, "columns", {}))
 
-    # Always use pandas DataFrame for control-plane simplicity
-    df = _load_parquet_dataset(parquet_path, columns, debug=debug, sample_n=sample_n)
+    # Choose IO mode: Ray Dataset streaming or pandas DataFrame (only for non-pipeline stages)
+    use_streaming = False
+    ds = None
+    try:
+        _stream_flag = bool(getattr(cfg.runtime, "streaming_io", False))
+        _stream_allowed = stage in ("classify", "taxonomy", "verification")
+        use_streaming = (_stream_flag and _stream_allowed and _RAY_OK_E)
+    except Exception:
+        use_streaming = False
+    if use_streaming:
+        try:
+            import ray  # type: ignore
+            if not ray.is_initialized():
+                # Use a stable namespace so detached actors are discoverable across sessions
+                try:
+                    _ns = os.environ.get("RAY_NAMESPACE") or os.environ.get("WANDB_GROUP") or "uair"
+                except Exception:
+                    _ns = "uair"
+                try:
+                    ray.init(log_to_driver=True, namespace=str(_ns))
+                except Exception:
+                    # Fallback without namespace if version doesn't support it
+                    ray.init(log_to_driver=True)
+            try:
+                ctx = ray.data.DataContext.get_current()
+                ctx.enable_progress_bars = False
+                # Encourage smaller blocks to improve time-to-first-output
+                ctx.target_min_block_size = 1 * 1024 * 1024
+                ctx.target_max_block_size = 64 * 1024 * 1024
+            except Exception:
+                pass
+            ds = ray.data.read_parquet(parquet_path)
+            # Ensure canonical columns exist; add renamed copies when needed
+            col_map = {
+                columns.get("article_text", "article_text"): "article_text",
+                columns.get("article_path", "article_path"): "article_path",
+                columns.get("country", "country"): "country",
+                columns.get("year", "year"): "year",
+                columns.get("article_id", "article_id"): "article_id",
+            }
+            def _ensure_canon(row: Dict[str, Any]) -> Dict[str, Any]:
+                out = dict(row)
+                for src, dst in col_map.items():
+                    try:
+                        if dst not in out and src in row:
+                            out[dst] = row.get(src)
+                    except Exception:
+                        pass
+                return out
+            try:
+                ds = ds.map(_ensure_canon)
+            except Exception:
+                pass
+            if debug and isinstance(sample_n, int) and sample_n:
+                try:
+                    ds = ds.limit(max(1, int(sample_n)))
+                except Exception:
+                    pass
+        except Exception:
+            ds = None
+            use_streaming = False
+    if (not use_streaming) and (stage in ("classify", "taxonomy", "verification")):
+        # Pandas control-plane path for non-pipeline stages only
+        df = _load_parquet_dataset(parquet_path, columns, debug=debug, sample_n=sample_n)
 
     if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+        try:
+            loaded = (int(len(df)) if not use_streaming else None)
+        except Exception:
+            loaded = None
+        try:
+            cols = (list(df.columns)[:12] if not use_streaming else None)
+        except Exception:
+            cols = None
         print(json.dumps({
-            "loaded_rows": int(len(df)),
+            "loaded_rows": loaded,
             "stage": stage,
-            "columns": list(df.columns)[:12],
-            "streaming": False,
+            "columns": cols,
+            "streaming": bool(use_streaming),
         }, indent=2))
 
     # If running the pipeline coordinator, ensure a non-null W&B group is set before init
@@ -208,151 +297,66 @@ def run_experiment(cfg) -> None:
             except Exception:
                 pass
 
-    # Optional W&B init (orchestrator-level) for consolidated logging
-    use_wandb = False
-    try:
-        use_wandb = bool(getattr(cfg.wandb, "enabled", False))
-    except Exception:
-        use_wandb = False
-    wb = None
-    _wb_group = None
-    if use_wandb:
+    # W&B enable flag
+    use_wandb = _wb_enabled(cfg)
+
+    if stage == "classify":
+        from .stages.classify import run_classification_stage
+        # Stage-scoped W&B run (Option B)
         try:
-            import wandb as _wandb  # type: ignore
-            wb = _wandb
-            try:
-                _wb_group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-            except Exception:
-                _wb_group = None
-            run_name = f"{getattr(cfg.experiment, 'name', 'UAIR')}-{stage}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-            try:
-                if _wb_group:
-                    run_name = f"{_wb_group}-{run_name}"
-            except Exception:
-                pass
-            # Build informative run config capturing model/runtime
-            try:
-                model_source = str(getattr(cfg.model, "model_source", ""))
-            except Exception:
-                model_source = ""
-            try:
-                engine_kwargs = dict(getattr(cfg.model, "engine_kwargs", {}))
-            except Exception:
-                engine_kwargs = {}
-            try:
-                batch_size = int(getattr(cfg.model, "batch_size", 16) or 16)
-            except Exception:
-                batch_size = 16
-            try:
-                concurrency = int(getattr(cfg.model, "concurrency", 1) or 1)
-            except Exception:
-                concurrency = 1
-            run_config = {
-                "stage": stage,
+            run_cfg = {
+                "stage": "classify",
                 "parquet_path": parquet_path,
                 "data_columns_map": columns,
                 "sample_n": sample_n,
                 "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
                 "use_llm_classify": bool(getattr(cfg.runtime, "use_llm_classify", False)),
-                "use_llm_decompose": bool(getattr(cfg.runtime, "use_llm_decompose", False)),
                 "prefilter_mode": str(getattr(cfg.runtime, "prefilter_mode", "pre_gating")),
-                # Model/runtime
-                "model_source": model_source,
-                "engine_kwargs": engine_kwargs,
-                "batch_size": batch_size,
-                "concurrency": concurrency,
+                "model_source": str(getattr(cfg.model, "model_source", "")),
+                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
+                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
+                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
                 "sampling_params": dict(getattr(cfg, "sampling_params", {})),
-                # System metadata
                 "python_version": sys.version.split()[0],
                 "os": platform.platform(),
                 "hostname": socket.gethostname(),
             }
-            try:
-                proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-            except Exception:
-                proj = "UAIR"
-            try:
-                ent = getattr(cfg.wandb, "entity", None)
-                ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-            except Exception:
-                ent = None
-            wb.init(project=proj, entity=ent, group=_wb_group, job_type=stage, name=run_name, config=run_config)
-            try:
-                wb.log({"dataset/loaded_rows": int(len(df))})
-            except Exception:
-                pass
         except Exception:
-            wb = None
-
-    def _wb_log(data: Dict[str, Any]) -> None:
-        if wb is not None:
-            try:
-                wb.log(data)
-            except Exception:
-                pass
-
-    def _wb_log_table(df_in: pd.DataFrame, key: str, prefer_cols: List[str], max_rows: int = 1000) -> None:
-        if wb is None:
-            return
-        # If a stage closed the global W&B run, re-init a lightweight run
+            run_cfg = {"stage": "classify"}
+        if use_wandb:
+            _wb_start(cfg, "classify", run_config=run_cfg)
+        # Support streaming IO when enabled
+        in_obj = None
         try:
-            if getattr(wb, "run", None) is None:
-                try:
-                    proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                except Exception:
-                    proj = "UAIR"
-                try:
-                    ent = getattr(cfg.wandb, "entity", None)
-                    ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                except Exception:
-                    ent = None
-                try:
-                    name = f"{getattr(cfg.experiment, 'name', 'UAIR')}-{stage}-tables-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-                except Exception:
-                    name = None
-                try:
-                    wb.init(project=proj, entity=ent, group=_wb_group, job_type=stage, name=name)
-                except Exception:
-                    pass
+            in_obj = ds if ("ds" in locals() and ds is not None) else df
         except Exception:
-            pass
-        try:
-            df_local = df_in
-            cols = [c for c in prefer_cols if c in df_local.columns]
-            if not cols:
-                cols = list(df_local.columns)[:12]
+            in_obj = df
+        # Create a named usage aggregator actor only when streaming is enabled
+        named_usage_actor = None
+        if use_streaming:
             try:
-                table = wb.Table(columns=cols, log_mode="MUTABLE")
-            except Exception:
-                table = wb.Table(columns=cols)
-            n = 0
-            for _, r in df_local.reset_index(drop=True).iterrows():
-                if n >= int(max_rows):
-                    break
-                row_vals: List[str] = []
-                for c in cols:
-                    v = r.get(c)
+                if use_wandb and _RAY_OK_E:
+                    import ray  # type: ignore
+                    # Ensure Ray is initialized with a stable namespace when using detached actors
                     try:
-                        import json as _json
-                        if isinstance(v, (dict, list, tuple, set)):
-                            if isinstance(v, set):
-                                v = list(v)
-                            v = _json.dumps(v, ensure_ascii=False)
+                        if not ray.is_initialized():
+                            _ns = os.environ.get("RAY_NAMESPACE") or os.environ.get("WANDB_GROUP") or "uair"
+                            try:
+                                ray.init(log_to_driver=True, namespace=str(_ns))
+                            except Exception:
+                                ray.init(log_to_driver=True)
                     except Exception:
                         pass
                     try:
-                        row_vals.append(str(v) if v is not None else "")
+                        named_usage_actor = ray.get_actor("uair_usage_agg")
                     except Exception:
-                        row_vals.append("")
-                table.add_data(*row_vals)
-                n += 1
-            wb.log({key: table, f"{key}/rows": n})
-        except Exception:
-            pass
-
-    if stage == "classify":
-        from .stages.classify import run_classification_stage
-        out_df = run_classification_stage(df, cfg)
+                        try:
+                            named_usage_actor = _UsageAggregator.options(name="uair_usage_agg", lifetime="detached").remote()  # type: ignore
+                        except Exception:
+                            named_usage_actor = None
+            except Exception:
+                named_usage_actor = None
+        out_any = run_classification_stage(in_obj, cfg)
         out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
         # Best-effort sanitization for Parquet: convert nested objects to JSON strings
         def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
@@ -394,6 +398,115 @@ def run_experiment(cfg) -> None:
                 except Exception:
                     pass
             return pdf
+        # If streaming dataset output, write Parquet via Ray Data
+        is_ds_out = False
+        try:
+            import ray  # type: ignore
+            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
+        except Exception:
+            is_ds_out = False
+        if is_ds_out:
+            # Accumulate usage via actor during streaming writes (no background thread)
+            usage_actor = None
+            try:
+                if use_wandb and _RAY_OK_E:
+                    usage_actor = _UsageAggregator.remote()  # type: ignore
+            except Exception:
+                usage_actor = None
+            # Attach accumulator map to stream per-batch token usage into the actor
+            out_ds = out_any
+            if usage_actor is not None:
+                def _accumulate_usage(pdf: pd.DataFrame) -> pd.DataFrame:
+                    try:
+                        s_prompt = pd.to_numeric(pdf.get("token_usage_prompt", 0), errors="coerce").fillna(0).astype("int64").sum()
+                    except Exception:
+                        s_prompt = 0
+                    try:
+                        s_output = pd.to_numeric(pdf.get("token_usage_output", 0), errors="coerce").fillna(0).astype("int64").sum()
+                    except Exception:
+                        s_output = 0
+                    try:
+                        s_total = pd.to_numeric(pdf.get("token_usage_total", 0), errors="coerce").fillna(0).astype("int64").sum()
+                    except Exception:
+                        s_total = 0
+                    # Keyword counters
+                    try:
+                        s_kw_checked = int(len(pdf))
+                    except Exception:
+                        s_kw_checked = 0
+                    try:
+                        if "relevant_keyword" in pdf.columns:
+                            s_kw_marked = int(pdf["relevant_keyword"].astype(bool).sum())
+                        else:
+                            s_kw_marked = 0
+                    except Exception:
+                        s_kw_marked = 0
+                    try:
+                        usage_actor.record.remote("classify", calls=len(pdf), prompt_tokens=int(s_prompt), completion_tokens=int(s_output), total_tokens=int(s_total), kw_marked=int(s_kw_marked), kw_checked=int(s_kw_checked))  # type: ignore
+                    except Exception:
+                        pass
+                    return pdf
+                try:
+                    out_ds = out_ds.map_batches(_accumulate_usage, batch_format="pandas", batch_size=256)
+                except Exception:
+                    pass
+            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("classify"))
+            if out_dir:
+                try:
+                    os.makedirs(out_dir, exist_ok=True)
+                except Exception:
+                    pass
+                try:
+                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
+                    pq_all = os.path.join(out_dir, "classify_all.parquet")
+                    out_ds.write_parquet(pq_all)
+                    # Relevant-only
+                    pq_rel = None
+                    try:
+                        rel_ds = out_ds.filter(lambda r: bool(r.get("is_relevant", False)))
+                        pq_rel = os.path.join(out_dir, "classify_relevant.parquet")
+                        rel_ds.write_parquet(pq_rel)
+                    except Exception:
+                        pq_rel = None
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({
+                            "classified_rows": None,
+                            "output_parquet_all": pq_all,
+                            "output_parquet_relevant": pq_rel,
+                        }, indent=2))
+                except Exception as e:
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({"error": "classify_parquet_write_failed", "detail": str(e)}, indent=2))
+            # Final usage snapshot logging (once)
+            try:
+                if usage_actor is not None and use_wandb:
+                    import ray as __ray  # type: ignore
+                    snap = __ray.get(usage_actor.snapshot.remote())  # type: ignore
+                    cls = (snap.get("classify") or {}) if isinstance(snap, dict) else {}
+                    payload2 = {
+                        "usage/classify/calls": int(cls.get("calls", 0) or 0),
+                        "usage/classify/prompt_tokens": int(cls.get("prompt_tokens", 0) or 0),
+                        "usage/classify/completion_tokens": int(cls.get("completion_tokens", 0) or 0),
+                        "usage/classify/total_tokens": int(cls.get("total_tokens", 0) or 0),
+                        "keyword/total_checked": int(cls.get("kw_checked", 0) or 0),
+                        "keyword/marked": int(cls.get("kw_marked", 0) or 0),
+                    }
+                    try:
+                        kc = float(payload2.get("keyword/total_checked") or 0)
+                        km = float(payload2.get("keyword/marked") or 0)
+                        if kc > 0:
+                            payload2["keyword/marked_ratio"] = (km / kc)
+                    except Exception:
+                        pass
+                    _wb_log(cfg, payload2)  # type: ignore[arg-type]
+            except Exception:
+                pass
+            if use_wandb:
+                _wb_finish(cfg)
+            return
+
+        # Pandas output path
+        out_df = out_any
         if out_path:
             try:
                 out_df.to_csv(out_path, index=False)
@@ -480,7 +593,7 @@ def run_experiment(cfg) -> None:
                 kw_marked = None
             if kw_marked is not None:
                 payload["keyword/marked"] = kw_marked
-            _wb_log(payload)
+            _wb_log(cfg, payload)  # type: ignore[arg-type]
         except Exception:
             pass
         # Log final results table to W&B (sampled)
@@ -489,8 +602,7 @@ def run_experiment(cfg) -> None:
                 max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
             except Exception:
                 max_rows = 1000
-            _wb_log_table(
-                out_df,
+            _wb_log_table(cfg, out_df,
                 key="tables/classify_results",
                 prefer_cols=[
                     "article_id","article_path","country","year",
@@ -504,8 +616,7 @@ def run_experiment(cfg) -> None:
                 if "is_relevant" in out_df.columns:
                     rel_df = out_df[out_df["is_relevant"].astype(bool) == True]
                     if len(rel_df) > 0:
-                        _wb_log_table(
-                            rel_df,
+                        _wb_log_table(cfg, rel_df,
                             key="tables/classify_relevant_results",
                             prefer_cols=[
                                 "article_id","article_path","country","year",
@@ -518,6 +629,8 @@ def run_experiment(cfg) -> None:
                 pass
         except Exception:
             pass
+        if use_wandb:
+            _wb_finish(cfg)
         return
 
     if stage == "decompose":
@@ -539,7 +652,106 @@ def run_experiment(cfg) -> None:
 
     if stage == "taxonomy":
         from .stages.taxonomy import run_taxonomy_stage
-        out_df = run_taxonomy_stage(df, cfg)
+        # Stage-scoped W&B run (Option B)
+        try:
+            run_cfg = {
+                "stage": "taxonomy",
+                "parquet_path": parquet_path,
+                "data_columns_map": columns,
+                "sample_n": sample_n,
+                "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
+                "prefilter_mode": str(getattr(cfg.runtime, "prefilter_mode", "pre_gating")),
+                "model_source": str(getattr(cfg.model, "model_source", "")),
+                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
+                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
+                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
+                "sampling_params": dict(getattr(cfg, "sampling_params", {})),
+                "python_version": sys.version.split()[0],
+                "os": platform.platform(),
+                "hostname": socket.gethostname(),
+            }
+        except Exception:
+            run_cfg = {"stage": "taxonomy"}
+        if use_wandb:
+            _wb_start(cfg, "taxonomy", run_config=run_cfg)
+        in_obj = None
+        try:
+            in_obj = ds if ("ds" in locals() and ds is not None) else df
+        except Exception:
+            in_obj = df
+        out_any = run_taxonomy_stage(in_obj, cfg)
+        # If streaming dataset output, write Parquet via Ray Data
+        is_ds_out = False
+        try:
+            import ray  # type: ignore
+            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
+        except Exception:
+            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
+        if is_ds_out:
+            out_ds = out_any
+            # Write chunks-level results to Parquet directory
+            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("taxonomy"))
+            if out_dir:
+                try:
+                    os.makedirs(out_dir, exist_ok=True)
+                except Exception:
+                    pass
+                # Best-effort sanitization for Arrow/Parquet
+                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
+                    pdf = pdf.copy()
+                    def _ser(v: Any) -> Any:
+                        try:
+                            import numpy as _np  # type: ignore
+                            if isinstance(v, _np.generic):
+                                try:
+                                    return v.item()
+                                except Exception:
+                                    pass
+                            if isinstance(v, _np.ndarray):
+                                try:
+                                    import json as _json
+                                    return _json.dumps(v.tolist(), ensure_ascii=False)
+                                except Exception:
+                                    return str(v)
+                        except Exception:
+                            pass
+                        if isinstance(v, (dict, list, tuple, set)):
+                            try:
+                                import json as _json
+                                if isinstance(v, set):
+                                    v = list(v)
+                                return _json.dumps(v, ensure_ascii=False)
+                            except Exception:
+                                return str(v)
+                        return v
+                    for col in list(pdf.columns):
+                        try:
+                            if pdf[col].dtype == object:
+                                s = pdf[col].apply(_ser)
+                                try:
+                                    s = s.apply(lambda x: "" if x is None else x)
+                                except Exception:
+                                    pass
+                                pdf[col] = s
+                        except Exception:
+                            pass
+                    return pdf
+                try:
+                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
+                except Exception:
+                    pass
+                try:
+                    pq_path = os.path.join(out_dir, "results.parquet")
+                    out_ds.write_parquet(pq_path)
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({"taxonomy_rows": None, "output_parquet": pq_path}, indent=2))
+                except Exception as e:
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({"error": "taxonomy_parquet_write_failed", "detail": str(e)}, indent=2))
+            # Sampled W&B tables are skipped for streaming path to avoid driver collection
+            return
+        # Pandas output path
+        out_df = out_any
         out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
         # Doc-level aggregation (non-streaming)
         try:
@@ -610,7 +822,7 @@ def run_experiment(cfg) -> None:
                     none_ct = int(_none_mask(out_df["chunk_label"]).sum())
                 else:
                     none_ct = 0
-                _wb_log({"taxonomy/none_fraction": (float(none_ct) / float(total_tx))})
+                _wb_log(cfg, {"taxonomy/none_fraction": (float(none_ct) / float(total_tx))})  # type: ignore[arg-type]
         except Exception:
             pass
 
@@ -694,8 +906,7 @@ def run_experiment(cfg) -> None:
                 max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
             except Exception:
                 max_rows = 1000
-            _wb_log_table(
-                out_df,
+            _wb_log_table(cfg, out_df,
                 key="tables/taxonomy_chunks",
                 prefer_cols=[
                     "article_id","article_path","chunk_id","num_chunks",
@@ -704,8 +915,7 @@ def run_experiment(cfg) -> None:
                 max_rows=max_rows,
             )
             if len(docs_df):
-                _wb_log_table(
-                    docs_df,
+                _wb_log_table(cfg, docs_df,
                     key="tables/taxonomy_docs",
                     prefer_cols=[
                         "article_id","article_path","predicted_category_number","predicted_category_name","num_chunks",
@@ -714,11 +924,110 @@ def run_experiment(cfg) -> None:
                 )
         except Exception:
             pass
+        if use_wandb:
+            _wb_finish(cfg)
         return
 
     if stage == "verification":
         from .stages.verify import run_verification_stage
-        out_df = run_verification_stage(df, cfg)
+        # Stage-scoped W&B run (Option B)
+        try:
+            run_cfg = {
+                "stage": "verification",
+                "parquet_path": parquet_path,
+                "data_columns_map": columns,
+                "sample_n": sample_n,
+                "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
+                "model_source": str(getattr(cfg.model, "model_source", "")),
+                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
+                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
+                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
+                "sampling_params": dict(getattr(cfg, "sampling_params", {})),
+                "python_version": sys.version.split()[0],
+                "os": platform.platform(),
+                "hostname": socket.gethostname(),
+            }
+        except Exception:
+            run_cfg = {"stage": "verification"}
+        if use_wandb:
+            _wb_start(cfg, "verification", run_config=run_cfg)
+        in_obj = None
+        try:
+            in_obj = ds if ("ds" in locals() and ds is not None) else df
+        except Exception:
+            in_obj = df
+        out_any = run_verification_stage(in_obj, cfg)
+        # If streaming dataset output, write Parquet via Ray Data
+        is_ds_out = False
+        try:
+            import ray  # type: ignore
+            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
+        except Exception:
+            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
+        if is_ds_out:
+            out_ds = out_any
+            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("verification"))
+            if out_dir:
+                try:
+                    os.makedirs(out_dir, exist_ok=True)
+                except Exception:
+                    pass
+                # Reuse sanitizer from classify branch
+                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
+                    pdf = pdf.copy()
+                    def _ser(v: Any) -> Any:
+                        try:
+                            import numpy as _np  # type: ignore
+                            if isinstance(v, _np.generic):
+                                try:
+                                    return v.item()
+                                except Exception:
+                                    pass
+                            if isinstance(v, _np.ndarray):
+                                try:
+                                    import json as _json
+                                    return _json.dumps(v.tolist(), ensure_ascii=False)
+                                except Exception:
+                                    return str(v)
+                        except Exception:
+                            pass
+                        if isinstance(v, (dict, list, tuple, set)):
+                            try:
+                                import json as _json
+                                if isinstance(v, set):
+                                    v = list(v)
+                                return _json.dumps(v, ensure_ascii=False)
+                            except Exception:
+                                return str(v)
+                        return v
+                    for col in list(pdf.columns):
+                        try:
+                            if pdf[col].dtype == object:
+                                s = pdf[col].apply(_ser)
+                                try:
+                                    s = s.apply(lambda x: "" if x is None else x)
+                                except Exception:
+                                    pass
+                                pdf[col] = s
+                        except Exception:
+                            pass
+                    return pdf
+                try:
+                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
+                except Exception:
+                    pass
+                try:
+                    pq_path = os.path.join(out_dir, "verification.parquet")
+                    out_ds.write_parquet(pq_path)
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({"verification_rows": None, "output_parquet": pq_path}, indent=2))
+                except Exception as e:
+                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                        print(json.dumps({"error": "verification_parquet_write_failed", "detail": str(e)}, indent=2))
+            # W&B table logging is skipped for streaming to avoid driver collection
+            return
+        # Pandas output path
+        out_df = out_any
         out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
         if out_path:
             try:
@@ -792,17 +1101,25 @@ def run_experiment(cfg) -> None:
                 max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
             except Exception:
                 max_rows = 1000
-            _wb_log_table(
-                out_df,
-                key="tables/verification_chunks",
-                prefer_cols=[
-                    "article_id","article_path","chunk_id","num_chunks",
-                    "chunk_label","ver_verified_chunk","ver_sim_max","ver_nli_ent_max",
-                ],
-                max_rows=max_rows,
-            )
+            base_cols = [
+                "article_id","article_path","chunk_id","num_chunks",
+                "chunk_label","ver_verified_chunk","ver_sim_max","ver_top_sent","ver_nli_ent_max",
+            ]
+            _wb_log_table(cfg, out_df, key="tables/verification_chunks", prefer_cols=base_cols, max_rows=max_rows)
+            # Optional debug columns
+            try:
+                dbg = str(os.environ.get("UAIR_VERIFY_DEBUG", "")).strip().lower() in ("1","true","yes","on")
+            except Exception:
+                dbg = False
+            if dbg:
+                debug_cols = base_cols + [
+                    "chunk_label_name","ver_nli_label_max","ver_top_sent","ver_evidence_topk",
+                ]
+                _wb_log_table(cfg, out_df, key="tables/verification_debug_chunks", prefer_cols=debug_cols, max_rows=max_rows)
         except Exception:
             pass
+        if use_wandb:
+            _wb_finish(cfg)
         return
 
     if stage == "pipeline":
@@ -842,13 +1159,33 @@ def run_experiment(cfg) -> None:
                 args.append(_format_override(k, v))
             if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
                 try:
-                    printable = " ".join(shlex.quote(a) for a in args)
+                    # Mask any sensitive args when printing
+                    def _mask_arg(a: str) -> str:
+                        if a.startswith("wandb.api_key="):
+                            return "wandb.api_key=***"
+                        return a
+                    printable = " ".join(shlex.quote(_mask_arg(a)) for a in args)
                     print(json.dumps({"launch": stage_name, "cmd": printable, "wandb_group": group_id}, indent=2))
                 except Exception:
                     pass
             if (child_launcher and (not run_local)):
                 env = os.environ.copy()
                 env["WANDB_GROUP"] = group_id
+                # Ensure W&B is not disabled in child env and API key is propagated
+                try:
+                    if str(getattr(cfg.wandb, "enabled", True)).lower() in ("true", "1", "yes"):
+                        env.pop("WANDB_DISABLED", None)
+                        env.setdefault("WANDB_MODE", "online")
+                except Exception:
+                    pass
+                # Propagate common W&B auth/env if present in parent
+                try:
+                    for _k in ("WANDB_API_KEY", "WANDB_BASE_URL", "WANDB_ENTITY", "WANDB_PROJECT"):
+                        if os.environ.get(_k) and not env.get(_k):
+                            env[_k] = os.environ.get(_k)  # type: ignore
+                except Exception:
+                    pass
+                # no WANDB_BASE_URL propagation
                 subprocess.run(args, check=True, env=env)
             else:
                 # Local in-process run using Hydra app entry
@@ -894,9 +1231,15 @@ def run_experiment(cfg) -> None:
             "runtime.output_dir": classify_dir,
             "data.parquet_path": str(getattr(cfg.data, "parquet_path")),
         }
+        # Do NOT pass API keys via args; rely on env or prior login
         # Propagate debug and sample_n so child classify behavior matches the parent
         try:
             cls_overrides["runtime.debug"] = bool(getattr(cfg.runtime, "debug", False))
+        except Exception:
+            pass
+        # Propagate streaming IO preference to child classify
+        try:
+            cls_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
         except Exception:
             pass
         try:
@@ -910,83 +1253,114 @@ def run_experiment(cfg) -> None:
                 cls_overrides["runtime.use_llm_classify"] = bool(getattr(cfg.runtime, "use_llm_classify"))
         except Exception:
             pass
-        # Log classify stage start and completion to W&B if available
+        # Ensure W&B is explicitly enabled for child classify
         try:
-            cls_t0 = _time.time()
-            _wb_log({
-                "pipeline/classify_started_at": float(cls_t0),
-            })
+            cls_overrides["wandb.enabled"] = True
         except Exception:
             pass
+        # Log pipeline stage timings to console only (no W&B in pipeline coordinator)
+        cls_t0 = _time.time()
         try:
             _run_stage_subprocess("classify", cls_overrides, group_id)
-            try:
-                cls_dt = float(_time.time() - cls_t0)
-            except Exception:
-                cls_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/classify_done": 1,
-                "pipeline/classify_failed": 0,
-                **({"pipeline/classify_duration_s": cls_dt} if cls_dt is not None else {}),
-            })
+            cls_dt = float(_time.time() - cls_t0)
         except Exception:
-            try:
-                cls_dt = float(_time.time() - cls_t0)
-            except Exception:
-                cls_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/classify_done": 0,
-                "pipeline/classify_failed": 1,
-                **({"pipeline/classify_duration_s": cls_dt} if cls_dt is not None else {}),
-            })
+            cls_dt = float(_time.time() - cls_t0)
             raise
 
         # Stage 2: taxonomy consumes classify_dir
-        # Prefer relevant-only parquet if present; otherwise all-results parquet; fallback to directory
+        # Prefer relevant-only parquet if present; also handle historical misspelling; otherwise fall back
         try:
             rel_pq = os.path.join(classify_dir, "classify_relevant.parquet")
+
             all_pq = os.path.join(classify_dir, "classify_all.parquet")
             if os.path.exists(rel_pq):
                 tax_input_path = rel_pq
+
             elif os.path.exists(all_pq):
                 tax_input_path = all_pq
             else:
                 tax_input_path = classify_dir
         except Exception:
             tax_input_path = classify_dir
+
+        # Best-effort: create a sanitized copy for taxonomy by dropping heavy/nested columns
+        # This avoids accidental collisions (e.g., stringified 'messages') and reduces memory.
+        sanitized_path = None
+        try:
+            import pandas as _pd  # local alias to avoid confusion with global pd
+            if os.path.exists(tax_input_path):
+                try:
+                    pdf_in = _pd.read_parquet(tax_input_path)
+                    # Columns to drop if present
+                    drop_cols = [
+                        "messages", "sampling_params", "usage", "token_counts",
+                        "generated_tokens", "embeddings", "generated_text",
+                        "llm_output", "relevance_answer", "classification_mode",
+                        "latency_s", "token_usage_prompt", "token_usage_output",
+                        "token_usage_total",
+                    ]
+                    cols_present = [c for c in drop_cols if c in list(pdf_in.columns)]
+                    if cols_present:
+                        pdf_in = pdf_in.drop(columns=cols_present)
+                    # Write sanitized parquet alongside taxonomy outputs
+                    sanitized_path = os.path.join(taxonomy_dir, "taxonomy_input_sanitized.parquet")
+                    try:
+                        pdf_in.to_parquet(sanitized_path, index=False)
+                    except Exception:
+                        # Attempt object sanitization similar to classify branch
+                        def _ser(v: Any) -> Any:
+                            try:
+                                import numpy as _np  # type: ignore
+                                if isinstance(v, _np.generic):
+                                    try:
+                                        return v.item()
+                                    except Exception:
+                                        pass
+                                if isinstance(v, _np.ndarray):
+                                    try:
+                                        import json as _json
+                                        return _json.dumps(v.tolist(), ensure_ascii=False)
+                                    except Exception:
+                                        return str(v)
+                            except Exception:
+                                pass
+                            if isinstance(v, (dict, list, tuple, set)):
+                                try:
+                                    import json as _json
+                                    if isinstance(v, set):
+                                        v = list(v)
+                                    return _json.dumps(v, ensure_ascii=False)
+                                except Exception:
+                                    return str(v)
+                            return v
+                        pdf_in = pdf_in.applymap(_ser)
+                        pdf_in.to_parquet(sanitized_path, index=False)
+                except Exception:
+                    sanitized_path = None
+        except Exception:
+            sanitized_path = None
+
         tax_overrides: Dict[str, Any] = {
             "runtime.output_dir": taxonomy_dir,
-            "data.parquet_path": tax_input_path,
+            "data.parquet_path": (sanitized_path or tax_input_path),
         }
-        # Log taxonomy stage start and completion to W&B if available
+        # Do NOT pass API keys via args; rely on env or prior login
+        # Propagate streaming IO preference to child taxonomy
         try:
-            tax_t0 = _time.time()
-            _wb_log({
-                "pipeline/taxonomy_started_at": float(tax_t0),
-            })
+            tax_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
         except Exception:
             pass
+        # Ensure W&B is explicitly enabled for child taxonomy
+        try:
+            tax_overrides["wandb.enabled"] = True
+        except Exception:
+            pass
+        tax_t0 = _time.time()
         try:
             _run_stage_subprocess("taxonomy", tax_overrides, group_id)
-            try:
-                tax_dt = float(_time.time() - tax_t0)
-            except Exception:
-                tax_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/taxonomy_done": 1,
-                "pipeline/taxonomy_failed": 0,
-                **({"pipeline/taxonomy_duration_s": tax_dt} if tax_dt is not None else {}),
-            })
+            tax_dt = float(_time.time() - tax_t0)
         except Exception:
-            try:
-                tax_dt = float(_time.time() - tax_t0)
-            except Exception:
-                tax_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/taxonomy_done": 0,
-                "pipeline/taxonomy_failed": 1,
-                **({"pipeline/taxonomy_duration_s": tax_dt} if tax_dt is not None else {}),
-            })
+            tax_dt = float(_time.time() - tax_t0)
             raise
 
         # Stage 3: verification consumes taxonomy_dir/results.parquet when present
@@ -1002,35 +1376,29 @@ def run_experiment(cfg) -> None:
             "runtime.output_dir": verify_dir,
             "data.parquet_path": ver_input_path,
         }
-        # Log verification stage start and completion to W&B if available
+        # If the taxonomy results path is a directory (Ray-style Parquet dataset), prefer streaming IO
         try:
-            ver_t0 = _time.time()
-            _wb_log({
-                "pipeline/verification_started_at": float(ver_t0),
-            })
+            if os.path.isdir(ver_input_path):
+                ver_overrides["runtime.streaming_io"] = True
         except Exception:
             pass
+        # Do NOT pass API keys via args; rely on env or prior login
+        # Propagate streaming IO preference to child verification
+        try:
+            ver_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
+        except Exception:
+            pass
+        # Ensure W&B is explicitly enabled for child verification
+        try:
+            ver_overrides["wandb.enabled"] = True
+        except Exception:
+            pass
+        ver_t0 = _time.time()
         try:
             _run_stage_subprocess("verification", ver_overrides, group_id)
-            try:
-                ver_dt = float(_time.time() - ver_t0)
-            except Exception:
-                ver_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/verification_done": 1,
-                "pipeline/verification_failed": 0,
-                **({"pipeline/verification_duration_s": ver_dt} if ver_dt is not None else {}),
-            })
+            ver_dt = float(_time.time() - ver_t0)
         except Exception:
-            try:
-                ver_dt = float(_time.time() - ver_t0)
-            except Exception:
-                ver_dt = None  # type: ignore
-            _wb_log({
-                "pipeline/verification_done": 0,
-                "pipeline/verification_failed": 1,
-                **({"pipeline/verification_duration_s": ver_dt} if ver_dt is not None else {}),
-            })
+            ver_dt = float(_time.time() - ver_t0)
             raise
 
         if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):

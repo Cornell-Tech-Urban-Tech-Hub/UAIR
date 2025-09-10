@@ -37,6 +37,67 @@ def _maybe_silence_vllm_logs() -> None:
         pass
 
 
+def _ensure_ray_init(cfg) -> None:
+    try:
+        import ray  # type: ignore
+        if not ray.is_initialized():
+            # Detect SLURM CPU allocation
+            cpus_alloc = None
+            try:
+                cpt = os.environ.get("SLURM_CPUS_PER_TASK")
+                if cpt is not None and str(cpt).strip() != "":
+                    cpus_alloc = int(cpt)
+                else:
+                    con = os.environ.get("SLURM_CPUS_ON_NODE")
+                    if con is not None and str(con).strip() != "":
+                        # Reuse simple parser from classify
+                        def _parse_cpus_on_node(val: str) -> int:
+                            try:
+                                v = val.strip()
+                                if "(x" in v and v.endswith(")"):
+                                    import re as _re
+                                    m = _re.match(r"^(\d+)\(x(\d+)\)$", v)
+                                    if m:
+                                        return max(1, int(m.group(1)) * int(m.group(2)))
+                                if "," in v:
+                                    acc = 0
+                                    for p in v.split(","):
+                                        acc += int(p)
+                                    return max(1, acc)
+                                return max(1, int(v))
+                            except Exception:
+                                return -1
+                        cpus_alloc = _parse_cpus_on_node(con)
+            except Exception:
+                cpus_alloc = None
+            try:
+                job_mem_gb = int(getattr(cfg.runtime, "job_memory_gb", 64) or 64)
+            except Exception:
+                job_mem_gb = 64
+            try:
+                obj_store_bytes = int(max(1, job_mem_gb) * (1024 ** 3) * 0.90)
+            except Exception:
+                obj_store_bytes = int(64 * (1024 ** 3) * 0.90)
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ray.init(log_to_driver=True, object_store_memory=obj_store_bytes, num_cpus=int(cpus_alloc))
+                else:
+                    ray.init(log_to_driver=True, object_store_memory=obj_store_bytes)
+            except Exception:
+                try:
+                    ray.init(log_to_driver=True)
+                except Exception:
+                    pass
+            # Constrain Ray Data CPU limits to SLURM allocation when available
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ctx = ray.data.DataContext.get_current()
+                    ctx.execution_options.resource_limits = ctx.execution_options.resource_limits.copy(cpu=int(cpus_alloc))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
 def _build_relevant_regex() -> re.Pattern:
     phrases = [
         r"artificial\s+intelligence",
@@ -165,6 +226,7 @@ def _trim_text_for_prompt(text: str, tokenizer, system_text: str, cfg) -> str:
 
 
 def run_taxonomy_stage(df, cfg):
+    _ensure_ray_init(cfg)
     is_ray_ds = hasattr(df, "map_batches") and hasattr(df, "count") and _RAY_OK
     if not is_ray_ds:
         if df is None or len(df) == 0:
@@ -251,10 +313,39 @@ def run_taxonomy_stage(df, cfg):
     ek.setdefault("dtype", "auto")
     ek.setdefault("kv_cache_dtype", "auto")
     ek = _filter_vllm_engine_kwargs(ek)
+    # Bound concurrency to available CPUs when no GPUs are being used
+    try:
+        cpus_alloc = None
+        cpt = os.environ.get("SLURM_CPUS_PER_TASK")
+        if cpt is not None and str(cpt).strip() != "":
+            cpus_alloc = int(cpt)
+        elif os.environ.get("SLURM_CPUS_ON_NODE"):
+            # Simple parse (best-effort)
+            v = os.environ.get("SLURM_CPUS_ON_NODE")
+            try:
+                if v and "," in v:
+                    cpus_alloc = sum(int(p) for p in v.split(",") if p.strip())
+                elif v and "(x" in v and v.endswith(")"):
+                    import re as _re
+                    m = _re.match(r"^(\d+)\(x(\d+)\)$", v)
+                    if m:
+                        cpus_alloc = int(m.group(1)) * int(m.group(2))
+                elif v:
+                    cpus_alloc = int(v)
+            except Exception:
+                cpus_alloc = None
+    except Exception:
+        cpus_alloc = None
+    desired_conc = int(getattr(cfg.model, "concurrency", 1) or 1)
+    if cpus_alloc is not None and int(cpus_alloc) > 0:
+        try:
+            desired_conc = max(1, min(desired_conc, int(cpus_alloc)))
+        except Exception:
+            pass
     engine_config = vLLMEngineProcessorConfig(
         model_source=str(getattr(cfg.model, "model_source")),
         engine_kwargs=ek,
-        concurrency=int(getattr(cfg.model, "concurrency", 1) or 1),
+        concurrency=int(desired_conc),
         batch_size=int(getattr(cfg.model, "batch_size", 16) or 16),
     )
 
@@ -400,7 +491,7 @@ def run_taxonomy_stage(df, cfg):
             fake_llm = False
         # Prefilter gating
         if prefilter_mode in ("pre_gating", "post_gating"):
-            ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("article_text"))})
+            ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("chunk_text") or r.get("article_text"))})
             if prefilter_mode == "pre_gating":
                 ds_in = ds_in.filter(lambda r: bool(r.get("relevant_keyword", True)))
         # Build inputs
@@ -441,7 +532,7 @@ def run_taxonomy_stage(df, cfg):
         fake_llm = False
     if prefilter_mode in ("pre_gating", "post_gating"):
         try:
-            out["relevant_keyword"] = out["article_text"].apply(lambda t: _kw_flag(t))
+            out["relevant_keyword"] = out.apply(lambda rr: _kw_flag(rr.get("chunk_text") or rr.get("article_text")), axis=1)
         except Exception:
             out["relevant_keyword"] = True
         if prefilter_mode == "pre_gating":
@@ -475,81 +566,7 @@ def run_taxonomy_stage(df, cfg):
                 pass
         except Exception:
             pass
-    # Stage-scoped W&B logging (optional)
-    try:
-        if bool(getattr(cfg.wandb, "enabled", False)):
-            try:
-                import wandb as _wandb  # type: ignore
-            except Exception:
-                _wandb = None  # type: ignore
-            if _wandb is not None:
-                _created_run = False
-                try:
-                    group = getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP")
-                except Exception:
-                    group = None
-                try:
-                    proj = str(getattr(cfg.wandb, "project", "UAIR") or "UAIR")
-                except Exception:
-                    proj = "UAIR"
-                try:
-                    ent = getattr(cfg.wandb, "entity", None)
-                    ent = str(ent) if (ent is not None and str(ent).strip() != "") else None
-                except Exception:
-                    ent = None
-                try:
-                    existing = getattr(_wandb, "run", None)
-                    if existing is None:
-                        _base_name = f"{getattr(cfg.experiment, 'name', 'UAIR')}-taxonomy"
-                        try:
-                            _run_name = f"{group}-{_base_name}" if group else _base_name
-                        except Exception:
-                            _run_name = _base_name
-                        run = _wandb.init(project=proj, entity=ent, job_type=str(getattr(cfg.runtime, "stage", "taxonomy")), name=_run_name, group=group, config=OmegaConf.to_container(cfg, resolve=True))
-                        _created_run = True
-                    else:
-                        run = existing
-                except Exception:
-                    run = None  # type: ignore
-                try:
-                    total_tx = int(len(out_df))
-                except Exception:
-                    total_tx = 0
-                none_frac = 0.0
-                try:
-                    if total_tx > 0:
-                        def _none_mask(sr: pd.Series) -> pd.Series:
-                            try:
-                                s = sr.astype(str).str.strip().str.strip("\"'").str.lower()
-                                return s.isin(["none", ""])
-                            except Exception:
-                                try:
-                                    return sr.astype(str).str.lower().eq("none")
-                                except Exception:
-                                    return pd.Series([False] * len(sr))
-                        if "chunk_label_name" in out_df.columns:
-                            none_ct = int(_none_mask(out_df["chunk_label_name"]).sum())
-                        elif "chunk_label" in out_df.columns:
-                            none_ct = int(_none_mask(out_df["chunk_label"]).sum())
-                        else:
-                            none_ct = 0
-                        none_frac = float(none_ct) / float(total_tx)
-                except Exception:
-                    pass
-                try:
-                    _wandb.log({
-                        "taxonomy/rows": total_tx,
-                        "taxonomy/none_fraction": none_frac,
-                    })
-                except Exception:
-                    pass
-                try:
-                    if _created_run and not bool(getattr(cfg.wandb, "single_run", False)):
-                        _wandb.finish()
-                except Exception:
-                    pass
-    except Exception:
-        pass
+    # Stage-scoped logging is handled by the orchestrator
     return out_df
 
 

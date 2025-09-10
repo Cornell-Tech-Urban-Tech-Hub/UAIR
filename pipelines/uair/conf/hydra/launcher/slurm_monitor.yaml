@@ -17,6 +17,10 @@ setup:
   - source ~/.bashrc
   - conda activate /share/ju/matt/conda/cillm-lora || source activate /share/ju/matt/conda/cillm-lora
   - unset WANDB_DISABLED
+  - if [ -n "$WANDB_MODE" ]; then export WANDB_MODE="$WANDB_MODE"; fi
+  - if [ -n "$WANDB_BASE_URL" ]; then export WANDB_BASE_URL="$WANDB_BASE_URL"; fi
+  - if [ -n "$WANDB_GROUP" ]; then export WANDB_GROUP="$WANDB_GROUP"; fi
+  - export RAY_NAMESPACE=${oc.env:WANDB_GROUP,uair}
   - export RULE_TUPLES_SILENT=1
   - export TOKENIZERS_PARALLELISM=false
 

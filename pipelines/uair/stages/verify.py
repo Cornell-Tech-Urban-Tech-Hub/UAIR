@@ -14,6 +14,13 @@ try:
 except Exception:
     yaml = None  # type: ignore
 
+# Use in-repo verification core implementation (ported from .OLD/experiments/verification.py)
+from ..verification_core import (
+    init_verification,
+    verify_batch_pandas,
+    parse_thresholds_string,
+)
+
 
 def run_verification_stage(df, cfg):
     """
@@ -22,14 +29,7 @@ def run_verification_stage(df, cfg):
     Expects taxonomy JSON at cfg.taxonomy_json and chunk rows with
     at least: article_id, chunk_text, chunk_label (string index or "None").
     """
-    try:
-        from experiments.verification import (
-            init_verification,
-            verify_batch_pandas,
-            parse_thresholds_string,
-        )
-    except Exception as e:
-        raise RuntimeError(f"verification components unavailable: {e}")
+    # Imports are resolved at module import time; functions are available here
 
     # Resolve taxonomy (YAML or JSON)
     taxonomy_path = str(getattr(cfg, "taxonomy_json", "") or "")
@@ -66,9 +66,73 @@ def run_verification_stage(df, cfg):
     except Exception:
         device = None
 
+    # Ensure Ray is initialized with SLURM-aware CPU caps
+    try:
+        import ray  # type: ignore
+        if not ray.is_initialized():
+            cpus_alloc = None
+            try:
+                cpt = os.environ.get("SLURM_CPUS_PER_TASK")
+                if cpt and str(cpt).strip() != "":
+                    cpus_alloc = int(cpt)
+                elif os.environ.get("SLURM_CPUS_ON_NODE"):
+                    v = os.environ.get("SLURM_CPUS_ON_NODE")
+                    try:
+                        if v and "," in v:
+                            cpus_alloc = sum(int(p) for p in v.split(",") if p.strip())
+                        elif v and "(x" in v and v.endswith(")"):
+                            import re as _re
+                            m = _re.match(r"^(\d+)\(x(\d+)\)$", v)
+                            if m:
+                                cpus_alloc = int(m.group(1)) * int(m.group(2))
+                        elif v:
+                            cpus_alloc = int(v)
+                    except Exception:
+                        cpus_alloc = None
+            except Exception:
+                cpus_alloc = None
+            try:
+                if cpus_alloc and int(cpus_alloc) > 0:
+                    ray.init(log_to_driver=True, num_cpus=int(cpus_alloc))
+                else:
+                    ray.init(log_to_driver=True)
+            except Exception:
+                pass
+            # Constrain Ray Data CPUs
+            try:
+                if cpus_alloc and int(cpus_alloc) > 0:
+                    ctx = ray.data.DataContext.get_current()
+                    ctx.execution_options.resource_limits = ctx.execution_options.resource_limits.copy(cpu=int(cpus_alloc))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     is_ray_ds = hasattr(df, "map_batches") and hasattr(df, "count") and _RAY_OK
     if is_ray_ds:
+        # Count input rows early (driver-side)
+        try:
+            rows_in_total = int(df.count())
+        except Exception:
+            rows_in_total = None  # type: ignore
         ds_in = df
+
+        # Keep only rows WITH a chunk_label_name (present and non-empty)
+        def _is_labeled(r: Dict[str, Any]) -> bool:
+            nm = r.get("chunk_label_name")
+            if nm is None:
+                return False
+            try:
+                s = str(nm).strip().strip("\"").strip("'").lower()
+            except Exception:
+                s = str(nm).lower() if nm is not None else ""
+            if s == "" or s == "none" or s == "nan":
+                return False
+            return True
+        try:
+            ds_in = ds_in.filter(_is_labeled)
+        except Exception:
+            pass
 
         # Build name->index mapping consistent with taxonomy stage ordering
         def _norm(s: str) -> str:
@@ -90,54 +154,20 @@ def run_verification_stage(df, cfg):
         except Exception:
             name_to_idx = {}
 
-        def _coerce_label(row: Dict[str, Any]) -> Dict[str, Any]:
+        def _ensure_chunk_text(row: Dict[str, Any]) -> Dict[str, Any]:
             r = dict(row)
-            # Ensure chunk_text exists
             if not r.get("chunk_text"):
                 r["chunk_text"] = str(r.get("article_text") or "")
-            lab = r.get("chunk_label")
-            lab_name = r.get("chunk_label_name")
-            lab_str = str(lab) if lab is not None else "None"
-            # If numeric-like, keep
-            is_numeric = False
-            try:
-                int(lab_str)
-                is_numeric = True
-            except Exception:
-                is_numeric = False
-            if not is_numeric:
-                # Try to map name to index
-                nm = str(lab_name if lab_name not in (None, "None", "") else lab_str)
-                idx_val = name_to_idx.get(_norm(nm))
-                if isinstance(idx_val, int):
-                    r["chunk_label"] = str(idx_val)
-                else:
-                    r["chunk_label"] = "None"
-            else:
-                r["chunk_label"] = lab_str
             return r
 
         try:
-            ds_in = ds_in.map(_coerce_label)
+            ds_in = ds_in.map(_ensure_chunk_text)
         except Exception:
             pass
-        # Keep only rows with a usable chunk_label
-        def _has_label(r: Dict[str, Any]) -> bool:
-            v = r.get("chunk_label")
-            if v is None:
-                return False
-            s = str(v).strip()
-            if s == "" or s.lower() == "none":
-                return False
-            try:
-                int(s)
-                return True
-            except Exception:
-                return False
         try:
-            ds_in = ds_in.filter(_has_label)
+            rows_kept = int(ds_in.count())
         except Exception:
-            pass
+            rows_kept = None  # type: ignore
 
         # Initialize per-worker via map_batches constructor, or do a lightweight pre-map init
         def _init_fn() -> None:
@@ -147,6 +177,7 @@ def run_verification_stage(df, cfg):
                 top_k=top_k,
                 thresholds=thresholds,
                 device=device,
+                debug=bool(getattr(getattr(cfg, "runtime", object()), "debug", False)),
             )
 
         # Wrapper ensures initialization per worker before verifying batches
@@ -158,6 +189,7 @@ def run_verification_stage(df, cfg):
                     top_k=top_k,
                     thresholds=thresholds,
                     device=device,
+                    debug=bool(getattr(getattr(cfg, "runtime", object()), "debug", False)),
                 )
             except Exception:
                 pass
@@ -229,10 +261,15 @@ def run_verification_stage(df, cfg):
                     ver_docs_ds.write_parquet(os.path.join(out_dir, "docs_verification"))
             except Exception:
                 pass
+        # Stage-scoped logging is handled by the orchestrator
         return ds_out
 
     # Pandas fallback
     pdf = df.copy() if df is not None else pd.DataFrame([])
+    try:
+        rows_in_total = int(len(pdf))
+    except Exception:
+        rows_in_total = None  # type: ignore
     init_verification(
         taxonomy=taxonomy,
         method=method,
@@ -242,65 +279,22 @@ def run_verification_stage(df, cfg):
     )
     if len(pdf) == 0:
         return pdf
-    # Coerce labels by name when needed
+    # Keep only rows WITH chunk_label_name (present and non-empty), and ensure chunk_text
     try:
-        def _norm2(s: str) -> str:
-            try:
-                import re as _re
-                return _re.sub(r"\s+", " ", str(s or "").strip().lower())
-            except Exception:
-                return str(s or "").strip().lower()
-        name_to_idx2: Dict[str, int] = {}
-        if isinstance(taxonomy, dict):
-            idx = 1
-            for _cat, subs in taxonomy.items():
-                if isinstance(subs, list):
-                    for s in subs:
-                        if isinstance(s, str) and s.strip():
-                            name_to_idx2[_norm2(s)] = idx
-                            idx += 1
-        def _fix_row(r: pd.Series) -> pd.Series:
-            lab = r.get("chunk_label")
-            lab_name = r.get("chunk_label_name")
-            lab_str = str(lab) if lab is not None else "None"
-            # numeric?
-            numeric = False
-            try:
-                int(lab_str)
-                numeric = True
-            except Exception:
-                numeric = False
-            if not numeric:
-                nm = str(lab_name if lab_name not in (None, "None", "") else lab_str)
-                idx_v = name_to_idx2.get(_norm2(nm))
-                r["chunk_label"] = (str(idx_v) if isinstance(idx_v, int) else "None")
-            else:
-                r["chunk_label"] = lab_str
-            if not r.get("chunk_text"):
-                r["chunk_text"] = str(r.get("article_text") or "")
-            return r
-        if len(name_to_idx2):
-            pdf = pdf.apply(_fix_row, axis=1)
-    except Exception:
-        pass
-    # Filter to rows with usable chunk_label
-    try:
-        def _keep_row(r: pd.Series) -> bool:
-            v = r.get("chunk_label")
-            if v is None:
-                return False
-            s = str(v).strip()
-            if s == "" or s.lower() == "none":
-                return False
-            try:
-                int(s)
-                return True
-            except Exception:
-                return False
         if len(pdf):
-            pdf = pdf[pdf.apply(_keep_row, axis=1)]
+            try:
+                s = pdf.get("chunk_label_name")
+                labeled_mask = (~s.isna()) & (~s.astype(str).str.strip().str.strip('"').str.strip("'").str.lower().isin(["", "none", "nan"]))
+            except Exception:
+                labeled_mask = (~pdf.get("chunk_label_name").isna())
+            pdf = pdf[labeled_mask]
+            if "chunk_text" not in pdf.columns:
+                pdf["chunk_text"] = pdf.get("article_text", pd.Series([""] * len(pdf))).fillna("").astype(str)
+            else:
+                pdf["chunk_text"] = pdf["chunk_text"].fillna(pdf.get("article_text", "")).astype(str)
+        rows_kept = int(len(pdf))
     except Exception:
-        pass
+        rows_kept = None  # type: ignore
 
     try:
         out = verify_batch_pandas(pdf)
@@ -343,6 +337,8 @@ def run_verification_stage(df, cfg):
         ver_docs_pdf = out.groupby("article_id", dropna=False).apply(_reduce_verify_pdf).reset_index(drop=True)
     except Exception:
         ver_docs_pdf = pd.DataFrame([])
+
+    # Stage-scoped logging is handled by the orchestrator
 
     # Persist side outputs if requested
     try:

@@ -5,7 +5,7 @@ defaults:
   - prompt: classify
   - prompt@prompt_taxonomy: taxonomy
   - model: vllm_qwen3-30b
-  - override hydra/launcher: g2_slurm_pierson
+  - override hydra/launcher: g2_slurm_cpu
   - _self_
 
 experiment:
@@ -31,6 +31,7 @@ runtime:
   child_launcher: g2_slurm_pierson
   pipeline_local: false
   gate_on_relevance: true
+  rows_per_block: 4000
 
 sampling_params:
   seed: 777
