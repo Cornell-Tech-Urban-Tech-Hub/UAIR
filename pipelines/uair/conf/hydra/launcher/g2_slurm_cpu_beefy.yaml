@@ -4,8 +4,8 @@ submitit_folder: ${hydra.sweep.dir}/.submitit/%j
 timeout_min: 2880
 nodes: 1
 tasks_per_node: 1
-cpus_per_task: 2
-mem_gb: 16
+cpus_per_task: 8
+mem_gb: 64
 partition: pierson
 array_parallelism: 1
 name: UAIR
@@ -36,12 +36,12 @@ setup:
   # Disable SLURM CPU binding which can conflict with submitit's launch context
   - export SLURM_CPU_BIND=none
   # Respect SLURM CPU allocation for threaded libs (BLAS/OpenMP/numexpr/BLIS/veclib)
-  - export OMP_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
-  - export MKL_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
-  - export OPENBLAS_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
-  - export NUMEXPR_MAX_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
-  - export VECLIB_MAXIMUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
-  - export BLIS_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,2}
+  - export OMP_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
+  - export MKL_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
+  - export OPENBLAS_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
+  - export NUMEXPR_MAX_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
+  - export VECLIB_MAXIMUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
+  - export BLIS_NUM_THREADS=${oc.env:SLURM_CPUS_PER_TASK,8}
   # Avoid GPU-related exports in CPU-only parent
   - unset CUDA_VISIBLE_DEVICES
   - unset PYTORCH_CUDA_ALLOC_CONF

@@ -134,16 +134,43 @@ def log_table(cfg, df, key: str, prefer_cols: Optional[List[str]] = None, max_ro
             table = _WB.Table(columns=cols)
         except Exception:
             table = _WB.Table(columns=cols)
+        # Determine sampling
+        try:
+            total_rows = int(len(df))
+        except Exception:
+            total_rows = None
+        sample_n = int(max_rows)
+        # Fixed seed selection
+        seed = 777
+        try:
+            # Prefer cfg.wandb.table_sample_seed when available
+            seed = int(getattr(getattr(cfg, "wandb", object()), "table_sample_seed", 777))
+        except Exception:
+            try:
+                env_seed = os.environ.get("UAIR_WB_TABLE_SEED") or os.environ.get("UAIR_TABLE_SAMPLE_SEED")
+                if env_seed is not None:
+                    seed = int(env_seed)
+            except Exception:
+                seed = 777
+        try:
+            if total_rows is not None and total_rows > sample_n and _pd is not None:
+                df_iter = df.sample(n=sample_n, random_state=seed).reset_index(drop=True)
+            else:
+                df_iter = df.reset_index(drop=True)
+        except Exception:
+            # Fallback to first N if sampling fails
+            try:
+                df_iter = df.reset_index(drop=True).head(sample_n)
+            except Exception:
+                df_iter = df
         n = 0
-        for _, r in df.reset_index(drop=True).iterrows():
-            if n >= int(max_rows):
-                break
+        for _, r in df_iter.iterrows():
             row_vals: List[str] = []
             for c in cols:
                 row_vals.append(_to_str(r.get(c)))
             table.add_data(*row_vals)
             n += 1
-        _WB.log({key: table, f"{key}/rows": n})
+        _WB.log({key: table, f"{key}/rows": n, f"{key}/total_rows": (total_rows if total_rows is not None else n)})
     except Exception:
         pass
 

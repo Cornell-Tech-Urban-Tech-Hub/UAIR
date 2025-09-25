@@ -201,6 +201,8 @@ def run_experiment(cfg) -> None:
     # Choose IO mode: Ray Dataset streaming or pandas DataFrame (only for non-pipeline stages)
     use_streaming = False
     ds = None
+    # Ensure df is defined for all stages (incl. topic) to avoid NameError in fallbacks/prints
+    df = None  # type: ignore[assignment]
     try:
         _stream_flag = bool(getattr(cfg.runtime, "streaming_io", False))
         _stream_allowed = stage in ("classify", "taxonomy", "verification")
@@ -928,6 +930,143 @@ def run_experiment(cfg) -> None:
             _wb_finish(cfg)
         return
 
+    if stage == "topic":
+        from .stages.topic import run_topic_stage
+        try:
+            run_cfg = {"stage": "topic", "parquet_path": parquet_path}
+        except Exception:
+            run_cfg = {"stage": "topic"}
+        if use_wandb:
+            _wb_start(cfg, "topic", run_config=run_cfg)
+        in_obj = None
+        try:
+            in_obj = ds if ("ds" in locals() and ds is not None) else df
+        except Exception:
+            in_obj = df
+        # If input looks like a directory or classify output dir, try to read classify_relevant.parquet
+        try:
+            p = parquet_path
+            if os.path.isdir(p):
+                # Expect classify outputs at the root of the provided directory
+                cand_rel = os.path.join(p, "classify_relevant.parquet")
+                cand_all = os.path.join(p, "classify_all.parquet")
+                if os.path.exists(cand_rel):
+                    in_obj = pd.read_parquet(cand_rel)
+                elif os.path.exists(cand_all):
+                    in_obj = pd.read_parquet(cand_all)
+            elif os.path.isfile(p):
+                # Direct parquet file input
+                in_obj = pd.read_parquet(p)
+        except Exception:
+            pass
+        out_any = run_topic_stage(in_obj, cfg)
+        out_df = out_any if isinstance(out_any, pd.DataFrame) else None
+        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
+        if out_path:
+            try:
+                out_df.to_csv(out_path, index=False)
+                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                    print(json.dumps({"topic_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
+            except Exception:
+                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                    print(json.dumps({"topic_rows": int(len(out_df)), "output_csv": None}, indent=2))
+        else:
+            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                print(json.dumps({"topic_rows": int(len(out_df))}, indent=2))
+        out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("topic"))
+        if out_dir:
+            try:
+                os.makedirs(out_dir, exist_ok=True)
+            except Exception:
+                pass
+            try:
+                pq_path = os.path.join(out_dir, "docs_topics.parquet")
+                out_df.to_parquet(pq_path, index=False)
+                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                    print(json.dumps({"topic_rows": int(len(out_df)), "output_parquet": pq_path}, indent=2))
+            except Exception as e:
+                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                    print(json.dumps({"error": "topic_parquet_write_failed", "detail": str(e)}, indent=2))
+        if use_wandb:
+            try:
+                _wb_log_table(cfg, out_df, key="tables/topic_docs", prefer_cols=[
+                    "unit_id","article_id","article_path","topic_id","topic_prob","topic_top_terms","article_keywords","plot_x","plot_y"
+                ], max_rows=int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000))
+            except Exception:
+                pass
+            # Cluster-level summary table (one row per topic_id) with top terms
+            try:
+                if out_df is not None and "topic_id" in out_df.columns:
+                    import pandas as _pd  # type: ignore
+                    def _first_nonnull(s):
+                        try:
+                            for v in s:
+                                if v is not None:
+                                    return v
+                        except Exception:
+                            pass
+                        return None
+                    grp = out_df.groupby("topic_id", dropna=False)
+                    rows = []
+                    for tid, g in grp:
+                        try:
+                            ex = g.iloc[0]
+                        except Exception:
+                            ex = None
+                        rows.append({
+                            "topic_id": int(tid) if tid is not None else -1,
+                            "topic_size": int(len(g)),
+                            "topic_top_terms": _first_nonnull(g.get("topic_top_terms", [])),
+                            "example_article_id": (ex.get("article_id") if ex is not None else None),
+                            "example_article_path": (ex.get("article_path") if ex is not None else None),
+                        })
+                    clust_df = _pd.DataFrame(rows)
+                    _wb_log_table(cfg, clust_df, key="tables/topic_clusters", prefer_cols=[
+                        "topic_id","topic_size","topic_top_terms","example_article_id","example_article_path"
+                    ], max_rows=1000)
+            except Exception:
+                pass
+            # Plot and log a 2D cluster scatter when coordinates are present
+            try:
+                if out_df is not None and ("plot_x" in out_df.columns and "plot_y" in out_df.columns):
+                    from .stages.topic_plot import log_cluster_scatter_to_wandb, log_cluster_scatter_plotly_to_wandb  # type: ignore
+                    try:
+                        log_cluster_scatter_to_wandb(out_df, cfg, title="topic_cluster_map")
+                    except Exception:
+                        pass
+                    try:
+                        log_cluster_scatter_plotly_to_wandb(out_df, cfg, title="topic_cluster_map")
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+            # Log basic topic metrics
+            try:
+                n_units = int(len(out_df)) if out_df is not None else 0
+                noise_ct = 0
+                num_clusters = 0
+                try:
+                    vc = out_df["topic_id"].value_counts(dropna=False)
+                    noise_ct = int(vc.get(-1, 0)) if hasattr(vc, "get") else (int(vc[-1]) if (-1 in getattr(vc, 'index', [])) else 0)
+                    try:
+                        uniq = out_df["topic_id"].astype(int).unique().tolist()
+                        num_clusters = int(len([x for x in uniq if int(x) != -1]))
+                    except Exception:
+                        num_clusters = 0
+                except Exception:
+                    pass
+                payload = {
+                    "topic/units": n_units,
+                    "topic/noise_count": noise_ct,
+                    "topic/noise_fraction": (float(noise_ct) / float(n_units)) if n_units else 0.0,
+                    "topic/num_clusters": num_clusters,
+                }
+                _wb_log(cfg, payload)  # type: ignore[arg-type]
+            except Exception:
+                pass
+            _wb_finish(cfg)
+        return
+
     if stage == "verification":
         from .stages.verify import run_verification_stage
         # Stage-scoped W&B run (Option B)
@@ -1133,8 +1272,26 @@ def run_experiment(cfg) -> None:
 
         def _run_stage_subprocess(stage_name: str, overrides: Dict[str, Any], group_id: str) -> None:
             args: List[str] = [sys.executable, "-m", "pipelines.uair.cli"]
+            # Prefer mapping runtime.child_launchers[stage]; fallback to runtime.child_launcher
+            # Resolve per-stage launcher from DictConfig or dict; fallback to runtime.child_launcher
             try:
-                child_launcher = str(getattr(cfg.runtime, "child_launcher", "") or "")
+                cl_map = getattr(cfg.runtime, "child_launchers", None)
+            except Exception:
+                cl_map = None
+            stage_launcher = None
+            if cl_map is not None:
+                try:
+                    # OmegaConf DictConfig supports attribute access
+                    stage_launcher = getattr(cl_map, stage_name)
+                except Exception:
+                    stage_launcher = None
+                if stage_launcher is None:
+                    try:
+                        stage_launcher = cl_map.get(stage_name)  # type: ignore[attr-defined]
+                    except Exception:
+                        stage_launcher = None
+            try:
+                child_launcher = str(stage_launcher or getattr(cfg.runtime, "child_launcher", "") or "")
             except Exception:
                 child_launcher = ""
             run_local = bool(getattr(cfg.runtime, "pipeline_local", False))
@@ -1226,6 +1383,31 @@ def run_experiment(cfg) -> None:
         except Exception:
             group_id = uuid4().hex
 
+        # Start a W&B pipeline monitor run (coordinator)
+        if use_wandb:
+            try:
+                run_cfg = {
+                    "stage": "pipeline",
+                    "parquet_path": str(getattr(cfg.data, "parquet_path")),
+                    "output_dir": base_out,
+                    "classify_dir": classify_dir,
+                    "taxonomy_dir": taxonomy_dir,
+                    "verification_dir": verify_dir,
+                    "pipeline_topic": bool(getattr(cfg.runtime, "pipeline_topic", False)),
+                    "streaming_io": bool(getattr(cfg.runtime, "streaming_io", False)),
+                    "child_launcher": str(getattr(cfg.runtime, "child_launcher", "")),
+                    "python_version": sys.version.split()[0],
+                    "os": platform.platform(),
+                    "hostname": socket.gethostname(),
+                    "wandb_group": group_id,
+                }
+            except Exception:
+                run_cfg = {"stage": "pipeline", "wandb_group": group_id}
+            try:
+                _wb_start(cfg, "pipeline", run_config=run_cfg)
+            except Exception:
+                pass
+
         # Stage 1: classify
         cls_overrides: Dict[str, Any] = {
             "runtime.output_dir": classify_dir,
@@ -1266,6 +1448,62 @@ def run_experiment(cfg) -> None:
         except Exception:
             cls_dt = float(_time.time() - cls_t0)
             raise
+        # Log classify stage duration to W&B
+        if use_wandb:
+            try:
+                _wb_log(cfg, {"pipeline/classify_seconds": float(cls_dt)})  # type: ignore[arg-type]
+            except Exception:
+                pass
+
+        # Optional Stage 2: topic consumes classify_dir when pipeline_topic=true; otherwise taxonomy
+        pipeline_topic = bool(getattr(cfg.runtime, "pipeline_topic", False))
+        if pipeline_topic:
+            try:
+                rel_pq = os.path.join(classify_dir, "classify_relevant.parquet")
+                all_pq = os.path.join(classify_dir, "classify_all.parquet")
+                if os.path.exists(rel_pq):
+                    topic_input_path = rel_pq
+                elif os.path.exists(all_pq):
+                    topic_input_path = all_pq
+                else:
+                    topic_input_path = classify_dir
+            except Exception:
+                topic_input_path = classify_dir
+            topic_overrides: Dict[str, Any] = {
+                "runtime.output_dir": os.path.join(base_out, "topic"),
+                "data.parquet_path": topic_input_path,
+                # Ensure SentenceTransformer runs on CPU to avoid GPU contention
+                "topic.embed.device": "cpu",
+            }
+            try:
+                topic_overrides["wandb.enabled"] = True
+            except Exception:
+                pass
+            t_t0 = _time.time()
+            try:
+                _run_stage_subprocess("topic", topic_overrides, group_id)
+                _ = float(_time.time() - t_t0)
+            except Exception:
+                _ = float(_time.time() - t_t0)
+                raise
+            # Log topic stage duration and mode
+            if use_wandb:
+                try:
+                    _wb_log(cfg, {"pipeline/topic_seconds": float(_), "pipeline/topic_mode": True})  # type: ignore[arg-type]
+                except Exception:
+                    pass
+            if not bool(getattr(cfg.runtime, "pipeline_topic", False)):
+                pass
+            # Skip taxonomy and verification when topic pipeline is enabled
+            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
+                print(json.dumps({"pipeline": {"output_dir": base_out, "topic_mode": True}}, indent=2))
+            # Finish pipeline W&B run early in topic mode
+            if use_wandb:
+                try:
+                    _wb_finish(cfg)
+                except Exception:
+                    pass
+            return
 
         # Stage 2: taxonomy consumes classify_dir
         # Prefer relevant-only parquet if present; also handle historical misspelling; otherwise fall back
@@ -1362,6 +1600,12 @@ def run_experiment(cfg) -> None:
         except Exception:
             tax_dt = float(_time.time() - tax_t0)
             raise
+        # Log taxonomy stage duration
+        if use_wandb:
+            try:
+                _wb_log(cfg, {"pipeline/taxonomy_seconds": float(tax_dt)})  # type: ignore[arg-type]
+            except Exception:
+                pass
 
         # Stage 3: verification consumes taxonomy_dir/results.parquet when present
         try:
@@ -1400,6 +1644,12 @@ def run_experiment(cfg) -> None:
         except Exception:
             ver_dt = float(_time.time() - ver_t0)
             raise
+        # Log verification stage duration
+        if use_wandb:
+            try:
+                _wb_log(cfg, {"pipeline/verification_seconds": float(ver_dt)})  # type: ignore[arg-type]
+            except Exception:
+                pass
 
         if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
             print(json.dumps({
@@ -1411,6 +1661,22 @@ def run_experiment(cfg) -> None:
                     "wandb_group": group_id,
                 }
             }, indent=2))
+        # Log final pipeline outputs and finish W&B run
+        if use_wandb:
+            try:
+                _wb_log(cfg, {
+                    "pipeline/output_dir": str(base_out),
+                    "pipeline/classify_dir": str(classify_dir),
+                    "pipeline/taxonomy_dir": str(taxonomy_dir),
+                    "pipeline/verification_dir": str(verify_dir),
+                    "pipeline/topic_mode": False,
+                })  # type: ignore[arg-type]
+            except Exception:
+                pass
+            try:
+                _wb_finish(cfg)
+            except Exception:
+                pass
         return
 
     raise ValueError(f"Unknown runtime.stage: {stage}")

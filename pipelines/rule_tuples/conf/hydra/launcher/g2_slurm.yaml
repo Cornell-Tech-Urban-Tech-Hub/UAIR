@@ -1,0 +1,23 @@
+# Uses Hydra Submitit Slurm launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 480
+nodes: 1
+tasks_per_node: 1
+cpus_per_task: 8
+mem_gb: 64
+gpus_per_node: 4
+partition: ju
+array_parallelism: 1
+name: E_rule_tuples
+additional_parameters:
+  gres: gpu:4
+  wckey: ""
+setup:
+  - export HYDRA_FULL_ERROR=1
+  - source ~/.bashrc
+  - source activate /share/ju/matt/conda/cillm-lora
+  - export RULE_TUPLES_SILENT=1
+  - export WANDB_SILENT=true
+  - export CUDA_VISIBLE_DEVICES=0,1,2,3
+

@@ -21,12 +21,24 @@ def _maybe_silence_vllm_logs() -> None:
     if _VLLM_LOGS_SILENCED:
         return
     try:
+        # Throttle INFO logs to every N messages; always allow WARNING+
+        from pipelines.uair.logging_filters import PatternModuloFilter  # local import for worker
+        lg = logging.getLogger("vllm")
+        try:
+            n = int(os.environ.get("UAIR_VLLM_LOG_EVERY", "10") or "10")
+        except Exception:
+            n = 10
+        lg.setLevel(logging.INFO)
+        # Attach once
+        try:
+            existing_filters = getattr(lg, "filters", [])
+            if not any(getattr(f, "__class__", object).__name__ == "PatternModuloFilter" for f in existing_filters):
+                lg.addFilter(PatternModuloFilter(mod=n, pattern="Elapsed time for batch"))
+        except Exception:
+            pass
+        # If explicit silence requested, escalate to ERROR
         if os.environ.get("RULE_TUPLES_SILENT"):
-            os.environ.setdefault("VLLM_LOGGING_LEVEL", "ERROR")
-            for name in ("vllm", "vllm.logger", "vllm.engine", "vllm.core", "vllm.worker"):
-                lg = logging.getLogger(name)
-                lg.setLevel(logging.ERROR)
-                lg.propagate = False
+            lg.setLevel(logging.ERROR)
         _VLLM_LOGS_SILENCED = True
     except Exception:
         pass
@@ -507,6 +519,16 @@ def run_classification_stage(df: pd.DataFrame, cfg):
         except Exception:
             return None
 
+    _TOK_CACHED = None  # lazy per-process tokenizer cache
+    def _get_tokenizer_cached(model_source: str):
+        nonlocal _TOK_CACHED
+        try:
+            if _TOK_CACHED is None:
+                _TOK_CACHED = _get_tokenizer(model_source)
+            return _TOK_CACHED
+        except Exception:
+            return None
+
     def _get_max_user_input_tokens(tokenizer, system_text: str) -> int:
         try:
             system_tokens = len(tokenizer.encode(system_text, add_special_tokens=False)) if tokenizer else 0
@@ -565,7 +587,8 @@ def run_classification_stage(df: pd.DataFrame, cfg):
         model_source=str(getattr(cfg.model, "model_source")),
         runtime_env={
             "env_vars": {
-                "VLLM_LOGGING_LEVEL": "ERROR",
+                # Doc-supported knob to reduce verbosity safely
+                "VLLM_LOGGING_LEVEL": str(os.environ.get("VLLM_LOGGING_LEVEL", "WARNING")),
             }
         },
         engine_kwargs=ek,
@@ -630,13 +653,16 @@ def run_classification_stage(df: pd.DataFrame, cfg):
             pass
         if enable_kw_buf and kw_regex is not None:
             row = _attach_chunk_text(dict(row))
-        # Construct user content; avoid per-row tokenizer loads to prevent massive overhead.
-        user = _format_user(row.get("article_text"), row)
+        # Construct user content and perform token-aware trimming to model context
+        user_raw = _format_user(row.get("article_text"), row)
+        tok_local = _get_tokenizer_cached(str(getattr(cfg.model, "model_source", "")))
+        # First, ensure chunk_text itself is trimmed defensively
         try:
-            if isinstance(user, str) and len(user) > int(_approx_user_char_budget):
-                user = user[: int(_approx_user_char_budget)]
+            txt0 = row.get("chunk_text") or row.get("article_text")
+            row["chunk_text"] = _trim_text_for_prompt(str(txt0 or ""), tok_local, system_prompt)
         except Exception:
             pass
+        user = _trim_text_for_prompt(user_raw, tok_local, system_prompt)
         from datetime import datetime as _dt
         return {
             "messages": [

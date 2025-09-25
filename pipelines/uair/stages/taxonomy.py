@@ -26,12 +26,21 @@ def _maybe_silence_vllm_logs() -> None:
     if _VLLM_LOGS_SILENCED:
         return
     try:
+        from pipelines.uair.logging_filters import PatternModuloFilter
+        lg = logging.getLogger("vllm")
+        try:
+            n = int(os.environ.get("UAIR_VLLM_LOG_EVERY", "10") or "10")
+        except Exception:
+            n = 10
+        lg.setLevel(logging.INFO)
+        try:
+            existing_filters = getattr(lg, "filters", [])
+            if not any(getattr(f, "__class__", object).__name__ == "PatternModuloFilter" for f in existing_filters):
+                lg.addFilter(PatternModuloFilter(mod=n, pattern="Elapsed time for batch"))
+        except Exception:
+            pass
         if os.environ.get("RULE_TUPLES_SILENT"):
-            os.environ.setdefault("VLLM_LOGGING_LEVEL", "ERROR")
-            for name in ("vllm", "vllm.logger", "vllm.engine", "vllm.core", "vllm.worker"):
-                lg = logging.getLogger(name)
-                lg.setLevel(logging.ERROR)
-                lg.propagate = False
+            lg.setLevel(logging.ERROR)
         _VLLM_LOGS_SILENCED = True
     except Exception:
         pass
@@ -344,6 +353,11 @@ def run_taxonomy_stage(df, cfg):
             pass
     engine_config = vLLMEngineProcessorConfig(
         model_source=str(getattr(cfg.model, "model_source")),
+        runtime_env={
+            "env_vars": {
+                "VLLM_LOGGING_LEVEL": str(os.environ.get("VLLM_LOGGING_LEVEL", "WARNING")),
+            }
+        },
         engine_kwargs=ek,
         concurrency=int(desired_conc),
         batch_size=int(getattr(cfg.model, "batch_size", 16) or 16),
@@ -404,11 +418,19 @@ def run_taxonomy_stage(df, cfg):
         row["chunk_text"] = ("\n\n".join(blocks) if blocks else str(row.get("article_text") or ""))
         return row
 
-    tok = _get_tokenizer(str(getattr(cfg.model, "model_source", "")))
+    _TOK_CACHED = None
+    def _get_tokenizer_cached():
+        nonlocal _TOK_CACHED
+        try:
+            if _TOK_CACHED is None:
+                _TOK_CACHED = _get_tokenizer(str(getattr(cfg.model, "model_source", "")))
+            return _TOK_CACHED
+        except Exception:
+            return None
 
     def _trim_row(row: Dict[str, Any]) -> Dict[str, Any]:
         txt = row.get("chunk_text") or row.get("article_text")
-        row["chunk_text"] = _trim_text_for_prompt(str(txt or ""), tok, system_prompt, cfg)
+        row["chunk_text"] = _trim_text_for_prompt(str(txt or ""), _get_tokenizer_cached(), system_prompt, cfg)
         return row
 
     def _pre(row: Dict[str, Any]) -> Dict[str, Any]:
@@ -442,7 +464,7 @@ def run_taxonomy_stage(df, cfg):
             **row,
             "messages": [
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": (_format_user(row)[:int(approx_chars)] if isinstance(_format_user(row), str) else _format_user(row))},
+                {"role": "user", "content": _trim_text_for_prompt(_format_user(row), _get_tokenizer_cached(), system_prompt, cfg)[:int(approx_chars)]},
             ],
             "sampling_params": sampling_params,
         }

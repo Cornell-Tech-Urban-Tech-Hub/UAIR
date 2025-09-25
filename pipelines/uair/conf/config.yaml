@@ -12,7 +12,7 @@ experiment:
   name: UAIR
 
 runtime:
-  stage: classify   # classify | taxonomy | verification | pipeline
+  stage: classify   # classify | taxonomy | verification | topic | pipeline
   debug: false
   sample_n: null
   output_csv: null
@@ -29,9 +29,55 @@ runtime:
   keyword_window_words: 100
   job_memory_gb: 64
   child_launcher: g2_slurm_pierson
+  # Per-stage launcher mapping used by the pipeline coordinator (child runs)
+  child_launchers:
+    classify: g2_slurm_pierson
+    taxonomy: g2_slurm_pierson
+    verification: g2_slurm_pierson
+    topic: g2_slurm_gpu_1x
   pipeline_local: false
   gate_on_relevance: true
   rows_per_block: 4000
+  # Topic pipeline mode: classify -> topic, skipping taxonomy & verification when true
+  pipeline_topic: false
+
+# Topic modeling configuration
+topic:
+  cluster_on: article       # article | chunk
+  text_column: chunk_text # auto | chunk_text | article_text (default to full article)
+  max_tokens_for_embed: 8192
+  seed: 777
+  # Optional cap to bound memory; null means unlimited
+  sample_max_units: null
+  # TF-IDF controls for cluster top-term summaries
+  tfidf_stop_words: english   # english | null | custom list via code
+  tfidf_max_df: 0.90          # ignore terms in >90% of units
+  tfidf_ngram_max: 2          # up to bigrams for scalability at 386k docs
+  doc_terms_k: 10             # number of per-article tf-idf keywords to emit
+  embed:
+    model_source: nomic-ai/nomic-embed-text-v1.5
+    batch_size: 64
+    device: auto            # auto | cpu | cuda
+    normalize: true
+    trust_remote_code: true
+    matryoshka_dim: 256     # 512 for more fidelity; 256 balances speed/memory
+    max_seq_length: 8192     # e.g., 8192; null = model default
+    torch_dtype: float16     # float16 | bfloat16 | float32
+  plot:
+    method: scatter
+  gpu:
+    use_rapids: true         # try cuML UMAP/HDBSCAN on GPU when available
+  reduce:
+    method: umap            # umap | pca | none
+    n_components: 15
+    n_neighbors: 50
+    min_dist: 0.05
+    metric: cosine
+  hdbscan:
+    min_cluster_size: 10
+    min_samples: null         # robustness at scale
+    metric: euclidean
+    cluster_selection_epsilon: 0.0
 
 sampling_params:
   seed: 777
