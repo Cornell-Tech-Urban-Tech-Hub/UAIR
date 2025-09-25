@@ -1,0 +1,15 @@
+{
+  "relevance_v1": {
+    "description": "Binary relevance check: is the article related to artificial intelligence?",
+    "system": "You are a careful news analyst trained to decide if a news article is related to artificial intelligence (AI) in any substantive way.",
+    "user_template": "Read the following article chunk and answer strictly YES or NO to the question: Is this article related to artificial intelligence? If enabled, also provide a one-sentence rationale.\n\n[article_id={article_id} chunk={chunk_id}/{num_chunks}]\n{chunk_text}",
+    "output_instructions": "Return ONLY 'YES' or 'NO'. If rationale logging is enabled, also return a 'Rationale:' line after the label.",
+    "expected_labels": ["YES", "NO"]
+  },
+  "taxonomy_v1": {
+    "description": "Classify article into a numbered taxonomy of AI risk categories or return None.",
+    "system_template": "You are a news analyst that classifies news articles into one of the following categories of risks from deployed artificial intelligence systems:\n{taxonomy_str}\n\nYou will be given a news article (possibly a chunk of a longer article). Classify it into one of the categories, or return 'None' if it does not fit into any of the categories, or if it is not about artificial intelligence. Return only the category number or 'None'.",
+    "user_template": "[article_id={article_id} chunk={chunk_id}/{num_chunks}]\n{chunk_text}",
+    "output_instructions": "Return only the category number (1..N) or 'None'."
+  }
+}
