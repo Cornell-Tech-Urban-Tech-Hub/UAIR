@@ -1,6 +1,0 @@
-parquet_path: ${oc.env:DATA_ROOT,/share/pierson/matt/UAIR/data}/global_subset/all_articles.parquet
-columns:
-  # Canonical UAIR column expected by stages is now article_text directly
-  article_text: article_text
-
-

@@ -1,9 +1,0 @@
-# @package hydra.launcher
-_target_: hydra_plugins.hydra_ray_launcher.ray_launcher.RayLauncher
-ray:
-  init:
-    address: null
-  remote:
-    num_cpus: 8
-    num_gpus: 2
-
