@@ -9,10 +9,10 @@ import json
 import sys
 from pathlib import Path
 
-# Add parent directory to path to import pipelines module
+# Add parent directory to path to import dagspaces module
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from pipelines.uair.wandb_logger import collect_compute_metadata
+from dagspaces.uair.wandb_logger import collect_compute_metadata
 
 
 def test_basic_collection():

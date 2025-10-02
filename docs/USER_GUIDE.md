@@ -1,6 +1,6 @@
 # UAIR Pipeline Framework - User Guide
 
-Building Custom Pipelines for Urban AI Risk Assessment
+Building Custom dagspaces for Urban AI Risk Assessment
 
 ---
 
@@ -35,7 +35,7 @@ UAIR (Urban AI Risks) is a pipeline framework designed for assessing AI-related 
 
 UAIR follows three key principles:
 
-1. **Configuration over Code**: Define pipelines declaratively in YAML, not Python
+1. **Configuration over Code**: Define dagspaces declaratively in YAML, not Python
 2. **Composability**: Mix and match stages, models, and datasets
 3. **Reproducibility**: Every run is tracked with full configuration snapshots
 
@@ -175,8 +175,8 @@ pipeline:
 #### Step 3: Run the Pipeline
 
 ```bash
-# Run from the pipelines/uair directory
-python -m pipelines.uair.cli \
+# Run from the dagspaces/uair directory
+python -m dagspaces.uair.cli \
   pipeline=my_first_pipeline \
   data.parquet_path=/path/to/your/articles.parquet
 ```
@@ -232,7 +232,7 @@ With a working pipeline, consider the following extensions:
 - **Deploy to SLURM**: Use `override /hydra/launcher: g2_slurm_cpu`
 - **Customize**: Adjust UMAP/HDBSCAN parameters in `topic` config
 
-Refer to [Core Concepts](#core-concepts) for detailed framework understanding, or [Complete Examples](#complete-examples) for more complex pipelines.
+Refer to [Core Concepts](#core-concepts) for detailed framework understanding, or [Complete Examples](#complete-examples) for more complex dagspaces.
 
 ---
 
@@ -327,7 +327,7 @@ UAIR uses **Hydra** for hierarchical configuration management with **OmegaConf**
 #### Configuration Structure
 
 ```
-pipelines/uair/conf/
+dagspaces/uair/conf/
 ├── config.yaml                    # Base config
 ├── data/
 │   ├── inputs.yaml               # Input data configs
@@ -404,16 +404,16 @@ Override any config value from the command line:
 
 ```bash
 # Simple overrides
-python -m pipelines.uair.cli runtime.debug=true
+python -m dagspaces.uair.cli runtime.debug=true
 
 # Nested overrides
-python -m pipelines.uair.cli model.engine_kwargs.max_model_len=4096
+python -m dagspaces.uair.cli model.engine_kwargs.max_model_len=4096
 
 # Change config group
-python -m pipelines.uair.cli data=flattened_rules
+python -m dagspaces.uair.cli data=flattened_rules
 
 # Multiple overrides
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.debug=true \
   runtime.sample_n=500 \
   model.batch_size=8
@@ -425,13 +425,13 @@ Config groups allow you to swap entire configuration blocks:
 
 ```bash
 # Use different data source
-python -m pipelines.uair.cli data=flattened_rules
+python -m dagspaces.uair.cli data=flattened_rules
 
 # Use different model
-python -m pipelines.uair.cli model=different_model
+python -m dagspaces.uair.cli model=different_model
 
 # Use different pipeline
-python -m pipelines.uair.cli pipeline=taxonomy_full
+python -m dagspaces.uair.cli pipeline=taxonomy_full
 ```
 
 ### 3. Stage Runners & Registry
@@ -561,7 +561,7 @@ The orchestrator performs automatic column mapping based on `data.columns` confi
 Parquet doesn't support nested Python objects natively. UAIR provides serialization helpers:
 
 ```python
-from pipelines.uair.stages.classify import _to_json_str
+from dagspaces.uair.stages.classify import _to_json_str
 
 # Serialize nested structures
 row['messages'] = _to_json_str(messages_list)

@@ -19,7 +19,7 @@ UAIR (Urban AI Risks) is a scalable pipeline framework for assessing AI-related 
 
 ### Key Features
 
-- **Configuration-Driven**: Define complex multi-stage pipelines in YAML, no code changes needed
+- **Configuration-Driven**: Define complex multi-stage dagspaces in YAML, no code changes needed
 - **Scalable**: Process millions of articles using Ray Data and SLURM clusters
 - **LLM-Integrated**: Built-in vLLM support with automatic GPU management
 - **Modular**: Mix and match stages, models, and datasets
@@ -49,7 +49,7 @@ uv pip install -r requirements.txt
 
 ```bash
 # Topic modeling on a sample of articles
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.debug=true \
   runtime.sample_n=100 \
   data.parquet_path=/path/to/articles.parquet
@@ -59,7 +59,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Complete pipeline: classify → taxonomy → verify
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=taxonomy_full \
   data.parquet_path=/path/to/articles.parquet
 ```
@@ -78,7 +78,7 @@ Complete documentation is available in `docs/`:
 - **[User Guide](docs/USER_GUIDE.md)** - Complete introduction with Quick Start
 - **[Quick Reference](docs/QUICK_REFERENCE.md)** - Command cheat sheet
 
-### Building Pipelines
+### Building dagspaces
 
 - **[Configuration Guide](docs/CONFIGURATION_GUIDE.md)** - Pipeline recipes and config patterns
 - **[Custom Stages Guide](docs/CUSTOM_STAGES_GUIDE.md)** - Building custom processing stages
@@ -132,7 +132,7 @@ UAIR/
 │   ├── CUSTOM_STAGES_GUIDE.md     # Build custom stages
 │   ├── CONFIGURATION_GUIDE.md     # Config recipes
 │   └── QUICK_REFERENCE.md         # Cheat sheet
-├── pipelines/uair/                # Core framework
+├── dagspaces/uair/                # Core framework
 │   ├── cli.py                     # CLI entry point
 │   ├── orchestrator.py            # Pipeline orchestrator
 │   ├── config_schema.py           # Configuration schemas
@@ -186,19 +186,19 @@ Adapt for other domains (medical, legal, scientific):
 1. Define your taxonomy in `conf/taxonomy/my_domain.yaml`
 2. Create custom prompts in `conf/prompt/my_prompts.yaml`
 3. Build pipeline in `conf/pipeline/my_pipeline.yaml`
-4. Run: `python -m pipelines.uair.cli pipeline=my_pipeline`
+4. Run: `python -m dagspaces.uair.cli pipeline=my_pipeline`
 
 See [Custom Stages Guide](docs/CUSTOM_STAGES_GUIDE.md) for details.
 
 ---
 
-## Example Pipelines
+## Example dagspaces
 
 ### Topic Modeling
 
 ```bash
 # Discover topics in your dataset
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=cluster_topic \
   topic.embed.device=cuda \
   data.parquet_path=/data/articles.parquet
@@ -208,7 +208,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Full pipeline with classification, taxonomy, and verification
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=taxonomy_full \
   runtime.sample_n=1000 \
   data.parquet_path=/data/articles.parquet
@@ -218,7 +218,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Override GPU and batch settings
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   model.engine_kwargs.max_model_len=8192 \
   model.batch_size=16 \
@@ -235,7 +235,7 @@ More examples in [Configuration Guide](docs/CONFIGURATION_GUIDE.md#pipeline-reci
 
 ```bash
 # Run locally (no SLURM)
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   hydra/launcher=null \
   runtime.sample_n=100
 ```
@@ -244,7 +244,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Submit to SLURM with GPU
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   hydra/launcher=g2_slurm_gpu_4x
 ```
@@ -281,7 +281,7 @@ pipeline:
 
 **Override from command line**:
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.debug=true \
   model.batch_size=8 \
   data.parquet_path=/path/to/data.parquet
@@ -303,12 +303,12 @@ pip install -r requirements-dev.txt
 pytest tests/
 
 # Run with coverage
-pytest --cov=pipelines tests/
+pytest --cov=dagspaces tests/
 ```
 
 ### Creating a Custom Stage
 
-1. **Implement stage function** in `pipelines/uair/stages/mystage.py`:
+1. **Implement stage function** in `dagspaces/uair/stages/mystage.py`:
 ```python
 def run_mystage(df, cfg):
     # Your processing logic
@@ -374,20 +374,20 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 **GPU Out of Memory**:
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   model.engine_kwargs.gpu_memory_utilization=0.6 \
   model.batch_size=2
 ```
 
 **Ray Object Store Full**:
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.rows_per_block=1000
 ```
 
 **Debug Mode**:
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.debug=true \
   runtime.sample_n=10
 ```

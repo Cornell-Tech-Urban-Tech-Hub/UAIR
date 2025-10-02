@@ -1,0 +1,1343 @@
+from typing import Any, Dict, List
+import re
+from bisect import bisect_right
+import pandas as pd
+import os
+import logging
+import json
+from omegaconf import OmegaConf
+
+try:
+    import ray  # noqa: F401
+    from ray.data.llm import build_llm_processor, vLLMEngineProcessorConfig  # type: ignore
+    _RAY_OK = True
+except Exception:
+    _RAY_OK = False
+
+_VLLM_LOGS_SILENCED = False
+
+def _maybe_silence_vllm_logs() -> None:
+    global _VLLM_LOGS_SILENCED
+    if _VLLM_LOGS_SILENCED:
+        return
+    try:
+        # Throttle INFO logs to every N messages; always allow WARNING+
+        from dagspaces.uair.logging_filters import PatternModuloFilter  # local import for worker
+        lg = logging.getLogger("vllm")
+        try:
+            n = int(os.environ.get("UAIR_VLLM_LOG_EVERY", "10") or "10")
+        except Exception:
+            n = 10
+        lg.setLevel(logging.INFO)
+        # Attach once
+        try:
+            existing_filters = getattr(lg, "filters", [])
+            if not any(getattr(f, "__class__", object).__name__ == "PatternModuloFilter" for f in existing_filters):
+                lg.addFilter(PatternModuloFilter(mod=n, pattern="Elapsed time for batch"))
+        except Exception:
+            pass
+        # If explicit silence requested, escalate to ERROR
+        if os.environ.get("RULE_TUPLES_SILENT"):
+            lg.setLevel(logging.ERROR)
+        _VLLM_LOGS_SILENCED = True
+    except Exception:
+        pass
+
+
+def _read_int_file(path: str) -> int:
+    try:
+        with open(path, "r") as f:
+            s = f.read().strip()
+        if s.lower() == "max":
+            return -1
+        return int(s)
+    except Exception:
+        return -1
+
+
+def _detect_cgroup_mem_limit_bytes() -> int:
+    """Return cgroup memory limit in bytes when available; otherwise -1.
+
+    Supports cgroup v2 (memory.max) and v1 (memory.limit_in_bytes).
+    """
+    # cgroup v2
+    v2 = "/sys/fs/cgroup/memory.max"
+    lim = _read_int_file(v2)
+    if lim > 0:
+        # Filter out unrealistically large values (no limit)
+        try:
+            if lim > (1 << 56):
+                return -1
+        except Exception:
+            pass
+        return lim
+    # cgroup v1
+    v1 = "/sys/fs/cgroup/memory/memory.limit_in_bytes"
+    lim = _read_int_file(v1)
+    if lim > 0:
+        try:
+            if lim > (1 << 56):
+                return -1
+        except Exception:
+            pass
+        return lim
+    return -1
+
+
+def _parse_int(val: str) -> int:
+    try:
+        return int(val)
+    except Exception:
+        return -1
+
+
+def _parse_cpus_on_node(val: str) -> int:
+    if not isinstance(val, str):
+        return -1
+    try:
+        # Common forms: "32", "16(x2)", "2,2", "2,1"
+        v = val.strip()
+        if "(x" in v and v.endswith(")"):
+            import re as _re
+            m = _re.match(r"^(\d+)\(x(\d+)\)$", v)
+            if m:
+                a = int(m.group(1))
+                b = int(m.group(2))
+                return max(1, a * b)
+        if "," in v:
+            parts = [p for p in v.split(",") if p.strip()]
+            acc = 0
+            for p in parts:
+                try:
+                    acc += int(p)
+                except Exception:
+                    return -1
+            return max(1, acc)
+        return max(1, int(v))
+    except Exception:
+        return -1
+
+
+def _detect_slurm_job_mem_bytes() -> int:
+    """Infer SLURM job memory allocation in bytes from env vars.
+
+    Prefers SLURM_MEM_PER_NODE; otherwise uses SLURM_MEM_PER_CPU * SLURM_CPUS_ON_NODE.
+    Values are MB according to SLURM docs.
+    """
+    try:
+        mem_per_node_mb = os.environ.get("SLURM_MEM_PER_NODE")
+        if mem_per_node_mb:
+            mb = _parse_int(mem_per_node_mb)
+            if mb > 0:
+                return mb * 1024 * 1024
+    except Exception:
+        pass
+    try:
+        mem_per_cpu_mb = os.environ.get("SLURM_MEM_PER_CPU")
+        cpus_on_node = os.environ.get("SLURM_CPUS_ON_NODE")
+        if mem_per_cpu_mb and cpus_on_node:
+            mb = _parse_int(mem_per_cpu_mb)
+            cpus = _parse_cpus_on_node(cpus_on_node)
+            if mb > 0 and cpus > 0:
+                return mb * cpus * 1024 * 1024
+    except Exception:
+        pass
+    return -1
+
+
+def _effective_total_memory_bytes() -> int:
+    """Best-effort job-aware total memory for sizing Ray object store.
+
+    Order of preference:
+    1) cgroup memory limit (container/SLURM cgroup)
+    2) SLURM env-based memory inference
+    3) System total memory (psutil/sysconf)
+    """
+    # cgroup limit first
+    cg = _detect_cgroup_mem_limit_bytes()
+    if cg > 0:
+        return cg
+    # SLURM-derived
+    sj = _detect_slurm_job_mem_bytes()
+    if sj > 0:
+        return sj
+    # Fallback to system total
+    try:
+        import psutil  # type: ignore
+        tot = int(getattr(psutil.virtual_memory(), "total", 0))
+        if tot > 0:
+            return tot
+    except Exception:
+        pass
+    try:
+        return int(os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES"))
+    except Exception:
+        pass
+    return -1
+
+
+def _ensure_ray_init(cfg) -> None:
+    try:
+        import ray  # type: ignore
+        if not ray.is_initialized():
+            # Detect SLURM CPU allocation
+            cpus_alloc = None
+            try:
+                cpt = os.environ.get("SLURM_CPUS_PER_TASK")
+                if cpt is not None and str(cpt).strip() != "":
+                    cpus_alloc = int(cpt)
+                else:
+                    con = os.environ.get("SLURM_CPUS_ON_NODE")
+                    if con is not None and str(con).strip() != "":
+                        cpus_alloc = _parse_cpus_on_node(con)
+            except Exception:
+                cpus_alloc = None
+            # Prefer proportion of system memory when available; fallback to job_memory_gb.
+            obj_store_bytes = None
+            try:
+                # Allow explicit override via cfg.runtime.object_store_proportion (0.0-1.0)
+                prop = getattr(cfg.runtime, "object_store_proportion", None)
+                prop = float(prop) if prop is not None else None
+            except Exception:
+                prop = None
+            # Honor env proportion if set and no explicit override provided
+            try:
+                if prop is None:
+                    env_prop = os.environ.get("RAY_DEFAULT_OBJECT_STORE_MEMORY_PROPORTION")
+                    if env_prop is not None and str(env_prop).strip() != "":
+                        prop = float(env_prop)
+            except Exception:
+                pass
+            if prop is not None and 0.0 < prop <= 0.95:
+                try:
+                    total_bytes = _effective_total_memory_bytes()
+                    if total_bytes:
+                        obj_store_bytes = int(total_bytes * float(prop))
+                except Exception:
+                    obj_store_bytes = None
+            if obj_store_bytes is None:
+                try:
+                    # Prefer SLURM job mem if available to avoid using full node memory
+                    slurm_bytes = _detect_slurm_job_mem_bytes()
+                    if slurm_bytes > 0:
+                        job_mem_gb = max(1, int(slurm_bytes / (1024 ** 3)))
+                    else:
+                        job_mem_gb = int(getattr(cfg.runtime, "job_memory_gb", 64) or 64)
+                except Exception:
+                    job_mem_gb = 64
+                try:
+                    job_mem_gb = int(getattr(cfg.runtime, "job_memory_gb", 64) or 64)
+                except Exception:
+                    job_mem_gb = 64
+                try:
+                    obj_store_bytes = int(max(1, job_mem_gb) * (1024 ** 3) * 0.90)
+                except Exception:
+                    obj_store_bytes = int(64 * (1024 ** 3) * 0.90)
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ray.init(log_to_driver=True, object_store_memory=int(obj_store_bytes), num_cpus=int(cpus_alloc))
+                else:
+                    ray.init(log_to_driver=True, object_store_memory=int(obj_store_bytes))
+            except Exception:
+                # Best-effort fallback: let Ray auto-init
+                try:
+                    ray.init(log_to_driver=True)
+                except Exception:
+                    pass
+            # Constrain Ray Data CPU limits to SLURM allocation when available
+            try:
+                if cpus_alloc is not None and int(cpus_alloc) > 0:
+                    ctx = ray.data.DataContext.get_current()
+                    ctx.execution_options.resource_limits = ctx.execution_options.resource_limits.copy(cpu=int(cpus_alloc))
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+def _to_json_str(value: Any):
+    """Serialize Python objects to JSON string for Arrow/Parquet friendliness.
+
+    Returns None for None input; falls back to str(value) on failure.
+    """
+    try:
+        if value is None:
+            return None
+        return json.dumps(value, ensure_ascii=False, default=str)
+    except Exception:
+        try:
+            return str(value)
+        except Exception:
+            return None
+
+
+def _serialize_arrow_unfriendly_in_row(row: Dict[str, Any], columns: List[str]) -> None:
+    """In-place convert nested/dict/list columns to JSON strings in a row dict."""
+    for col in columns:
+        if col in row:
+            val = row.get(col)
+            if isinstance(val, (dict, list, tuple)):
+                row[col] = _to_json_str(val)
+
+
+def _detect_num_gpus() -> int:
+    """Detect the number of GPUs allocated to this job.
+    
+    Priority order:
+    1. CUDA_VISIBLE_DEVICES environment variable (set by launcher)
+    2. SLURM_GPUS_PER_NODE or SLURM_GPUS_ON_NODE
+    3. torch.cuda.device_count() if CUDA is available
+    4. Return 1 as safe fallback
+    """
+    # Priority 1: CUDA_VISIBLE_DEVICES (most reliable for actual allocation)
+    try:
+        cuda_visible = os.environ.get("CUDA_VISIBLE_DEVICES")
+        if cuda_visible and cuda_visible.strip():
+            # Parse comma-separated GPU indices (e.g., "0,1,2,3" -> 4 GPUs)
+            gpu_indices = [x.strip() for x in cuda_visible.split(",") if x.strip()]
+            if gpu_indices:
+                return len(gpu_indices)
+    except Exception:
+        pass
+    
+    # Priority 2: SLURM environment variables
+    try:
+        slurm_gpus = os.environ.get("SLURM_GPUS_PER_NODE") or os.environ.get("SLURM_GPUS_ON_NODE")
+        if slurm_gpus:
+            # Can be a number like "4" or format like "gpu:4"
+            try:
+                if ":" in slurm_gpus:
+                    return int(slurm_gpus.split(":")[-1])
+                return int(slurm_gpus)
+            except Exception:
+                pass
+    except Exception:
+        pass
+    
+    # Priority 3: Torch CUDA device count
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available():
+            count = torch.cuda.device_count()
+            if count > 0:
+                return count
+    except Exception:
+        pass
+    
+    # Fallback: 1 GPU
+    return 1
+
+
+def _detect_gpu_type() -> str:
+    """Detect the GPU type/model name.
+    
+    Returns a normalized GPU type string (e.g., 'rtx_a6000', 'rtx_a5000', 'unknown').
+    """
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available() and torch.cuda.device_count() > 0:
+            # Get the name of the first GPU (assuming homogeneous GPUs)
+            gpu_name = torch.cuda.get_device_name(0).lower()
+            
+            # Normalize common GPU names
+            if "a6000" in gpu_name:
+                return "rtx_a6000"
+            elif "a5000" in gpu_name:
+                return "rtx_a5000"
+            elif "a100" in gpu_name:
+                return "a100"
+            elif "v100" in gpu_name:
+                return "v100"
+            elif "a40" in gpu_name:
+                return "a40"
+            elif "rtx" in gpu_name:
+                # Generic RTX
+                return "rtx_generic"
+            
+            return "unknown"
+    except Exception:
+        pass
+    
+    return "unknown"
+
+
+def _apply_gpu_aware_batch_settings(engine_kwargs: Dict[str, Any], cfg) -> None:
+    """Apply GPU-type-aware batch size and max_num_seqs if not explicitly set.
+    
+    GPU-specific defaults (can be overridden in config):
+    - RTX A6000: batch_size=4, max_num_seqs=4
+    - RTX A5000: batch_size=2, max_num_seqs=2
+    - Others: Use config defaults or fallback values
+    """
+    # GPU-aware defaults mapping
+    GPU_BATCH_SETTINGS = {
+        "rtx_a6000": {"batch_size": 4, "max_num_seqs": 4},
+        "rtx_a5000": {"batch_size": 2, "max_num_seqs": 2},
+        "a100": {"batch_size": 8, "max_num_seqs": 8},
+        "v100": {"batch_size": 4, "max_num_seqs": 4},
+        "a40": {"batch_size": 4, "max_num_seqs": 4},
+    }
+    
+    gpu_type = _detect_gpu_type()
+    gpu_settings = GPU_BATCH_SETTINGS.get(gpu_type, {})
+    
+    # Apply max_num_seqs from GPU settings if not in engine_kwargs and GPU type is recognized
+    if "max_num_seqs" not in engine_kwargs and gpu_settings:
+        try:
+            engine_kwargs["max_num_seqs"] = gpu_settings["max_num_seqs"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set max_num_seqs={gpu_settings['max_num_seqs']} for {gpu_type}")
+        except Exception:
+            pass
+    
+    # Note: batch_size is handled separately in the calling code since it's a model config param, not engine_kwargs
+    # We'll return the gpu_settings for use there
+    return gpu_settings
+
+
+def _filter_vllm_engine_kwargs(ek: Dict[str, Any]) -> Dict[str, Any]:
+    """Drop engine kwargs unsupported by the installed vLLM version.
+
+    We try to introspect vllm.AsyncEngineArgs for accepted fields. If that
+    fails, conservatively drop known newer flags.
+    """
+    try:
+        import vllm as _v
+        accepted = None
+        # Prefer dataclass fields (older vLLM uses dataclasses)
+        try:
+            fields = getattr(getattr(_v, "AsyncEngineArgs", None), "__dataclass_fields__", None)
+            if isinstance(fields, dict) and fields:
+                accepted = set(fields.keys())
+        except Exception:
+            accepted = None
+        # Fallback to signature introspection
+        if accepted is None:
+            try:
+                import inspect as _inspect
+                sig = _inspect.signature(_v.AsyncEngineArgs.__init__)
+                accepted = set(k for k in sig.parameters.keys() if k != "self")
+            except Exception:
+                accepted = None
+        if accepted:
+            filtered = {k: v for k, v in ek.items() if k in accepted}
+            if len(filtered) != len(ek):
+                try:
+                    if not os.environ.get("RULE_TUPLES_SILENT"):
+                        dropped = [k for k in ek.keys() if k not in accepted]
+                        print(f"Filtering unsupported vLLM engine kwargs: {dropped}")
+                except Exception:
+                    pass
+            return filtered
+    except Exception:
+        pass
+    # Conservative fallback for unknown versions: drop newer flags
+    ek = dict(ek)
+    for k in ("use_v2_block_manager",):
+        ek.pop(k, None)
+    return ek
+
+
+def _build_relevant_regex() -> re.Pattern:
+    
+    phrases = [
+        # Core AI Technologies & Acronyms
+        r"\bai\b",
+        r"\bml\b",
+        r"\bnlp\b",
+        r"\bllm\b",
+        r"\bagi\b",
+        r"\bxai\b",
+        r"\biot\b",
+        r"artificial\s+intelligence",
+        r"machine\s+learning",
+        r"neural\s+network",
+        r"large\s+language\s+model",
+        r"transformer",
+        r"chatgpt|gpt-\d+|gpt-",
+        r"openai|anthropic|claude|gemini|qwen",
+        r"fine-?tuning|inference|prompt(ing)?|agent(s)?",
+        
+        # Journalist-Friendly AI Terms
+        r"computer",
+        r"computers",
+        r"software",
+        r"program",
+        r"programs",
+        r"programming",
+        r"coded",
+        r"coding",
+        r"app",
+        r"apps",
+        r"application",
+        r"applications",
+        r"tool",
+        r"tools",
+        r"technology",
+        r"tech",
+        r"innovation",
+        r"innovations",
+        r"breakthrough",
+        r"breakthroughs",
+        r"advancement",
+        r"advancements",
+        
+        # Anthropomorphic/Accessible Descriptions
+        r"robot",
+        r"robots",
+        r"robotic",
+        r"bot",
+        r"bots",
+        r"chatbot",
+        r"chatbots",
+        r"virtual\s+assistant",
+        r"digital\s+assistant",
+        r"smart\s+assistant",
+        r"machine",
+        r"machines",
+        r"device",
+        r"devices",
+        r"smart\s+device",
+        r"intelligent\s+system",
+        r"thinking\s+machine",
+        r"electronic\s+brain",
+        r"digital\s+brain",
+        r"computer\s+brain",
+        
+        # Process-Oriented Terms
+        r"automated",
+        r"automation",
+        r"automatic",
+        r"automatically",
+        r"self-?learning",
+        r"self-?teaching",
+        r"self-?improving",
+        r"adaptive",
+        r"smart",
+        r"intelligent",
+        r"cognitive",
+        r"thinking",
+        r"reasoning",
+        r"decision-?making",
+        r"processing",
+        r"analyzing",
+        r"analysis",
+        r"pattern\s+recognition",
+        r"image\s+recognition",
+        r"voice\s+recognition",
+        r"language\s+processing",
+        
+        # Capability Descriptions
+        r"learns",
+        r"learning",
+        r"teaches\s+itself",
+        r"trains",
+        r"training",
+        r"trained",
+        r"understands",
+        r"understanding",
+        r"recognizes",
+        r"recognition",
+        r"identifies",
+        r"identification",
+        r"predicts",
+        r"prediction",
+        r"predictions",
+        r"forecasts",
+        r"forecasting",
+        r"generates",
+        r"generation",
+        r"creates",
+        r"creation",
+        r"produces",
+        r"mimics",
+        r"simulates",
+        r"replicates",
+        
+        # Business/Industry Terms
+        r"silicon\s+valley",
+        r"tech\s+company",
+        r"tech\s+companies",
+        r"tech\s+giant",
+        r"tech\s+giants",
+        r"startup",
+        r"startups",
+        r"big\s+tech",
+        r"platform",
+        r"platforms",
+        r"service",
+        r"services",
+        r"product",
+        r"products",
+        r"solution",
+        r"solutions",
+        r"ecosystem",
+        r"infrastructure",
+        
+        # Buzzword/Hype Terms
+        r"revolutionary",
+        r"game-?changing",
+        r"cutting-?edge",
+        r"state-?of-?the-?art",
+        r"next-?generation",
+        r"futuristic",
+        r"advanced",
+        r"sophisticated",
+        r"powerful",
+        r"disruptive",
+        r"transformative",
+        r"groundbreaking",
+        r"innovative",
+        r"emerging",
+        r"novel",
+        r"pioneering",
+        
+        # Comparison/Analogy Terms
+        r"human-?like",
+        r"human-?level",
+        r"superhuman",
+        r"brain-?like",
+        r"mimicking\s+humans?",
+        r"replacing\s+humans?",
+        r"outsmarting\s+humans?",
+        r"beating\s+humans?",
+        r"surpassing\s+humans?",
+        r"artificial\s+brain",
+        r"electronic\s+mind",
+        r"digital\s+worker",
+        r"virtual\s+employee",
+        
+        # AI Safety & Governance
+        r"safety",
+        r"alignment",
+        r"governance",
+        r"responsible",
+        r"trustworthy",
+        r"ethics",
+        r"ethical",
+        r"bias",
+        r"biased",
+        r"fairness",
+        r"explainable",
+        r"transparency",
+        r"transparent",
+        r"accountability",
+        r"accountable",
+        r"regulation",
+        r"oversight",
+        r"compliance",
+        
+        # Risk & Harm Terms
+        r"risk",
+        r"risks",
+        r"harm",
+        r"harms",
+        r"harmful",
+        r"danger",
+        r"dangerous",
+        r"threat",
+        r"threats",
+        r"vulnerability",
+        r"vulnerabilities",
+        r"attack",
+        r"attacks",
+        r"exploitation",
+        r"manipulation",
+        r"weaponization",
+        
+        # Societal Impact Terms
+        r"deepfake",
+        r"misinformation",
+        r"disinformation",
+        r"fake\s+news",
+        r"discrimination",
+        r"discriminatory",
+        r"surveillance",
+        r"capitalism",
+        r"privacy",
+        r"invasion",
+        r"facial\s+recognition",
+        r"predictive\s+policing",
+        r"social\s+credit",
+        r"filter\s+bubble",
+        r"echo\s+chamber",
+        r"polarization",
+        r"radicalization",
+        
+        # Economic & Labor
+        r"displacement",
+        r"unemployment",
+        r"automation",
+        r"automated",
+        r"replacement",
+        r"disruption",
+        r"workforce",
+        r"labor",
+        r"labour",
+        r"jobs",
+        r"employment",
+        r"gig\s+economy",
+        r"platform\s+workers?",
+        r"algorithmic\s+management",
+        
+        # AI Systems & Applications
+        r"algorithm",
+        r"algorithms",
+        r"algorithmic",
+        r"autonomous",
+        r"self-?driving",
+        r"recommendation",
+        r"moderation",
+        r"computer\s+vision",
+        r"speech\s+recognition",
+        r"sentiment\s+analysis",
+        r"predictive\s+analytics",
+        r"decision\s+support",
+        r"synthetic\s+media",
+        r"voice\s+cloning",
+        
+        # Major Tech Companies
+        r"microsoft",
+        r"google",
+        r"amazon",
+        r"meta",
+        r"facebook",
+        r"nvidia",
+        r"intel",
+        r"apple",
+        r"tesla",
+        r"deepmind",
+        r"hugging\s?face",
+        r"stability\s+ai",
+        r"midjourney",
+        r"dall-?e",
+        r"baidu",
+        r"alibaba",
+        r"tencent",
+        r"bytedance",
+        
+        # Regulatory & Legal
+        r"gdpr",
+        r"ccpa",
+        r"regulation",
+        r"regulatory",
+        r"policy",
+        r"policies",
+        r"governance",
+        r"antitrust",
+        r"monopoly",
+        r"section\s+230",
+        r"digital\s+rights",
+        r"data\s+protection",
+        r"impact\s+assessment",
+        
+        # Social & Cultural Harms
+        r"manipulation",
+        r"identity\s+theft",
+        r"cyberbullying",
+        r"harassment",
+        r"hate\s+speech",
+        r"democratic",
+        r"democracy",
+        r"election",
+        r"elections",
+        r"voting",
+        r"interference",
+        
+        # Technical Risks
+        r"adversarial",
+        r"poisoning",
+        r"backdoor",
+        r"inference",
+        r"inversion",
+        r"leakage",
+        r"robustness",
+        r"brittleness",
+        r"hallucination",
+        r"confabulation",
+        r"distribution\s+shift",
+        r"out-?of-?distribution",
+        
+        # Long-term & Existential
+        r"superintelligence",
+        r"existential",
+        r"x-?risk",
+        r"control\s+problem",
+        r"value\s+alignment",
+        r"mesa-?optimization",
+        r"instrumental\s+convergence",
+        r"orthogonality",
+        
+        # Domain Applications
+        r"city",
+        r"cities",
+        r"urban",
+        r"climate",
+        r"earth",
+        r"environment",
+        r"environmental",
+        r"transport",
+        r"transportation",
+        r"smart\s+grid",
+        r"infrastructure",
+        r"connected\s+device",
+        r"monitoring",
+        r"carbon",
+        r"energy",
+        r"sustainable",
+        r"sustainability",
+        r"green",
+        
+        # Healthcare
+        r"medical",
+        r"healthcare",
+        r"health",
+        r"diagnostic",
+        r"clinical",
+        r"telemedicine",
+        r"therapeutics",
+        r"equity",
+        
+        # Financial
+        r"trading",
+        r"advisor",
+        r"credit",
+        r"scoring",
+        r"financial",
+        r"inclusion",
+        r"redlining",
+        r"lending",
+        r"predatory",
+        
+        # Education
+        r"education",
+        r"educational",
+        r"edtech",
+        r"learning",
+        r"student",
+        r"academic",
+        r"integrity",
+        r"cheating",
+        r"proctoring",
+        
+        # Criminal Justice
+        r"criminal",
+        r"justice",
+        r"recidivism",
+        r"bail",
+        r"sentencing",
+        r"policing",
+        r"enforcement",
+        
+        # Emerging Tech
+        r"quantum",
+        r"neuromorphic",
+        r"edge\s+computing",
+        r"distributed",
+        r"swarm",
+        r"multi-?agent",
+        
+        # General Tech Terms
+        r"technology",
+        r"technological",
+        r"digital",
+        r"cyber",
+        r"online",
+        r"internet",
+        r"platform",
+        r"platforms",
+        r"data",
+        r"dataset",
+        r"datasets",
+        r"model",
+        r"models",
+        r"system",
+        r"systems",
+        
+    ]
+    pattern = r"(" + r"|".join(phrases) + r")"
+    return re.compile(pattern, flags=re.IGNORECASE)
+
+
+def _generate_relevant_blocks(text: str, compiled_regex: re.Pattern, window_words: int = 100) -> List[str]:
+    if not isinstance(text, str) or not text:
+        return []
+    token_matches = list(re.finditer(r"\S+", text))
+    if not token_matches:
+        return []
+    token_starts = [m.start() for m in token_matches]
+    intervals: List[List[int]] = []
+    for m in compiled_regex.finditer(text):
+        idx = max(0, min(len(token_starts) - 1, bisect_right(token_starts, m.start()) - 1))
+        start_token = max(0, idx - window_words)
+        end_token = min(len(token_matches) - 1, idx + window_words)
+        start_char = token_matches[start_token].start()
+        end_char = token_matches[end_token].end()
+        intervals.append([start_char, end_char])
+    if not intervals:
+        return []
+    intervals.sort(key=lambda x: x[0])
+    merged: List[List[int]] = []
+    for s, e in intervals:
+        if not merged or s > merged[-1][1]:
+            merged.append([s, e])
+        else:
+            merged[-1][1] = max(merged[-1][1], e)
+    return [text[s:e] for s, e in merged]
+
+
+def run_classification_stage(df: pd.DataFrame, cfg):
+    """Article relevance classification stage.
+
+    - Heuristic: detect AI-related keywords in text
+    - LLM: borrow prompt shape from experiments/prompts/base.yaml (relevance_v1) when available,
+      else fall back to UAIR classify prompt. Produces both `relevance_answer` and `is_relevant`.
+    Uses `article_text` as the canonical input text column.
+    """
+    # Ensure Ray is initialized with desired object store cap based on job_memory_gb
+    _ensure_ray_init(cfg)
+    # Streaming path: if a Ray Dataset is passed, use it end-to-end
+    is_ray_ds = hasattr(df, "map_batches") and hasattr(df, "count") and _RAY_OK
+    if not is_ray_ds:
+        if df is None or len(df) == 0:
+            return pd.DataFrame(columns=["article_id","article_text","is_relevant"])  # minimal
+        out = df.copy()
+        # Ensure article_id exists for all rows (deterministic hash of path or text)
+        try:
+            import hashlib as _hash
+            if "article_id" not in out.columns:
+                out["article_id"] = None
+            def _gen_id_row(r: pd.Series) -> str:
+                try:
+                    src = r.get("article_path")
+                    if not isinstance(src, str) or src.strip() == "":
+                        src = r.get("article_text") or r.get("chunk_text") or ""
+                    return _hash.sha1(str(src).encode("utf-8")).hexdigest()
+                except Exception:
+                    return _hash.sha1(str(r.get("article_text") or r.get("chunk_text") or "").encode("utf-8")).hexdigest()
+            try:
+                mask_missing = (~out["article_id"].astype(str).str.strip().astype(bool))
+            except Exception:
+                mask_missing = True
+            if isinstance(mask_missing, bool):
+                out["article_id"] = out.apply(_gen_id_row, axis=1)
+            else:
+                out.loc[mask_missing, "article_id"] = out[mask_missing].apply(_gen_id_row, axis=1)
+        except Exception:
+            pass
+    def _heuristic(text: Any) -> bool:
+        s = str(text or "").lower()
+        if not s:
+            return False
+        # Simple AI/news relevance heuristic aligned to experiments.relevance_stage intent
+        keywords = [
+            "artificial intelligence"," ai ","machine learning","ml ","neural network","deep learning",
+            "large language model","llm","chatgpt","gpt-","openai","anthropic","claude","gemini","qwen",
+            "transformer model","fine-tuning","inference","prompting","agents","autonomous agent","model weights",
+        ]
+        return any(k in s for k in keywords)
+    use_llm = bool(getattr(cfg.runtime, "use_llm_classify", False))
+    # Prefilter gating: pre_gating (filter before LLM), post_gating (compute flag only), off
+    try:
+        prefilter_mode = str(getattr(cfg.runtime, "prefilter_mode", "pre_gating")).strip().lower()
+    except Exception:
+        prefilter_mode = "pre_gating"
+    if not use_llm:
+        if is_ray_ds:
+            def _heuristic_batch(pdf: pd.DataFrame) -> pd.DataFrame:
+                pdf = pdf.copy()
+                pdf["is_relevant"] = pdf["article_text"].apply(_heuristic)
+                pdf["classification_mode"] = "heuristic"
+                return pdf
+            return df.map_batches(_heuristic_batch, batch_format="pandas")
+        out["is_relevant"] = out["article_text"].apply(_heuristic)
+        out["classification_mode"] = "heuristic"
+        out_df = out
+        return out_df
+
+    if not _RAY_OK:
+        out["is_relevant"] = out["article_text"].apply(_heuristic)
+        out["classification_mode"] = "heuristic_fallback"
+        try:
+            print("Warning: Ray LLM not available; falling back to heuristic classification.")
+        except Exception:
+            pass
+        return out
+
+    # LLM classification via Ray vLLM
+    # Optional keyword-based buffering (±window words around matches)
+    try:
+        enable_kw_buf = bool(getattr(cfg.runtime, "keyword_buffering", True))
+    except Exception:
+        enable_kw_buf = True
+    try:
+        window_words = int(getattr(cfg.runtime, "keyword_window_words", 100) or 100)
+    except Exception:
+        window_words = 100
+    kw_regex = _build_relevant_regex() if enable_kw_buf else None
+    # Compute keyword prefilter flag for gating
+    def _kw_flag(text: Any) -> bool:
+        if kw_regex is None:
+            return True
+        try:
+            return bool(kw_regex.search(str(text or "")))
+        except Exception:
+            return True
+    # Prefer experiments-style prompts when available; otherwise fall back to UAIR prompt
+    try:
+        system_prompt = (
+            getattr(getattr(cfg, "prompts", {}), "relevance_v1", {}).get("system")  # type: ignore
+            if hasattr(cfg, "prompts") else None
+        )
+    except Exception:
+        system_prompt = None
+    if not system_prompt:
+        system_prompt = str(getattr(cfg.prompt, "system_prompt", ""))
+
+    try:
+        user_template = (
+            getattr(getattr(cfg, "prompts", {}), "relevance_v1", {}).get("user_template")  # type: ignore
+            if hasattr(cfg, "prompts") else None
+        )
+    except Exception:
+        user_template = None
+    if not user_template:
+        user_template = str(getattr(cfg.prompt, "prompt_template", ""))
+
+    def _format_user(article_text: str, row: Dict[str, Any]) -> str:
+        text_val = str((row.get("chunk_text") if row.get("chunk_text") else article_text) or "")
+        # Provide basic ids to satisfy experiments-style templates when present
+        try:
+            art_id = row.get("article_id") or row.get("name") or None
+        except Exception:
+            art_id = None
+        if not art_id:
+            try:
+                import hashlib as _hash
+                art_id = _hash.sha1(text_val.encode("utf-8")).hexdigest()[:12]
+            except Exception:
+                art_id = "unknown"
+        # If template uses '{chunk_text}' style, format with .format; else support UAIR '{{rule_text}}'
+        if "{chunk_text}" in user_template or "{article_id}" in user_template:
+            try:
+                return user_template.format(article_id=art_id, chunk_id=0, num_chunks=1, chunk_text=text_val)
+            except Exception:
+                pass
+        # Maintain UAIR template compatibility
+        return user_template.replace("{{rule_text}}", text_val).replace("{{article_text}}", text_val)
+
+    # Tokenizer-based trimming helpers
+    def _get_tokenizer(model_source: str):
+        try:
+            from transformers import AutoTokenizer  # type: ignore
+            return AutoTokenizer.from_pretrained(model_source, trust_remote_code=True, use_fast=True)
+        except Exception:
+            return None
+
+    _TOK_CACHED = None  # lazy per-process tokenizer cache
+    def _get_tokenizer_cached(model_source: str):
+        nonlocal _TOK_CACHED
+        try:
+            if _TOK_CACHED is None:
+                _TOK_CACHED = _get_tokenizer(model_source)
+            return _TOK_CACHED
+        except Exception:
+            return None
+
+    def _get_max_user_input_tokens(tokenizer, system_text: str) -> int:
+        try:
+            system_tokens = len(tokenizer.encode(system_text, add_special_tokens=False)) if tokenizer else 0
+            max_model_len = int(getattr(cfg.model, "engine_kwargs", {}).get("max_model_len", 4096))
+            try:
+                sp = getattr(cfg, "sampling_params_classify", getattr(cfg, "sampling_params", {}))
+                if hasattr(sp, "max_tokens"):
+                    max_output = int(getattr(sp, "max_tokens"))
+                else:
+                    max_output = int((sp or {}).get("max_tokens", 8))
+            except Exception:
+                max_output = 8
+            safety = 512
+            return max(512, max_model_len - max_output - system_tokens - safety)
+        except Exception:
+            return 2048
+
+    def _trim_text_for_prompt(text: str, tokenizer, system_text: str) -> str:
+        # Tokenizer-aware trimming when available; otherwise conservative char-based fallback
+        if tokenizer:
+            try:
+                ids = tokenizer.encode(text or "", add_special_tokens=False)
+                max_user = _get_max_user_input_tokens(tokenizer, system_text)
+                if len(ids) <= max_user:
+                    return text
+                ids = ids[:max_user]
+                return tokenizer.decode(ids, skip_special_tokens=True)
+            except Exception:
+                pass
+        # Fallback: approximate 4 chars per token budget
+        try:
+            max_user = _get_max_user_input_tokens(tokenizer, system_text)
+        except Exception:
+            max_user = 2048
+        approx_chars_per_token = 4
+        max_chars = int(max_user) * approx_chars_per_token
+        try:
+            return text if len(text or "") <= max_chars else str(text or "")[:max_chars]
+        except Exception:
+            return text
+
+    # Constrain GPU mem via vLLM engine args: prefer provided config; otherwise set conservative defaults
+    ek = dict(getattr(cfg.model, "engine_kwargs", {}))
+    ek.setdefault("max_model_len", 4096)
+    ek.setdefault("max_num_seqs", 16)
+    ek.setdefault("gpu_memory_utilization", 0.85)
+    # Auto-detect tensor_parallel_size from allocated GPUs if not explicitly set
+    if "tensor_parallel_size" not in ek:
+        try:
+            num_gpus = _detect_num_gpus()
+            ek["tensor_parallel_size"] = num_gpus
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-detected {num_gpus} GPU(s) for tensor parallelism")
+        except Exception:
+            ek.setdefault("tensor_parallel_size", 1)
+    # Apply GPU-type-aware batch settings (max_num_seqs and batch_size)
+    gpu_settings = _apply_gpu_aware_batch_settings(ek, cfg)
+    # vLLM best-practice safe defaults (overridable via config)
+    ek.setdefault("enable_prefix_caching", True)
+    ek.setdefault("use_v2_block_manager", True)
+    ek.setdefault("tokenizer_mode", "auto")
+    ek.setdefault("trust_remote_code", True)
+    ek.setdefault("dtype", "auto")
+    ek.setdefault("kv_cache_dtype", "auto")
+    ek = _filter_vllm_engine_kwargs(ek)
+    # Determine batch_size: explicit config > GPU-aware default > fallback
+    try:
+        batch_size_cfg = getattr(cfg.model, "batch_size", None)
+        if batch_size_cfg is not None:
+            batch_size = int(batch_size_cfg)
+        elif gpu_settings and "batch_size" in gpu_settings:
+            batch_size = gpu_settings["batch_size"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set batch_size={batch_size} for {_detect_gpu_type()}")
+        else:
+            batch_size = 16
+    except Exception:
+        batch_size = 16
+    engine_config = vLLMEngineProcessorConfig(
+        model_source=str(getattr(cfg.model, "model_source")),
+        runtime_env={
+            "env_vars": {
+                # Doc-supported knob to reduce verbosity safely
+                "VLLM_LOGGING_LEVEL": str(os.environ.get("VLLM_LOGGING_LEVEL", "WARNING")),
+                # Propagate wandb config to Ray workers (uses in-process mode)
+                "WANDB_DISABLE_SERVICE": str(os.environ.get("WANDB_DISABLE_SERVICE", "true")),
+                "WANDB_SILENT": str(os.environ.get("WANDB_SILENT", "true")),
+            }
+        },
+        engine_kwargs=ek,
+        concurrency=int(getattr(cfg.model, "concurrency", 1) or 1),
+        batch_size=int(batch_size),
+    )
+
+    # Prefer stage-specific sampling params when present; convert nested DictConfig -> dict
+    try:
+        sp_src = getattr(cfg, "sampling_params_classify", getattr(cfg, "sampling_params", {}))
+        sampling_params = OmegaConf.to_container(sp_src, resolve=True) if isinstance(sp_src, (dict,)) or hasattr(sp_src, "_get_node") else dict(sp_src)
+    except Exception:
+        sampling_params = dict(getattr(cfg, "sampling_params", {}))
+    # Borrow from experiments: short label budget; optionally allow rationales
+    try:
+        if bool(getattr(cfg.runtime, "log_rationales", False)):
+            sampling_params.setdefault("max_tokens", 32)
+        else:
+            sampling_params.setdefault("max_tokens", 8)
+    except Exception:
+        sampling_params.setdefault("max_tokens", 8)
+
+    # Driver-computed conservative char budget for user content (captured into Ray workers)
+    try:
+        mm_len = int(getattr(cfg.model, "engine_kwargs", {}).get("max_model_len", 4096))
+    except Exception:
+        mm_len = 4096
+    try:
+        max_out = int(sampling_params.get("max_tokens", 8) or 8)
+    except Exception:
+        max_out = 8
+    _approx_user_char_budget = max(2048, (mm_len - max_out - 512) * 4)
+
+    def _attach_chunk_text(row: Dict[str, Any]) -> Dict[str, Any]:
+        if not enable_kw_buf or kw_regex is None:
+            return row
+        text_val = row.get("article_text")
+        try:
+            blocks = _generate_relevant_blocks(text_val, kw_regex, window_words)
+        except Exception:
+            blocks = []
+        if blocks:
+            row["chunk_text"] = "\n\n".join(blocks)
+        else:
+            row.setdefault("chunk_text", str(text_val or ""))
+        return row
+
+    def _pre(row: Dict[str, Any]) -> Dict[str, Any]:
+        _maybe_silence_vllm_logs()
+        # Ensure article_id is present on every row
+        try:
+            import hashlib as _hash
+            r = dict(row)
+            aid = r.get("article_id")
+            if not (isinstance(aid, str) and aid.strip() != ""):
+                src = r.get("article_path")
+                if not isinstance(src, str) or src.strip() == "":
+                    src = r.get("article_text") or r.get("chunk_text") or ""
+                r["article_id"] = _hash.sha1(str(src).encode("utf-8")).hexdigest()
+            row = r
+        except Exception:
+            pass
+        if enable_kw_buf and kw_regex is not None:
+            row = _attach_chunk_text(dict(row))
+        # Construct user content and perform token-aware trimming to model context
+        user_raw = _format_user(row.get("article_text"), row)
+        tok_local = _get_tokenizer_cached(str(getattr(cfg.model, "model_source", "")))
+        # First, ensure chunk_text itself is trimmed defensively
+        try:
+            txt0 = row.get("chunk_text") or row.get("article_text")
+            row["chunk_text"] = _trim_text_for_prompt(str(txt0 or ""), tok_local, system_prompt)
+        except Exception:
+            pass
+        user = _trim_text_for_prompt(user_raw, tok_local, system_prompt)
+        from datetime import datetime as _dt
+        return {
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user},
+            ],
+            "sampling_params": sampling_params,
+            "ts_start": _dt.now().timestamp(),
+            **row,
+        }
+
+    def _post(row: Dict[str, Any]) -> Dict[str, Any]:
+        from datetime import datetime as _dt
+        text = str(row.get("generated_text") or "").strip().upper()
+        is_rel = text.startswith("YES") or ("YES" in text and "NO" not in text)
+        ts_end = _dt.now().timestamp()
+        usage = row.get("usage") or row.get("token_counts") or None
+        # Optionally serialize nested columns for Arrow/Parquet compatibility
+        try:
+            serialize_nested = bool(getattr(cfg.runtime, "serialize_nested_json", True))
+        except Exception:
+            serialize_nested = True
+        if serialize_nested:
+            _serialize_arrow_unfriendly_in_row(row, [
+                "messages",
+                "sampling_params",
+                "usage",
+                "token_counts",
+            ])
+        return {
+            **row,
+            "relevance_answer": row.get("generated_text"),
+            "is_relevant": bool(is_rel),
+            "llm_output": row.get("generated_text"),
+            "classification_mode": "llm_relevance",
+            "latency_s": (float(ts_end) - float(row.get("ts_start", ts_end))),
+            "token_usage_prompt": ((usage or {}).get("prompt_tokens") or (usage or {}).get("input_tokens")),
+            "token_usage_output": ((usage or {}).get("completion_tokens") or (usage or {}).get("output_tokens")),
+            "token_usage_total": ((usage or {}).get("total_tokens")),
+            # Signal a single-row progress marker for downstream logging
+            "_progress_row": 1,
+        }
+
+    # Pre-attach chunk_text in a separate map when streaming; apply prefilter gating and trimming
+    if is_ray_ds:
+        ds_in = df
+        # Keyword flag + gating
+        if prefilter_mode in ("pre_gating", "post_gating"):
+            # First mark keyword and tally BEFORE any filter so W&B sees true totals
+            usage_actor = None  # type: ignore
+            try:
+                if _RAY_OK:
+                    usage_actor = ray.get_actor("uair_usage_agg")  # type: ignore
+            except Exception:
+                usage_actor = None  # type: ignore
+            ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("article_text"))})
+            if usage_actor is not None:
+                def _acc_kw(pdf: pd.DataFrame) -> pd.DataFrame:
+                    try:
+                        total_checked = int(len(pdf))
+                    except Exception:
+                        total_checked = 0
+                    try:
+                        marked = int(pdf["relevant_keyword"].astype(bool).sum()) if "relevant_keyword" in pdf.columns else 0
+                    except Exception:
+                        marked = 0
+                    try:
+                        usage_actor.record.remote("classify", kw_marked=int(marked), kw_checked=int(total_checked))  # type: ignore
+                    except Exception:
+                        pass
+                    return pdf
+                try:
+                    ds_in = ds_in.map_batches(_acc_kw, batch_format="pandas", batch_size=512)
+                except Exception:
+                    pass
+            if prefilter_mode == "pre_gating":
+                ds_in = ds_in.filter(lambda r: bool(r.get("relevant_keyword", True)))
+        # Attach chunk_text
+        if enable_kw_buf and kw_regex is not None:
+            ds_in = ds_in.map(_attach_chunk_text)
+        # Trim chunk_text to fit model context budget
+        sys_text = system_prompt
+        def _trim_row(r: Dict[str, Any]) -> Dict[str, Any]:
+            txt = r.get("chunk_text") or r.get("article_text")
+            # Use char-based trimming to avoid heavy tokenizer in Ray workers.
+            r["chunk_text"] = _trim_text_for_prompt(str(txt or ""), None, sys_text)
+            return r
+        ds_in = ds_in.map(_trim_row)
+        processor = build_llm_processor(engine_config, preprocess=_pre, postprocess=_post)
+        return processor(ds_in)
+
+    # Pandas path: build Ray Dataset directly and push prefilter/trim into maps
+    # Build a Ray Dataset with multiple blocks to enable true streaming.
+    # A single huge block (default from_pandas behavior) forces upstream UDFs
+    # like ChatTemplateUDF/TokenizeUDF to process the entire dataset before
+    # the vLLM stage sees any rows, causing large startup latency.
+    try:
+        total_rows = int(len(out))
+    except Exception:
+        total_rows = 0
+    try:
+        desired_rows_per_block = int(getattr(cfg.runtime, "rows_per_block", 2000) or 2000)
+    except Exception:
+        desired_rows_per_block = 2000
+    step = max(1, desired_rows_per_block)
+    if total_rows > step:
+        try:
+            dfs_list = [out.iloc[i:i + step] for i in range(0, total_rows, step)]
+            ds = ray.data.from_pandas(dfs_list)
+        except Exception:
+            ds = ray.data.from_pandas(out)
+    else:
+        ds = ray.data.from_pandas(out)
+
+    # Apply keyword flag + pre-gating and trimming in Ray maps (same as streaming path)
+    ds_in = ds
+    if prefilter_mode in ("pre_gating", "post_gating"):
+        ds_in = ds_in.map(lambda r: {**r, "relevant_keyword": _kw_flag(r.get("article_text"))})
+        if prefilter_mode == "pre_gating":
+            ds_in = ds_in.filter(lambda r: bool(r.get("relevant_keyword", True)))
+    if enable_kw_buf and kw_regex is not None:
+        ds_in = ds_in.map(_attach_chunk_text)
+    sys_text = system_prompt
+    def _trim_row(r: Dict[str, Any]) -> Dict[str, Any]:
+        txt = r.get("chunk_text") or r.get("article_text")
+        # Use char-based trimming to avoid heavy tokenizer in Ray workers.
+        r["chunk_text"] = _trim_text_for_prompt(str(txt or ""), None, sys_text)
+        return r
+    ds_in = ds_in.map(_trim_row)
+
+    processor = build_llm_processor(engine_config, preprocess=_pre, postprocess=_post)
+    # Avoid an extra materialize; converting to pandas will trigger execution.
+    out_df = processor(ds_in).to_pandas()
+    # Stage-scoped logging is handled by the orchestrator
+    return out_df
+
+

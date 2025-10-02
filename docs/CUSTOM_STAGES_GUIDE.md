@@ -44,7 +44,7 @@ This example demonstrates a custom stage that adds sentiment scores to articles.
 
 #### Step 1: Create the Stage Function
 
-Create `pipelines/uair/stages/sentiment.py`:
+Create `dagspaces/uair/stages/sentiment.py`:
 
 ```python
 """Sentiment analysis stage for UAIR pipeline."""
@@ -215,7 +215,7 @@ def _process_sentiment_ray(ds, cfg: DictConfig):
 
 #### Step 2: Create the Stage Runner
 
-Add to `pipelines/uair/orchestrator.py`:
+Add to `dagspaces/uair/orchestrator.py`:
 
 ```python
 from .stages.sentiment import run_sentiment_stage
@@ -279,7 +279,7 @@ class SentimentRunner(StageRunner):
 
 #### Step 3: Register the Stage
 
-Add to the `_STAGE_REGISTRY` in `pipelines/uair/orchestrator.py`:
+Add to the `_STAGE_REGISTRY` in `dagspaces/uair/orchestrator.py`:
 
 ```python
 _STAGE_REGISTRY: Dict[str, StageRunner] = {
@@ -342,7 +342,7 @@ pipeline:
 #### Step 6: Run It
 
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=with_sentiment \
   data.parquet_path=/path/to/articles.parquet
 ```
@@ -693,22 +693,22 @@ def run_cached_stage(df, cfg):
 
 ### Complete Registration Checklist
 
-1. **Create stage module**: `pipelines/uair/stages/mystage.py`
+1. **Create stage module**: `dagspaces/uair/stages/mystage.py`
 2. **Implement `run_*_stage` function**
 3. **Create `MyStageRunner` class** in `orchestrator.py`
 4. **Add to `_STAGE_REGISTRY`**
 5. **Create default config**: `conf/mystage/default.yaml`
-6. **Add stage import** to `pipelines/uair/stages/__init__.py`
+6. **Add stage import** to `dagspaces/uair/stages/__init__.py`
 
 ### Example: Complete Registration
 
 ```python
-# pipelines/uair/stages/__init__.py
+# dagspaces/uair/stages/__init__.py
 from .classify import run_classification_stage
 from .taxonomy import run_taxonomy_stage
 from .mystage import run_my_custom_stage  # Add this
 
-# pipelines/uair/orchestrator.py
+# dagspaces/uair/orchestrator.py
 from .stages.mystage import run_my_custom_stage
 
 class MyCustomStageRunner(StageRunner):
@@ -735,7 +735,7 @@ _STAGE_REGISTRY: Dict[str, StageRunner] = {
 import pytest
 import pandas as pd
 from omegaconf import OmegaConf
-from pipelines.uair.stages.sentiment import run_sentiment_stage
+from dagspaces.uair.stages.sentiment import run_sentiment_stage
 
 def test_sentiment_basic():
     """Test basic sentiment analysis."""
@@ -780,7 +780,7 @@ def test_sentiment_empty_input():
 
 ```bash
 # Test with small sample
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=test_mystage \
   runtime.debug=true \
   runtime.sample_n=10 \
@@ -828,7 +828,7 @@ This guide covered:
 - Handling both pandas and Ray Data inputs  
 - Registering stages in the orchestrator  
 - Configuring and overriding stage parameters  
-- Testing stages in isolation and in pipelines  
+- Testing stages in isolation and in dagspaces  
 
 For additional information:
 - See [Configuration Guide](CONFIGURATION_GUIDE.md) for advanced config patterns

@@ -1,6 +1,6 @@
 # UAIR Configuration Guide
 
-Hydra configuration patterns for building flexible, scalable pipelines.
+Hydra configuration patterns for building flexible, scalable dagspaces.
 
 ---
 
@@ -154,7 +154,7 @@ pipeline:
 
 **Execution**:
 ```bash
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=simple_linear \
   data.parquet_path=/data/articles.parquet
 ```
@@ -490,7 +490,7 @@ concurrency: 1
 
 Use it:
 ```bash
-python -m pipelines.uair.cli model=my_custom_model
+python -m dagspaces.uair.cli model=my_custom_model
 ```
 
 ### GPU-Specific Model Configs
@@ -661,7 +661,7 @@ model:
     gpu_memory_utilization: 0.5  # Leave room for debugging
 ```
 
-Use: `python -m pipelines.uair.cli env=dev`
+Use: `python -m dagspaces.uair.cli env=dev`
 
 ### Staging Environment
 
@@ -837,12 +837,12 @@ pipeline:
 
 ```bash
 # Validate configuration without running
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   --cfg job  # Print resolved config
 
 # Check for missing files/references
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   hydra.verbose=true
 ```

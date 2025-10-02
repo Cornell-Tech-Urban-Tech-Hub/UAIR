@@ -49,7 +49,7 @@
 
 #### 4. **Configuration Guide** (`CONFIGURATION_GUIDE.md`)
 - **Status**: ✅ Complete
-- **Purpose**: Master Hydra configurations for flexible pipelines
+- **Purpose**: Master Hydra configurations for flexible dagspaces
 - **Contents**:
   - Configuration fundamentals
   - 5 Pipeline recipes:
@@ -123,7 +123,7 @@
 - ✅ Find help quickly
 
 ### Intermediate Users ✅
-- ✅ Build custom pipelines from recipes
+- ✅ Build custom dagspaces from recipes
 - ✅ Compose multi-stage workflows
 - ✅ Configure GPU resources
 - ✅ Run on SLURM clusters
@@ -133,7 +133,7 @@
 - ✅ Implement custom stages
 - ✅ Build LLM-powered stages
 - ✅ Optimize performance
-- ✅ Create domain-specific pipelines
+- ✅ Create domain-specific dagspaces
 - ✅ Extend the framework
 
 ---
@@ -307,12 +307,12 @@ docs/
 ### Beginner Track (1-2 hours) ✅
 - **Covered**: 100%
 - **Quality**: Excellent
-- **User can**: Run basic pipelines, understand concepts
+- **User can**: Run basic dagspaces, understand concepts
 
 ### Intermediate Track (3-4 hours) ✅
 - **Covered**: 95%
 - **Quality**: Excellent
-- **User can**: Build production pipelines, configure resources
+- **User can**: Build production dagspaces, configure resources
 
 ### Advanced Track (5+ hours) ✅
 - **Covered**: 85%
@@ -370,7 +370,7 @@ Users should be able to answer:
 
 We've created a comprehensive, immediately useful documentation suite that enables users to:
 - Get started quickly (< 30 minutes)
-- Build custom pipelines from recipes
+- Build custom dagspaces from recipes
 - Implement custom stages
 - Scale to production on SLURM clusters
 

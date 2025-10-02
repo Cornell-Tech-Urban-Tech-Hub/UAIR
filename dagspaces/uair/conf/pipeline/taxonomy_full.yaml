@@ -1,0 +1,73 @@
+# @package _global_
+defaults:
+  - override /hydra/launcher: slurm_monitor
+
+runtime:
+  debug: true
+  sample_n: 1000
+
+pipeline:
+  output_root: ${runtime.output_root}
+  allow_partial: false
+  sources:
+    articles:
+      path: ${data.parquet_path}
+      type: parquet
+  graph:
+    nodes:
+      classify:
+        stage: classify
+        depends_on: []
+        inputs:
+          dataset: articles
+        outputs:
+          all: outputs/classify/classify_all.parquet
+          relevant: outputs/classify/classify_relevant.parquet
+        overrides:
+          runtime.rows_per_block: ${runtime.rows_per_block}
+          runtime.streaming_io: ${runtime.streaming_io}
+          runtime.sample_n: ${runtime.sample_n}
+          runtime.debug: ${runtime.debug}
+          runtime.use_llm_classify: ${runtime.use_llm_classify}
+          # Model config overrides for 2-GPU setup (g2_slurm_pierson)
+          model.engine_kwargs.gpu_memory_utilization: 0.45
+          model.engine_kwargs.max_model_len: 2048
+          model.engine_kwargs.max_num_seqs: 2
+          model.engine_kwargs.enable_prefix_caching: false
+        launcher: g2_slurm_pierson
+        wandb_suffix: classify
+      taxonomy:
+        stage: taxonomy
+        depends_on:
+          - classify
+        inputs:
+          dataset: classify.relevant
+        outputs:
+          chunks: outputs/taxonomy/results.parquet
+        overrides:
+          runtime.streaming_io: ${runtime.streaming_io}
+          runtime.debug: ${runtime.debug}
+          runtime.prefilter_mode: ${runtime.prefilter_mode}
+          # Model config overrides for 2-GPU setup (g2_slurm_pierson)
+          model.engine_kwargs.gpu_memory_utilization: 0.45
+          model.engine_kwargs.max_model_len: 2048
+          model.engine_kwargs.max_num_seqs: 1
+          model.engine_kwargs.enable_prefix_caching: false
+          model.engine_kwargs.enable_chunked_prefill: false
+          model.batch_size: 1
+        launcher: g2_slurm_pierson
+        wandb_suffix: taxonomy
+      verification:
+        stage: verification
+        depends_on:
+          - taxonomy
+        inputs:
+          dataset: taxonomy.chunks
+        outputs:
+          chunks: outputs/verification/verification.parquet
+        overrides:
+          runtime.streaming_io: ${runtime.streaming_io}
+          runtime.debug: ${runtime.debug}
+        launcher: g2_slurm_pierson
+        wandb_suffix: verification
+

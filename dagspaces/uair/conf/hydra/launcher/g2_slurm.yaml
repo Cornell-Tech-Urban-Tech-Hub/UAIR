@@ -1,0 +1,30 @@
+# Uses Hydra Submitit Slurm launcher
+_target_: hydra_plugins.hydra_submitit_launcher.submitit_launcher.SlurmLauncher
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 480
+nodes: 1
+tasks_per_node: 1
+cpus_per_task: 8
+mem_gb: ${runtime.job_memory_gb}
+gpus_per_node: 4
+partition: pierson
+array_parallelism: 1
+name: E_rule_tuples
+additional_parameters:
+  gres: gpu:4
+setup:
+  - export HYDRA_FULL_ERROR=1
+  - source ~/.bashrc
+  - source /share/pierson/matt/UAIR/.venv/bin/activate
+  - unset WANDB_DISABLED
+  - export RULE_TUPLES_SILENT=1
+  - export WANDB_SILENT=true
+  # Disable wandb service for distributed environments (uses in-process mode)
+  - export WANDB_DISABLE_SERVICE=true
+  - export VLLM_WORKER_MULTIPROC_METHOD=spawn
+  - export VLLM_USE_V1=1
+  - export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True
+  - export CUDA_LAUNCH_BLOCKING=0
+  - export TOKENIZERS_PARALLELISM=false
+  - export CUDA_VISIBLE_DEVICES=0,1,2,3
+

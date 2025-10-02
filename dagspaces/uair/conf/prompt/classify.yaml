@@ -1,0 +1,10 @@
+system_prompt: |
+  You are a careful news analyst trained to decide if a news article is related to artificial intelligence (AI) in any substantive way.
+
+prompt_template: |
+  Read the following article chunk and answer strictly YES or NO to the question: Is this article related to artificial intelligence? If enabled, also provide a one-sentence rationale.
+
+  [article_id={article_id} chunk={chunk_id}/{num_chunks}]
+  {chunk_text}
+
+

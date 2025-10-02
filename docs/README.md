@@ -1,6 +1,6 @@
 # UAIR Pipeline Framework Documentation
 
-Build scalable, configuration-driven pipelines for Urban AI Risk assessment.
+Build scalable, configuration-driven dagspaces for Urban AI Risk assessment.
 
 ---
 
@@ -63,7 +63,7 @@ pip install -r requirements.txt
 
 ```bash
 # Simple topic modeling on 100 articles
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   runtime.debug=true \
   runtime.sample_n=100 \
   data.parquet_path=/path/to/articles.parquet
@@ -71,7 +71,7 @@ python -m pipelines.uair.cli \
 
 ### 3. Explore the Documentation
 
-- **New to pipelines?** → [User Guide](USER_GUIDE.md#quick-start)
+- **New to dagspaces?** → [User Guide](USER_GUIDE.md#quick-start)
 - **Building a custom pipeline?** → [Configuration Guide](CONFIGURATION_GUIDE.md#pipeline-recipes)
 - **Need a new stage?** → [Custom Stages Guide](CUSTOM_STAGES_GUIDE.md#simple-stage-template)
 - **Need quick help?** → [Quick Reference](QUICK_REFERENCE.md)
@@ -97,7 +97,7 @@ Articles → Relevance Filter → [Topic Modeling | Sentiment Analysis | Risk Sc
 Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 ```
 
-**Custom Domain Pipelines**
+**Custom Domain dagspaces**
 - Medical text analysis
 - Legal document processing
 - Code vulnerability detection
@@ -128,8 +128,8 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 
 ### Key Features
 
-- **DAG-based Pipelines**: Express complex workflows as directed graphs
-- **Configuration-Driven**: No code changes needed for new pipelines
+- **DAG-based dagspaces**: Express complex workflows as directed graphs
+- **Configuration-Driven**: No code changes needed for new dagspaces
 - **Distributed Execution**: Scale to large datasets with Ray + SLURM
 - **LLM Integration**: Built-in vLLM support with automatic GPU management
 - **Experiment Tracking**: Automatic W&B logging
@@ -153,7 +153,7 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 2. Build a custom pipeline using recipes (90 min)
 3. Learn [Per-Node Configuration](CONFIGURATION_GUIDE.md#per-node-configuration) (30 min)
 
-**Goal**: Build production-ready pipelines from templates
+**Goal**: Build production-ready dagspaces from templates
 
 ### Advanced Track (5+ hours)
 
@@ -199,7 +199,7 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 
 ```bash
 # Quick test with 10 articles on CPU
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   runtime.debug=true \
   runtime.sample_n=10 \
@@ -210,7 +210,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Production run with full dataset on GPU cluster
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=production_pipeline \
   runtime.debug=false \
   runtime.sample_n=null \
@@ -221,7 +221,7 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Try different model parameters
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   model.batch_size=8 \
   model.engine_kwargs.max_model_len=4096 \
@@ -230,9 +230,9 @@ python -m pipelines.uair.cli \
 
 ### Workflow 4: Build and Test Custom Stage
 
-1. Create stage: `pipelines/uair/stages/mystage.py`
+1. Create stage: `dagspaces/uair/stages/mystage.py`
 2. Register: Add to `_STAGE_REGISTRY` in `orchestrator.py`
-3. Test: `python -m pipelines.uair.cli pipeline=test_mystage`
+3. Test: `python -m dagspaces.uair.cli pipeline=test_mystage`
 
 ---
 
@@ -267,7 +267,7 @@ To contribute:
 1. **Enable debug mode**: `runtime.debug=true`
 2. **Use small sample**: `runtime.sample_n=10`
 3. **Check logs**: `outputs/.../stage_name/*.log`
-4. **Verify config**: `python -m pipelines.uair.cli --cfg job`
+4. **Verify config**: `python -m dagspaces.uair.cli --cfg job`
 
 ### Common Issues
 
@@ -314,7 +314,7 @@ See [Quick Reference - Stage Reference](QUICK_REFERENCE.md#stage-reference) for 
 
 For questions about UAIR framework:
 - Check existing documentation first
-- Review code examples in `pipelines/uair/`
+- Review code examples in `dagspaces/uair/`
 - Consult [Quick Reference](QUICK_REFERENCE.md) troubleshooting section
 
 ---

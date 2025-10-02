@@ -10,19 +10,19 @@ Fast lookup for common commands, patterns, and configurations.
 
 ```bash
 # Run with default config
-python -m pipelines.uair.cli
+python -m dagspaces.uair.cli
 
 # Run specific pipeline
-python -m pipelines.uair.cli pipeline=taxonomy_full
+python -m dagspaces.uair.cli pipeline=taxonomy_full
 
 # Override data path
-python -m pipelines.uair.cli data.parquet_path=/path/to/data.parquet
+python -m dagspaces.uair.cli data.parquet_path=/path/to/data.parquet
 
 # Debug mode with sampling
-python -m pipelines.uair.cli runtime.debug=true runtime.sample_n=100
+python -m dagspaces.uair.cli runtime.debug=true runtime.sample_n=100
 
 # Multiple overrides
-python -m pipelines.uair.cli \
+python -m dagspaces.uair.cli \
   pipeline=my_pipeline \
   runtime.debug=true \
   model.batch_size=8 \
@@ -33,29 +33,29 @@ python -m pipelines.uair.cli \
 
 ```bash
 # Change data source
-python -m pipelines.uair.cli data=flattened_rules
+python -m dagspaces.uair.cli data=flattened_rules
 
 # Change model
-python -m pipelines.uair.cli model=vllm_qwen3-30b
+python -m dagspaces.uair.cli model=vllm_qwen3-30b
 
 # Change launcher (execution environment)
-python -m pipelines.uair.cli hydra/launcher=g2_slurm_gpu_4x
+python -m dagspaces.uair.cli hydra/launcher=g2_slurm_gpu_4x
 
 # Change pipeline
-python -m pipelines.uair.cli pipeline=topic_modeling_of_relevant_classifications
+python -m dagspaces.uair.cli pipeline=topic_modeling_of_relevant_classifications
 ```
 
 ### Inspection Commands
 
 ```bash
 # Print resolved configuration
-python -m pipelines.uair.cli --cfg job
+python -m dagspaces.uair.cli --cfg job
 
 # Print help
-python -m pipelines.uair.cli --help
+python -m dagspaces.uair.cli --help
 
 # List available config groups
-python -m pipelines.uair.cli --hydra-help
+python -m dagspaces.uair.cli --hydra-help
 ```
 
 ---
@@ -253,7 +253,7 @@ conf/
 ### Code
 
 ```
-pipelines/uair/
+dagspaces/uair/
 ├── cli.py                   # Entry point
 ├── orchestrator.py          # Pipeline execution
 ├── config_schema.py         # Config schemas
@@ -322,7 +322,7 @@ runtime:
 ```
 
 ```bash
-python -m pipelines.uair.cli runtime.debug=true runtime.sample_n=10
+python -m dagspaces.uair.cli runtime.debug=true runtime.sample_n=10
 ```
 
 ### Local Testing (No SLURM)
@@ -412,7 +412,7 @@ sacct -j JOB_ID
 ls conf/pipeline/my_pipeline.yaml
 
 # Check search paths
-python -m pipelines.uair.cli --hydra-help
+python -m dagspaces.uair.cli --hydra-help
 ```
 
 ---
@@ -443,7 +443,7 @@ from omegaconf import OmegaConf
 import os
 
 # Initialize Hydra
-config_dir = os.path.join(os.getcwd(), "pipelines/uair/conf")
+config_dir = os.path.join(os.getcwd(), "dagspaces/uair/conf")
 initialize_config_dir(config_dir=config_dir, version_base="1.3")
 
 # Compose config
