@@ -1,30 +1,24 @@
 # UAIR Pipeline Framework Documentation
 
-**Build scalable, configuration-driven pipelines for Urban AI Risk assessment**
+Build scalable, configuration-driven pipelines for Urban AI Risk assessment.
 
 ---
 
-## Welcome! 👋
-
-This documentation will help you build custom experimental pipelines using the UAIR framework. Whether you're analyzing news articles, extracting risk indicators, or building entirely new AI risk assessment workflows, this guide has you covered.
-
----
-
-## 📚 Documentation Structure
+## Documentation Structure
 
 ### For Beginners
 
-**Start here if you're new to UAIR:**
+Start here if you are new to UAIR:
 
 1. **[User Guide](USER_GUIDE.md)** - Complete introduction
    - What is UAIR?
-   - Quick Start (your first pipeline in 10 minutes)
+   - Quick Start
    - Core Concepts (architecture, configuration, stages)
    - Required reading for understanding the framework
 
 ### For Pipeline Builders
 
-**Once you understand the basics:**
+Once you understand the basics:
 
 2. **[Configuration Guide](CONFIGURATION_GUIDE.md)** - Master Hydra configs
    - Pipeline recipes (linear, parallel, filter-then-process)
@@ -55,7 +49,7 @@ This documentation will help you build custom experimental pipelines using the U
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -84,35 +78,34 @@ python -m pipelines.uair.cli \
 
 ---
 
-## 🎯 What Can You Build?
+## What Can You Build?
 
 ### Example Use Cases
 
-**✅ Multi-Stage Classification Pipeline**
+**Multi-Stage Classification Pipeline**
 ```
 Articles → Relevance Filter → Taxonomy Classification → Verification
 ```
 
-**✅ Parallel Analysis**
+**Parallel Analysis**
 ```
 Articles → Relevance Filter → [Topic Modeling | Sentiment Analysis | Risk Scoring]
 ```
 
-**✅ Iterative Refinement**
+**Iterative Refinement**
 ```
 Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 ```
 
-**✅ Custom Domain Pipelines**
+**Custom Domain Pipelines**
 - Medical text analysis
 - Legal document processing
 - Code vulnerability detection
 - Scientific literature mining
-- ... and more!
 
 ---
 
-## 🏗️ Framework Architecture
+## Framework Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -120,9 +113,9 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 │                         (YAML Config)                            │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
-│  📊 Data Sources    →  🔧 Processing Stages  →  💾 Outputs      │
-│  (Parquet/CSV)         (classify, taxonomy,     (Parquet)       │
-│                         topic, custom, etc.)                     │
+│  Data Sources    →  Processing Stages  →  Outputs               │
+│  (Parquet/CSV)      (classify, taxonomy,  (Parquet)             │
+│                      topic, custom, etc.)                        │
 │                                                                   │
 ├─────────────────────────────────────────────────────────────────┤
 │              Orchestrator (DAG Execution Engine)                 │
@@ -135,16 +128,16 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 
 ### Key Features
 
-- **🔄 DAG-based Pipelines**: Express complex workflows as directed graphs
-- **⚙️ Configuration-Driven**: No code changes needed for new pipelines
-- **⚡ Distributed Execution**: Scale to large datasets with Ray + SLURM
-- **🤖 LLM Integration**: Built-in vLLM support with automatic GPU management
-- **📊 Experiment Tracking**: Automatic W&B logging
-- **🧩 Modular**: Mix and match stages, models, and datasets
+- **DAG-based Pipelines**: Express complex workflows as directed graphs
+- **Configuration-Driven**: No code changes needed for new pipelines
+- **Distributed Execution**: Scale to large datasets with Ray + SLURM
+- **LLM Integration**: Built-in vLLM support with automatic GPU management
+- **Experiment Tracking**: Automatic W&B logging
+- **Modular**: Mix and match stages, models, and datasets
 
 ---
 
-## 📖 Learning Path
+## Learning Path
 
 ### Beginner Track (1-2 hours)
 
@@ -172,7 +165,7 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 
 ---
 
-## 🔍 Find What You Need
+## Find What You Need
 
 ### By Task
 
@@ -200,7 +193,7 @@ Articles → Coarse Classification → Fine-Grained Analysis → Quality Check
 
 ---
 
-## 💡 Common Workflows
+## Common Workflows
 
 ### Workflow 1: Test a Pipeline Locally
 
@@ -243,7 +236,7 @@ python -m pipelines.uair.cli \
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 ### Adding a New Stage
 
@@ -261,13 +254,13 @@ To contribute:
 
 ---
 
-## 🆘 Getting Help
+## Getting Help
 
 ### Documentation
 
 - Start with [User Guide](USER_GUIDE.md)
 - Check [Quick Reference](QUICK_REFERENCE.md) for common issues
-- Search this documentation (Ctrl+F or Cmd+F)
+- Search this documentation
 
 ### Debugging
 
@@ -285,9 +278,7 @@ To contribute:
 
 ---
 
-## 📊 What's Inside Each Stage?
-
-### Built-in Stages
+## Built-in Stages
 
 | Stage | Input | Output | Purpose |
 |-------|-------|--------|---------|
@@ -301,33 +292,7 @@ See [Quick Reference - Stage Reference](QUICK_REFERENCE.md#stage-reference) for 
 
 ---
 
-## 🎓 Examples Gallery (Coming Soon)
-
-### Urban AI Risks Pipeline
-- Filter relevant news articles
-- Classify into risk taxonomy
-- Verify high-impact claims
-- Generate risk reports
-
-### Custom Domain Pipelines
-- Medical literature mining
-- Legal document analysis
-- Code security scanning
-- Scientific paper screening
-
----
-
-## 📝 Version History
-
-- **v1.0** (2025-10-02): Initial documentation release
-  - User Guide
-  - Configuration Guide
-  - Custom Stages Guide
-  - Quick Reference
-
----
-
-## 🔗 External Resources
+## External Resources
 
 ### Technologies Used
 
@@ -345,7 +310,7 @@ See [Quick Reference - Stage Reference](QUICK_REFERENCE.md#stage-reference) for 
 
 ---
 
-## 📬 Contact
+## Contact
 
 For questions about UAIR framework:
 - Check existing documentation first
@@ -354,9 +319,8 @@ For questions about UAIR framework:
 
 ---
 
-**Ready to build your first pipeline?** → [Start with the User Guide](USER_GUIDE.md)
+Ready to build your first pipeline? Start with the [User Guide](USER_GUIDE.md).
 
 ---
 
 *Documentation last updated: 2025-10-02*
-

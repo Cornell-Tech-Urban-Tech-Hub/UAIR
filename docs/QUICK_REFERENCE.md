@@ -1,6 +1,6 @@
 # UAIR Quick Reference
 
-**Fast lookup for common commands, patterns, and configurations**
+Fast lookup for common commands, patterns, and configurations.
 
 ---
 
@@ -460,11 +460,11 @@ print(OmegaConf.to_yaml(cfg))
 
 ## Links to Full Guides
 
-- 📚 [User Guide](USER_GUIDE.md) - Complete introduction and concepts
-- 🔧 [Custom Stages](CUSTOM_STAGES_GUIDE.md) - Build your own stages
-- ⚙️ [Configuration](CONFIGURATION_GUIDE.md) - Config recipes and patterns
-- 🖥️ [SLURM Guide](SLURM_GUIDE.md) - Distributed execution
-- 📖 [Examples](EXAMPLES.md) - End-to-end pipeline examples
+- [User Guide](USER_GUIDE.md) - Complete introduction and concepts
+- [Custom Stages](CUSTOM_STAGES_GUIDE.md) - Build custom stages
+- [Configuration](CONFIGURATION_GUIDE.md) - Config recipes and patterns
+- [SLURM Guide](SLURM_GUIDE.md) - Distributed execution
+- [Examples](EXAMPLES.md) - End-to-end pipeline examples
 
 ---
 

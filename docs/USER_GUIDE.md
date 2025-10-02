@@ -1,6 +1,6 @@
 # UAIR Pipeline Framework - User Guide
 
-**Building Custom Pipelines for Urban AI Risk Assessment**
+Building Custom Pipelines for Urban AI Risk Assessment
 
 ---
 
@@ -23,13 +23,13 @@
 
 ### What is UAIR?
 
-UAIR (Urban AI Risks) is a powerful pipeline framework designed for assessing AI-related risks in urban contexts by running large-scale AI inference over news article datasets. The framework provides:
+UAIR (Urban AI Risks) is a pipeline framework designed for assessing AI-related risks in urban contexts by running large-scale AI inference over news article datasets. The framework provides:
 
-- **🔄 DAG-based Pipeline Orchestration**: Define complex multi-stage workflows as directed acyclic graphs
-- **⚡ Distributed Execution**: Scale to large datasets using Ray Data and SLURM clusters
-- **🤖 LLM Integration**: Built-in support for vLLM inference with automatic GPU management
-- **📊 Experiment Tracking**: Automatic logging to Weights & Biases
-- **⚙️ Configuration-Driven**: Modular, composable configs using Hydra
+- **DAG-based Pipeline Orchestration**: Define complex multi-stage workflows as directed acyclic graphs
+- **Distributed Execution**: Scale to large datasets using Ray Data and SLURM clusters
+- **LLM Integration**: Built-in support for vLLM inference with automatic GPU management
+- **Experiment Tracking**: Automatic logging to Weights & Biases
+- **Configuration-Driven**: Modular, composable configs using Hydra
 
 ### Core Philosophy
 
@@ -108,12 +108,12 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
 # Verify installation
-python -c "import ray, hydra, vllm; print('✓ All dependencies installed')"
+python -c "import ray, hydra, vllm; print('All dependencies installed')"
 ```
 
 ### Your First Pipeline: Topic Modeling
 
-Let's start with a simple single-stage pipeline that performs topic modeling on news articles.
+This section demonstrates a simple single-stage pipeline that performs topic modeling on news articles.
 
 #### Step 1: Prepare Your Data
 
@@ -224,7 +224,7 @@ print(results.groupby('topic_id')['topic_top_terms'].first())
 
 ### Next Steps
 
-Now that you have a working pipeline, you can:
+With a working pipeline, consider the following extensions:
 
 - **Add More Stages**: Chain topic modeling with classification
 - **Use GPU**: Set `topic.embed.device: cuda` for faster embeddings
@@ -232,7 +232,7 @@ Now that you have a working pipeline, you can:
 - **Deploy to SLURM**: Use `override /hydra/launcher: g2_slurm_cpu`
 - **Customize**: Adjust UMAP/HDBSCAN parameters in `topic` config
 
-Continue to [Core Concepts](#core-concepts) to understand the framework deeply, or jump to [Complete Examples](#complete-examples) for more complex pipelines.
+Refer to [Core Concepts](#core-concepts) for detailed framework understanding, or [Complete Examples](#complete-examples) for more complex pipelines.
 
 ---
 
@@ -370,7 +370,7 @@ runtime:
   sample_n: null
 ```
 
-**Key Point**: The order matters! Items later in the list override earlier ones. The special `_self_` keyword controls when the current file's values are applied.
+**Note**: The order of items in the defaults list determines precedence, with later items overriding earlier ones. The `_self_` keyword controls when the current file's values are applied.
 
 #### Variable Interpolation
 
@@ -494,7 +494,7 @@ _STAGE_REGISTRY: Dict[str, StageRunner] = {
 }
 ```
 
-To register a custom stage, add it to this dictionary.
+Custom stages are registered by adding them to this dictionary.
 
 #### Stage Execution Lifecycle
 
@@ -574,9 +574,13 @@ row['usage'] = _to_json_str(usage_dict)
 
 ## Building Custom Stages
 
-Coming in next section...
+Refer to the [Custom Stages Guide](CUSTOM_STAGES_GUIDE.md) for detailed information on implementing custom processing stages.
 
 ---
 
-*This guide continues with sections on Building Custom Stages, Configuration Recipes, Advanced Topics, Complete Examples, Best Practices, Reference Documentation, and Troubleshooting.*
+For additional topics including Configuration Recipes, Advanced Topics, Complete Examples, and Troubleshooting, consult the [Configuration Guide](CONFIGURATION_GUIDE.md) and [Quick Reference](QUICK_REFERENCE.md).
+
+---
+
+*Last updated: 2025-10-02*
 

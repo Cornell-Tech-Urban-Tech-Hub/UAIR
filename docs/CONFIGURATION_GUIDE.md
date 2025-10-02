@@ -1,6 +1,6 @@
 # UAIR Configuration Guide
 
-**Master Hydra configurations for building flexible, scalable pipelines**
+Hydra configuration patterns for building flexible, scalable pipelines.
 
 ---
 
@@ -60,7 +60,7 @@ runtime:
   debug: true
 ```
 
-**Key Rule**: Later items override earlier items. `_self_` controls when the current file's values apply.
+**Note**: Later items override earlier items. The `_self_` directive controls when the current file's values apply.
 
 ### Variable Interpolation Patterns
 
@@ -152,7 +152,7 @@ pipeline:
         wandb_suffix: verify
 ```
 
-**Run it**:
+**Execution**:
 ```bash
 python -m pipelines.uair.cli \
   pipeline=simple_linear \
@@ -895,18 +895,18 @@ output_path: ${oc.env:OUTPUT_PATH,/default/path}/outputs
 
 ## Summary
 
-You now know how to:
+This guide covered:
 
-✅ Organize configuration files hierarchically  
-✅ Compose configs with defaults and overrides  
-✅ Build common pipeline patterns (linear, parallel, filter-then-process)  
-✅ Override parameters per-node  
-✅ Configure models for different GPU setups  
-✅ Select appropriate SLURM launchers  
-✅ Create environment-specific configurations  
-✅ Use advanced patterns (inheritance, conditionals, dynamic paths)  
+- Organizing configuration files hierarchically  
+- Composing configs with defaults and overrides  
+- Building common pipeline patterns (linear, parallel, filter-then-process)  
+- Overriding parameters per-node  
+- Configuring models for different GPU setups  
+- Selecting appropriate SLURM launchers  
+- Creating environment-specific configurations  
+- Using advanced patterns (inheritance, conditionals, dynamic paths)  
 
-Next steps:
+For additional information:
 - See [Custom Stages Guide](CUSTOM_STAGES_GUIDE.md) for implementing new stages
 - See [SLURM Guide](SLURM_GUIDE.md) for distributed execution details
 - See [Complete Examples](EXAMPLES.md) for full pipeline walkthroughs

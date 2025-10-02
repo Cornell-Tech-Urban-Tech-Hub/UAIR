@@ -1,6 +1,6 @@
 # Building Custom Stages - Practical Guide
 
-This guide walks you through creating custom processing stages for the UAIR pipeline framework, from simple transformations to complex LLM-powered analysis.
+This guide provides instructions for creating custom processing stages for the UAIR pipeline framework, from simple transformations to complex LLM-powered analysis.
 
 ---
 
@@ -40,7 +40,7 @@ Every custom stage consists of three components:
 
 ### Example: Sentiment Analysis Stage
 
-Let's build a custom stage that adds sentiment scores to articles.
+This example demonstrates a custom stage that adds sentiment scores to articles.
 
 #### Step 1: Create the Stage Function
 
@@ -357,7 +357,7 @@ For stages that require LLM inference (classification, extraction, generation), 
 
 ### Template: LLM Classification Stage
 
-Let's create a stage that classifies articles into risk categories.
+This template demonstrates a stage that classifies articles into risk categories.
 
 ```python
 """Risk classification stage using vLLM."""
@@ -821,16 +821,16 @@ runtime:
 
 ## Summary
 
-You now know how to:
+This guide covered:
 
-✅ Create simple transformation stages  
-✅ Implement LLM-powered stages with vLLM  
-✅ Handle both pandas and Ray Data inputs  
-✅ Register stages in the orchestrator  
-✅ Configure and override stage parameters  
-✅ Test stages in isolation and in pipelines  
+- Creating simple transformation stages  
+- Implementing LLM-powered stages with vLLM  
+- Handling both pandas and Ray Data inputs  
+- Registering stages in the orchestrator  
+- Configuring and overriding stage parameters  
+- Testing stages in isolation and in pipelines  
 
-Next steps:
+For additional information:
 - See [Configuration Guide](CONFIGURATION_GUIDE.md) for advanced config patterns
 - See [Complete Examples](EXAMPLES.md) for full pipeline walkthroughs
 - See [SLURM Guide](SLURM_GUIDE.md) for distributed execution
