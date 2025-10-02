@@ -9,14 +9,14 @@ import json
 from bisect import bisect_right
 
 import sys 
-sys.path.append("/share/ju/matt/sensing-ai-risks")
+sys.path.append("/share/pierson/matt/UAIR")
 from utils.logger import setup_logger
 
 logger = setup_logger("processing.keyword")
 logger.setLevel(logging.INFO)
 
 # %%
-articles_path = "/share/ju/matt/sensing-ai-risks/data/global_subset/all_articles.parquet"
+articles_path = "/share/pierson/matt/UAIR/data/global_subset/all_articles.parquet"
 logger.info(f"Loading articles from {articles_path}")
 articles = pd.read_parquet(articles_path)
 logger.success(f"Loaded {len(articles)} articles with {articles.shape[1]} columns")
@@ -218,7 +218,7 @@ logger.info(
 )
 
 # %%
-sample_csv_path = "/share/ju/matt/sensing-ai-risks/data/global_subset/relevant_articles_sample.csv"
+sample_csv_path = "/share/pierson/matt/UAIR/data/global_subset/relevant_articles_sample.csv"
 logger.info(f"Writing sample CSV to {sample_csv_path}")
 relevant.sample(n=10, random_state=42).to_csv(sample_csv_path, index=False)
 logger.success("Wrote sample CSV")

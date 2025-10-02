@@ -16,7 +16,7 @@ additional_parameters:
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
-  - source activate /share/ju/matt/conda/cillm-lora
+  - source activate /share/pierson/matt/conda/cillm-lora
   - export CUDA_VISIBLE_DEVICES=0,1
   - export VLLM_WORKER_MULTIPROC_METHOD=spawn
   - export VLLM_USE_V1=1

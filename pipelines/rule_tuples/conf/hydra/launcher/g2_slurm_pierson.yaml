@@ -15,7 +15,7 @@ additional_parameters:
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
-  - source activate /share/ju/matt/conda/cillm-lora
+  - source activate /share/pierson/matt/conda/cillm-lora
   - unset WANDB_DISABLED
   - export RULE_TUPLES_SILENT=1
   - export WANDB_SILENT=true

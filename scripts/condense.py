@@ -4,14 +4,14 @@ from pandarallel import pandarallel
 from tqdm import tqdm
 
 import sys
-sys.path.append("/share/ju/matt/sensing-ai-risks/")
+sys.path.append("/share/pierson/matt/UAIR/")
 from utils.logger import setup_logger
 logger = setup_logger()
 logger.setLevel("INFO")
 
 
 logger.info("Loading all article metadata via glob.")
-all_articles_glob = glob("/share/ju/matt/sensing-ai-risks/data/global_subset/*/content/20*/*.txt")
+all_articles_glob = glob("/share/pierson/matt/UAIR/data/global_subset/*/content/20*/*.txt")
 logger.success(f"Found {len(all_articles_glob)} articles.")
 
 all_articles = pd.DataFrame(all_articles_glob, columns=["article_path"])

@@ -1,7 +1,7 @@
 #!/bin/bash 
 #SBATCH -J batch_inference
-#SBATCH -o /share/ju/matt/sensing-ai-risks/log/batch_inference/%j.out 
-#SBATCH -e /share/ju/matt/sensing-ai-risks/log/batch_inference/%j.err
+#SBATCH -o /share/pierson/matt/UAIR/log/batch_inference/%j.out 
+#SBATCH -e /share/pierson/matt/UAIR/log/batch_inference/%j.err
 #SBATCH --mail-type=ALL 
 #SBATCH --mail-user=mwf62@cornell.edu 
 #SBATCH -N 1
@@ -15,13 +15,13 @@
 pwd
 source /home/mwf62/.bashrc
  
-source activate /share/ju/matt/conda/cillm-lora
+source activate /share/pierson/matt/conda/cillm-lora
 
 nvidia-smi
 
 nvidia-smi topo -m
 
-cd /share/ju/matt/sensing-ai-risks
+cd /share/pierson/matt/UAIR
 
 # run the python command in the script in $1. cat the script and echo it to the screen.
 cat $1

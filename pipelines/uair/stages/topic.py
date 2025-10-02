@@ -47,7 +47,14 @@ def _get_logger() -> logging.Logger:
         logger.propagate = False
     return logger
 
-def _log_event(event: str, **kwargs: Any) -> None:
+def _log_event(event: str, logger=None, **kwargs: Any) -> None:
+    """Log a topic stage event.
+    
+    Args:
+        event: Event name
+        logger: Optional WandbLogger instance for W&B logging
+        **kwargs: Event metadata
+    """
     payload: Dict[str, Any] = {"topic": {"event": event}}
     if kwargs:
         try:
@@ -64,17 +71,35 @@ def _log_event(event: str, **kwargs: Any) -> None:
     except Exception:
         pass
     # Best-effort forward to W&B run when available
-    try:
-        import wandb  # type: ignore
+    if logger:
         try:
             # Optional gate via env to disable
             gate = str(os.environ.get("UAIR_TOPIC_WANDB_LOG_EVENTS", "1")).strip().lower() in ("1","true","yes","on")
+            if gate:
+                # Route categorical/string fields to summary, numeric to metrics
+                try:
+                    logger.set_summary("topic/event", str(event))
+                except Exception:
+                    pass
+                numeric_metrics: Dict[str, Any] = {}
+                for k, v in (kwargs or {}).items():
+                    try:
+                        if isinstance(v, (int, float)):
+                            numeric_metrics[f"topic/{k}"] = v
+                        elif isinstance(v, str):
+                            logger.set_summary(f"topic/{k}", v)
+                        else:
+                            # Best-effort: store JSON-serializable values in summary
+                            try:
+                                logger.set_summary(f"topic/{k}", v)
+                            except Exception:
+                                pass
+                    except Exception:
+                        pass
+                if numeric_metrics:
+                    logger.log_metrics(numeric_metrics)
         except Exception:
-            gate = True
-        if gate:
-            wandb.log(payload)
-    except Exception:
-        pass
+            pass
 
 def _select_text(pdf: pd.DataFrame, text_pref: str) -> pd.Series:
     if text_pref == "chunk_text" and "chunk_text" in pdf.columns:
@@ -351,14 +376,14 @@ def _cluster_hdbscan(emb_red: List[List[float]], cfg) -> Tuple[List[int], List[f
     except Exception as e:
         raise RuntimeError(f"hdbscan not available: {e}")
 
-def run_topic_stage(df, cfg):
+def run_topic_stage(df, cfg, logger=None):
     # Load into pandas if Ray Dataset
     if hasattr(df, "to_pandas") and hasattr(df, "count") and _RAY_OK:
         pdf = df.to_pandas()
     else:
         pdf = df.copy() if isinstance(df, pd.DataFrame) else pd.DataFrame([])
     if pdf is None or len(pdf) == 0:
-        _log_event("input_empty")
+        _log_event("input_empty", logger=logger)
         return pd.DataFrame([])
 
     pdf = _ensure_ids(pdf)
@@ -369,7 +394,7 @@ def run_topic_stage(df, cfg):
     except Exception:
         pass
     if len(pdf) == 0:
-        _log_event("no_rows_after_gate")
+        _log_event("no_rows_after_gate", logger=logger)
         return pd.DataFrame([])
 
     # Environment preflight logging (CUDA / RAPIDS visibility)
@@ -504,7 +529,7 @@ def run_topic_stage(df, cfg):
         pass
 
     # Progress: units prepared
-    _log_event("units_prepared", units=int(len(units)))
+    _log_event("units_prepared", logger=logger, units=int(len(units)))
 
     texts_list = [str(t or "") for t in units["text"].tolist()]
     texts_list = _trim_texts(texts_list, max_tok)
@@ -574,11 +599,11 @@ def run_topic_stage(df, cfg):
         normalize=bool(normalize),
     )
     # Also log an explicit W&B metric counter for progress tracking dashboarding
-    try:
-        import wandb as _wandb  # type: ignore
-        _wandb.log({"topic/embed/total_units": int(len(texts_list))})
-    except Exception:
-        pass
+    if logger:
+        try:
+            logger.log_metrics({"topic/embed/total_units": int(len(texts_list))})
+        except Exception:
+            pass
     # Optional progress bar via env flag
     try:
         show_pb = str(os.environ.get("UAIR_TOPIC_SHOW_PB", "")).strip().lower() in ("1","true","yes","on")
@@ -675,16 +700,16 @@ def run_topic_stage(df, cfg):
                         rate_items_per_s=(round(rate, 2) if rate else None),
                         eta_s=(round(eta, 2) if eta else None),
                     )
-                    try:
-                        import wandb as _wandb  # type: ignore
-                        _wandb.log({
-                            "topic/embed/done_units": int(done),
-                            "topic/embed/elapsed_s": round(elapsed, 2),
-                            "topic/embed/rate_units_per_s": (round(rate, 2) if rate else None),
-                            "topic/embed/pct": (round(100.0 * done / total, 2) if total else 100.0),
-                        })
-                    except Exception:
-                        pass
+                    if logger:
+                        try:
+                            logger.log_metrics({
+                                "topic/embed/done_units": int(done),
+                                "topic/embed/elapsed_s": round(elapsed, 2),
+                                "topic/embed/rate_units_per_s": (round(rate, 2) if rate else None),
+                                "topic/embed/pct": (round(100.0 * done / total, 2) if total else 100.0),
+                            })
+                        except Exception:
+                            pass
             import torch  # type: ignore
             emb = torch.cat(emb_list, dim=0).tolist()
         else:
@@ -692,12 +717,12 @@ def run_topic_stage(df, cfg):
     except Exception:
         emb = _embed_batch(model_name, texts_list, eff_device, normalize, trust_rc, mat_dim, max_len, bs_cfg, devices=devices_list, torch_dtype=torch_dtype_cfg)
     elapsed_embed = time.perf_counter() - start_embed
-    _log_event("embedding_done", dim=(len(emb[0]) if emb else None), elapsed_s=round(elapsed_embed, 2))
-    try:
-        import wandb as _wandb  # type: ignore
-        _wandb.log({"topic/embed/elapsed_s": round(elapsed_embed, 2)})
-    except Exception:
-        pass
+    _log_event("embedding_done", logger=logger, dim=(len(emb[0]) if emb else None), elapsed_s=round(elapsed_embed, 2))
+    if logger:
+        try:
+            logger.log_metrics({"topic/embed/elapsed_s": round(elapsed_embed, 2)})
+        except Exception:
+            pass
 
     # Reduction
     method = str(getattr(cfg.topic.reduce, "method", "umap") or "umap")
@@ -733,14 +758,17 @@ def run_topic_stage(df, cfg):
                 out_dim=(len(emb_red[0]) if emb_red else None),
                 elapsed_s=round(elapsed_red, 2),
             )
-            try:
-                import wandb as _wandb  # type: ignore
-                _wandb.log({
-                    "topic/reduction/method": str(method),
-                    "topic/reduction/elapsed_s": round(elapsed_red, 2),
-                })
-            except Exception:
-                pass
+            if logger:
+                try:
+                    logger.log_metrics({
+                        "topic/reduction/elapsed_s": round(elapsed_red, 2),
+                    })
+                    try:
+                        logger.set_config({"topic": {"reduction": {"method": str(method)}}})
+                    except Exception:
+                        logger.set_summary("topic/reduction/method", str(method))
+                except Exception:
+                    pass
         except Exception:
             # Fallback to PCA, then identity
             try:
@@ -752,10 +780,10 @@ def run_topic_stage(df, cfg):
                 emb_red = PCA(n_components=min(comps, max(1, n_units - 1)), random_state=int(getattr(cfg.topic, "seed", 777))).fit_transform(arr).tolist()
                 elapsed_red = time.perf_counter() - start_red
                 reducer = None
-                _log_event("reduction_done", method="pca", backend="sklearn", out_dim=(len(emb_red[0]) if emb_red else None), elapsed_s=round(elapsed_red, 2))
+                _log_event("reduction_done", logger=logger, method="pca", backend="sklearn", out_dim=(len(emb_red[0]) if emb_red else None), elapsed_s=round(elapsed_red, 2))
             except Exception:
                 emb_red, reducer = emb, None
-                _log_event("reduction_done", method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
+                _log_event("reduction_done", logger=logger, method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
     elif method == "pca":
         try:
             import numpy as np  # type: ignore
@@ -767,27 +795,31 @@ def run_topic_stage(df, cfg):
             elapsed_red = time.perf_counter() - start_red
             reducer = None
             _log_event("reduction_done", method="pca", backend="sklearn", out_dim=(len(emb_red[0]) if emb_red else None), elapsed_s=round(elapsed_red, 2))
-            try:
-                import wandb as _wandb  # type: ignore
-                _wandb.log({
-                    "topic/reduction/method": "pca",
-                    "topic/reduction/elapsed_s": round(elapsed_red, 2),
-                })
-            except Exception:
-                pass
+            if logger:
+                try:
+                    logger.log_metrics({
+                        "topic/reduction/elapsed_s": round(elapsed_red, 2),
+                    })
+                    try:
+                        logger.set_config({"topic": {"reduction": {"method": "pca"}}})
+                    except Exception:
+                        logger.set_summary("topic/reduction/method", "pca")
+                except Exception:
+                    pass
         except Exception:
             emb_red, reducer = emb, None
-            _log_event("reduction_done", method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
-            try:
-                import wandb as _wandb  # type: ignore
-                _wandb.log({
-                    "topic/reduction/method": "identity",
-                })
-            except Exception:
-                pass
+            _log_event("reduction_done", logger=logger, method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
+            if logger:
+                try:
+                    try:
+                        logger.set_config({"topic": {"reduction": {"method": "identity"}}})
+                    except Exception:
+                        logger.set_summary("topic/reduction/method", "identity")
+                except Exception:
+                    pass
     else:
         emb_red, reducer = emb, None
-        _log_event("reduction_done", method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
+        _log_event("reduction_done", logger=logger, method="identity", backend=None, out_dim=(len(emb_red[0]) if emb_red else None))
 
     # Clustering
     # Log start with parameters
@@ -828,17 +860,17 @@ def run_topic_stage(df, cfg):
             noise_ratio=(round(noise_ratio, 4) if noise_ratio is not None else None),
             elapsed_s=(round(elapsed_clu, 2) if elapsed_clu is not None else None),
         )
-        try:
-            import wandb as _wandb  # type: ignore
-            _wandb.log({
-                "topic/clustering/num_clusters": int(num_clusters),
-                "topic/clustering/noise": int(noise),
-                "topic/clustering/total": int(total_pts),
-                "topic/clustering/noise_ratio": (round(noise_ratio, 4) if noise_ratio is not None else None),
-                "topic/clustering/elapsed_s": (round(elapsed_clu, 2) if elapsed_clu is not None else None),
-            })
-        except Exception:
-            pass
+        if logger:
+            try:
+                logger.log_metrics({
+                    "topic/clustering/num_clusters": int(num_clusters),
+                    "topic/clustering/noise": int(noise),
+                    "topic/clustering/total": int(total_pts),
+                    "topic/clustering/noise_ratio": (round(noise_ratio, 4) if noise_ratio is not None else None),
+                    "topic/clustering/elapsed_s": (round(elapsed_clu, 2) if elapsed_clu is not None else None),
+                })
+            except Exception:
+                pass
     except Exception:
         pass
     # Prepare 2D coordinates for plotting (use first two reduced dims, else PCA to 2D)
@@ -1033,20 +1065,24 @@ def run_topic_stage(df, cfg):
                 out["topic_top_terms"] = out["topic_id"].apply(lambda l: top_terms.get(int(l)) if int(l) in top_terms else None)
                 used_gpu = True
                 tfidf_elapsed = time.perf_counter() - tfidf_start
-                _log_event("tfidf_done", vocab_size=int(len(terms) if terms is not None else 0), elapsed_s=round(tfidf_elapsed, 2))
-                try:
-                    import wandb as _wandb  # type: ignore
-                    _wandb.log({
-                        "topic/tfidf/elapsed_s": round(tfidf_elapsed, 2),
-                        "topic/tfidf/vocab_size": int(len(terms) if terms is not None else 0),
-                        "topic/tfidf/backend": "cuml",
-                    })
-                except Exception:
-                    pass
+                _log_event("tfidf_done", logger=logger, elapsed_s=round(tfidf_elapsed, 2))
+                if logger:
+                    try:
+                        logger.log_metrics({
+                            "topic/tfidf/elapsed_s": round(tfidf_elapsed, 2),
+                            "topic/tfidf/vocab_size": int(len(terms) if terms is not None else 0),
+                        })
+                        # Backend is categorical; prefer config/summary over scalar metric
+                        try:
+                            logger.set_config({"topic": {"tfidf": {"backend": "cuml"}}})
+                        except Exception:
+                            logger.set_summary("topic/tfidf/backend", "cuml")
+                    except Exception:
+                        pass
             except Exception as _e:
                 used_gpu = False
                 try:
-                    _log_event("tfidf_gpu_skip", reason=str(_e)[:200])
+                    _log_event("tfidf_gpu_skip", logger=logger, reason=str(_e)[:200])
                 except Exception:
                     pass
         if not used_gpu:
@@ -1117,16 +1153,19 @@ def run_topic_stage(df, cfg):
                     top_terms[int(lab)] = None
             out["topic_top_terms"] = out["topic_id"].apply(lambda l: top_terms.get(int(l)) if int(l) in top_terms else None)
             tfidf_elapsed = time.perf_counter() - tfidf_start
-            _log_event("tfidf_done", vocab_size=int(len(terms) if terms is not None else 0), elapsed_s=round(tfidf_elapsed, 2))
-            try:
-                import wandb as _wandb  # type: ignore
-                _wandb.log({
-                    "topic/tfidf/elapsed_s": round(tfidf_elapsed, 2),
-                    "topic/tfidf/vocab_size": int(len(terms) if terms is not None else 0),
-                    "topic/tfidf/backend": "sklearn",
-                })
-            except Exception:
-                pass
+            _log_event("tfidf_done", elapsed_s=round(tfidf_elapsed, 2))
+            if logger:
+                try:
+                    logger.log_metrics({
+                        "topic/tfidf/elapsed_s": round(tfidf_elapsed, 2),
+                        "topic/tfidf/vocab_size": int(len(terms) if terms is not None else 0),
+                    })
+                    try:
+                        logger.set_config({"topic": {"tfidf": {"backend": "sklearn"}}})
+                    except Exception:
+                        logger.set_summary("topic/tfidf/backend", "sklearn")
+                except Exception:
+                    pass
     except Exception:
         pass
 

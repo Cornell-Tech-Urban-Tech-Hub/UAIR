@@ -16,21 +16,15 @@ additional_parameters:
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
-  # Ensure conda is available in non-interactive batch shells
-  # Robust conda activation across batch shells
-  - if [ -f /share/ju/matt/conda/etc/profile.d/conda.sh ]; then source /share/ju/matt/conda/etc/profile.d/conda.sh; fi
-  - if [ -x /share/ju/matt/conda/bin/conda ]; then eval "$(/share/ju/matt/conda/bin/conda shell.bash hook)"; fi
-  - |
-      if ! command -v conda >/dev/null 2>&1; then
-        echo "[launcher] conda command not found; trying direct env activation" >&2
-      fi
-  - conda activate /share/ju/matt/conda/cillm-lora || { [ -f /share/ju/matt/conda/cillm-lora/bin/activate ] && source /share/ju/matt/conda/cillm-lora/bin/activate; } || true
+  - source /share/pierson/matt/UAIR/.venv/bin/activate
   - unset WANDB_DISABLED
   - if [ -n "$WANDB_MODE" ]; then export WANDB_MODE="$WANDB_MODE"; fi
   - if [ -n "$WANDB_BASE_URL" ]; then export WANDB_BASE_URL="$WANDB_BASE_URL"; fi
   - if [ -n "$WANDB_GROUP" ]; then export WANDB_GROUP="$WANDB_GROUP"; fi
   - export RULE_TUPLES_SILENT=1
   - export WANDB_SILENT=true
+  # Disable wandb service for distributed environments (uses in-process mode)
+  - export WANDB_DISABLE_SERVICE=true
   # Ensure Ray detached actors are created in a stable namespace per run
   - export RAY_NAMESPACE=${oc.env:WANDB_GROUP,uair}
   - export VLLM_WORKER_MULTIPROC_METHOD=spawn
@@ -38,7 +32,7 @@ setup:
   - export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True
   - export CUDA_LAUNCH_BLOCKING=0
   - export TOKENIZERS_PARALLELISM=false
-  - export CUDA_VISIBLE_DEVICES=0
+  # Let SLURM set CUDA_VISIBLE_DEVICES based on allocated GPUs for auto-detection
   # Fallback: disable CPU bind via env if launcher ignores srun_args
   - export SLURM_CPU_BIND=none
 

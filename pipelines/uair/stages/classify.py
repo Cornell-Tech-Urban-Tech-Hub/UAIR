@@ -279,6 +279,121 @@ def _serialize_arrow_unfriendly_in_row(row: Dict[str, Any], columns: List[str]) 
                 row[col] = _to_json_str(val)
 
 
+def _detect_num_gpus() -> int:
+    """Detect the number of GPUs allocated to this job.
+    
+    Priority order:
+    1. CUDA_VISIBLE_DEVICES environment variable (set by launcher)
+    2. SLURM_GPUS_PER_NODE or SLURM_GPUS_ON_NODE
+    3. torch.cuda.device_count() if CUDA is available
+    4. Return 1 as safe fallback
+    """
+    # Priority 1: CUDA_VISIBLE_DEVICES (most reliable for actual allocation)
+    try:
+        cuda_visible = os.environ.get("CUDA_VISIBLE_DEVICES")
+        if cuda_visible and cuda_visible.strip():
+            # Parse comma-separated GPU indices (e.g., "0,1,2,3" -> 4 GPUs)
+            gpu_indices = [x.strip() for x in cuda_visible.split(",") if x.strip()]
+            if gpu_indices:
+                return len(gpu_indices)
+    except Exception:
+        pass
+    
+    # Priority 2: SLURM environment variables
+    try:
+        slurm_gpus = os.environ.get("SLURM_GPUS_PER_NODE") or os.environ.get("SLURM_GPUS_ON_NODE")
+        if slurm_gpus:
+            # Can be a number like "4" or format like "gpu:4"
+            try:
+                if ":" in slurm_gpus:
+                    return int(slurm_gpus.split(":")[-1])
+                return int(slurm_gpus)
+            except Exception:
+                pass
+    except Exception:
+        pass
+    
+    # Priority 3: Torch CUDA device count
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available():
+            count = torch.cuda.device_count()
+            if count > 0:
+                return count
+    except Exception:
+        pass
+    
+    # Fallback: 1 GPU
+    return 1
+
+
+def _detect_gpu_type() -> str:
+    """Detect the GPU type/model name.
+    
+    Returns a normalized GPU type string (e.g., 'rtx_a6000', 'rtx_a5000', 'unknown').
+    """
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available() and torch.cuda.device_count() > 0:
+            # Get the name of the first GPU (assuming homogeneous GPUs)
+            gpu_name = torch.cuda.get_device_name(0).lower()
+            
+            # Normalize common GPU names
+            if "a6000" in gpu_name:
+                return "rtx_a6000"
+            elif "a5000" in gpu_name:
+                return "rtx_a5000"
+            elif "a100" in gpu_name:
+                return "a100"
+            elif "v100" in gpu_name:
+                return "v100"
+            elif "a40" in gpu_name:
+                return "a40"
+            elif "rtx" in gpu_name:
+                # Generic RTX
+                return "rtx_generic"
+            
+            return "unknown"
+    except Exception:
+        pass
+    
+    return "unknown"
+
+
+def _apply_gpu_aware_batch_settings(engine_kwargs: Dict[str, Any], cfg) -> None:
+    """Apply GPU-type-aware batch size and max_num_seqs if not explicitly set.
+    
+    GPU-specific defaults (can be overridden in config):
+    - RTX A6000: batch_size=4, max_num_seqs=4
+    - RTX A5000: batch_size=2, max_num_seqs=2
+    - Others: Use config defaults or fallback values
+    """
+    # GPU-aware defaults mapping
+    GPU_BATCH_SETTINGS = {
+        "rtx_a6000": {"batch_size": 4, "max_num_seqs": 4},
+        "rtx_a5000": {"batch_size": 2, "max_num_seqs": 2},
+        "a100": {"batch_size": 8, "max_num_seqs": 8},
+        "v100": {"batch_size": 4, "max_num_seqs": 4},
+        "a40": {"batch_size": 4, "max_num_seqs": 4},
+    }
+    
+    gpu_type = _detect_gpu_type()
+    gpu_settings = GPU_BATCH_SETTINGS.get(gpu_type, {})
+    
+    # Apply max_num_seqs from GPU settings if not in engine_kwargs and GPU type is recognized
+    if "max_num_seqs" not in engine_kwargs and gpu_settings:
+        try:
+            engine_kwargs["max_num_seqs"] = gpu_settings["max_num_seqs"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set max_num_seqs={gpu_settings['max_num_seqs']} for {gpu_type}")
+        except Exception:
+            pass
+    
+    # Note: batch_size is handled separately in the calling code since it's a model config param, not engine_kwargs
+    # We'll return the gpu_settings for use there
+    return gpu_settings
+
+
 def _filter_vllm_engine_kwargs(ek: Dict[str, Any]) -> Dict[str, Any]:
     """Drop engine kwargs unsupported by the installed vLLM version.
 
@@ -323,7 +438,16 @@ def _filter_vllm_engine_kwargs(ek: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _build_relevant_regex() -> re.Pattern:
+    
     phrases = [
+        # Core AI Technologies & Acronyms
+        r"\bai\b",
+        r"\bml\b",
+        r"\bnlp\b",
+        r"\bllm\b",
+        r"\bagi\b",
+        r"\bxai\b",
+        r"\biot\b",
         r"artificial\s+intelligence",
         r"machine\s+learning",
         r"neural\s+network",
@@ -332,13 +456,403 @@ def _build_relevant_regex() -> re.Pattern:
         r"chatgpt|gpt-\d+|gpt-",
         r"openai|anthropic|claude|gemini|qwen",
         r"fine-?tuning|inference|prompt(ing)?|agent(s)?",
-        # light domain cues mirroring keyword_extract guidance
-        r"(?:city|cities)",
+        
+        # Journalist-Friendly AI Terms
+        r"computer",
+        r"computers",
+        r"software",
+        r"program",
+        r"programs",
+        r"programming",
+        r"coded",
+        r"coding",
+        r"app",
+        r"apps",
+        r"application",
+        r"applications",
+        r"tool",
+        r"tools",
+        r"technology",
+        r"tech",
+        r"innovation",
+        r"innovations",
+        r"breakthrough",
+        r"breakthroughs",
+        r"advancement",
+        r"advancements",
+        
+        # Anthropomorphic/Accessible Descriptions
+        r"robot",
+        r"robots",
+        r"robotic",
+        r"bot",
+        r"bots",
+        r"chatbot",
+        r"chatbots",
+        r"virtual\s+assistant",
+        r"digital\s+assistant",
+        r"smart\s+assistant",
+        r"machine",
+        r"machines",
+        r"device",
+        r"devices",
+        r"smart\s+device",
+        r"intelligent\s+system",
+        r"thinking\s+machine",
+        r"electronic\s+brain",
+        r"digital\s+brain",
+        r"computer\s+brain",
+        
+        # Process-Oriented Terms
+        r"automated",
+        r"automation",
+        r"automatic",
+        r"automatically",
+        r"self-?learning",
+        r"self-?teaching",
+        r"self-?improving",
+        r"adaptive",
+        r"smart",
+        r"intelligent",
+        r"cognitive",
+        r"thinking",
+        r"reasoning",
+        r"decision-?making",
+        r"processing",
+        r"analyzing",
+        r"analysis",
+        r"pattern\s+recognition",
+        r"image\s+recognition",
+        r"voice\s+recognition",
+        r"language\s+processing",
+        
+        # Capability Descriptions
+        r"learns",
+        r"learning",
+        r"teaches\s+itself",
+        r"trains",
+        r"training",
+        r"trained",
+        r"understands",
+        r"understanding",
+        r"recognizes",
+        r"recognition",
+        r"identifies",
+        r"identification",
+        r"predicts",
+        r"prediction",
+        r"predictions",
+        r"forecasts",
+        r"forecasting",
+        r"generates",
+        r"generation",
+        r"creates",
+        r"creation",
+        r"produces",
+        r"mimics",
+        r"simulates",
+        r"replicates",
+        
+        # Business/Industry Terms
+        r"silicon\s+valley",
+        r"tech\s+company",
+        r"tech\s+companies",
+        r"tech\s+giant",
+        r"tech\s+giants",
+        r"startup",
+        r"startups",
+        r"big\s+tech",
+        r"platform",
+        r"platforms",
+        r"service",
+        r"services",
+        r"product",
+        r"products",
+        r"solution",
+        r"solutions",
+        r"ecosystem",
+        r"infrastructure",
+        
+        # Buzzword/Hype Terms
+        r"revolutionary",
+        r"game-?changing",
+        r"cutting-?edge",
+        r"state-?of-?the-?art",
+        r"next-?generation",
+        r"futuristic",
+        r"advanced",
+        r"sophisticated",
+        r"powerful",
+        r"disruptive",
+        r"transformative",
+        r"groundbreaking",
+        r"innovative",
+        r"emerging",
+        r"novel",
+        r"pioneering",
+        
+        # Comparison/Analogy Terms
+        r"human-?like",
+        r"human-?level",
+        r"superhuman",
+        r"brain-?like",
+        r"mimicking\s+humans?",
+        r"replacing\s+humans?",
+        r"outsmarting\s+humans?",
+        r"beating\s+humans?",
+        r"surpassing\s+humans?",
+        r"artificial\s+brain",
+        r"electronic\s+mind",
+        r"digital\s+worker",
+        r"virtual\s+employee",
+        
+        # AI Safety & Governance
+        r"safety",
+        r"alignment",
+        r"governance",
+        r"responsible",
+        r"trustworthy",
+        r"ethics",
+        r"ethical",
+        r"bias",
+        r"biased",
+        r"fairness",
+        r"explainable",
+        r"transparency",
+        r"transparent",
+        r"accountability",
+        r"accountable",
+        r"regulation",
+        r"oversight",
+        r"compliance",
+        
+        # Risk & Harm Terms
+        r"risk",
+        r"risks",
+        r"harm",
+        r"harms",
+        r"harmful",
+        r"danger",
+        r"dangerous",
+        r"threat",
+        r"threats",
+        r"vulnerability",
+        r"vulnerabilities",
+        r"attack",
+        r"attacks",
+        r"exploitation",
+        r"manipulation",
+        r"weaponization",
+        
+        # Societal Impact Terms
+        r"deepfake",
+        r"misinformation",
+        r"disinformation",
+        r"fake\s+news",
+        r"discrimination",
+        r"discriminatory",
+        r"surveillance",
+        r"capitalism",
+        r"privacy",
+        r"invasion",
+        r"facial\s+recognition",
+        r"predictive\s+policing",
+        r"social\s+credit",
+        r"filter\s+bubble",
+        r"echo\s+chamber",
+        r"polarization",
+        r"radicalization",
+        
+        # Economic & Labor
+        r"displacement",
+        r"unemployment",
+        r"automation",
+        r"automated",
+        r"replacement",
+        r"disruption",
+        r"workforce",
+        r"labor",
+        r"labour",
+        r"jobs",
+        r"employment",
+        r"gig\s+economy",
+        r"platform\s+workers?",
+        r"algorithmic\s+management",
+        
+        # AI Systems & Applications
+        r"algorithm",
+        r"algorithms",
+        r"algorithmic",
+        r"autonomous",
+        r"self-?driving",
+        r"recommendation",
+        r"moderation",
+        r"computer\s+vision",
+        r"speech\s+recognition",
+        r"sentiment\s+analysis",
+        r"predictive\s+analytics",
+        r"decision\s+support",
+        r"synthetic\s+media",
+        r"voice\s+cloning",
+        
+        # Major Tech Companies
+        r"microsoft",
+        r"google",
+        r"amazon",
+        r"meta",
+        r"facebook",
+        r"nvidia",
+        r"intel",
+        r"apple",
+        r"tesla",
+        r"deepmind",
+        r"hugging\s?face",
+        r"stability\s+ai",
+        r"midjourney",
+        r"dall-?e",
+        r"baidu",
+        r"alibaba",
+        r"tencent",
+        r"bytedance",
+        
+        # Regulatory & Legal
+        r"gdpr",
+        r"ccpa",
+        r"regulation",
+        r"regulatory",
+        r"policy",
+        r"policies",
+        r"governance",
+        r"antitrust",
+        r"monopoly",
+        r"section\s+230",
+        r"digital\s+rights",
+        r"data\s+protection",
+        r"impact\s+assessment",
+        
+        # Social & Cultural Harms
+        r"manipulation",
+        r"identity\s+theft",
+        r"cyberbullying",
+        r"harassment",
+        r"hate\s+speech",
+        r"democratic",
+        r"democracy",
+        r"election",
+        r"elections",
+        r"voting",
+        r"interference",
+        
+        # Technical Risks
+        r"adversarial",
+        r"poisoning",
+        r"backdoor",
+        r"inference",
+        r"inversion",
+        r"leakage",
+        r"robustness",
+        r"brittleness",
+        r"hallucination",
+        r"confabulation",
+        r"distribution\s+shift",
+        r"out-?of-?distribution",
+        
+        # Long-term & Existential
+        r"superintelligence",
+        r"existential",
+        r"x-?risk",
+        r"control\s+problem",
+        r"value\s+alignment",
+        r"mesa-?optimization",
+        r"instrumental\s+convergence",
+        r"orthogonality",
+        
+        # Domain Applications
+        r"city",
+        r"cities",
         r"urban",
         r"climate",
         r"earth",
         r"environment",
+        r"environmental",
         r"transport",
+        r"transportation",
+        r"smart\s+grid",
+        r"infrastructure",
+        r"connected\s+device",
+        r"monitoring",
+        r"carbon",
+        r"energy",
+        r"sustainable",
+        r"sustainability",
+        r"green",
+        
+        # Healthcare
+        r"medical",
+        r"healthcare",
+        r"health",
+        r"diagnostic",
+        r"clinical",
+        r"telemedicine",
+        r"therapeutics",
+        r"equity",
+        
+        # Financial
+        r"trading",
+        r"advisor",
+        r"credit",
+        r"scoring",
+        r"financial",
+        r"inclusion",
+        r"redlining",
+        r"lending",
+        r"predatory",
+        
+        # Education
+        r"education",
+        r"educational",
+        r"edtech",
+        r"learning",
+        r"student",
+        r"academic",
+        r"integrity",
+        r"cheating",
+        r"proctoring",
+        
+        # Criminal Justice
+        r"criminal",
+        r"justice",
+        r"recidivism",
+        r"bail",
+        r"sentencing",
+        r"policing",
+        r"enforcement",
+        
+        # Emerging Tech
+        r"quantum",
+        r"neuromorphic",
+        r"edge\s+computing",
+        r"distributed",
+        r"swarm",
+        r"multi-?agent",
+        
+        # General Tech Terms
+        r"technology",
+        r"technological",
+        r"digital",
+        r"cyber",
+        r"online",
+        r"internet",
+        r"platform",
+        r"platforms",
+        r"data",
+        r"dataset",
+        r"datasets",
+        r"model",
+        r"models",
+        r"system",
+        r"systems",
+        
     ]
     pattern = r"(" + r"|".join(phrases) + r")"
     return re.compile(pattern, flags=re.IGNORECASE)
@@ -575,6 +1089,17 @@ def run_classification_stage(df: pd.DataFrame, cfg):
     ek.setdefault("max_model_len", 4096)
     ek.setdefault("max_num_seqs", 16)
     ek.setdefault("gpu_memory_utilization", 0.85)
+    # Auto-detect tensor_parallel_size from allocated GPUs if not explicitly set
+    if "tensor_parallel_size" not in ek:
+        try:
+            num_gpus = _detect_num_gpus()
+            ek["tensor_parallel_size"] = num_gpus
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-detected {num_gpus} GPU(s) for tensor parallelism")
+        except Exception:
+            ek.setdefault("tensor_parallel_size", 1)
+    # Apply GPU-type-aware batch settings (max_num_seqs and batch_size)
+    gpu_settings = _apply_gpu_aware_batch_settings(ek, cfg)
     # vLLM best-practice safe defaults (overridable via config)
     ek.setdefault("enable_prefix_caching", True)
     ek.setdefault("use_v2_block_manager", True)
@@ -583,17 +1108,33 @@ def run_classification_stage(df: pd.DataFrame, cfg):
     ek.setdefault("dtype", "auto")
     ek.setdefault("kv_cache_dtype", "auto")
     ek = _filter_vllm_engine_kwargs(ek)
+    # Determine batch_size: explicit config > GPU-aware default > fallback
+    try:
+        batch_size_cfg = getattr(cfg.model, "batch_size", None)
+        if batch_size_cfg is not None:
+            batch_size = int(batch_size_cfg)
+        elif gpu_settings and "batch_size" in gpu_settings:
+            batch_size = gpu_settings["batch_size"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set batch_size={batch_size} for {_detect_gpu_type()}")
+        else:
+            batch_size = 16
+    except Exception:
+        batch_size = 16
     engine_config = vLLMEngineProcessorConfig(
         model_source=str(getattr(cfg.model, "model_source")),
         runtime_env={
             "env_vars": {
                 # Doc-supported knob to reduce verbosity safely
                 "VLLM_LOGGING_LEVEL": str(os.environ.get("VLLM_LOGGING_LEVEL", "WARNING")),
+                # Propagate wandb config to Ray workers (uses in-process mode)
+                "WANDB_DISABLE_SERVICE": str(os.environ.get("WANDB_DISABLE_SERVICE", "true")),
+                "WANDB_SILENT": str(os.environ.get("WANDB_SILENT", "true")),
             }
         },
         engine_kwargs=ek,
         concurrency=int(getattr(cfg.model, "concurrency", 1) or 1),
-        batch_size=int(getattr(cfg.model, "batch_size", 16) or 16),
+        batch_size=int(batch_size),
     )
 
     # Prefer stage-specific sampling params when present; convert nested DictConfig -> dict

@@ -7,7 +7,7 @@ tasks_per_node: 1
 cpus_per_task: 8
 mem_gb: ${runtime.job_memory_gb}
 gpus_per_node: 4
-partition: ju
+partition: pierson
 array_parallelism: 1
 name: E_rule_tuples
 additional_parameters:
@@ -15,10 +15,12 @@ additional_parameters:
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
-  - conda activate /share/ju/matt/conda/cillm-lora || source activate /share/ju/matt/conda/cillm-lora
+  - source /share/pierson/matt/UAIR/.venv/bin/activate
   - unset WANDB_DISABLED
   - export RULE_TUPLES_SILENT=1
   - export WANDB_SILENT=true
+  # Disable wandb service for distributed environments (uses in-process mode)
+  - export WANDB_DISABLE_SERVICE=true
   - export VLLM_WORKER_MULTIPROC_METHOD=spawn
   - export VLLM_USE_V1=1
   - export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:64,expandable_segments:True

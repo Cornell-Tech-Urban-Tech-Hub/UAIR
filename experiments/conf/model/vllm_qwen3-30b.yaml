@@ -1,4 +1,4 @@
-model_source: /share/ju/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507
+model_source: /share/pierson/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507
 engine_kwargs:
   enable_chunked_prefill: true
   max_num_batched_tokens: 4096

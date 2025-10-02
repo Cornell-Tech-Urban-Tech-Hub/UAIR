@@ -18,10 +18,7 @@ srun_args:
 setup:
   - export HYDRA_FULL_ERROR=1
   - source ~/.bashrc
-  # Ensure conda is available in non-interactive batch shells
-  - if [ -f /share/ju/matt/conda/etc/profile.d/conda.sh ]; then source /share/ju/matt/conda/etc/profile.d/conda.sh; fi
-  - if [ -x /share/ju/matt/conda/bin/conda ]; then eval "$(/share/ju/matt/conda/bin/conda shell.bash hook)"; fi
-  - conda activate /share/ju/matt/conda/cillm-lora || { [ -f /share/ju/matt/conda/cillm-lora/bin/activate ] && source /share/ju/matt/conda/cillm-lora/bin/activate; } || true
+  - source /share/pierson/matt/UAIR/.venv/bin/activate
   # W&B is controlled via config; avoid forcing mode here
   - unset WANDB_DISABLED
   - if [ -n "$WANDB_MODE" ]; then export WANDB_MODE="$WANDB_MODE"; fi
@@ -30,6 +27,8 @@ setup:
   - if [ -n "$WANDB_GROUP" ]; then export WANDB_GROUP="$WANDB_GROUP"; fi
   - export RULE_TUPLES_SILENT=1
   - export WANDB_SILENT=true
+  # Disable wandb service for distributed environments (uses in-process mode)
+  - export WANDB_DISABLE_SERVICE=true
   # Ensure Ray detached actors are created in a stable namespace per run
   - export RAY_NAMESPACE=${oc.env:WANDB_GROUP,uair}
   - export TOKENIZERS_PARALLELISM=false

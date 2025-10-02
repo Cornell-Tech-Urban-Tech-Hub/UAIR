@@ -1,104 +1,139 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
-import os
 import json
+import os
+import time
+from dataclasses import dataclass, field
+from typing import Any, Dict, Iterable, Mapping, Optional
+
 import pandas as pd
-from datetime import datetime
-from uuid import uuid4
-import platform
-import socket
-import sys
-import subprocess
-import shlex
-import threading
-import time as _time
-from .logging_util import (
-    is_enabled as _wb_enabled,
-    start_run as _wb_start,
-    finish_run as _wb_finish,
-    log_metrics as _wb_log,
-    log_table as _wb_log_table,
+from omegaconf import DictConfig, OmegaConf
+from hydra import compose, initialize_config_dir
+from hydra.core.global_hydra import GlobalHydra
+from hydra.core.hydra_config import HydraConfig
+
+from .config_schema import (
+    PipelineGraphSpec,
+    PipelineNodeSpec,
+    load_pipeline_graph,
+    resolve_output_root,
 )
+from .stages.classify import run_classification_stage
+from .stages.decompose import run_decomposition_stage
+from .stages.taxonomy import run_taxonomy_stage
+from .stages.topic import run_topic_stage
+from .stages.verify import run_verification_stage
+from .wandb_logger import WandbLogger
+
 try:
     import ray  # type: ignore
-    _RAY_OK_E = True
+
+    _RAY_AVAILABLE = True
+except Exception:  # pragma: no cover - Ray optional dependency
+    ray = None  # type: ignore
+    _RAY_AVAILABLE = False
+
+try:
+    import submitit  # type: ignore
+    _SUBMITIT_AVAILABLE = True
 except Exception:
-    _RAY_OK_E = False
+    submitit = None  # type: ignore
+    _SUBMITIT_AVAILABLE = False
 
-# Lightweight Ray actor to aggregate streaming usage stats without driver blocking
-if _RAY_OK_E:
+
+@dataclass
+class StageExecutionContext:
+    cfg: DictConfig
+    node: PipelineNodeSpec
+    inputs: Dict[str, str]
+    output_paths: Dict[str, str]
+    output_dir: str
+    output_root: str
+    logger: Optional['WandbLogger'] = None
+
+
+@dataclass
+class StageResult:
+    outputs: Dict[str, str]
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+class StageRunner:
+    stage_name: str
+
+    def run(self, context: StageExecutionContext) -> StageResult:
+        raise NotImplementedError
+
+
+class ArtifactRegistry:
+    def __init__(self) -> None:
+        self._artifacts: Dict[str, str] = {}
+
+    def register_source(self, name: str, path: str) -> None:
+        self._artifacts[name] = path
+
+    def register_outputs(self, node_key: str, outputs: Mapping[str, str]) -> None:
+        for out_name, out_path in outputs.items():
+            self._artifacts[f"{node_key}.{out_name}"] = out_path
+
+    def resolve(self, ref: str) -> str:
+        if ref in self._artifacts:
+            return self._artifacts[ref]
+        candidate = os.path.abspath(os.path.expanduser(ref))
+        if os.path.exists(candidate) or os.path.isabs(ref):
+            return candidate
+        raise KeyError(f"Unknown artifact reference '{ref}'")
+
+    def resolve_output_path(self, path: str, output_root: str, node_key: str) -> str:
+        if not path:
+            raise ValueError(f"Node '{node_key}' output path is empty")
+        resolved = path
+        if not os.path.isabs(resolved):
+            resolved = os.path.join(output_root, resolved)
+        return os.path.abspath(resolved)
+
+
+def clone_config(cfg: DictConfig) -> DictConfig:
+    return OmegaConf.create(OmegaConf.to_container(cfg, resolve=False))  # type: ignore[return-value]
+
+
+def merge_overrides(base_cfg: DictConfig, overrides: Optional[Mapping[str, Any]]) -> DictConfig:
+    if not overrides:
+        return base_cfg
+    return OmegaConf.merge(base_cfg, OmegaConf.create(overrides))  # type: ignore[return-value]
+
+
+def ensure_section(cfg: DictConfig, section: str) -> None:
+    if OmegaConf.select(cfg, section) is None:
+        OmegaConf.update(cfg, section, {}, merge=True)
+
+
+def common_parent(paths: Iterable[str]) -> Optional[str]:
     try:
-        @ray.remote
-        class _UsageAggregator:
-            def __init__(self):
-                # Stage-scoped and overall cumulative counters
-                self._totals: Dict[str, Dict[str, int]] = {
-                    "classify": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
-                    "decompose": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
-                    "taxonomy": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
-                    "overall": {"calls": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "kw_marked": 0, "kw_checked": 0},
-                }
-
-            def _coerce_int(self, v: Any) -> int:
-                try:
-                    if v is None:
-                        return 0
-                    if isinstance(v, bool):
-                        return int(v)
-                    if isinstance(v, (int,)):
-                        return int(v)
-                    if isinstance(v, float):
-                        return int(v)
-                    return int(float(v))
-                except Exception:
-                    return 0
-
-            def record(self, stage: str, calls: Any = 0, prompt_tokens: Any = 0, completion_tokens: Any = 0, total_tokens: Any = 0, kw_marked: Any = 0, kw_checked: Any = 0) -> None:
-                st = str(stage or "overall").strip().lower()
-                if st not in self._totals:
-                    st = "overall"
-                c = self._coerce_int(calls)
-                p = self._coerce_int(prompt_tokens)
-                q = self._coerce_int(completion_tokens)
-                t = self._coerce_int(total_tokens)
-                km = self._coerce_int(kw_marked)
-                kc = self._coerce_int(kw_checked)
-                self._totals[st]["calls"] += c
-                self._totals[st]["prompt_tokens"] += p
-                self._totals[st]["completion_tokens"] += q
-                self._totals[st]["total_tokens"] += t
-                self._totals[st]["kw_marked"] += km
-                self._totals[st]["kw_checked"] += kc
-                # Mirror into overall
-                if st != "overall":
-                    self._totals["overall"]["calls"] += c
-                    self._totals["overall"]["prompt_tokens"] += p
-                    self._totals["overall"]["completion_tokens"] += q
-                    # If total_tokens isn't provided, derive when possible
-                    if t == 0 and (p or q):
-                        t = p + q
-                    self._totals["overall"]["total_tokens"] += t
-                    self._totals["overall"]["kw_marked"] += km
-                    self._totals["overall"]["kw_checked"] += kc
-
-            def snapshot(self) -> Dict[str, Dict[str, int]]:
-                # Return a cheap copy
-                return {
-                    k: dict(v) for k, v in self._totals.items()
-                }
+        parents = [os.path.dirname(p) for p in paths]
+        if not parents:
+            return None
+        return os.path.commonpath(parents)
     except Exception:
-        pass
+        return None
 
 
-def _load_parquet_dataset(parquet_path: str, columns: Dict[str, str], debug: bool, sample_n: Optional[int]) -> pd.DataFrame:
-    if not isinstance(parquet_path, str) or not parquet_path:
+def prepare_node_config(base_cfg: DictConfig, node: PipelineNodeSpec, output_dir: str) -> DictConfig:
+    cfg_copy = clone_config(base_cfg)
+    cfg_copy = merge_overrides(cfg_copy, node.overrides)
+    ensure_section(cfg_copy, "runtime")
+    OmegaConf.update(cfg_copy, "runtime.stage", node.stage, merge=True)
+    OmegaConf.update(cfg_copy, "runtime.output_dir", output_dir, merge=True)
+    OmegaConf.update(cfg_copy, "runtime.output_csv", None, merge=True)
+    return cfg_copy
+
+
+def _load_parquet_dataset(parquet_path: str, columns: Mapping[str, str], debug: bool, sample_n: Optional[int]) -> pd.DataFrame:
+    if not isinstance(parquet_path, str) or parquet_path.strip() == "":
         raise ValueError("data.parquet_path is required")
     if not os.path.isabs(parquet_path):
-        # Resolve relative to repo root if possible
         parquet_path = os.path.abspath(parquet_path)
     df = pd.read_parquet(parquet_path)
-    # Build a rename map for article dataset columns only
     col_map = {
         columns.get("article_text", "article_text"): "article_text",
         columns.get("article_path", "article_path"): "article_path",
@@ -109,43 +144,37 @@ def _load_parquet_dataset(parquet_path: str, columns: Dict[str, str], debug: boo
     present = {src: dst for src, dst in col_map.items() if src in df.columns}
     if present:
         df = df.rename(columns=present)
-    # If dataset is empty, allow it to pass through (downstream will no-op)
-    try:
-        if len(df) == 0:
-            return df
-    except Exception:
-        pass
-    # Ensure a usable text column exists: prefer article_text; allow chunk_text for downstream stages
     if "article_text" not in df.columns and "chunk_text" not in df.columns:
-        raise RuntimeError("Parquet missing required text column (article_text) or chunk_text; configure data.columns.article_text or provide chunk_text")
+        raise RuntimeError("Parquet missing required text column (article_text) or chunk_text")
 
-    # Normalize a minimal working set; coerce a few known text-ish columns when present
     def _safe_str(x: Any) -> str:
+        if x is None:
+            return ""
         try:
-            return "" if x is None or (isinstance(x, float) and pd.isna(x)) else str(x).strip()
+            return "" if (isinstance(x, float) and pd.isna(x)) else str(x).strip()
         except Exception:
             return str(x) if x is not None else ""
-    # Ensure article metadata columns exist
-    for c in ("article_path", "country", "year", "article_id"):
-        if c not in df.columns:
-            df[c] = None
+
+    for column in ("article_path", "country", "year", "article_id"):
+        if column not in df.columns:
+            df[column] = None
         else:
             try:
-                df[c] = df[c].apply(_safe_str)
+                df[column] = df[column].apply(_safe_str)
             except Exception:
                 pass
 
-    # Drop legacy rules dataset columns if present
     legacy_cols = [
-        "name", "public_description", "subscribers", "rule_text",
-        "rule_index", "total_rules_count",
+        "name",
+        "public_description",
+        "subscribers",
+        "rule_text",
+        "rule_index",
+        "total_rules_count",
     ]
-    try:
-        drop_now = [c for c in legacy_cols if c in df.columns]
-        if drop_now:
-            df = df.drop(columns=drop_now)
-    except Exception:
-        pass
+    drop_now = [col for col in legacy_cols if col in df.columns]
+    if drop_now:
+        df = df.drop(columns=drop_now)
 
     if debug and isinstance(sample_n, int) and sample_n > 0:
         try:
@@ -153,7 +182,8 @@ def _load_parquet_dataset(parquet_path: str, columns: Dict[str, str], debug: boo
         except Exception:
             n = int(sample_n)
         try:
-            seed = int(os.environ.get("UAIR_SAMPLE_SEED", "777"))
+            seed_env = os.environ.get("UAIR_SAMPLE_SEED", "777")
+            seed = int(seed_env) if seed_env is not None else 777
         except Exception:
             seed = 777
         try:
@@ -163,1522 +193,725 @@ def _load_parquet_dataset(parquet_path: str, columns: Dict[str, str], debug: boo
     return df
 
 
-def _project_root() -> str:
+def _prepare_streaming_dataset(dataset_path: str, columns: Mapping[str, str], cfg: DictConfig, stage: str) -> tuple[Optional[Any], bool]:
+    if not _RAY_AVAILABLE:
+        return None, False
+    streaming_allowed = stage in {"classify", "taxonomy", "verification"}
+    if not streaming_allowed:
+        return None, False
     try:
-        here = os.path.dirname(__file__)
-        return os.path.abspath(os.path.join(here, "..", ".."))
+        if not os.path.isabs(dataset_path):
+            dataset_path = os.path.abspath(dataset_path)
+        if not ray.is_initialized():
+            namespace = os.environ.get("RAY_NAMESPACE") or os.environ.get("WANDB_GROUP") or "uair"
+            try:
+                ray.init(log_to_driver=True, namespace=str(namespace))
+            except Exception:
+                ray.init(log_to_driver=True)
+        ds = ray.data.read_parquet(dataset_path)
+        col_map = {
+            columns.get("article_text", "article_text"): "article_text",
+            columns.get("article_path", "article_path"): "article_path",
+            columns.get("country", "country"): "country",
+            columns.get("year", "year"): "year",
+            columns.get("article_id", "article_id"): "article_id",
+        }
+
+        def _ensure_canon(row: Dict[str, Any]) -> Dict[str, Any]:
+            out = dict(row)
+            for src, dst in col_map.items():
+                if dst not in out and src in row:
+                    out[dst] = row.get(src)
+            return out
+
+        try:
+            ds = ds.map(_ensure_canon)
+        except Exception:
+            pass
+        debug = bool(getattr(cfg.runtime, "debug", False))
+        sample_n = getattr(cfg.runtime, "sample_n", None)
+        if debug and isinstance(sample_n, int) and sample_n > 0:
+            try:
+                ds = ds.limit(max(1, int(sample_n)))
+            except Exception:
+                pass
+        return ds, True
     except Exception:
-        return os.getcwd()
+        return None, False
 
 
-def _default_output_dir(stage_name: str) -> str:
-    try:
-        ts = datetime.now().strftime("%Y%m%d-%H%M%S")
-    except Exception:
-        ts = "now"
-    try:
-        label = str(stage_name or "stage").strip().lower()
-    except Exception:
-        label = "stage"
-    base = os.path.join(_project_root(), "outputs", f"{ts}_{label}")
-    return base
-
-
-def run_experiment(cfg) -> None:
-    """Simplified experiment entry point: pandas IO, stage routing, and SLURM pipeline launcher.
-
-    Notes:
-    - W&B runs are initialized in stage implementations; orchestrator only forwards a shared group id.
-    - Hydra/Submitit should be used for SLURM sweeps and child stage jobs.
-    """
-    stage = str(getattr(cfg.runtime, "stage", "classify")).strip().lower()
-    debug = bool(getattr(cfg.runtime, "debug", True))
-    sample_n = getattr(cfg.runtime, "sample_n", 100)
-
-    parquet_path = str(getattr(cfg.data, "parquet_path"))
-    columns = dict(getattr(cfg.data, "columns", {}))
-
-    # Choose IO mode: Ray Dataset streaming or pandas DataFrame (only for non-pipeline stages)
-    use_streaming = False
+def prepare_stage_input(cfg: DictConfig, dataset_path: str, stage: str) -> tuple[Optional[pd.DataFrame], Optional[Any], bool]:
+    debug = bool(getattr(cfg.runtime, "debug", False))
+    sample_n = getattr(cfg.runtime, "sample_n", None)
+    columns = dict(getattr(cfg.data, "columns", {})) if getattr(cfg, "data", None) else {}
+    streaming_enabled = bool(getattr(cfg.runtime, "streaming_io", False))
     ds = None
-    # Ensure df is defined for all stages (incl. topic) to avoid NameError in fallbacks/prints
-    df = None  # type: ignore[assignment]
-    try:
-        _stream_flag = bool(getattr(cfg.runtime, "streaming_io", False))
-        _stream_allowed = stage in ("classify", "taxonomy", "verification")
-        use_streaming = (_stream_flag and _stream_allowed and _RAY_OK_E)
-    except Exception:
-        use_streaming = False
-    if use_streaming:
-        try:
-            import ray  # type: ignore
-            if not ray.is_initialized():
-                # Use a stable namespace so detached actors are discoverable across sessions
-                try:
-                    _ns = os.environ.get("RAY_NAMESPACE") or os.environ.get("WANDB_GROUP") or "uair"
-                except Exception:
-                    _ns = "uair"
-                try:
-                    ray.init(log_to_driver=True, namespace=str(_ns))
-                except Exception:
-                    # Fallback without namespace if version doesn't support it
-                    ray.init(log_to_driver=True)
-            try:
-                ctx = ray.data.DataContext.get_current()
-                ctx.enable_progress_bars = False
-                # Encourage smaller blocks to improve time-to-first-output
-                ctx.target_min_block_size = 1 * 1024 * 1024
-                ctx.target_max_block_size = 64 * 1024 * 1024
-            except Exception:
-                pass
-            ds = ray.data.read_parquet(parquet_path)
-            # Ensure canonical columns exist; add renamed copies when needed
-            col_map = {
-                columns.get("article_text", "article_text"): "article_text",
-                columns.get("article_path", "article_path"): "article_path",
-                columns.get("country", "country"): "country",
-                columns.get("year", "year"): "year",
-                columns.get("article_id", "article_id"): "article_id",
-            }
-            def _ensure_canon(row: Dict[str, Any]) -> Dict[str, Any]:
-                out = dict(row)
-                for src, dst in col_map.items():
-                    try:
-                        if dst not in out and src in row:
-                            out[dst] = row.get(src)
-                    except Exception:
-                        pass
-                return out
-            try:
-                ds = ds.map(_ensure_canon)
-            except Exception:
-                pass
-            if debug and isinstance(sample_n, int) and sample_n:
-                try:
-                    ds = ds.limit(max(1, int(sample_n)))
-                except Exception:
-                    pass
-        except Exception:
-            ds = None
-            use_streaming = False
-    if (not use_streaming) and (stage in ("classify", "taxonomy", "verification")):
-        # Pandas control-plane path for non-pipeline stages only
-        df = _load_parquet_dataset(parquet_path, columns, debug=debug, sample_n=sample_n)
+    use_streaming = False
+    if streaming_enabled:
+        ds, use_streaming = _prepare_streaming_dataset(dataset_path, columns, cfg, stage)
+    df = None
+    if not use_streaming:
+        df = _load_parquet_dataset(dataset_path, columns, debug=debug, sample_n=sample_n)
+    return df, ds, use_streaming
 
-    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-        try:
-            loaded = (int(len(df)) if not use_streaming else None)
-        except Exception:
-            loaded = None
-        try:
-            cols = (list(df.columns)[:12] if not use_streaming else None)
-        except Exception:
-            cols = None
-        print(json.dumps({
-            "loaded_rows": loaded,
-            "stage": stage,
-            "columns": cols,
+
+def _collect_outputs(context: StageExecutionContext, optional: Mapping[str, bool]) -> Dict[str, str]:
+    resolved: Dict[str, str] = {}
+    for key, path in context.output_paths.items():
+        if os.path.exists(path):
+            resolved[key] = path
+        else:
+            if optional.get(key, False):
+                continue
+            raise FileNotFoundError(
+                f"Expected output '{key}' for node '{context.node.key}' at '{path}' not found"
+            )
+    return resolved
+
+
+class ClassificationRunner(StageRunner):
+    stage_name = "classify"
+
+    def run(self, context: StageExecutionContext) -> StageResult:
+        dataset_path = context.inputs.get("dataset")
+        if not dataset_path:
+            raise ValueError(f"Node '{context.node.key}' requires 'dataset' input")
+        cfg = context.cfg
+        OmegaConf.update(cfg, "data.parquet_path", dataset_path, merge=True)
+        df, ds, use_streaming = prepare_stage_input(cfg, dataset_path, self.stage_name)
+        in_obj = ds if use_streaming and ds is not None else df
+        out = run_classification_stage(in_obj, cfg)
+        
+        # Convert Ray Dataset to pandas if needed
+        if hasattr(out, "to_pandas"):
+            out = out.to_pandas()
+        
+        # Calculate row count
+        row_count = None
+        if isinstance(out, pd.DataFrame):
+            row_count = len(out)
+        elif isinstance(out, pd.Series):
+            row_count = len(out)
+        elif hasattr(out, "__len__"):
+            try:
+                row_count = len(out)
+            except Exception:
+                pass
+        
+        # Save outputs to disk
+        if isinstance(out, pd.DataFrame):
+            # Save "all" output (all classified articles)
+            if "all" in context.output_paths:
+                out.to_parquet(context.output_paths["all"], index=False)
+            
+            # Save "relevant" output (only relevant articles)
+            if "relevant" in context.output_paths and "is_relevant" in out.columns:
+                relevant_df = out[out["is_relevant"] == True].copy()
+                relevant_df.to_parquet(context.output_paths["relevant"], index=False)
+        
+        # Log results table to wandb (in inspect_results panel group)
+        if isinstance(out, pd.DataFrame) and context.logger:
+            try:
+                prefer_cols = ["article_id", "is_relevant", "article_text", "article_path", "country", "year"]
+                context.logger.log_table(out, "classify/results", prefer_cols=prefer_cols, panel_group="inspect_results")
+            except Exception as e:
+                print(f"Warning: Failed to log classify results table to wandb: {e}", flush=True)
+        
+        metadata: Dict[str, Any] = {
+            "rows": row_count,
             "streaming": bool(use_streaming),
-        }, indent=2))
+        }
+        outputs = _collect_outputs(
+            context,
+            {name: spec.optional for name, spec in context.node.outputs.items()},
+        )
+        return StageResult(outputs=outputs, metadata=metadata)
 
-    # If running the pipeline coordinator, ensure a non-null W&B group is set before init
-    if stage == "pipeline":
-        try:
-            _existing_group = os.environ.get("WANDB_GROUP")
-        except Exception:
-            _existing_group = None
-        try:
-            if not _existing_group:
-                _pre_group = getattr(cfg.wandb, "group", None)
-                if not _pre_group:
-                    _pre_group = uuid4().hex
-                os.environ["WANDB_GROUP"] = str(_pre_group)
-        except Exception:
-            try:
-                os.environ["WANDB_GROUP"] = uuid4().hex
-            except Exception:
-                pass
 
-    # W&B enable flag
-    use_wandb = _wb_enabled(cfg)
+class TaxonomyRunner(StageRunner):
+    stage_name = "taxonomy"
 
-    if stage == "classify":
-        from .stages.classify import run_classification_stage
-        # Stage-scoped W&B run (Option B)
-        try:
-            run_cfg = {
-                "stage": "classify",
-                "parquet_path": parquet_path,
-                "data_columns_map": columns,
-                "sample_n": sample_n,
-                "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
-                "use_llm_classify": bool(getattr(cfg.runtime, "use_llm_classify", False)),
-                "prefilter_mode": str(getattr(cfg.runtime, "prefilter_mode", "pre_gating")),
-                "model_source": str(getattr(cfg.model, "model_source", "")),
-                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
-                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
-                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
-                "sampling_params": dict(getattr(cfg, "sampling_params", {})),
-                "python_version": sys.version.split()[0],
-                "os": platform.platform(),
-                "hostname": socket.gethostname(),
-            }
-        except Exception:
-            run_cfg = {"stage": "classify"}
-        if use_wandb:
-            _wb_start(cfg, "classify", run_config=run_cfg)
-        # Support streaming IO when enabled
-        in_obj = None
-        try:
-            in_obj = ds if ("ds" in locals() and ds is not None) else df
-        except Exception:
-            in_obj = df
-        # Create a named usage aggregator actor only when streaming is enabled
-        named_usage_actor = None
-        if use_streaming:
+    def run(self, context: StageExecutionContext) -> StageResult:
+        dataset_path = context.inputs.get("dataset")
+        if not dataset_path:
+            raise ValueError(f"Node '{context.node.key}' requires 'dataset' input")
+        cfg = context.cfg
+        OmegaConf.update(cfg, "data.parquet_path", dataset_path, merge=True)
+        df, ds, use_streaming = prepare_stage_input(cfg, dataset_path, self.stage_name)
+        in_obj = ds if use_streaming and ds is not None else df
+        out = run_taxonomy_stage(in_obj, cfg)
+        
+        # Convert to pandas if needed
+        if hasattr(out, "to_pandas"):
+            out = out.to_pandas()
+        
+        # Save outputs to disk
+        if isinstance(out, pd.DataFrame):
+            for output_name, output_path in context.output_paths.items():
+                out.to_parquet(output_path, index=False)
+        
+        # Log results table to wandb (in inspect_results panel group)
+        if isinstance(out, pd.DataFrame) and context.logger:
             try:
-                if use_wandb and _RAY_OK_E:
-                    import ray  # type: ignore
-                    # Ensure Ray is initialized with a stable namespace when using detached actors
-                    try:
-                        if not ray.is_initialized():
-                            _ns = os.environ.get("RAY_NAMESPACE") or os.environ.get("WANDB_GROUP") or "uair"
-                            try:
-                                ray.init(log_to_driver=True, namespace=str(_ns))
-                            except Exception:
-                                ray.init(log_to_driver=True)
-                    except Exception:
-                        pass
-                    try:
-                        named_usage_actor = ray.get_actor("uair_usage_agg")
-                    except Exception:
-                        try:
-                            named_usage_actor = _UsageAggregator.options(name="uair_usage_agg", lifetime="detached").remote()  # type: ignore
-                        except Exception:
-                            named_usage_actor = None
-            except Exception:
-                named_usage_actor = None
-        out_any = run_classification_stage(in_obj, cfg)
-        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
-        # Best-effort sanitization for Parquet: convert nested objects to JSON strings
-        def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
-            pdf = pdf.copy()
-            def _ser(v: Any) -> Any:
-                try:
-                    import numpy as _np  # type: ignore
-                    if isinstance(v, _np.generic):
-                        try:
-                            return v.item()
-                        except Exception:
-                            pass
-                    if isinstance(v, _np.ndarray):
-                        try:
-                            import json as _json
-                            return _json.dumps(v.tolist(), ensure_ascii=False)
-                        except Exception:
-                            return str(v)
-                except Exception:
-                    pass
-                if isinstance(v, (dict, list, tuple, set)):
-                    try:
-                        import json as _json
-                        if isinstance(v, set):
-                            v = list(v)
-                        return _json.dumps(v, ensure_ascii=False)
-                    except Exception:
-                        return str(v)
-                return v
-            for col in list(pdf.columns):
-                try:
-                    if pdf[col].dtype == object:
-                        s = pdf[col].apply(_ser)
-                        try:
-                            s = s.apply(lambda x: "" if x is None else x)
-                        except Exception:
-                            pass
-                        pdf[col] = s
-                except Exception:
-                    pass
-            return pdf
-        # If streaming dataset output, write Parquet via Ray Data
-        is_ds_out = False
-        try:
-            import ray  # type: ignore
-            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
-        except Exception:
-            is_ds_out = False
-        if is_ds_out:
-            # Accumulate usage via actor during streaming writes (no background thread)
-            usage_actor = None
-            try:
-                if use_wandb and _RAY_OK_E:
-                    usage_actor = _UsageAggregator.remote()  # type: ignore
-            except Exception:
-                usage_actor = None
-            # Attach accumulator map to stream per-batch token usage into the actor
-            out_ds = out_any
-            if usage_actor is not None:
-                def _accumulate_usage(pdf: pd.DataFrame) -> pd.DataFrame:
-                    try:
-                        s_prompt = pd.to_numeric(pdf.get("token_usage_prompt", 0), errors="coerce").fillna(0).astype("int64").sum()
-                    except Exception:
-                        s_prompt = 0
-                    try:
-                        s_output = pd.to_numeric(pdf.get("token_usage_output", 0), errors="coerce").fillna(0).astype("int64").sum()
-                    except Exception:
-                        s_output = 0
-                    try:
-                        s_total = pd.to_numeric(pdf.get("token_usage_total", 0), errors="coerce").fillna(0).astype("int64").sum()
-                    except Exception:
-                        s_total = 0
-                    # Keyword counters
-                    try:
-                        s_kw_checked = int(len(pdf))
-                    except Exception:
-                        s_kw_checked = 0
-                    try:
-                        if "relevant_keyword" in pdf.columns:
-                            s_kw_marked = int(pdf["relevant_keyword"].astype(bool).sum())
-                        else:
-                            s_kw_marked = 0
-                    except Exception:
-                        s_kw_marked = 0
-                    try:
-                        usage_actor.record.remote("classify", calls=len(pdf), prompt_tokens=int(s_prompt), completion_tokens=int(s_output), total_tokens=int(s_total), kw_marked=int(s_kw_marked), kw_checked=int(s_kw_checked))  # type: ignore
-                    except Exception:
-                        pass
-                    return pdf
-                try:
-                    out_ds = out_ds.map_batches(_accumulate_usage, batch_format="pandas", batch_size=256)
-                except Exception:
-                    pass
-            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("classify"))
-            if out_dir:
-                try:
-                    os.makedirs(out_dir, exist_ok=True)
-                except Exception:
-                    pass
-                try:
-                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
-                    pq_all = os.path.join(out_dir, "classify_all.parquet")
-                    out_ds.write_parquet(pq_all)
-                    # Relevant-only
-                    pq_rel = None
-                    try:
-                        rel_ds = out_ds.filter(lambda r: bool(r.get("is_relevant", False)))
-                        pq_rel = os.path.join(out_dir, "classify_relevant.parquet")
-                        rel_ds.write_parquet(pq_rel)
-                    except Exception:
-                        pq_rel = None
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({
-                            "classified_rows": None,
-                            "output_parquet_all": pq_all,
-                            "output_parquet_relevant": pq_rel,
-                        }, indent=2))
-                except Exception as e:
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({"error": "classify_parquet_write_failed", "detail": str(e)}, indent=2))
-            # Final usage snapshot logging (once)
-            try:
-                if usage_actor is not None and use_wandb:
-                    import ray as __ray  # type: ignore
-                    snap = __ray.get(usage_actor.snapshot.remote())  # type: ignore
-                    cls = (snap.get("classify") or {}) if isinstance(snap, dict) else {}
-                    payload2 = {
-                        "usage/classify/calls": int(cls.get("calls", 0) or 0),
-                        "usage/classify/prompt_tokens": int(cls.get("prompt_tokens", 0) or 0),
-                        "usage/classify/completion_tokens": int(cls.get("completion_tokens", 0) or 0),
-                        "usage/classify/total_tokens": int(cls.get("total_tokens", 0) or 0),
-                        "keyword/total_checked": int(cls.get("kw_checked", 0) or 0),
-                        "keyword/marked": int(cls.get("kw_marked", 0) or 0),
-                    }
-                    try:
-                        kc = float(payload2.get("keyword/total_checked") or 0)
-                        km = float(payload2.get("keyword/marked") or 0)
-                        if kc > 0:
-                            payload2["keyword/marked_ratio"] = (km / kc)
-                    except Exception:
-                        pass
-                    _wb_log(cfg, payload2)  # type: ignore[arg-type]
-            except Exception:
-                pass
-            if use_wandb:
-                _wb_finish(cfg)
-            return
-
-        # Pandas output path
-        out_df = out_any
-        if out_path:
-            try:
-                out_df.to_csv(out_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"classified_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
-            except Exception:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"classified_rows": int(len(out_df)), "output_csv": None}, indent=2))
-        else:
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"classified_rows": int(len(out_df))}, indent=2))
-        # Write Parquet to runtime.output_dir if provided
-        out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("classify"))
-        if out_dir:
-            try:
-                os.makedirs(out_dir, exist_ok=True)
-            except Exception:
-                pass
-            try:
-                # All results
-                pq_all = os.path.join(out_dir, "classify_all.parquet")
-                _sanitize_for_parquet_pdf(out_df).to_parquet(pq_all, index=False)
-                # Relevant-only results (when available)
-                pq_rel = None
-                try:
-                    if "is_relevant" in out_df.columns:
-                        rel_df = out_df[out_df["is_relevant"].astype(bool) == True]
-                        pq_rel = os.path.join(out_dir, "classify_relevant.parquet")
-                        _sanitize_for_parquet_pdf(rel_df).to_parquet(pq_rel, index=False)
-                except Exception:
-                    pq_rel = None
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({
-                        "classified_rows": int(len(out_df)),
-                        "output_parquet_all": pq_all,
-                        "output_parquet_relevant": pq_rel,
-                    }, indent=2))
+                prefer_cols = ["article_id", "chunk_id", "taxonomy_json", "chunk_text", "article_path"]
+                context.logger.log_table(out, "taxonomy/results", prefer_cols=prefer_cols, panel_group="inspect_results")
             except Exception as e:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"error": "classify_parquet_write_failed", "detail": str(e)}, indent=2))
-        # Orchestrator-level W&B fallback: aggregate usage tokens and throughput if available
-        try:
-            import numpy as _np  # type: ignore
-        except Exception:
-            _np = None  # type: ignore
-        try:
-            def _safe_sum(col: str) -> int:
-                try:
-                    if col in out_df.columns:
-                        s = pd.to_numeric(out_df[col], errors="coerce").fillna(0)
-                        return int(s.astype("int64").sum())
-                except Exception:
-                    pass
-                return 0
-            p_tok = _safe_sum("token_usage_prompt")
-            q_tok = _safe_sum("token_usage_output")
-            t_tok = _safe_sum("token_usage_total")
-            # Derive avg tokens/sec using output tokens and per-row latency if present
-            tok_per_s = None
-            try:
-                if "latency_s" in out_df.columns:
-                    lat = pd.to_numeric(out_df["latency_s"], errors="coerce").fillna(0.0)
-                    out = pd.to_numeric(out_df.get("token_usage_output", 0), errors="coerce").fillna(0.0)
-                    total_lat = float(lat.sum())
-                    total_out = float(out.sum())
-                    if total_lat > 0.0 and total_out > 0.0:
-                        tok_per_s = total_out / total_lat
-            except Exception:
-                tok_per_s = None
-            payload: Dict[str, Any] = {
-                "usage/classify/prompt_tokens": int(p_tok),
-                "usage/classify/completion_tokens": int(q_tok if q_tok > 0 else max(0, t_tok - p_tok)),
-                "usage/classify/total_tokens": int(t_tok if t_tok > 0 else p_tok + q_tok),
-            }
-            if tok_per_s is not None:
-                payload["classify/output_tok_per_s"] = float(tok_per_s)
-            # If classify stage used keyword gating, try to surface its counters
-            try:
-                if "relevant_keyword" in out_df.columns:
-                    kw_marked = int(out_df["relevant_keyword"].astype(bool).sum())
-                else:
-                    kw_marked = None
-            except Exception:
-                kw_marked = None
-            if kw_marked is not None:
-                payload["keyword/marked"] = kw_marked
-            _wb_log(cfg, payload)  # type: ignore[arg-type]
-        except Exception:
-            pass
-        # Log final results table to W&B (sampled)
-        try:
-            try:
-                max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
-            except Exception:
-                max_rows = 1000
-            _wb_log_table(cfg, out_df,
-                key="tables/classify_results",
-                prefer_cols=[
-                    "article_id","article_path","country","year",
-                    "is_relevant","relevance_answer","classification_mode",
-                    "relevant_keyword","latency_s","token_usage_prompt","token_usage_output","token_usage_total",
-                ],
-                max_rows=max_rows,
-            )
-            # Also log only the rows marked relevant by classify
-            try:
-                if "is_relevant" in out_df.columns:
-                    rel_df = out_df[out_df["is_relevant"].astype(bool) == True]
-                    if len(rel_df) > 0:
-                        _wb_log_table(cfg, rel_df,
-                            key="tables/classify_relevant_results",
-                            prefer_cols=[
-                                "article_id","article_path","country","year",
-                                "is_relevant","relevance_answer","classification_mode",
-                                "relevant_keyword","latency_s","token_usage_prompt","token_usage_output","token_usage_total",
-                            ],
-                            max_rows=max_rows,
-                        )
-            except Exception:
-                pass
-        except Exception:
-            pass
-        if use_wandb:
-            _wb_finish(cfg)
-        return
+                print(f"Warning: Failed to log taxonomy results table to wandb: {e}", flush=True)
+        
+        metadata: Dict[str, Any] = {
+            "rows": len(out) if isinstance(out, pd.DataFrame) else None,
+            "streaming": bool(use_streaming),
+        }
+        outputs = _collect_outputs(
+            context,
+            {name: spec.optional for name, spec in context.node.outputs.items()},
+        )
+        return StageResult(outputs=outputs, metadata=metadata)
 
-    if stage == "decompose":
-        from .stages.decompose import run_decomposition_stage
-        out_df = run_decomposition_stage(df, cfg)
-        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
-        if out_path:
-            try:
-                out_df.to_csv(out_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"decomposed_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
-            except Exception:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"decomposed_rows": int(len(out_df)), "output_csv": None}, indent=2))
-        else:
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"decomposed_rows": int(len(out_df))}, indent=2))
-        return
 
-    if stage == "taxonomy":
-        from .stages.taxonomy import run_taxonomy_stage
-        # Stage-scoped W&B run (Option B)
-        try:
-            run_cfg = {
-                "stage": "taxonomy",
-                "parquet_path": parquet_path,
-                "data_columns_map": columns,
-                "sample_n": sample_n,
-                "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
-                "prefilter_mode": str(getattr(cfg.runtime, "prefilter_mode", "pre_gating")),
-                "model_source": str(getattr(cfg.model, "model_source", "")),
-                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
-                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
-                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
-                "sampling_params": dict(getattr(cfg, "sampling_params", {})),
-                "python_version": sys.version.split()[0],
-                "os": platform.platform(),
-                "hostname": socket.gethostname(),
-            }
-        except Exception:
-            run_cfg = {"stage": "taxonomy"}
-        if use_wandb:
-            _wb_start(cfg, "taxonomy", run_config=run_cfg)
-        in_obj = None
-        try:
-            in_obj = ds if ("ds" in locals() and ds is not None) else df
-        except Exception:
-            in_obj = df
-        out_any = run_taxonomy_stage(in_obj, cfg)
-        # If streaming dataset output, write Parquet via Ray Data
-        is_ds_out = False
-        try:
-            import ray  # type: ignore
-            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
-        except Exception:
-            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
-        if is_ds_out:
-            out_ds = out_any
-            # Write chunks-level results to Parquet directory
-            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("taxonomy"))
-            if out_dir:
-                try:
-                    os.makedirs(out_dir, exist_ok=True)
-                except Exception:
-                    pass
-                # Best-effort sanitization for Arrow/Parquet
-                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
-                    pdf = pdf.copy()
-                    def _ser(v: Any) -> Any:
-                        try:
-                            import numpy as _np  # type: ignore
-                            if isinstance(v, _np.generic):
-                                try:
-                                    return v.item()
-                                except Exception:
-                                    pass
-                            if isinstance(v, _np.ndarray):
-                                try:
-                                    import json as _json
-                                    return _json.dumps(v.tolist(), ensure_ascii=False)
-                                except Exception:
-                                    return str(v)
-                        except Exception:
-                            pass
-                        if isinstance(v, (dict, list, tuple, set)):
-                            try:
-                                import json as _json
-                                if isinstance(v, set):
-                                    v = list(v)
-                                return _json.dumps(v, ensure_ascii=False)
-                            except Exception:
-                                return str(v)
-                        return v
-                    for col in list(pdf.columns):
-                        try:
-                            if pdf[col].dtype == object:
-                                s = pdf[col].apply(_ser)
-                                try:
-                                    s = s.apply(lambda x: "" if x is None else x)
-                                except Exception:
-                                    pass
-                                pdf[col] = s
-                        except Exception:
-                            pass
-                    return pdf
-                try:
-                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
-                except Exception:
-                    pass
-                try:
-                    pq_path = os.path.join(out_dir, "results.parquet")
-                    out_ds.write_parquet(pq_path)
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({"taxonomy_rows": None, "output_parquet": pq_path}, indent=2))
-                except Exception as e:
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({"error": "taxonomy_parquet_write_failed", "detail": str(e)}, indent=2))
-            # Sampled W&B tables are skipped for streaming path to avoid driver collection
-            return
-        # Pandas output path
-        out_df = out_any
-        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
-        # Doc-level aggregation (non-streaming)
-        try:
-            def _docs_from_chunks_pdf(chunks_df: pd.DataFrame) -> pd.DataFrame:
-                rows: List[Dict[str, Any]] = []
-                if chunks_df is None or len(chunks_df) == 0:
-                    return pd.DataFrame([])
-                for aid, grp in chunks_df.groupby("article_id", dropna=False):
-                    labels_num = [str(x) for x in grp.get("chunk_label", pd.Series([], dtype=str)).tolist()]
-                    labels_name = [str(x) for x in grp.get("chunk_label_name", pd.Series([], dtype=str)).tolist()]
-                    # Majority vote on names (excluding 'None')
-                    name_counts: Dict[str, int] = {}
-                    for nm in labels_name:
-                        if str(nm).strip().lower() == "none":
-                            continue
-                        name_counts[nm] = name_counts.get(nm, 0) + 1
-                    if name_counts:
-                        final_name = max(name_counts.items(), key=lambda it: it[1])[0]
-                    else:
-                        final_name = "None"
-                    # Majority vote on numbers (excluding 'None')
-                    num_counts: Dict[str, int] = {}
-                    for lb in labels_num:
-                        if str(lb).strip().lower() == "none":
-                            continue
-                        num_counts[lb] = num_counts.get(lb, 0) + 1
-                    if num_counts:
-                        def _num_sort_key(item):
-                            label, count = item
-                            try:
-                                numeric_val = int(label)
-                            except Exception:
-                                numeric_val = -1
-                            return (count, numeric_val)
-                        final_num = max(num_counts.items(), key=_num_sort_key)[0]
-                    else:
-                        final_num = "None"
-                    paths = [x for x in grp.get("article_path", pd.Series([], dtype=str)).tolist() if isinstance(x, str) and x]
-                    rows.append({
-                        "article_id": aid,
-                        "article_path": (paths[0] if paths else None),
-                        "predicted_category_number": final_num,
-                        "predicted_category_name": final_name,
-                        "num_chunks": int(grp.get("num_chunks", pd.Series([len(labels_num)])).max()) if "num_chunks" in grp.columns else len(labels_num),
-                        "chunk_labels": ",".join(labels_num),
-                        "chunk_label_names": ",".join(labels_name),
-                    })
-                return pd.DataFrame(rows)
-            docs_df = _docs_from_chunks_pdf(out_df)
-        except Exception:
-            docs_df = pd.DataFrame([])
-        # Robust W&B metric for none_fraction at chunk level (normalize names/numbers)
-        try:
-            def _none_mask(sr: pd.Series) -> pd.Series:
-                try:
-                    s = sr.astype(str).str.strip().str.strip("\"'").str.lower()
-                    return s.isin(["none", ""])
-                except Exception:
-                    try:
-                        return sr.astype(str).str.lower().eq("none")
-                    except Exception:
-                        return pd.Series([False] * len(sr))
-            total_tx = int(len(out_df))
-            if total_tx > 0 and use_wandb:
-                if "chunk_label_name" in out_df.columns:
-                    none_ct = int(_none_mask(out_df["chunk_label_name"]).sum())
-                elif "chunk_label" in out_df.columns:
-                    none_ct = int(_none_mask(out_df["chunk_label"]).sum())
-                else:
-                    none_ct = 0
-                _wb_log(cfg, {"taxonomy/none_fraction": (float(none_ct) / float(total_tx))})  # type: ignore[arg-type]
-        except Exception:
-            pass
+class DecomposeRunner(StageRunner):
+    stage_name = "decompose"
 
-        if out_path:
+    def run(self, context: StageExecutionContext) -> StageResult:
+        dataset_path = context.inputs.get("dataset")
+        if not dataset_path:
+            raise ValueError(f"Node '{context.node.key}' requires 'dataset' input")
+        cfg = context.cfg
+        OmegaConf.update(cfg, "data.parquet_path", dataset_path, merge=True)
+        df, ds, use_streaming = prepare_stage_input(cfg, dataset_path, self.stage_name)
+        in_obj = ds if use_streaming and ds is not None else df
+        out = run_decomposition_stage(in_obj, cfg)
+        
+        # Convert to pandas if needed
+        if hasattr(out, "to_pandas"):
+            out = out.to_pandas()
+        
+        # Save outputs to disk
+        if isinstance(out, pd.DataFrame):
+            for output_name, output_path in context.output_paths.items():
+                out.to_parquet(output_path, index=False)
+        
+        # Log results table to wandb (in inspect_results panel group)
+        if isinstance(out, pd.DataFrame) and context.logger:
             try:
-                out_df.to_csv(out_path, index=False)
-                # Write docs alongside chunk CSV with suffix
-                try:
-                    root, ext = os.path.splitext(out_path)
-                    docs_path = f"{root}_docs{ext or '.csv'}"
-                    if len(docs_df):
-                        docs_df.to_csv(docs_path, index=False)
-                except Exception:
-                    pass
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"taxonomy_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
-            except Exception:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"taxonomy_rows": int(len(out_df)), "output_csv": None}, indent=2))
-        else:
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"taxonomy_rows": int(len(out_df))}, indent=2))
-        # Also write Parquet to runtime.output_dir if provided
-        out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("taxonomy"))
-        if out_dir:
-            try:
-                os.makedirs(out_dir, exist_ok=True)
-            except Exception:
-                pass
-            try:
-                pq_path = os.path.join(out_dir, "results.parquet")
-                # Reuse sanitizer from classify branch
-                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
-                    pdf = pdf.copy()
-                    def _ser(v: Any) -> Any:
-                        try:
-                            import numpy as _np  # type: ignore
-                            if isinstance(v, _np.generic):
-                                try:
-                                    return v.item()
-                                except Exception:
-                                    pass
-                            if isinstance(v, _np.ndarray):
-                                try:
-                                    import json as _json
-                                    return _json.dumps(v.tolist(), ensure_ascii=False)
-                                except Exception:
-                                    return str(v)
-                        except Exception:
-                            pass
-                        if isinstance(v, (dict, list, tuple, set)):
-                            try:
-                                import json as _json
-                                if isinstance(v, set):
-                                    v = list(v)
-                                return _json.dumps(v, ensure_ascii=False)
-                            except Exception:
-                                return str(v)
-                        return v
-                    for col in list(pdf.columns):
-                        try:
-                            if pdf[col].dtype == object:
-                                s = pdf[col].apply(_ser)
-                                try:
-                                    s = s.apply(lambda x: "" if x is None else x)
-                                except Exception:
-                                    pass
-                                pdf[col] = s
-                        except Exception:
-                            pass
-                    return pdf
-                _sanitize_for_parquet_pdf(out_df).to_parquet(pq_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"taxonomy_rows": int(len(out_df)), "output_parquet": pq_path}, indent=2))
+                prefer_cols = ["article_id", "chunk_id", "chunk_text", "article_path"]
+                context.logger.log_table(out, "decompose/results", prefer_cols=prefer_cols, panel_group="inspect_results")
             except Exception as e:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"error": "taxonomy_parquet_write_failed", "detail": str(e)}, indent=2))
-        # Log final results tables to W&B (chunks and aggregated docs)
-        try:
-            try:
-                max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
-            except Exception:
-                max_rows = 1000
-            _wb_log_table(cfg, out_df,
-                key="tables/taxonomy_chunks",
-                prefer_cols=[
-                    "article_id","article_path","chunk_id","num_chunks",
-                    "chunk_label","chunk_label_name","answer","relevant_keyword",
-                ],
-                max_rows=max_rows,
-            )
-            if len(docs_df):
-                _wb_log_table(cfg, docs_df,
-                    key="tables/taxonomy_docs",
-                    prefer_cols=[
-                        "article_id","article_path","predicted_category_number","predicted_category_name","num_chunks",
-                    ],
-                    max_rows=max_rows,
-                )
-        except Exception:
-            pass
-        if use_wandb:
-            _wb_finish(cfg)
-        return
+                print(f"Warning: Failed to log decompose results table to wandb: {e}", flush=True)
+        
+        metadata: Dict[str, Any] = {
+            "rows": len(out) if isinstance(out, pd.DataFrame) else None,
+            "streaming": bool(use_streaming),
+        }
+        outputs = _collect_outputs(
+            context,
+            {name: spec.optional for name, spec in context.node.outputs.items()},
+        )
+        return StageResult(outputs=outputs, metadata=metadata)
 
-    if stage == "topic":
-        from .stages.topic import run_topic_stage
-        try:
-            run_cfg = {"stage": "topic", "parquet_path": parquet_path}
-        except Exception:
-            run_cfg = {"stage": "topic"}
-        if use_wandb:
-            _wb_start(cfg, "topic", run_config=run_cfg)
-        in_obj = None
-        try:
-            in_obj = ds if ("ds" in locals() and ds is not None) else df
-        except Exception:
-            in_obj = df
-        # If input looks like a directory or classify output dir, try to read classify_relevant.parquet
-        try:
-            p = parquet_path
-            if os.path.isdir(p):
-                # Expect classify outputs at the root of the provided directory
-                cand_rel = os.path.join(p, "classify_relevant.parquet")
-                cand_all = os.path.join(p, "classify_all.parquet")
-                if os.path.exists(cand_rel):
-                    in_obj = pd.read_parquet(cand_rel)
-                elif os.path.exists(cand_all):
-                    in_obj = pd.read_parquet(cand_all)
-            elif os.path.isfile(p):
-                # Direct parquet file input
-                in_obj = pd.read_parquet(p)
-        except Exception:
-            pass
-        out_any = run_topic_stage(in_obj, cfg)
-        out_df = out_any if isinstance(out_any, pd.DataFrame) else None
-        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
-        if out_path:
-            try:
-                out_df.to_csv(out_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"topic_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
-            except Exception:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"topic_rows": int(len(out_df)), "output_csv": None}, indent=2))
-        else:
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"topic_rows": int(len(out_df))}, indent=2))
-        out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("topic"))
-        if out_dir:
-            try:
-                os.makedirs(out_dir, exist_ok=True)
-            except Exception:
-                pass
-            try:
-                pq_path = os.path.join(out_dir, "docs_topics.parquet")
-                out_df.to_parquet(pq_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"topic_rows": int(len(out_df)), "output_parquet": pq_path}, indent=2))
-            except Exception as e:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"error": "topic_parquet_write_failed", "detail": str(e)}, indent=2))
-        if use_wandb:
-            try:
-                _wb_log_table(cfg, out_df, key="tables/topic_docs", prefer_cols=[
-                    "unit_id","article_id","article_path","topic_id","topic_prob","topic_top_terms","article_keywords","plot_x","plot_y"
-                ], max_rows=int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000))
-            except Exception:
-                pass
-            # Cluster-level summary table (one row per topic_id) with top terms
-            try:
-                if out_df is not None and "topic_id" in out_df.columns:
-                    import pandas as _pd  # type: ignore
-                    def _first_nonnull(s):
-                        try:
-                            for v in s:
-                                if v is not None:
-                                    return v
-                        except Exception:
-                            pass
-                        return None
-                    grp = out_df.groupby("topic_id", dropna=False)
-                    rows = []
-                    for tid, g in grp:
-                        try:
-                            ex = g.iloc[0]
-                        except Exception:
-                            ex = None
-                        rows.append({
-                            "topic_id": int(tid) if tid is not None else -1,
-                            "topic_size": int(len(g)),
-                            "topic_top_terms": _first_nonnull(g.get("topic_top_terms", [])),
-                            "example_article_id": (ex.get("article_id") if ex is not None else None),
-                            "example_article_path": (ex.get("article_path") if ex is not None else None),
-                        })
-                    clust_df = _pd.DataFrame(rows)
-                    _wb_log_table(cfg, clust_df, key="tables/topic_clusters", prefer_cols=[
-                        "topic_id","topic_size","topic_top_terms","example_article_id","example_article_path"
-                    ], max_rows=1000)
-            except Exception:
-                pass
-            # Plot and log a 2D cluster scatter when coordinates are present
-            try:
-                if out_df is not None and ("plot_x" in out_df.columns and "plot_y" in out_df.columns):
-                    from .stages.topic_plot import log_cluster_scatter_to_wandb, log_cluster_scatter_plotly_to_wandb  # type: ignore
-                    try:
-                        log_cluster_scatter_to_wandb(out_df, cfg, title="topic_cluster_map")
-                    except Exception:
-                        pass
-                    try:
-                        log_cluster_scatter_plotly_to_wandb(out_df, cfg, title="topic_cluster_map")
-                    except Exception:
-                        pass
-            except Exception:
-                pass
-            # Log basic topic metrics
-            try:
-                n_units = int(len(out_df)) if out_df is not None else 0
-                noise_ct = 0
-                num_clusters = 0
-                try:
-                    vc = out_df["topic_id"].value_counts(dropna=False)
-                    noise_ct = int(vc.get(-1, 0)) if hasattr(vc, "get") else (int(vc[-1]) if (-1 in getattr(vc, 'index', [])) else 0)
-                    try:
-                        uniq = out_df["topic_id"].astype(int).unique().tolist()
-                        num_clusters = int(len([x for x in uniq if int(x) != -1]))
-                    except Exception:
-                        num_clusters = 0
-                except Exception:
-                    pass
-                payload = {
-                    "topic/units": n_units,
-                    "topic/noise_count": noise_ct,
-                    "topic/noise_fraction": (float(noise_ct) / float(n_units)) if n_units else 0.0,
-                    "topic/num_clusters": num_clusters,
-                }
-                _wb_log(cfg, payload)  # type: ignore[arg-type]
-            except Exception:
-                pass
-            _wb_finish(cfg)
-        return
 
-    if stage == "verification":
-        from .stages.verify import run_verification_stage
-        # Stage-scoped W&B run (Option B)
-        try:
-            run_cfg = {
-                "stage": "verification",
-                "parquet_path": parquet_path,
-                "data_columns_map": columns,
-                "sample_n": sample_n,
-                "output_csv": str(getattr(cfg.runtime, "output_csv", "") or ""),
-                "model_source": str(getattr(cfg.model, "model_source", "")),
-                "engine_kwargs": dict(getattr(cfg.model, "engine_kwargs", {})),
-                "batch_size": int(getattr(cfg.model, "batch_size", 16) or 16),
-                "concurrency": int(getattr(cfg.model, "concurrency", 1) or 1),
-                "sampling_params": dict(getattr(cfg, "sampling_params", {})),
-                "python_version": sys.version.split()[0],
-                "os": platform.platform(),
-                "hostname": socket.gethostname(),
-            }
-        except Exception:
-            run_cfg = {"stage": "verification"}
-        if use_wandb:
-            _wb_start(cfg, "verification", run_config=run_cfg)
-        in_obj = None
-        try:
-            in_obj = ds if ("ds" in locals() and ds is not None) else df
-        except Exception:
-            in_obj = df
-        out_any = run_verification_stage(in_obj, cfg)
-        # If streaming dataset output, write Parquet via Ray Data
-        is_ds_out = False
-        try:
-            import ray  # type: ignore
-            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
-        except Exception:
-            is_ds_out = hasattr(out_any, "write_parquet") and hasattr(out_any, "count")
-        if is_ds_out:
-            out_ds = out_any
-            out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("verification"))
-            if out_dir:
-                try:
-                    os.makedirs(out_dir, exist_ok=True)
-                except Exception:
-                    pass
-                # Reuse sanitizer from classify branch
-                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
-                    pdf = pdf.copy()
-                    def _ser(v: Any) -> Any:
-                        try:
-                            import numpy as _np  # type: ignore
-                            if isinstance(v, _np.generic):
-                                try:
-                                    return v.item()
-                                except Exception:
-                                    pass
-                            if isinstance(v, _np.ndarray):
-                                try:
-                                    import json as _json
-                                    return _json.dumps(v.tolist(), ensure_ascii=False)
-                                except Exception:
-                                    return str(v)
-                        except Exception:
-                            pass
-                        if isinstance(v, (dict, list, tuple, set)):
-                            try:
-                                import json as _json
-                                if isinstance(v, set):
-                                    v = list(v)
-                                return _json.dumps(v, ensure_ascii=False)
-                            except Exception:
-                                return str(v)
-                        return v
-                    for col in list(pdf.columns):
-                        try:
-                            if pdf[col].dtype == object:
-                                s = pdf[col].apply(_ser)
-                                try:
-                                    s = s.apply(lambda x: "" if x is None else x)
-                                except Exception:
-                                    pass
-                                pdf[col] = s
-                        except Exception:
-                            pass
-                    return pdf
-                try:
-                    out_ds = out_ds.map_batches(_sanitize_for_parquet_pdf, batch_format="pandas", batch_size=256)
-                except Exception:
-                    pass
-                try:
-                    pq_path = os.path.join(out_dir, "verification.parquet")
-                    out_ds.write_parquet(pq_path)
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({"verification_rows": None, "output_parquet": pq_path}, indent=2))
-                except Exception as e:
-                    if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                        print(json.dumps({"error": "verification_parquet_write_failed", "detail": str(e)}, indent=2))
-            # W&B table logging is skipped for streaming to avoid driver collection
-            return
-        # Pandas output path
-        out_df = out_any
-        out_path = str(getattr(cfg.runtime, "output_csv", "") or "")
-        if out_path:
-            try:
-                out_df.to_csv(out_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"verification_rows": int(len(out_df)), "output_csv": out_path}, indent=2))
-            except Exception:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"verification_rows": int(len(out_df)), "output_csv": None}, indent=2))
-        else:
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"verification_rows": int(len(out_df))}, indent=2))
-        # Also write Parquet to runtime.output_dir if provided
-        out_dir = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("verification"))
-        if out_dir:
-            try:
-                os.makedirs(out_dir, exist_ok=True)
-            except Exception:
-                pass
-            try:
-                pq_path = os.path.join(out_dir, "verification.parquet")
-                # Reuse sanitizer from classify branch
-                def _sanitize_for_parquet_pdf(pdf: pd.DataFrame) -> pd.DataFrame:
-                    pdf = pdf.copy()
-                    def _ser(v: Any) -> Any:
-                        try:
-                            import numpy as _np  # type: ignore
-                            if isinstance(v, _np.generic):
-                                try:
-                                    return v.item()
-                                except Exception:
-                                    pass
-                            if isinstance(v, _np.ndarray):
-                                try:
-                                    import json as _json
-                                    return _json.dumps(v.tolist(), ensure_ascii=False)
-                                except Exception:
-                                    return str(v)
-                        except Exception:
-                            pass
-                        if isinstance(v, (dict, list, tuple, set)):
-                            try:
-                                import json as _json
-                                if isinstance(v, set):
-                                    v = list(v)
-                                return _json.dumps(v, ensure_ascii=False)
-                            except Exception:
-                                return str(v)
-                        return v
-                    for col in list(pdf.columns):
-                        try:
-                            if pdf[col].dtype == object:
-                                s = pdf[col].apply(_ser)
-                                try:
-                                    s = s.apply(lambda x: "" if x is None else x)
-                                except Exception:
-                                    pass
-                                pdf[col] = s
-                        except Exception:
-                            pass
-                    return pdf
-                _sanitize_for_parquet_pdf(out_df).to_parquet(pq_path, index=False)
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"verification_rows": int(len(out_df)), "output_parquet": pq_path}, indent=2))
-            except Exception as e:
-                if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                    print(json.dumps({"error": "verification_parquet_write_failed", "detail": str(e)}, indent=2))
-        # W&B table for verification results (sampled)
-        try:
-            try:
-                max_rows = int(getattr(cfg.wandb, "table_sample_rows", 1000) or 1000)
-            except Exception:
-                max_rows = 1000
-            base_cols = [
-                "article_id","article_path","chunk_id","num_chunks",
-                "chunk_label","ver_verified_chunk","ver_sim_max","ver_top_sent","ver_nli_ent_max",
+class TopicRunner(StageRunner):
+    stage_name = "topic"
+
+    @staticmethod
+    def _resolve_topic_path(path: str) -> str:
+        if os.path.isdir(path):
+            candidates = [
+                os.path.join(path, "classify_relevant.parquet"),
+                os.path.join(path, "classify_all.parquet"),
+                os.path.join(path, "results.parquet"),
             ]
-            _wb_log_table(cfg, out_df, key="tables/verification_chunks", prefer_cols=base_cols, max_rows=max_rows)
-            # Optional debug columns
+            for cand in candidates:
+                if os.path.exists(cand):
+                    return cand
+        return path
+
+    def run(self, context: StageExecutionContext) -> StageResult:
+        dataset_path = context.inputs.get("dataset")
+        if not dataset_path:
+            raise ValueError(f"Node '{context.node.key}' requires 'dataset' input")
+        resolved_path = self._resolve_topic_path(dataset_path)
+        cfg = context.cfg
+        OmegaConf.update(cfg, "data.parquet_path", resolved_path, merge=True)
+        df, ds, use_streaming = prepare_stage_input(cfg, resolved_path, self.stage_name)
+        in_obj = ds if use_streaming and ds is not None else df
+        out = run_topic_stage(in_obj, cfg, logger=context.logger)
+        
+        # Convert to pandas if needed
+        if hasattr(out, "to_pandas"):
+            out = out.to_pandas()
+        
+        # Save outputs to disk
+        if isinstance(out, pd.DataFrame):
+            for output_name, output_path in context.output_paths.items():
+                out.to_parquet(output_path, index=False)
+        
+        # Log results table and plots to wandb
+        if isinstance(out, pd.DataFrame) and context.logger:
             try:
-                dbg = str(os.environ.get("UAIR_VERIFY_DEBUG", "")).strip().lower() in ("1","true","yes","on")
-            except Exception:
-                dbg = False
-            if dbg:
-                debug_cols = base_cols + [
-                    "chunk_label_name","ver_nli_label_max","ver_top_sent","ver_evidence_topk",
-                ]
-                _wb_log_table(cfg, out_df, key="tables/verification_debug_chunks", prefer_cols=debug_cols, max_rows=max_rows)
-        except Exception:
-            pass
-        if use_wandb:
-            _wb_finish(cfg)
-        return
-
-    if stage == "pipeline":
-        # Run each stage via child Hydra/Submitit jobs by default; optionally run locally when pipeline_local=true.
-        def _format_override(k: str, v: Any) -> str:
-            if isinstance(v, bool):
-                vv = "true" if v else "false"
-            else:
-                vv = str(v)
-            return f"{k}={vv}"
-
-        def _run_stage_subprocess(stage_name: str, overrides: Dict[str, Any], group_id: str) -> None:
-            args: List[str] = [sys.executable, "-m", "pipelines.uair.cli"]
-            # Prefer mapping runtime.child_launchers[stage]; fallback to runtime.child_launcher
-            # Resolve per-stage launcher from DictConfig or dict; fallback to runtime.child_launcher
+                # Log results table (in inspect_results panel group)
+                prefer_cols = ["unit_id", "topic_id", "topic_prob", "topic_top_terms", "article_keywords", "plot_x", "plot_y"]
+                context.logger.log_table(out, "topic/results", prefer_cols=prefer_cols, panel_group="inspect_results")
+            except Exception as e:
+                print(f"Warning: Failed to log topic results table to wandb: {e}", flush=True)
+            
             try:
-                cl_map = getattr(cfg.runtime, "child_launchers", None)
-            except Exception:
-                cl_map = None
-            stage_launcher = None
-            if cl_map is not None:
-                try:
-                    # OmegaConf DictConfig supports attribute access
-                    stage_launcher = getattr(cl_map, stage_name)
-                except Exception:
-                    stage_launcher = None
-                if stage_launcher is None:
-                    try:
-                        stage_launcher = cl_map.get(stage_name)  # type: ignore[attr-defined]
-                    except Exception:
-                        stage_launcher = None
-            try:
-                child_launcher = str(stage_launcher or getattr(cfg.runtime, "child_launcher", "") or "")
-            except Exception:
-                child_launcher = ""
-            run_local = bool(getattr(cfg.runtime, "pipeline_local", False))
-            if (child_launcher and (not run_local)):
-                args.append("-m")
-                args.append(f"hydra/launcher={child_launcher}")
-                try:
-                    wckey = getattr(cfg.runtime, "wckey", None)
-                except Exception:
-                    wckey = None
-                if not wckey:
-                    try:
-                        wckey = os.environ.get("UAIR_WCKEY")
-                    except Exception:
-                        wckey = None
-                if wckey and str(wckey).strip() != "":
-                    args.append(_format_override("hydra.launcher.additional_parameters.wckey", str(wckey)))
-            args.append(_format_override("runtime.stage", stage_name))
-            # Pass wandb.group explicitly so Hydra picks it up even without env
-            overrides = {**overrides, "wandb.group": group_id}
-            for k, v in overrides.items():
-                args.append(_format_override(k, v))
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                try:
-                    # Mask any sensitive args when printing
-                    def _mask_arg(a: str) -> str:
-                        if a.startswith("wandb.api_key="):
-                            return "wandb.api_key=***"
-                        return a
-                    printable = " ".join(shlex.quote(_mask_arg(a)) for a in args)
-                    print(json.dumps({"launch": stage_name, "cmd": printable, "wandb_group": group_id}, indent=2))
-                except Exception:
-                    pass
-            if (child_launcher and (not run_local)):
-                env = os.environ.copy()
-                env["WANDB_GROUP"] = group_id
-                # Ensure W&B is not disabled in child env and API key is propagated
-                try:
-                    if str(getattr(cfg.wandb, "enabled", True)).lower() in ("true", "1", "yes"):
-                        env.pop("WANDB_DISABLED", None)
-                        env.setdefault("WANDB_MODE", "online")
-                except Exception:
-                    pass
-                # Propagate common W&B auth/env if present in parent
-                try:
-                    for _k in ("WANDB_API_KEY", "WANDB_BASE_URL", "WANDB_ENTITY", "WANDB_PROJECT"):
-                        if os.environ.get(_k) and not env.get(_k):
-                            env[_k] = os.environ.get(_k)  # type: ignore
-                except Exception:
-                    pass
-                # no WANDB_BASE_URL propagation
-                subprocess.run(args, check=True, env=env)
-            else:
-                # Local in-process run using Hydra app entry
-                from .cli import main as _main
-                # Reconstruct Hydra-style args for in-process call
-                hydra_args = []
-                for k, v in overrides.items():
-                    if isinstance(v, bool):
-                        vv = "true" if v else "false"
-                    else:
-                        vv = str(v)
-                    hydra_args.append(f"{k}={vv}")
-                hydra_args.append(f"runtime.stage={stage_name}")
-                # Set group in env for child
-                os.environ["WANDB_GROUP"] = group_id
-                # Call Hydra main with overrides
-                _main.callback(hydra_args) if hasattr(_main, 'callback') else _main()
-
-        # Prepare output dirs
-        base_out = str(getattr(cfg.runtime, "output_dir", "") or _default_output_dir("pipeline"))
-        try:
-            os.makedirs(base_out, exist_ok=True)
-        except Exception:
-            pass
-        classify_dir = os.path.join(base_out, "classify")
-        taxonomy_dir = os.path.join(base_out, "taxonomy")
-        verify_dir = os.path.join(base_out, "verification")
-        try:
-            os.makedirs(classify_dir, exist_ok=True)
-            os.makedirs(taxonomy_dir, exist_ok=True)
-            os.makedirs(verify_dir, exist_ok=True)
-        except Exception:
-            pass
-
-        # Group id shared by child stage runs
-        try:
-            group_id = str(getattr(cfg.wandb, "group", None) or os.environ.get("WANDB_GROUP") or uuid4().hex)
-        except Exception:
-            group_id = uuid4().hex
-
-        # Start a W&B pipeline monitor run (coordinator)
-        if use_wandb:
-            try:
-                run_cfg = {
-                    "stage": "pipeline",
-                    "parquet_path": str(getattr(cfg.data, "parquet_path")),
-                    "output_dir": base_out,
-                    "classify_dir": classify_dir,
-                    "taxonomy_dir": taxonomy_dir,
-                    "verification_dir": verify_dir,
-                    "pipeline_topic": bool(getattr(cfg.runtime, "pipeline_topic", False)),
-                    "streaming_io": bool(getattr(cfg.runtime, "streaming_io", False)),
-                    "child_launcher": str(getattr(cfg.runtime, "child_launcher", "")),
-                    "python_version": sys.version.split()[0],
-                    "os": platform.platform(),
-                    "hostname": socket.gethostname(),
-                    "wandb_group": group_id,
-                }
-            except Exception:
-                run_cfg = {"stage": "pipeline", "wandb_group": group_id}
-            try:
-                _wb_start(cfg, "pipeline", run_config=run_cfg)
-            except Exception:
-                pass
-
-        # Stage 1: classify
-        cls_overrides: Dict[str, Any] = {
-            "runtime.output_dir": classify_dir,
-            "data.parquet_path": str(getattr(cfg.data, "parquet_path")),
+                # Log plotly visualization
+                from .stages.topic_plot import log_cluster_scatter_plotly_to_wandb
+                log_cluster_scatter_plotly_to_wandb(out, context.logger, title="topic_cluster_map")
+            except Exception as e:
+                print(f"Warning: Failed to log topic plot to wandb: {e}", flush=True)
+        
+        metadata: Dict[str, Any] = {
+            "rows": len(out) if isinstance(out, pd.DataFrame) else None,
+            "streaming": bool(use_streaming),
         }
-        # Do NOT pass API keys via args; rely on env or prior login
-        # Propagate debug and sample_n so child classify behavior matches the parent
-        try:
-            cls_overrides["runtime.debug"] = bool(getattr(cfg.runtime, "debug", False))
-        except Exception:
-            pass
-        # Propagate streaming IO preference to child classify
-        try:
-            cls_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
-        except Exception:
-            pass
-        try:
-            _sn = getattr(cfg.runtime, "sample_n", None)
-            if _sn is not None:
-                cls_overrides["runtime.sample_n"] = int(_sn)
-        except Exception:
-            pass
-        try:
-            if hasattr(cfg.runtime, "use_llm_classify"):
-                cls_overrides["runtime.use_llm_classify"] = bool(getattr(cfg.runtime, "use_llm_classify"))
-        except Exception:
-            pass
-        # Ensure W&B is explicitly enabled for child classify
-        try:
-            cls_overrides["wandb.enabled"] = True
-        except Exception:
-            pass
-        # Log pipeline stage timings to console only (no W&B in pipeline coordinator)
-        cls_t0 = _time.time()
-        try:
-            _run_stage_subprocess("classify", cls_overrides, group_id)
-            cls_dt = float(_time.time() - cls_t0)
-        except Exception:
-            cls_dt = float(_time.time() - cls_t0)
-            raise
-        # Log classify stage duration to W&B
-        if use_wandb:
+        outputs = _collect_outputs(
+            context,
+            {name: spec.optional for name, spec in context.node.outputs.items()},
+        )
+        return StageResult(outputs=outputs, metadata=metadata)
+
+
+class VerificationRunner(StageRunner):
+    stage_name = "verification"
+
+    def run(self, context: StageExecutionContext) -> StageResult:
+        dataset_path = context.inputs.get("dataset")
+        if not dataset_path:
+            raise ValueError(f"Node '{context.node.key}' requires 'dataset' input")
+        cfg = context.cfg
+        OmegaConf.update(cfg, "data.parquet_path", dataset_path, merge=True)
+        df, ds, use_streaming = prepare_stage_input(cfg, dataset_path, self.stage_name)
+        in_obj = ds if use_streaming and ds is not None else df
+        out = run_verification_stage(in_obj, cfg)
+        
+        # Convert to pandas if needed
+        if hasattr(out, "to_pandas"):
+            out = out.to_pandas()
+        
+        # Save outputs to disk
+        if isinstance(out, pd.DataFrame):
+            for output_name, output_path in context.output_paths.items():
+                out.to_parquet(output_path, index=False)
+        
+        # Log results table to wandb (in inspect_results panel group)
+        if isinstance(out, pd.DataFrame) and context.logger:
             try:
-                _wb_log(cfg, {"pipeline/classify_seconds": float(cls_dt)})  # type: ignore[arg-type]
+                prefer_cols = ["article_id", "chunk_id", "chunk_text", "verification_result", "article_path"]
+                context.logger.log_table(out, "verification/results", prefer_cols=prefer_cols, panel_group="inspect_results")
+            except Exception as e:
+                print(f"Warning: Failed to log verification results table to wandb: {e}", flush=True)
+        
+        metadata: Dict[str, Any] = {
+            "rows": len(out) if isinstance(out, pd.DataFrame) else None,
+            "streaming": bool(use_streaming),
+        }
+        outputs = _collect_outputs(
+            context,
+            {name: spec.optional for name, spec in context.node.outputs.items()},
+        )
+        return StageResult(outputs=outputs, metadata=metadata)
+
+
+_STAGE_REGISTRY: Dict[str, StageRunner] = {
+    "classify": ClassificationRunner(),
+    "decompose": DecomposeRunner(),
+    "taxonomy": TaxonomyRunner(),
+    "topic": TopicRunner(),
+    "verification": VerificationRunner(),
+}
+
+
+def _ensure_output_dirs(paths: Iterable[str]) -> None:
+    for path in paths:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
+
+def _node_optional_outputs(node: PipelineNodeSpec) -> Dict[str, bool]:
+    return {name: spec.optional for name, spec in node.outputs.items()}
+
+
+def _node_output_paths(node: PipelineNodeSpec, registry: ArtifactRegistry, output_root: str) -> Dict[str, str]:
+    resolved: Dict[str, str] = {}
+    for out_name, spec in node.outputs.items():
+        resolved[out_name] = registry.resolve_output_path(spec.path, output_root, node.key)
+    _ensure_output_dirs(resolved.values())
+    return resolved
+
+
+def _node_inputs(node: PipelineNodeSpec, registry: ArtifactRegistry) -> Dict[str, str]:
+    resolved: Dict[str, str] = {}
+    for alias, ref in node.inputs.items():
+        resolved[alias] = registry.resolve(ref)
+    return resolved
+
+
+def _print_status(payload: Dict[str, Any]) -> None:
+    try:
+        print(json.dumps(payload, indent=2))
+    except Exception:
+        pass
+
+
+def _load_launcher_config(cfg: DictConfig, launcher_name: str) -> Optional[DictConfig]:
+    """Load a launcher configuration from Hydra config."""
+    try:
+        # Find the config path - use the location of this file as reference
+        config_path = os.path.join(os.path.dirname(__file__), "conf")
+        
+        if not os.path.exists(config_path):
+            # Try to get from hydra runtime
+            hydra_cfg = getattr(cfg, "hydra", None)
+            if hydra_cfg:
+                runtime_cfg = getattr(hydra_cfg, "runtime", None)
+                if runtime_cfg:
+                    sources = getattr(runtime_cfg, "config_sources", [])
+                    for source in sources:
+                        if hasattr(source, "provider") and source.provider == "main":
+                            config_path = source.path
+                            break
+        
+        if not config_path or not os.path.exists(config_path):
+            raise ValueError(f"Could not find config directory")
+            
+        launcher_file = os.path.join(config_path, "hydra", "launcher", f"{launcher_name}.yaml")
+        if not os.path.exists(launcher_file):
+            raise ValueError(f"Launcher config file not found: {launcher_file}")
+        
+        # Load the launcher config
+        launcher_cfg = OmegaConf.load(launcher_file)
+        # Resolve interpolations with the main config as context
+        launcher_cfg = OmegaConf.merge({"runtime": cfg.get("runtime", {})}, launcher_cfg)
+        return launcher_cfg
+    except Exception as e:
+        raise ValueError(f"Failed to load launcher config '{launcher_name}': {e}") from e
+
+
+def _create_submitit_executor(launcher_cfg: DictConfig, job_name: str, log_folder: str) -> Any:
+    """Create a submitit executor from launcher configuration."""
+    if not _SUBMITIT_AVAILABLE or submitit is None:
+        raise RuntimeError("submitit is not available but is required for SLURM job submission")
+    
+    executor = submitit.AutoExecutor(folder=log_folder)
+    
+    # Map launcher config to submitit parameters
+    executor.update_parameters(
+        timeout_min=int(launcher_cfg.get("timeout_min", 120)),
+        slurm_partition=str(launcher_cfg.get("partition", "pierson")),
+        slurm_mem=f"{int(launcher_cfg.get('mem_gb', 8))}GB",
+        slurm_cpus_per_task=int(launcher_cfg.get("cpus_per_task", 2)),
+        slurm_gpus_per_node=int(launcher_cfg.get("gpus_per_node", 0)),
+        slurm_nodes=int(launcher_cfg.get("nodes", 1)),
+        slurm_tasks_per_node=int(launcher_cfg.get("tasks_per_node", 1)),
+        slurm_array_parallelism=int(launcher_cfg.get("array_parallelism", 1)),
+        name=job_name,
+        slurm_additional_parameters=launcher_cfg.get("additional_parameters", {}),
+        slurm_setup=launcher_cfg.get("setup", []),
+    )
+    
+    return executor
+
+
+def execute_stage_job(context_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Execute a single stage - designed to be submitted as a SLURM job."""
+    # Reconstruct context from serialized data
+    from omegaconf import OmegaConf
+    cfg = OmegaConf.create(context_data["cfg"])
+    node_dict = context_data["node"]
+    
+    # Reconstruct PipelineNodeSpec
+    from .config_schema import PipelineNodeSpec, OutputSpec
+    outputs = {}
+    for out_key, out_val in node_dict.get("outputs", {}).items():
+        outputs[out_key] = OutputSpec.from_config(out_key, out_val)
+    
+    node = PipelineNodeSpec(
+        key=node_dict["key"],
+        stage=node_dict["stage"],
+        depends_on=node_dict.get("depends_on", []),
+        inputs=node_dict.get("inputs", {}),
+        outputs=outputs,
+        overrides=node_dict.get("overrides", {}),
+        launcher=node_dict.get("launcher"),
+        parallel_group=node_dict.get("parallel_group"),
+        max_attempts=node_dict.get("max_attempts", 1),
+        retry_backoff_s=node_dict.get("retry_backoff_s", 0.0),
+        wandb_suffix=node_dict.get("wandb_suffix"),
+    )
+    
+    context = StageExecutionContext(
+        cfg=cfg,
+        node=node,
+        inputs=context_data["inputs"],
+        output_paths=context_data["output_paths"],
+        output_dir=context_data["output_dir"],
+        output_root=context_data["output_root"],
+    )
+    
+    # Get the stage runner
+    stage_registry = dict(_STAGE_REGISTRY)
+    runner = stage_registry.get(node.stage)
+    if runner is None:
+        raise ValueError(f"No runner registered for stage '{node.stage}' (node '{node.key}')")
+    
+    # Execute stage with wandb logging context
+    wandb_run_id = node.wandb_suffix or node.key
+    run_config = {
+        "node": node.key,
+        "stage": node.stage,
+        "inputs": list(context.inputs.keys()),
+        "outputs": list(context.output_paths.keys()),
+    }
+    
+    with WandbLogger(cfg, stage=node.stage, run_id=wandb_run_id, run_config=run_config) as logger:
+        try:
+            # Update context with logger
+            context.logger = logger
+            
+            # Execute the stage
+            _print_status({"node": node.key, "stage": node.stage, "status": "running", "inputs": context.inputs})
+            stage_start = time.time()
+            
+            result = runner.run(context)
+            
+            # Log completion metrics
+            duration_s = time.time() - stage_start
+            try:
+                logger.set_summary(f"{node.stage}/status", "completed")
             except Exception:
                 pass
-
-        # Optional Stage 2: topic consumes classify_dir when pipeline_topic=true; otherwise taxonomy
-        pipeline_topic = bool(getattr(cfg.runtime, "pipeline_topic", False))
-        if pipeline_topic:
-            try:
-                rel_pq = os.path.join(classify_dir, "classify_relevant.parquet")
-                all_pq = os.path.join(classify_dir, "classify_all.parquet")
-                if os.path.exists(rel_pq):
-                    topic_input_path = rel_pq
-                elif os.path.exists(all_pq):
-                    topic_input_path = all_pq
-                else:
-                    topic_input_path = classify_dir
-            except Exception:
-                topic_input_path = classify_dir
-            topic_overrides: Dict[str, Any] = {
-                "runtime.output_dir": os.path.join(base_out, "topic"),
-                "data.parquet_path": topic_input_path,
-                # Ensure SentenceTransformer runs on CPU to avoid GPU contention
-                "topic.embed.device": "cpu",
+            logger.log_metrics({
+                f"{node.stage}/duration_s": duration_s,
+                f"{node.stage}/rows_processed": result.metadata.get("rows", 0),
+            })
+            
+            return {
+                "outputs": result.outputs,
+                "metadata": result.metadata,
             }
+        except Exception as e:
+            # Log failure
             try:
-                topic_overrides["wandb.enabled"] = True
+                logger.set_summary(f"{node.stage}/status", "failed")
+                logger.set_summary(f"{node.stage}/error", str(e))
             except Exception:
                 pass
-            t_t0 = _time.time()
+            raise
+
+
+def run_experiment(cfg: DictConfig) -> None:
+    # Execute entire pipeline with wandb logging context
+    with WandbLogger(cfg, stage="orchestrator", run_id="monitor", run_config={"type": "pipeline"}) as logger:
+        try:
+            # Get the parent/monitor group ID to pass to child jobs
+            # This ensures all stages in one pipeline run are grouped together
+            parent_group = logger.wb_config.group if logger.wb_config else None
+            if parent_group:
+                # Set in environment so child jobs can inherit it
+                os.environ["WANDB_GROUP"] = parent_group
+                print(f"[orchestrator] Setting WANDB_GROUP={parent_group} for child stages", flush=True)
+            
+            graph_spec: PipelineGraphSpec = load_pipeline_graph(cfg)
+            output_root = resolve_output_root(graph_spec, cfg)
+            os.makedirs(output_root, exist_ok=True)
+            registry = ArtifactRegistry()
+            for source_key, source in graph_spec.sources.items():
+                path = source.path
+                if not os.path.isabs(path):
+                    path = os.path.abspath(os.path.expanduser(path))
+                registry.register_source(source_key, path)
+            manifest: Dict[str, Any] = {
+                "output_root": output_root,
+                "nodes": {},
+            }
+            stage_registry = dict(_STAGE_REGISTRY)
+            ordered_nodes = graph_spec.topological_order()
+            pipeline_start = time.time()
+            
+            # Log pipeline structure to wandb: numeric to charts; structure to config
+            logger.log_metrics({
+                "orchestrator/total_nodes": len(ordered_nodes),
+            })
             try:
-                _run_stage_subprocess("topic", topic_overrides, group_id)
-                _ = float(_time.time() - t_t0)
+                logger.set_config({
+                    "orchestrator": {
+                        "node_order": ordered_nodes,
+                        "total_nodes": len(ordered_nodes),
+                    }
+                })
             except Exception:
-                _ = float(_time.time() - t_t0)
-                raise
-            # Log topic stage duration and mode
-            if use_wandb:
-                try:
-                    _wb_log(cfg, {"pipeline/topic_seconds": float(_), "pipeline/topic_mode": True})  # type: ignore[arg-type]
-                except Exception:
-                    pass
-            if not bool(getattr(cfg.runtime, "pipeline_topic", False)):
                 pass
-            # Skip taxonomy and verification when topic pipeline is enabled
-            if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-                print(json.dumps({"pipeline": {"output_dir": base_out, "topic_mode": True}}, indent=2))
-            # Finish pipeline W&B run early in topic mode
-            if use_wandb:
-                try:
-                    _wb_finish(cfg)
-                except Exception:
-                    pass
-            return
-
-        # Stage 2: taxonomy consumes classify_dir
-        # Prefer relevant-only parquet if present; also handle historical misspelling; otherwise fall back
-        try:
-            rel_pq = os.path.join(classify_dir, "classify_relevant.parquet")
-
-            all_pq = os.path.join(classify_dir, "classify_all.parquet")
-            if os.path.exists(rel_pq):
-                tax_input_path = rel_pq
-
-            elif os.path.exists(all_pq):
-                tax_input_path = all_pq
-            else:
-                tax_input_path = classify_dir
-        except Exception:
-            tax_input_path = classify_dir
-
-        # Best-effort: create a sanitized copy for taxonomy by dropping heavy/nested columns
-        # This avoids accidental collisions (e.g., stringified 'messages') and reduces memory.
-        sanitized_path = None
-        try:
-            import pandas as _pd  # local alias to avoid confusion with global pd
-            if os.path.exists(tax_input_path):
-                try:
-                    pdf_in = _pd.read_parquet(tax_input_path)
-                    # Columns to drop if present
-                    drop_cols = [
-                        "messages", "sampling_params", "usage", "token_counts",
-                        "generated_tokens", "embeddings", "generated_text",
-                        "llm_output", "relevance_answer", "classification_mode",
-                        "latency_s", "token_usage_prompt", "token_usage_output",
-                        "token_usage_total",
-                    ]
-                    cols_present = [c for c in drop_cols if c in list(pdf_in.columns)]
-                    if cols_present:
-                        pdf_in = pdf_in.drop(columns=cols_present)
-                    # Write sanitized parquet alongside taxonomy outputs
-                    sanitized_path = os.path.join(taxonomy_dir, "taxonomy_input_sanitized.parquet")
+            
+            for node_key in ordered_nodes:
+                node = graph_spec.nodes[node_key]
+                runner = stage_registry.get(node.stage)
+                if runner is None:
+                    raise ValueError(f"No runner registered for stage '{node.stage}' (node '{node.key}')")
+                inputs = _node_inputs(node, registry)
+                output_paths = _node_output_paths(node, registry, output_root)
+                output_dir = common_parent(output_paths.values())
+                if not output_dir:
+                    output_dir = os.path.join(output_root, node.key)
+                os.makedirs(output_dir, exist_ok=True)
+                node_cfg = prepare_node_config(cfg, node, output_dir)
+                context = StageExecutionContext(
+                    cfg=node_cfg,
+                    node=node,
+                    inputs=inputs,
+                    output_paths=output_paths,
+                    output_dir=output_dir,
+                    output_root=output_root,
+                )
+                
+                node_start = time.time()
+                
+                # Check if this node should be launched as a separate SLURM job
+                if node.launcher:
+                    _print_status({"node": node.key, "stage": node.stage, "status": "submitting", "launcher": node.launcher, "inputs": inputs})
                     try:
-                        pdf_in.to_parquet(sanitized_path, index=False)
-                    except Exception:
-                        # Attempt object sanitization similar to classify branch
-                        def _ser(v: Any) -> Any:
-                            try:
-                                import numpy as _np  # type: ignore
-                                if isinstance(v, _np.generic):
-                                    try:
-                                        return v.item()
-                                    except Exception:
-                                        pass
-                                if isinstance(v, _np.ndarray):
-                                    try:
-                                        import json as _json
-                                        return _json.dumps(v.tolist(), ensure_ascii=False)
-                                    except Exception:
-                                        return str(v)
-                            except Exception:
-                                pass
-                            if isinstance(v, (dict, list, tuple, set)):
-                                try:
-                                    import json as _json
-                                    if isinstance(v, set):
-                                        v = list(v)
-                                    return _json.dumps(v, ensure_ascii=False)
-                                except Exception:
-                                    return str(v)
-                            return v
-                        pdf_in = pdf_in.applymap(_ser)
-                        pdf_in.to_parquet(sanitized_path, index=False)
-                except Exception:
-                    sanitized_path = None
-        except Exception:
-            sanitized_path = None
-
-        tax_overrides: Dict[str, Any] = {
-            "runtime.output_dir": taxonomy_dir,
-            "data.parquet_path": (sanitized_path or tax_input_path),
-        }
-        # Do NOT pass API keys via args; rely on env or prior login
-        # Propagate streaming IO preference to child taxonomy
-        try:
-            tax_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
-        except Exception:
-            pass
-        # Ensure W&B is explicitly enabled for child taxonomy
-        try:
-            tax_overrides["wandb.enabled"] = True
-        except Exception:
-            pass
-        tax_t0 = _time.time()
-        try:
-            _run_stage_subprocess("taxonomy", tax_overrides, group_id)
-            tax_dt = float(_time.time() - tax_t0)
-        except Exception:
-            tax_dt = float(_time.time() - tax_t0)
-            raise
-        # Log taxonomy stage duration
-        if use_wandb:
-            try:
-                _wb_log(cfg, {"pipeline/taxonomy_seconds": float(tax_dt)})  # type: ignore[arg-type]
-            except Exception:
-                pass
-
-        # Stage 3: verification consumes taxonomy_dir/results.parquet when present
-        try:
-            tax_res = os.path.join(taxonomy_dir, "results.parquet")
-            if os.path.exists(tax_res):
-                ver_input_path = tax_res
-            else:
-                ver_input_path = taxonomy_dir
-        except Exception:
-            ver_input_path = taxonomy_dir
-        ver_overrides: Dict[str, Any] = {
-            "runtime.output_dir": verify_dir,
-            "data.parquet_path": ver_input_path,
-        }
-        # If the taxonomy results path is a directory (Ray-style Parquet dataset), prefer streaming IO
-        try:
-            if os.path.isdir(ver_input_path):
-                ver_overrides["runtime.streaming_io"] = True
-        except Exception:
-            pass
-        # Do NOT pass API keys via args; rely on env or prior login
-        # Propagate streaming IO preference to child verification
-        try:
-            ver_overrides["runtime.streaming_io"] = bool(getattr(cfg.runtime, "streaming_io", False))
-        except Exception:
-            pass
-        # Ensure W&B is explicitly enabled for child verification
-        try:
-            ver_overrides["wandb.enabled"] = True
-        except Exception:
-            pass
-        ver_t0 = _time.time()
-        try:
-            _run_stage_subprocess("verification", ver_overrides, group_id)
-            ver_dt = float(_time.time() - ver_t0)
-        except Exception:
-            ver_dt = float(_time.time() - ver_t0)
-            raise
-        # Log verification stage duration
-        if use_wandb:
-            try:
-                _wb_log(cfg, {"pipeline/verification_seconds": float(ver_dt)})  # type: ignore[arg-type]
-            except Exception:
-                pass
-
-        if not bool(os.environ.get("RULE_TUPLES_SILENT", "0")):
-            print(json.dumps({
-                "pipeline": {
-                    "output_dir": base_out,
-                    "classify_dir": classify_dir,
-                    "taxonomy_dir": taxonomy_dir,
-                    "verification_dir": verify_dir,
-                    "wandb_group": group_id,
+                        launcher_cfg = _load_launcher_config(cfg, node.launcher)
+                    except ValueError as e:
+                        raise ValueError(f"Could not load launcher config '{node.launcher}' for node '{node.key}': {e}") from e
+                    
+                    # Create submitit executor - store logs in the Hydra multirun directory
+                    # Structure: multirun/YYYY-MM-DD/HH-MM-SS/0/.slurm_jobs/STAGE_NAME/
+                    log_folder = None
+                    try:
+                        # Priority 1: Use HydraConfig to get runtime output directory
+                        hydra_cfg = HydraConfig.get()
+                        if hydra_cfg and hydra_cfg.runtime and hydra_cfg.runtime.output_dir:
+                            hydra_output_dir = hydra_cfg.runtime.output_dir
+                            log_folder = os.path.join(hydra_output_dir, ".slurm_jobs", node.key)
+                            _print_status({"debug": "using_hydra_output_dir", "log_folder": log_folder})
+                    except Exception as e:
+                        _print_status({"debug": "hydra_config_error", "error": str(e)})
+                    
+                    # Priority 2: Fall back to output_root
+                    if not log_folder:
+                        log_folder = os.path.join(output_root, ".slurm_jobs", node.key)
+                        _print_status({"debug": "using_output_root_fallback", "log_folder": log_folder, "output_root": output_root})
+                    
+                    log_folder = os.path.abspath(log_folder)
+                    os.makedirs(log_folder, exist_ok=True)
+                    job_name = f"UAIR-{node.key}"
+                    executor = _create_submitit_executor(launcher_cfg, job_name, log_folder)
+                    
+                    # Ensure child job uses parent's W&B group for proper grouping
+                    # Submitit doesn't auto-inherit env vars, so we need to explicitly set them
+                    if parent_group:
+                        # Method 1: Set environment variable on executor
+                        # This ensures it's available in the SLURM job's environment
+                        try:
+                            # Get current setup commands and prepend WANDB_GROUP export
+                            current_setup = list(launcher_cfg.get("setup", []))
+                            # Insert explicit WANDB_GROUP export at the beginning (after shebang/source commands)
+                            # Find insertion point (after source commands)
+                            insert_idx = 0
+                            for i, cmd in enumerate(current_setup):
+                                if "source" in cmd or "export HYDRA_FULL_ERROR" in cmd:
+                                    insert_idx = i + 1
+                            # Insert WANDB_GROUP export
+                            wandb_group_export = f"export WANDB_GROUP={parent_group}"
+                            if wandb_group_export not in current_setup:
+                                current_setup.insert(insert_idx, wandb_group_export)
+                                executor.update_parameters(slurm_setup=current_setup)
+                                _print_status({"debug": "injected_wandb_group", "group": parent_group, "node": node.key})
+                        except Exception as e:
+                            _print_status({"debug": "failed_to_inject_wandb_group", "error": str(e)})
+                    
+                    # Prepare serializable context data
+                    context_data = {
+                        "cfg": OmegaConf.to_container(node_cfg, resolve=True),
+                        "node": {
+                            "key": node.key,
+                            "stage": node.stage,
+                            "depends_on": node.depends_on,
+                            "inputs": node.inputs,
+                            "outputs": {k: {"path": v.path, "type": v.type, "optional": v.optional} for k, v in node.outputs.items()},
+                            "overrides": node.overrides,
+                            "launcher": node.launcher,
+                            "parallel_group": node.parallel_group,
+                            "max_attempts": node.max_attempts,
+                            "retry_backoff_s": node.retry_backoff_s,
+                            "wandb_suffix": node.wandb_suffix,
+                        },
+                        "inputs": inputs,
+                        "output_paths": output_paths,
+                        "output_dir": output_dir,
+                        "output_root": output_root,
+                    }
+                    
+                    # Submit the job
+                    job = executor.submit(execute_stage_job, context_data)
+                    _print_status({"node": node.key, "stage": node.stage, "status": "submitted", "job_id": job.job_id})
+                    
+                    # Wait for the job to complete
+                    try:
+                        job_result = job.result()  # This blocks until the job completes
+                        result = StageResult(
+                            outputs=job_result["outputs"],
+                            metadata=job_result["metadata"],
+                        )
+                    except Exception as exc:
+                        _print_status({"node": node.key, "stage": node.stage, "status": "failed", "job_id": job.job_id, "error": str(exc)})
+                        raise
+                else:
+                    # Run locally in the current process
+                    _print_status({"node": node.key, "stage": node.stage, "status": "running", "inputs": inputs})
+                    try:
+                        result = runner.run(context)
+                    except Exception as exc:
+                        _print_status({"node": node.key, "stage": node.stage, "status": "failed", "error": str(exc)})
+                        raise
+                
+                registry.register_outputs(node.key, result.outputs)
+                duration = time.time() - node_start
+                manifest["nodes"][node.key] = {
+                    "stage": node.stage,
+                    "inputs": inputs,
+                    "outputs": result.outputs,
+                    "metadata": result.metadata,
+                    "duration_s": duration,
                 }
-            }, indent=2))
-        # Log final pipeline outputs and finish W&B run
-        if use_wandb:
+                _print_status({
+                    "node": node.key,
+                    "stage": node.stage,
+                    "status": "completed",
+                    "duration_s": round(duration, 3),
+                    "outputs": result.outputs,
+                })
+            
+            manifest_path = os.path.join(output_root, "pipeline_manifest.json")
             try:
-                _wb_log(cfg, {
-                    "pipeline/output_dir": str(base_out),
-                    "pipeline/classify_dir": str(classify_dir),
-                    "pipeline/taxonomy_dir": str(taxonomy_dir),
-                    "pipeline/verification_dir": str(verify_dir),
-                    "pipeline/topic_mode": False,
-                })  # type: ignore[arg-type]
+                with open(manifest_path, "w", encoding="utf-8") as fh:
+                    json.dump(manifest, fh, indent=2)
             except Exception:
                 pass
+            total_duration = time.time() - pipeline_start
+            
+            # Log final pipeline metrics to wandb
             try:
-                _wb_finish(cfg)
+                logger.set_summary("orchestrator/status", "completed")
             except Exception:
                 pass
-        return
-
-    raise ValueError(f"Unknown runtime.stage: {stage}")
-
-
+            logger.log_metrics({
+                "orchestrator/total_duration_s": round(total_duration, 3),
+                "orchestrator/nodes_completed": len(manifest["nodes"]),
+            })
+            
+            _print_status({
+                "pipeline": {
+                    "output_root": output_root,
+                    "nodes": ordered_nodes,
+                    "duration_s": round(total_duration, 3),
+                    "manifest": manifest_path,
+                }
+            })
+        except Exception as e:
+            try:
+                logger.set_summary("orchestrator/status", "failed")
+                logger.set_summary("orchestrator/error", str(e))
+            except Exception:
+                pass
+            raise

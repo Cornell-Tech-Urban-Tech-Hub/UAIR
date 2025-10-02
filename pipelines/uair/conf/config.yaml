@@ -1,45 +1,32 @@
 # Top-level Hydra config for E_CI-rule-tuples
 
 defaults:
+  - _self_
   - data: inputs
   - prompt: classify
   - prompt@prompt_taxonomy: taxonomy
   - model: vllm_qwen3-30b
-  - override hydra/launcher: g2_slurm_cpu
-  - _self_
+  - optional pipeline: cluster_topic
 
 experiment:
   name: UAIR
 
 runtime:
-  stage: classify   # classify | taxonomy | verification | topic | pipeline
   debug: false
   sample_n: null
-  output_csv: null
+  output_root: null
+  serialize_nested_json: true
   use_llm_classify: true
   use_llm_decompose: false
   max_errored_blocks: 0
   guided_decoding_decompose: false
   streaming_io: false
-  output_dir: null
-  serialize_nested_json: true
-  # Relevance/taxonomy controls
   prefilter_mode: pre_gating   # pre_gating | post_gating | off
   keyword_buffering: true
   keyword_window_words: 100
-  job_memory_gb: 64
-  child_launcher: g2_slurm_pierson
-  # Per-stage launcher mapping used by the pipeline coordinator (child runs)
-  child_launchers:
-    classify: g2_slurm_pierson
-    taxonomy: g2_slurm_pierson
-    verification: g2_slurm_pierson
-    topic: g2_slurm_gpu_1x
-  pipeline_local: false
+  job_memory_gb: 32
   gate_on_relevance: true
   rows_per_block: 4000
-  # Topic pipeline mode: classify -> topic, skipping taxonomy & verification when true
-  pipeline_topic: false
 
 # Topic modeling configuration
 topic:
@@ -105,7 +92,7 @@ sampling_params_taxonomy:
   detokenize: false
 
 # Path/config for taxonomy
-taxonomy_json: ${oc.env:TAXONOMY_JSON,/share/ju/matt/sensing-ai-risks/pipelines/uair/conf/taxonomy/weitz.yaml}
+taxonomy_json: ${oc.env:TAXONOMY_JSON,/share/pierson/matt/UAIR/pipelines/uair/conf/taxonomy/weitz.yaml}
 
 # Verification defaults
 verify:
@@ -113,6 +100,29 @@ verify:
   top_k: 3
   thresholds: "sim=0.55,ent=0.85,contra=0.05"
   device: ${oc.env:VERIFY_DEVICE,null}
+
+pipeline:
+  output_root: ${runtime.output_root}
+  allow_partial: false
+  sources:
+    articles:
+      path: ${data.parquet_path}
+      type: parquet
+  graph:
+    nodes:
+      topic:
+        stage: topic
+        depends_on: []
+        inputs:
+          dataset: articles
+        outputs:
+          docs: outputs/topic/docs_topics.parquet
+        overrides:
+          runtime.streaming_io: ${runtime.streaming_io}
+          runtime.debug: ${runtime.debug}
+          topic.embed.device: cpu
+        launcher: g2_slurm_cpu
+        wandb_suffix: topic
 
 wandb:
   enabled: true

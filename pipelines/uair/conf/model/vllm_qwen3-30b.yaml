@@ -1,11 +1,11 @@
-model_source: /share/ju/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507
+model_source: /share/pierson/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507
 engine_kwargs:
   enable_chunked_prefill: true
   max_num_batched_tokens: 2048
   max_model_len: 16384
-  max_num_seqs: 4
+  # max_num_seqs: auto-detected based on GPU type (RTX A6000: 4, RTX A5000: 2)
   gpu_memory_utilization: 0.9
-  tensor_parallel_size: 2
+  # tensor_parallel_size: auto-detected from CUDA_VISIBLE_DEVICES
   # vLLM best-practice safe defaults
   tokenizer_mode: auto            # auto-select fast/hf
   trust_remote_code: true         # allow custom model code when needed
@@ -15,7 +15,8 @@ engine_kwargs:
   use_v2_block_manager: true      # newer block manager with better performance
   disable_log_stats: true         # reduce engine-side logging noise
   enforce_eager: true             # disable CUDA graphs by default for stability
-batch_size: 4
+# batch_size: auto-detected based on GPU type (RTX A6000: 4, RTX A5000: 2)
+# Explicitly set batch_size here to override GPU-aware defaults if needed
 concurrency: 1
 
 

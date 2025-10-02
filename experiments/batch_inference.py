@@ -60,15 +60,15 @@ assert Version(ray.__version__) >= Version("2.44.1"), (
 def _build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Ray Data + vLLM batch inference with optional W&B logging")
     # IO
-    parser.add_argument("--input_parquet", type=str, default="/share/ju/matt/sensing-ai-risks/data/global_subset/relevant_articles.parquet")
-    parser.add_argument("--taxonomy_json", type=str, default="/share/ju/matt/sensing-ai-risks/resources/taxonomy_weitz.json")
-    parser.add_argument("--keywords_json", type=str, default="/share/ju/matt/sensing-ai-risks/resources/keywords.json")
-    parser.add_argument("--prompts_json", type=str, default="/share/ju/matt/sensing-ai-risks/resources/prompts.json")
-    parser.add_argument("--output_dir", type=str, default="/share/ju/matt/sensing-ai-risks/data/inferences/")
+    parser.add_argument("--input_parquet", type=str, default="/share/pierson/matt/UAIR/data/global_subset/relevant_articles.parquet")
+    parser.add_argument("--taxonomy_json", type=str, default="/share/pierson/matt/UAIR/resources/taxonomy_weitz.json")
+    parser.add_argument("--keywords_json", type=str, default="/share/pierson/matt/UAIR/resources/keywords.json")
+    parser.add_argument("--prompts_json", type=str, default="/share/pierson/matt/UAIR/resources/prompts.json")
+    parser.add_argument("--output_dir", type=str, default="/share/pierson/matt/UAIR/data/inferences/")
     parser.add_argument("--stage", choices=["full", "relevance", "taxonomy"], default="full", help="Which stage(s) to run")
     parser.add_argument("--relevance_dir", type=str, default=None, help="Path to previously saved relevance outputs (for stage=taxonomy)")
     # Model / engine
-    parser.add_argument("--model_source", type=str, default="/share/ju/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507")
+    parser.add_argument("--model_source", type=str, default="/share/pierson/matt/zoo/models/Qwen3-30B-A3B-Instruct-2507")
     parser.add_argument("--tensor_parallel_size", type=int, default=2)
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--concurrency", type=int, default=1)

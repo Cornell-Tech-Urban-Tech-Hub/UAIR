@@ -1,4 +1,4 @@
-parquet_path: /share/ju/matt/structured-ci-extraction/data/reddit/processed/subreddits_rules_flattened.parquet
+parquet_path: /share/pierson/matt/structured-ci-extraction/data/reddit/processed/subreddits_rules_flattened.parquet
 columns:
   name: name
   public_description: public_description

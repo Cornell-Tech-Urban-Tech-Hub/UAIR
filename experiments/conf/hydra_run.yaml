@@ -1,8 +1,8 @@
 hydra:
   run:
-    dir: /share/ju/matt/sensing-ai-risks/outputs/${now:%Y-%m-%d_%H-%M-%S}
+    dir: /share/pierson/matt/UAIR/outputs/${now:%Y-%m-%d_%H-%M-%S}
   sweep:
-    dir: /share/ju/matt/sensing-ai-risks/multirun/${now:%Y-%m-%d_%H-%M-%S}
+    dir: /share/pierson/matt/UAIR/multirun/${now:%Y-%m-%d_%H-%M-%S}
     subdir: ${hydra.job.override_dirname}
   job:
     config:

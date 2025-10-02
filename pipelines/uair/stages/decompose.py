@@ -55,6 +55,119 @@ def _serialize_arrow_unfriendly_in_row(row: Dict[str, Any], columns):
                 row[col] = _to_json_str(val)
 
 
+def _detect_num_gpus() -> int:
+    """Detect the number of GPUs allocated to this job.
+    
+    Priority order:
+    1. CUDA_VISIBLE_DEVICES environment variable (set by launcher)
+    2. SLURM_GPUS_PER_NODE or SLURM_GPUS_ON_NODE
+    3. torch.cuda.device_count() if CUDA is available
+    4. Return 1 as safe fallback
+    """
+    # Priority 1: CUDA_VISIBLE_DEVICES (most reliable for actual allocation)
+    try:
+        cuda_visible = os.environ.get("CUDA_VISIBLE_DEVICES")
+        if cuda_visible and cuda_visible.strip():
+            # Parse comma-separated GPU indices (e.g., "0,1,2,3" -> 4 GPUs)
+            gpu_indices = [x.strip() for x in cuda_visible.split(",") if x.strip()]
+            if gpu_indices:
+                return len(gpu_indices)
+    except Exception:
+        pass
+    
+    # Priority 2: SLURM environment variables
+    try:
+        slurm_gpus = os.environ.get("SLURM_GPUS_PER_NODE") or os.environ.get("SLURM_GPUS_ON_NODE")
+        if slurm_gpus:
+            # Can be a number like "4" or format like "gpu:4"
+            try:
+                if ":" in slurm_gpus:
+                    return int(slurm_gpus.split(":")[-1])
+                return int(slurm_gpus)
+            except Exception:
+                pass
+    except Exception:
+        pass
+    
+    # Priority 3: Torch CUDA device count
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available():
+            count = torch.cuda.device_count()
+            if count > 0:
+                return count
+    except Exception:
+        pass
+    
+    # Fallback: 1 GPU
+    return 1
+
+
+def _detect_gpu_type() -> str:
+    """Detect the GPU type/model name.
+    
+    Returns a normalized GPU type string (e.g., 'rtx_a6000', 'rtx_a5000', 'unknown').
+    """
+    try:
+        import torch  # type: ignore
+        if torch.cuda.is_available() and torch.cuda.device_count() > 0:
+            # Get the name of the first GPU (assuming homogeneous GPUs)
+            gpu_name = torch.cuda.get_device_name(0).lower()
+            
+            # Normalize common GPU names
+            if "a6000" in gpu_name:
+                return "rtx_a6000"
+            elif "a5000" in gpu_name:
+                return "rtx_a5000"
+            elif "a100" in gpu_name:
+                return "a100"
+            elif "v100" in gpu_name:
+                return "v100"
+            elif "a40" in gpu_name:
+                return "a40"
+            elif "rtx" in gpu_name:
+                # Generic RTX
+                return "rtx_generic"
+            
+            return "unknown"
+    except Exception:
+        pass
+    
+    return "unknown"
+
+
+def _apply_gpu_aware_batch_settings(engine_kwargs: Dict[str, Any], cfg) -> Dict[str, Any]:
+    """Apply GPU-type-aware batch size and max_num_seqs if not explicitly set.
+    
+    GPU-specific defaults (can be overridden in config):
+    - RTX A6000: batch_size=4, max_num_seqs=4
+    - RTX A5000: batch_size=2, max_num_seqs=2
+    - Others: Use config defaults or fallback values
+    """
+    # GPU-aware defaults mapping
+    GPU_BATCH_SETTINGS = {
+        "rtx_a6000": {"batch_size": 4, "max_num_seqs": 4},
+        "rtx_a5000": {"batch_size": 2, "max_num_seqs": 2},
+        "a100": {"batch_size": 8, "max_num_seqs": 8},
+        "v100": {"batch_size": 4, "max_num_seqs": 4},
+        "a40": {"batch_size": 4, "max_num_seqs": 4},
+    }
+    
+    gpu_type = _detect_gpu_type()
+    gpu_settings = GPU_BATCH_SETTINGS.get(gpu_type, {})
+    
+    # Apply max_num_seqs from GPU settings if not in engine_kwargs and GPU type is recognized
+    if "max_num_seqs" not in engine_kwargs and gpu_settings:
+        try:
+            engine_kwargs["max_num_seqs"] = gpu_settings["max_num_seqs"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set max_num_seqs={gpu_settings['max_num_seqs']} for {gpu_type}")
+        except Exception:
+            pass
+    
+    return gpu_settings
+
+
 def _filter_vllm_engine_kwargs(ek: Dict[str, Any]) -> Dict[str, Any]:
     """Drop engine kwargs unsupported by the installed vLLM version.
 
@@ -172,8 +285,19 @@ def run_decomposition_stage(df: pd.DataFrame, cfg):
     # Constrain GPU mem via vLLM engine args: prefer provided config; otherwise set conservative defaults
     ek = dict(getattr(cfg.model, "engine_kwargs", {}))
     ek.setdefault("max_model_len", 4096)
-    ek.setdefault("max_num_seqs", 16)
-    ek.setdefault("gpu_memory_utilization", 0.85)
+    ek.setdefault("max_num_seqs", 4)  # Reduced from 16 for 2-GPU setup
+    ek.setdefault("gpu_memory_utilization", 0.6)  # Reduced from 0.85 for 2-GPU setup
+    # Auto-detect tensor_parallel_size from allocated GPUs if not explicitly set
+    if "tensor_parallel_size" not in ek:
+        try:
+            num_gpus = _detect_num_gpus()
+            ek["tensor_parallel_size"] = num_gpus
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-detected {num_gpus} GPU(s) for tensor parallelism")
+        except Exception:
+            ek.setdefault("tensor_parallel_size", 1)
+    # Apply GPU-type-aware batch settings (max_num_seqs and batch_size)
+    gpu_settings = _apply_gpu_aware_batch_settings(ek, cfg)
     # vLLM best-practice safe defaults (overridable via config)
     ek.setdefault("enable_prefix_caching", True)
     ek.setdefault("use_v2_block_manager", True)
@@ -182,16 +306,32 @@ def run_decomposition_stage(df: pd.DataFrame, cfg):
     ek.setdefault("dtype", "auto")
     ek.setdefault("kv_cache_dtype", "auto")
     ek = _filter_vllm_engine_kwargs(ek)
+    # Determine batch_size: explicit config > GPU-aware default > fallback
+    try:
+        batch_size_cfg = getattr(cfg.model, "batch_size", None)
+        if batch_size_cfg is not None:
+            batch_size = int(batch_size_cfg)
+        elif gpu_settings and "batch_size" in gpu_settings:
+            batch_size = gpu_settings["batch_size"]
+            if not os.environ.get("RULE_TUPLES_SILENT"):
+                print(f"Auto-set batch_size={batch_size} for {_detect_gpu_type()}")
+        else:
+            batch_size = 16
+    except Exception:
+        batch_size = 16
     engine_config = vLLMEngineProcessorConfig(
         model_source=str(getattr(cfg.model, "model_source")),
         runtime_env={
             "env_vars": {
                 "VLLM_LOGGING_LEVEL": "ERROR",
+                # Propagate wandb config to Ray workers (uses in-process mode)
+                "WANDB_DISABLE_SERVICE": str(os.environ.get("WANDB_DISABLE_SERVICE", "true")),
+                "WANDB_SILENT": str(os.environ.get("WANDB_SILENT", "true")),
             }
         },
         engine_kwargs=ek,
         concurrency=int(getattr(cfg.model, "concurrency", 1) or 1),
-        batch_size=int(getattr(cfg.model, "batch_size", 16) or 16),
+        batch_size=int(batch_size),
     )
     # Prefer stage-specific sampling params when present; convert nested DictConfig -> dict
     try:

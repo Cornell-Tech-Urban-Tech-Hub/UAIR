@@ -1,0 +1,34 @@
+{
+  "output_root": "/share/pierson/matt/UAIR",
+  "nodes": {
+    "classify": {
+      "stage": "classify",
+      "inputs": {
+        "dataset": "/share/pierson/matt/UAIR/data/global_subset/all_articles.parquet"
+      },
+      "outputs": {
+        "all": "/share/pierson/matt/UAIR/outputs/classify/classify_all.parquet",
+        "relevant": "/share/pierson/matt/UAIR/outputs/classify/classify_relevant.parquet"
+      },
+      "metadata": {
+        "rows": 831,
+        "streaming": false
+      },
+      "duration_s": 216.73799800872803
+    },
+    "topic": {
+      "stage": "topic",
+      "inputs": {
+        "dataset": "/share/pierson/matt/UAIR/outputs/classify/classify_relevant.parquet"
+      },
+      "outputs": {
+        "docs": "/share/pierson/matt/UAIR/outputs/topic/docs_topics.parquet"
+      },
+      "metadata": {
+        "rows": 25,
+        "streaming": false
+      },
+      "duration_s": 24.35644245147705
+    }
+  }
+}
